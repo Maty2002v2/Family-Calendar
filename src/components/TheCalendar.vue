@@ -1,6 +1,6 @@
 <template>
   <div class="calendar">
-    <div>{{ daysInMonth }} {{ firstMonthDay }}</div>
+    <div>{{ getDaysInMonth }} {{ getFirstMonthDay }}</div>
     <calendar-navigation-button icon="<" :step="-1" />
     <calendar-navigation-button icon=">" :step="1" />
     <the-calendar-title />
@@ -13,12 +13,19 @@
     </div>
     <div
       class="calendar__border--blank"
-      v-for="day in firstMonthDay - 1"
+      v-for="day in getFirstMonthDay - 1"
       :key="day"
     >
       __
     </div>
-    <div class="calendar__border--normal" v-for="day in daysInMonth" :key="day">
+    <div
+      class="calendar__border--normal"
+      :class="{
+        calendar__active: day === getDay && new Date().getMonth() === getMounth,
+      }"
+      v-for="day in getDaysInMonth"
+      :key="day"
+    >
       {{ day }}
     </div>
   </div>
@@ -40,7 +47,9 @@ export default defineComponent({
     TheCalendarTitle,
   },
   setup() {
-    const { getDaysInMonth, getFirstMonthDay } = storeToRefs(useMainStore());
+    const { getDay, getMounth, getDaysInMonth, getFirstMonthDay } = storeToRefs(
+      useMainStore()
+    );
     const totalNumberFields = getDaysInMonth.value + getFirstMonthDay.value - 1;
 
     const namesDaysOfWeek: string[] = [
@@ -54,6 +63,8 @@ export default defineComponent({
     ];
 
     return {
+      getDay,
+      getMounth,
       getDaysInMonth,
       getFirstMonthDay,
       totalNumberFields,
@@ -88,6 +99,10 @@ export default defineComponent({
 
   &__border--normal {
     border: 1px solid #7b4848;
+  }
+
+  &__active {
+    background: #7b4848;
   }
 }
 </style>
