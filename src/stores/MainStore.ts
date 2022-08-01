@@ -22,8 +22,22 @@ export const useMainStore = defineStore("Main", {
     },
   },
   actions: {
-    changeDateData(numberMonths: number) {
-      this.month = new Date(this.year, this.month + numberMonths).getMonth();
+    changeDateData(step: number) {
+      const newMonthValue = this.month + step;
+
+      if (newMonthValue < 0) {
+        this.month = 11;
+        this.year--;
+        return;
+      }
+
+      if (newMonthValue > 11) {
+        this.month = 0;
+        this.year++;
+        return;
+      }
+
+      this.month = newMonthValue;
     },
   },
 });
