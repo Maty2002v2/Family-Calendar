@@ -1,6 +1,8 @@
 <template>
   <div class="calendar">
     <div>{{ daysInMonth }} {{ firstMonthDay }}</div>
+    <calendar-navigation-button icon="<" :step="-1" />
+    <calendar-navigation-button icon=">" :step="1" />
     <div
       class="calendar__nameDayOfWeek"
       v-for="(name, index) in namesDaysOfWeek"
@@ -27,8 +29,13 @@ import { defineComponent } from "vue";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "../stores/MainStore";
 
+import CalendarNavigationButton from "./CalendarNavigationButton.vue";
+
 export default defineComponent({
   name: "TheCalendar",
+  components: {
+    CalendarNavigationButton,
+  },
   setup() {
     const { daysInMonth, firstMonthDay } = storeToRefs(useMainStore());
     const totalNumberFields = daysInMonth.value + firstMonthDay.value - 1;

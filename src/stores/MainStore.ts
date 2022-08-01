@@ -11,7 +11,7 @@ export const useMainStore = defineStore("Main", {
   getters: {
     daysInMonth: (state) => new Date(state.year, state.month + 1, 0).getDate(),
     firstMonthDay: (state) => {
-      const tempDate = new Date(state.year, state.month + 1, 1);
+      const tempDate = new Date(state.year, state.month, 1);
       let firstMonthDay = tempDate.getDay();
 
       if (firstMonthDay === 0) {
@@ -21,5 +21,9 @@ export const useMainStore = defineStore("Main", {
       return firstMonthDay;
     },
   },
-  actions: {},
+  actions: {
+    changeDateData(numberMonths: number) {
+      this.month = new Date(this.year, this.month + numberMonths).getMonth();
+    },
+  },
 });
