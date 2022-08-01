@@ -40,8 +40,8 @@ export default defineComponent({
     TheCalendarTitle,
   },
   setup() {
-    const { daysInMonth, firstMonthDay } = storeToRefs(useMainStore());
-    const totalNumberFields = daysInMonth.value + firstMonthDay.value - 1;
+    const { getDaysInMonth, getFirstMonthDay } = storeToRefs(useMainStore());
+    const totalNumberFields = getDaysInMonth.value + getFirstMonthDay.value - 1;
 
     const namesDaysOfWeek: string[] = [
       "Pon",
@@ -53,7 +53,12 @@ export default defineComponent({
       "Nie",
     ];
 
-    return { daysInMonth, firstMonthDay, totalNumberFields, namesDaysOfWeek };
+    return {
+      getDaysInMonth,
+      getFirstMonthDay,
+      totalNumberFields,
+      namesDaysOfWeek,
+    };
   },
 });
 </script>

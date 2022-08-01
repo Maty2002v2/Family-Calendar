@@ -11,7 +11,7 @@ import { useMainStore } from "../stores/MainStore";
 export default defineComponent({
   name: "TheCalendarTitle",
   setup() {
-    const { month, year } = storeToRefs(useMainStore());
+    const { getMounth, getYear } = storeToRefs(useMainStore());
     const monthNames = [
       "styczeń",
       "luty",
@@ -28,7 +28,7 @@ export default defineComponent({
     ];
 
     const title = computed(() => {
-      return `${monthNames[month.value]} ${year.value}`;
+      return `${monthNames[getMounth.value]} ${getYear.value}`;
     });
     return { title };
   },

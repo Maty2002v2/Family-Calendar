@@ -9,8 +9,12 @@ export const useMainStore = defineStore("Main", {
     };
   },
   getters: {
-    daysInMonth: (state) => new Date(state.year, state.month + 1, 0).getDate(),
-    firstMonthDay: (state) => {
+    getDay: (state) => state.day,
+    getMounth: (state) => state.month,
+    getYear: (state) => state.year,
+    getDaysInMonth: (state) =>
+      new Date(state.year, state.month + 1, 0).getDate(),
+    getFirstMonthDay: (state) => {
       const tempDate = new Date(state.year, state.month, 1);
       let firstMonthDay = tempDate.getDay();
 
