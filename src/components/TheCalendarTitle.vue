@@ -1,5 +1,5 @@
 <template>
-  <div>{{ title }}</div>
+  <div class="calendar-title">{{ title }}</div>
 </template>
 
 <script>
@@ -34,3 +34,16 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.calendar-title {
+  width: 120px;
+  text-align: center;
+  box-sizing: border-box;
+
+  color: #666;
+  font-family: sans-serif;
+  font-size: 15px;
+  line-height: 30px;
+}
+</style>

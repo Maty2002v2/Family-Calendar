@@ -1,32 +1,41 @@
 <template>
   <div class="calendar">
-    <div>{{ getDaysInMonth }} {{ getFirstMonthDay }}</div>
-    <calendar-navigation-button icon="<" :step="-1" />
-    <calendar-navigation-button icon=">" :step="1" />
-    <the-calendar-title />
-    <div
-      class="calendar__nameDayOfWeek"
-      v-for="(name, index) in namesDaysOfWeek"
-      :key="index"
-    >
-      {{ name }}
+    <div class="calendar__nav">
+      <calendar-navigation-button class="" icon="<" :step="-1" />
+      <the-calendar-title />
+      <calendar-navigation-button class="" icon=">" :step="1" />
     </div>
-    <div
-      class="calendar__border--blank"
-      v-for="day in getFirstMonthDay - 1"
-      :key="day"
-    >
-      __
-    </div>
-    <div
-      class="calendar__border--normal"
-      :class="{
-        calendar__active: day === getDay && new Date().getMonth() === getMounth,
-      }"
-      v-for="day in getDaysInMonth"
-      :key="day"
-    >
-      {{ day }}
+
+    <div class="container">
+      <div
+        class="calendar__name-day-of-week"
+        v-for="(name, index) in namesDaysOfWeek"
+        :key="index"
+      >
+        {{ name }}
+      </div>
+
+      <div
+        class="calendar__day calendar__day--blank"
+        v-for="day in getFirstMonthDay - 1"
+        :key="day"
+      >
+        .
+      </div>
+
+      <div
+        class="calendar__day"
+        :class="{
+          'calendar__day--active':
+            day === getDay &&
+            new Date().getMonth() === getMounth &&
+            new Date().getFullYear() === getYear,
+        }"
+        v-for="day in getDaysInMonth"
+        :key="day"
+      >
+        <calendar-field :nrDay="day" />
+      </div>
     </div>
   </div>
 </template>
@@ -39,17 +48,18 @@ import { useMainStore } from "../stores/MainStore";
 
 import CalendarNavigationButton from "./CalendarNavigationButton.vue";
 import TheCalendarTitle from "./TheCalendarTitle.vue";
+import CalendarField from "./CalendarField.vue";
 
 export default defineComponent({
   name: "TheCalendar",
   components: {
     CalendarNavigationButton,
     TheCalendarTitle,
+    CalendarField,
   },
   setup() {
-    const { getDay, getMounth, getDaysInMonth, getFirstMonthDay } = storeToRefs(
-      useMainStore()
-    );
+    const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } =
+      storeToRefs(useMainStore());
     const totalNumberFields = getDaysInMonth.value + getFirstMonthDay.value - 1;
 
     const namesDaysOfWeek: string[] = [
@@ -65,6 +75,7 @@ export default defineComponent({
     return {
       getDay,
       getMounth,
+      getYear,
       getDaysInMonth,
       getFirstMonthDay,
       totalNumberFields,
@@ -75,34 +86,90 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+$size-day-div: calc(100% / 7 - 5px);
+
 .calendar {
   width: 100%;
+  background: #fff;
 
-  &__nameDayOfWeek {
-    display: inline-block;
-    width: (100% / 7.5);
-    margin: 1px;
+  &__nav {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 20px 0px 10px 0px;
   }
 
-  &__border,
-  &__border--blank,
-  &__border--normal {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  &__name-day-of-week {
     display: inline-block;
-    width: (100% / 7.5);
+    width: $size-day-div;
+    text-align: center;
     box-sizing: border-box;
-    margin: 1px;
+    margin: 15px 0px;
+
+    color: #aaa;
+    font-family: sans-serif;
+    font-weight: normal;
+    font-size: 15px;
   }
 
-  &__border--blank {
-    border: 1px solid #000000;
+  &__day {
+    display: inline-block;
+    width: $size-day-div;
+    height: 100px;
+    border: 1px solid rgb(149, 148, 148);
+    box-sizing: border-box;
+
+    background: #fafafa;
   }
 
-  &__border--normal {
-    border: 1px solid #7b4848;
+  &__day:hover {
+    background: $hover-blue;
+    cursor: pointer;
   }
 
-  &__active {
-    background: #7b4848;
+  &__day--blank {
+    background: none;
+    border: none;
+  }
+
+  &__day--active {
+    color: #fff;
+    font-weight: bold;
+    background: $active-day;
+  }
+
+  &__day--active:hover {
+    background: $hover-active-day;
+  }
+
+  @media only screen and (max-width: 740px) {
+    &__day {
+      height: 90px;
+    }
+  }
+
+  @media only screen and (max-width: 630px) {
+    &__day {
+      height: 70px;
+    }
+  }
+
+  @media only screen and (max-width: 460px) {
+    &__day {
+      height: 50px;
+    }
+  }
+
+  @media only screen and (max-width: 300px) {
+    &__day {
+      height: 20px;
+    }
   }
 }
 </style>
