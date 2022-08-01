@@ -3,6 +3,7 @@
     <div>{{ daysInMonth }} {{ firstMonthDay }}</div>
     <calendar-navigation-button icon="<" :step="-1" />
     <calendar-navigation-button icon=">" :step="1" />
+    <the-calendar-title />
     <div
       class="calendar__nameDayOfWeek"
       v-for="(name, index) in namesDaysOfWeek"
@@ -30,11 +31,13 @@ import { storeToRefs } from "pinia";
 import { useMainStore } from "../stores/MainStore";
 
 import CalendarNavigationButton from "./CalendarNavigationButton.vue";
+import TheCalendarTitle from "./TheCalendarTitle.vue";
 
 export default defineComponent({
   name: "TheCalendar",
   components: {
     CalendarNavigationButton,
+    TheCalendarTitle,
   },
   setup() {
     const { daysInMonth, firstMonthDay } = storeToRefs(useMainStore());
