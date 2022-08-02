@@ -90,7 +90,6 @@ $size-day-div: calc(100% / 7 - 5px);
 
 .calendar {
   width: 100%;
-  background: $background-color;
 
   &__nav {
     display: flex;
