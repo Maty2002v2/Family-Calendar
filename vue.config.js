@@ -8,6 +8,7 @@ module.exports = defineConfig({
           @import "@/styles/_variables.sass";
           @import "@/styles/_globalStyles.sass";
           @import "@/styles/_buttons.sass";
+          @import "@/styles/_inputs.sass";
         `,
       },
     },

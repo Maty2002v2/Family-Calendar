@@ -4,9 +4,8 @@
       <button class="btn-rectangle">create</button>
     </div>
     <div class="home__join-calendar">
-      <input type="text" />
-      <button class="btn-rectangle">create</button>
-      <button class="btn-rectangle--gradient">create</button>
+      <input type="text" class="input" />
+      <button class="btn-rectangle--gradient">join</button>
     </div>
   </div>
 </template>
@@ -24,9 +23,11 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 
   width: 100%;
   height: 100%;
+  padding: 10px;
   box-sizing: border-box;
 
   color: $color;
