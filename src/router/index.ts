@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import CalendarView from "../views/CalendarView.vue";
 import NotFound from "../views/NotFound.vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -7,6 +8,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/calendar/:calendarId",
+    name: "calendar",
+    component: CalendarView,
+    props: true,
   },
   {
     path: "/:pathMatch(.*)*",

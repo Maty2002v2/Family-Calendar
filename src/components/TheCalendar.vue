@@ -149,25 +149,25 @@ $size-day-div: calc(100% / 7 - 5px);
     background: $hover-active-day;
   }
 
-  @media only screen and (max-width: 740px) {
+  @media only screen and (max-width: $large) {
     &__day {
       height: 90px;
     }
   }
 
-  @media only screen and (max-width: 630px) {
+  @media only screen and (max-width: $medium) {
     &__day {
       height: 70px;
     }
   }
 
-  @media only screen and (max-width: 460px) {
+  @media only screen and (max-width: $small) {
     &__day {
       height: 50px;
     }
   }
 
-  @media only screen and (max-width: 300px) {
+  @media only screen and (max-width: $extra-small) {
     &__day {
       height: 20px;
     }
