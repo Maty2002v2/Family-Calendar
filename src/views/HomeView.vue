@@ -1,20 +1,28 @@
 <template>
   <div class="home">
     <div class="home__create-calendar">
+      <h2 class="home__h2">Create your calendar.</h2>
       <button class="btn-rectangle">create</button>
     </div>
     <div class="home__join-calendar">
-      <input type="text" class="input" />
-      <button class="btn-rectangle--gradient">join</button>
+      <h2 class="home__h2">Join already existing calendar.</h2>
+      <div class="form">
+        <sliding-button title="KOD" />
+        <button class="btn-rectangle--gradient">join</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import SlidingButton from "../components/SlidingButton.vue";
 
 export default defineComponent({
   name: "HomeView",
+  components: {
+    SlidingButton,
+  },
 });
 </script>
 
@@ -23,11 +31,13 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 100px;
 
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 20px;
+  text-align: center;
   box-sizing: border-box;
 
   color: $color;
@@ -47,6 +57,15 @@ export default defineComponent({
 
   &__join-calendar {
     @include home__segments($active-day, $background-color);
+
+    .form {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  &__h2 {
+    font-size: max(5vw, 40px);
   }
 }
 
