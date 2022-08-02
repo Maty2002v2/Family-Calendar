@@ -90,13 +90,13 @@ $size-day-div: calc(100% / 7 - 5px);
 
 .calendar {
   width: 100%;
-  background: #fff;
+  background: $background-color;
 
   &__nav {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    margin: 20px 0px 10px 0px;
+    padding: 20px 0px 10px 0px;
   }
 
   .container {
