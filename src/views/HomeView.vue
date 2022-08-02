@@ -1,14 +1,20 @@
 <template>
   <div class="home">
     <div class="home__create-calendar">
-      <h2 class="home__h2">Create your calendar.</h2>
-      <button class="btn-rectangle">create</button>
+      <div class="containter animate__animated animate__fadeInDown">
+        <h2 class="home__h2">Create your calendar.</h2>
+        <button class="btn-rectangle">create</button>
+      </div>
     </div>
-    <div class="home__join-calendar">
-      <h2 class="home__h2">Join already existing calendar.</h2>
-      <div class="form">
-        <sliding-button title="KOD" />
-        <button class="btn-rectangle--gradient">join</button>
+    <div
+      class="home__join-calendar animate__animated animate__zoomIn animate__delay-1s"
+    >
+      <div class="containter">
+        <h2 class="home__h2">Join already existing calendar.</h2>
+        <div class="form">
+          <sliding-button title="KOD" />
+          <button class="btn-rectangle--gradient">join</button>
+        </div>
       </div>
     </div>
   </div>
@@ -28,21 +34,24 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @mixin home__segments($color, $background-color) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 100px;
-
   width: 100%;
   height: 100%;
   padding: 20px;
-  text-align: center;
   box-sizing: border-box;
 
   color: $color;
 
   background-color: $background-color;
+
+  .containter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 90px;
+
+    height: 100%;
+  }
 }
 
 .home {
@@ -65,6 +74,7 @@ export default defineComponent({
   }
 
   &__h2 {
+    text-align: center;
     font-size: max(5vw, 40px);
   }
 }
