@@ -125,6 +125,8 @@ $size-day-div: calc(100% / 7 - 5px);
     border: 1px solid rgb(149, 148, 148);
     box-sizing: border-box;
 
+    color: $color-day-fiels;
+
     background: #fafafa;
   }
 
