@@ -17,13 +17,16 @@ const routes: Array<RouteRecordRaw> = [
     component: CalendarView,
     props: true,
     beforeEnter: (to, from, next) => {
-      const { checkIfThereIsCalendar } = useMainStore();
+      const { checkIfThereIsCalendar, switchIncorrectCodeEntered } =
+        useMainStore();
+
       checkIfThereIsCalendar(to.params.calendarId as string).then(
         (response) => {
           if (!response.error) {
             next();
           } else {
             next(false);
+            switchIncorrectCodeEntered();
           }
         }
       );

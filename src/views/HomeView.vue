@@ -12,10 +12,18 @@
       <div class="containter">
         <h2 class="home__h2">Join already existing calendar.</h2>
         <div class="form">
-          <sliding-input title="KOD" v-model="calendarHash" />
+          <sliding-input label="CODE" v-model="calendarHash" />
           <button class="btn-rectangle--gradient" @click="pushWithQuery">
             join
           </button>
+          <span
+            class="animate__animated"
+            :class="{
+              animate__rubberBand: getIncorrectCodeEntered,
+              animate__bounceOut: !getIncorrectCodeEntered,
+            }"
+            >BAD CODE</span
+          >
         </div>
       </div>
     </div>
@@ -23,8 +31,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import SlidingInput from "../components/SlidingInput.vue";
+
+import { storeToRefs } from "pinia";
+import { useMainStore } from "../stores/MineStore";
 
 import { useRouter } from "vue-router";
 
@@ -34,6 +45,9 @@ export default defineComponent({
     SlidingInput,
   },
   setup() {
+    const { getIncorrectCodeEntered } = storeToRefs(useMainStore());
+    const { switchIncorrectCodeEntered } = useMainStore();
+
     const calendarHash = ref("");
 
     const router = useRouter();
@@ -47,7 +61,13 @@ export default defineComponent({
       });
     };
 
-    return { calendarHash, pushWithQuery };
+    watch(getIncorrectCodeEntered, (newValue) => {
+      if (newValue) {
+        setTimeout(() => switchIncorrectCodeEntered(), 3000);
+      }
+    });
+
+    return { calendarHash, pushWithQuery, getIncorrectCodeEntered };
   },
 });
 </script>
@@ -92,6 +112,22 @@ export default defineComponent({
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
+
+      overflow-wrap: hidden;
+
+      span {
+        //TODO: Nadać klase nie zostawaic selektora
+        width: 100%;
+        text-align: center;
+
+        color: $color-day-fiels;
+        font-size: 13px;
+        font-weight: 100;
+        letter-spacing: 1px;
+
+        z-index: -999;
+        // opacity: 0;
+      }
     }
   }
 

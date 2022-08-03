@@ -7,7 +7,7 @@
       @input="updateValue"
       required
     />
-    <label class="sliding-input__label">{{ title }}</label>
+    <label class="sliding-input__label">{{ label }}</label>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "SlidingInput",
   props: {
-    title: {
+    label: {
       type: String,
       required: true,
     },
