@@ -53,12 +53,16 @@ export default defineComponent({
     const router = useRouter();
 
     const pushWithQuery = () => {
-      router.push({
-        name: "calendar",
-        params: {
-          calendarId: calendarHash.value,
-        },
-      });
+      if (calendarHash.value.length > 0) {
+        router.push({
+          name: "calendar",
+          params: {
+            calendarId: calendarHash.value,
+          },
+        });
+      } else {
+        switchIncorrectCodeEntered(true); //TODO: Zrobic by mozna bylo przekazywac wiadomosci a nie tylko BAD CODE, np pusty kod
+      }
     };
 
     watch(getIncorrectCodeEntered, (newValue) => {
