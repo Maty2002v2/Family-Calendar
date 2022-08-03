@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useDateStore = defineStore("Data", {
+export const useDateStore = defineStore("Date", {
   state: () => {
     return {
       day: new Date().getDate(),

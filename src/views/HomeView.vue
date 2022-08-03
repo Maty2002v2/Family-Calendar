@@ -12,8 +12,10 @@
       <div class="containter">
         <h2 class="home__h2">Join already existing calendar.</h2>
         <div class="form">
-          <sliding-input title="KOD" />
-          <button class="btn-rectangle--gradient">join</button>
+          <sliding-input title="KOD" v-model="calendarHash" />
+          <button class="btn-rectangle--gradient" @click="pushWithQuery">
+            join
+          </button>
         </div>
       </div>
     </div>
@@ -21,13 +23,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import SlidingInput from "../components/SlidingInput.vue";
+
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "HomeView",
   components: {
     SlidingInput,
+  },
+  setup() {
+    const calendarHash = ref("");
+
+    const router = useRouter();
+
+    const pushWithQuery = () => {
+      router.push({
+        name: "calendar",
+        params: {
+          calendarId: calendarHash.value,
+        },
+      });
+    };
+
+    return { calendarHash, pushWithQuery };
   },
 });
 </script>

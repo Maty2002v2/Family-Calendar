@@ -1,11 +1,40 @@
 import { defineStore } from "pinia";
 
-export const useMineStore = defineStore("Mine", {
+export const useMainStore = defineStore("Mine", {
   state: () => {
     return {
-      calendar_hash: "",
+      calendarHash: "",
     };
   },
   getters: {},
-  actions: {},
+  actions: {
+    setCalendarHash(hash: string) {
+      this.calendarHash = hash;
+    },
+    async checkIfThereIsCalendar(calendar_id: string) {
+      const url = new URL("http://localhost/family-calendar-api");
+      const params = { action: "exist-calendar", calendar_id: calendar_id };
+      const result = { error: false, message: "" };
+
+      Object.keys(params).forEach((key) =>
+        url.searchParams.append(key, params[key as keyof typeof params])
+      );
+
+      await fetch(url.toString(), {
+        method: "GET",
+        mode: "cors",
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          result.error = response.error;
+          result.message = response.message;
+        })
+        .catch((error) => {
+          result.error = true;
+          result.message = error;
+        });
+
+      return result;
+    },
+  },
 });

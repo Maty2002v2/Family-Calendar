@@ -25,7 +25,6 @@ export default defineComponent({
     },
   },
   setup(props) {
-    console.log("asdasd");
     const { changeDateData } = useDateStore();
     const changeDate = () => changeDateData(props.step);
 

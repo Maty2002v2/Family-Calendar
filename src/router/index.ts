@@ -3,6 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import CalendarView from "../views/CalendarView.vue";
 import NotFound from "../views/NotFound.vue";
 
+import { useMainStore } from "@/stores/MineStore";
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -15,8 +17,16 @@ const routes: Array<RouteRecordRaw> = [
     component: CalendarView,
     props: true,
     beforeEnter: (to, from, next) => {
-      console.log(to.params.calendarId, from, next);
-      next(true);
+      const { checkIfThereIsCalendar } = useMainStore();
+      checkIfThereIsCalendar(to.params.calendarId as string).then(
+        (response) => {
+          if (!response.error) {
+            next();
+          } else {
+            next(false);
+          }
+        }
+      );
     },
   },
   {

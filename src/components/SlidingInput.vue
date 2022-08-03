@@ -1,6 +1,12 @@
 <template>
   <div class="sliding-input">
-    <input type="text" class="input sliding-input__input" required />
+    <input
+      type="text"
+      class="input sliding-input__input"
+      :value="modelValue"
+      @input="updateValue"
+      required
+    />
     <label class="sliding-input__label">{{ title }}</label>
   </div>
 </template>
@@ -15,6 +21,16 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    modelValue: {
+      type: String,
+    },
+  },
+  setup(props, { emit }) {
+    const updateValue = (event: any) => {
+      emit("update:modelValue", event.target.value);
+    };
+
+    return { updateValue };
   },
 });
 </script>
