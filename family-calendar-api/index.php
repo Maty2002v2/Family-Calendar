@@ -27,7 +27,6 @@ switch ($action) {
         break;
 
     case 'exist-calendar':
-        // echo json_encode(["ala" => "kot"]);
         if ($request->get('calendar_id', false)) {
             $calendar_id = filter_input(INPUT_GET, 'calendar_id', FILTER_SANITIZE_SPECIAL_CHARS);
             $calender = new Calendar($calendar_id);
