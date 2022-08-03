@@ -14,8 +14,8 @@ export const useMainStore = defineStore("Mine", {
     setCalendarHash(hash: string) {
       this.calendarHash = hash;
     },
-    switchIncorrectCodeEntered() {
-      this.incorrectCodeEntered = !this.incorrectCodeEntered;
+    switchIncorrectCodeEntered(value: boolean) {
+      this.incorrectCodeEntered = value;
     },
     async checkIfThereIsCalendar(calendar_id: string) {
       const url = new URL("http://localhost/family-calendar-api");

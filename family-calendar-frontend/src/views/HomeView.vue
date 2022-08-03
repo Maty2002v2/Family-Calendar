@@ -63,7 +63,7 @@ export default defineComponent({
 
     watch(getIncorrectCodeEntered, (newValue) => {
       if (newValue) {
-        setTimeout(() => switchIncorrectCodeEntered(), 3000);
+        setTimeout(() => switchIncorrectCodeEntered(false), 3000);
       }
     });
 

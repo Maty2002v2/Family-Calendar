@@ -26,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
             next();
           } else {
             next(false);
-            switchIncorrectCodeEntered();
+            switchIncorrectCodeEntered(true);
           }
         }
       );
