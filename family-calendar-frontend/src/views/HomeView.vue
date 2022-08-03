@@ -132,7 +132,7 @@ export default defineComponent({
       gap: 10px;
 
       span {
-        //TODO: Nadać klase nie zostawaic selektora
+        //TODO: Nadać klase nie zostawaic selektora.
         width: 100%;
         text-align: center;
 
