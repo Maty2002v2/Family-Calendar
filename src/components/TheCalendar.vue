@@ -44,7 +44,7 @@
 import { defineComponent } from "vue";
 
 import { storeToRefs } from "pinia";
-import { useMainStore } from "../stores/MainStore";
+import { useDateStore } from "../stores/DateStore";
 
 import CalendarNavigationButton from "./CalendarNavigationButton.vue";
 import TheCalendarTitle from "./TheCalendarTitle.vue";
@@ -59,7 +59,7 @@ export default defineComponent({
   },
   setup() {
     const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } =
-      storeToRefs(useMainStore());
+      storeToRefs(useDateStore());
     const totalNumberFields = getDaysInMonth.value + getFirstMonthDay.value - 1;
 
     const namesDaysOfWeek: string[] = [

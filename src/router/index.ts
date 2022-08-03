@@ -14,6 +14,10 @@ const routes: Array<RouteRecordRaw> = [
     name: "calendar",
     component: CalendarView,
     props: true,
+    beforeEnter: (to, from, next) => {
+      console.log(to.params.calendarId, from, next);
+      next(true);
+    },
   },
   {
     path: "/:pathMatch(.*)*",

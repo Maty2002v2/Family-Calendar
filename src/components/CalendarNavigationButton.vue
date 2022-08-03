@@ -10,7 +10,7 @@
 
 <script>
 import { defineComponent } from "vue";
-import { useMainStore } from "../stores/MainStore";
+import { useDateStore } from "../stores/DateStore";
 
 export default defineComponent({
   name: "CalendarNavigationButton",
@@ -26,7 +26,7 @@ export default defineComponent({
   },
   setup(props) {
     console.log("asdasd");
-    const { changeDateData } = useMainStore();
+    const { changeDateData } = useDateStore();
     const changeDate = () => changeDateData(props.step);
 
     return { changeDate };

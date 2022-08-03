@@ -6,12 +6,12 @@
 import { defineComponent, computed } from "vue";
 
 import { storeToRefs } from "pinia";
-import { useMainStore } from "../stores/MainStore";
+import { useuseDateStore } from "../stores/DateStore";
 
 export default defineComponent({
   name: "TheCalendarTitle",
   setup() {
-    const { getMounth, getYear } = storeToRefs(useMainStore());
+    const { getMounth, getYear } = storeToRefs(useuseDateStore());
     const monthNames = [
       "styczeń",
       "luty",

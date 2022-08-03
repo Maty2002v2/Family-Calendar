@@ -12,7 +12,7 @@
       <div class="containter">
         <h2 class="home__h2">Join already existing calendar.</h2>
         <div class="form">
-          <sliding-button title="KOD" />
+          <sliding-input title="KOD" />
           <button class="btn-rectangle--gradient">join</button>
         </div>
       </div>
@@ -22,12 +22,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SlidingButton from "../components/SlidingButton.vue";
+import SlidingInput from "../components/SlidingInput.vue";
 
 export default defineComponent({
   name: "HomeView",
   components: {
-    SlidingButton,
+    SlidingInput,
   },
 });
 </script>
@@ -69,6 +69,8 @@ export default defineComponent({
 
     .form {
       display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 10px;
     }
   }
@@ -81,7 +83,6 @@ export default defineComponent({
 
 @media only screen and (max-width: $medium) {
   .home {
-    display: flex;
     flex-direction: column;
   }
 }

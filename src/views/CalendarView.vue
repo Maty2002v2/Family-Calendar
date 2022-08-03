@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar">
+  <div class="calendar animate__animated animate__fadeInDown">
     <the-calendar />
   </div>
 </template>

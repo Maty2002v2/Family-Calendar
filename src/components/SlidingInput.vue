@@ -1,7 +1,7 @@
 <template>
-  <div class="sliding-button">
-    <input type="text" class="input" required />
-    <label class="sliding-button__label">{{ title }}</label>
+  <div class="sliding-input">
+    <input type="text" class="input sliding-input__input" required />
+    <label class="sliding-input__label">{{ title }}</label>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "SlidingButton",
+  name: "SlidingInput",
   props: {
     title: {
       type: String,
@@ -20,8 +20,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.sliding-button {
+.sliding-input {
   position: relative;
+
+  &__input {
+    outline: none;
+  }
 
   &__label {
     position: absolute;
@@ -30,6 +34,7 @@ export default defineComponent({
 
     color: $color-day-fiels;
 
+    user-select: none;
     pointer-events: none;
     transform: translateY(-50%) scale(0.8);
     transition: all 0.2s ease;

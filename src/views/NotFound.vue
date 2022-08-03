@@ -2,7 +2,7 @@
   <div class="not-found">
     <div class="container">
       <h1 class="not-found__h1 animate__animated animate__jello">404</h1>
-      <p class="not-found__p">Brak klendarza o takim #hashu</p>
+      <p class="not-found__p">No calendar with such #hash</p>
     </div>
   </div>
 </template>
