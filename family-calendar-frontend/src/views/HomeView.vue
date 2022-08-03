@@ -3,7 +3,7 @@
     <div class="home__create-calendar">
       <div class="containter animate__animated animate__fadeInDown">
         <h2 class="home__h2">Create your calendar.</h2>
-        <button class="btn-rectangle">create</button>
+        <button class="btn-rectangle" @click="create">create</button>
       </div>
     </div>
     <div
@@ -46,7 +46,7 @@ export default defineComponent({
   },
   setup() {
     const { getIncorrectCodeEntered } = storeToRefs(useMainStore());
-    const { switchIncorrectCodeEntered } = useMainStore();
+    const { switchIncorrectCodeEntered, createCalendar } = useMainStore();
 
     const calendarHash = ref("");
 
@@ -65,13 +65,28 @@ export default defineComponent({
       }
     };
 
+    const create = () => {
+      createCalendar().then((response) => {
+        if (!response.error) {
+          router.push({
+            name: "calendar",
+            params: {
+              calendarId: response.message,
+            },
+          });
+        } else {
+          console.log("Cos poszlo nie tak", response);
+        }
+      });
+    };
+
     watch(getIncorrectCodeEntered, (newValue) => {
       if (newValue) {
         setTimeout(() => switchIncorrectCodeEntered(false), 3000);
       }
     });
 
-    return { calendarHash, pushWithQuery, getIncorrectCodeEntered };
+    return { calendarHash, pushWithQuery, getIncorrectCodeEntered, create };
   },
 });
 </script>
@@ -89,10 +104,9 @@ export default defineComponent({
 
   .containter {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 90px;
+    gap: (100%) / 4;
 
     height: 100%;
   }
@@ -117,8 +131,6 @@ export default defineComponent({
       flex-wrap: wrap;
       gap: 10px;
 
-      overflow-wrap: hidden;
-
       span {
         //TODO: Nadać klase nie zostawaic selektora
         width: 100%;
@@ -128,14 +140,12 @@ export default defineComponent({
         font-size: 13px;
         font-weight: 100;
         letter-spacing: 1px;
-
-        z-index: -999;
-        // opacity: 0;
       }
     }
   }
 
   &__h2 {
+    margin-top: 100px;
     text-align: center;
     font-size: max(5vw, 40px);
   }
@@ -144,6 +154,10 @@ export default defineComponent({
 @media only screen and (max-width: $medium) {
   .home {
     flex-direction: column;
+
+    &__h2 {
+      margin-top: 30px;
+    }
   }
 }
 </style>
