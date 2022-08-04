@@ -10,7 +10,7 @@
 
 <script>
 import { defineComponent } from "vue";
-import { useDateStore } from "../stores/DateStore";
+import { useDateStore } from "../../stores/DateStore";
 
 export default defineComponent({
   name: "CalendarNavigationButton",

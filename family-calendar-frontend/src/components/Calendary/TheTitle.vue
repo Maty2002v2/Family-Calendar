@@ -6,7 +6,7 @@
 import { defineComponent, computed } from "vue";
 
 import { storeToRefs } from "pinia";
-import { useDateStore } from "../stores/DateStore";
+import { useDateStore } from "../../stores/DateStore";
 
 export default defineComponent({
   name: "TheCalendarTitle",

@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TheCalendar from "../components/TheCalendar.vue"; // @ is an alias to /src
+import TheCalendar from "../components/Calendary/TheCalendar.vue"; // @ is an alias to /src
 
 export default defineComponent({
   name: "CalendarView",

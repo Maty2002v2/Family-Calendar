@@ -29,7 +29,7 @@ export default defineComponent({
 
 @media only screen and (max-width: 300px) {
   .field {
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 </style>

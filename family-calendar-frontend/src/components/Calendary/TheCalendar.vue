@@ -44,11 +44,11 @@
 import { defineComponent } from "vue";
 
 import { storeToRefs } from "pinia";
-import { useDateStore } from "../stores/DateStore";
+import { useDateStore } from "../../stores/DateStore";
 
-import CalendarNavigationButton from "./CalendarNavigationButton.vue";
-import TheCalendarTitle from "./TheCalendarTitle.vue";
-import CalendarField from "./CalendarField.vue";
+import CalendarNavigationButton from "./NavigationButton.vue";
+import TheCalendarTitle from "./TheTitle.vue";
+import CalendarField from "./Field.vue";
 
 export default defineComponent({
   name: "TheCalendar",
