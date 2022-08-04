@@ -4,3 +4,4 @@ require_once('config/settings.php');
 require_once('classes/request.php');
 require_once('classes/database.php');
 require_once('classes/calendar.php');
+require_once('classes/days.php');

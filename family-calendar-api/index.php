@@ -38,4 +38,51 @@ switch ($action) {
             }
         }
         break;
+    
+    case 'add-day':
+        $calendar_id = $request->get('calendar_id');
+        $number_day = $request->get('number_day');
+        $number_month = $request->get('number_month');
+        $number_year = $request->get('number_year');
+        $to_repeat = $request->get('to_repeat');
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        $days = new Days('', $calendar_id, $number_day, $number_month, $number_year, $to_repeat, $title, $description);
+
+        $result = $days->create_day();
+
+        if($result['is_ok']) {
+            sendResponse(201, $result);
+        } else {
+            sendResponse(400);
+        }
+        break;
+
+    case 'give-days-of-the-month':
+        if ($request->get('calendar_id', false) &&  $request->get('number_month', false)) {
+            $calendar_id = $request->get('calendar_id');
+            $number_month = $request->get('number_month');
+            $days = new Days();
+
+            sendResponse(200, $days->give_days_of_the_month($calendar_id, $number_month));
+        } else {
+            sendResponse(400, "Missing or incorrect data");
+        }
+        break;
+
+    case 'delete-day':
+        if ($request->get('id', false)) {
+            $id = $request->get('id');
+            $days = new Days();
+
+            if ($days->delete_day($id)) {
+                sendResponse(201, "The day has been erased");
+            } else {
+                sendResponse(400, "Could not erase the day");
+            }
+        } else {
+            sendResponse(400, "Missing or incorrect data");
+        }
+        break;
 }
