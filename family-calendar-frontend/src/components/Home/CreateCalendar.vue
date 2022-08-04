@@ -3,12 +3,17 @@
     <div class="create-calendar__title-with-information">
       <h2 class="create-calendar__h2">Create your calendar.</h2>
     </div>
-    <button class="btn-rectangle" @click="create">create</button>
+    <button
+      v-html="messageButton"
+      class="btn-rectangle animate__animated"
+      :class="{ animate__shakeX: failedCreation }"
+      @click="create"
+    ></button>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import { useMainStore } from "../../stores/MineStore";
 import { useRouter } from "vue-router";
 
@@ -18,22 +23,34 @@ export default defineComponent({
     const { createCalendar } = useMainStore();
     const router = useRouter();
 
+    let failedCreation = ref(false);
+
     const create = () => {
-      createCalendar().then((response) => {
-        if (!response.error) {
-          router.push({
-            name: "calendar",
-            params: {
-              calendarId: response.message,
-            },
-          });
-        } else {
-          console.log("Cos poszlo nie tak", response);
-        }
-      });
+      createCalendar()
+        .then((response) => {
+          if (!response.error) {
+            router.push({
+              name: "calendar",
+              params: {
+                calendarId: response.message,
+              },
+            });
+          } else {
+            failedCreation.value = true;
+            setTimeout(() => (failedCreation.value = false), 4000);
+          }
+        })
+        .catch(() => {
+          failedCreation.value = true;
+          setTimeout(() => (failedCreation.value = false), 4000);
+        });
     };
 
-    return { create };
+    const messageButton = computed(() =>
+      failedCreation.value ? "Something went wrong <br /> Try leater" : "create"
+    );
+
+    return { create, failedCreation, messageButton };
   },
 });
 </script>
