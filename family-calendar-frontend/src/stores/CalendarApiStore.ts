@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import DayObject from "../types/DayObject";
 
 export const useCalendarApiStore = defineStore("CalendarApi", {
   state: () => {
@@ -55,10 +56,18 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
 
       return result;
     },
-    // async fetchDaysOfTheMonth() {
-    //   const url = new URL("http://localhost/family-calendar-api");
-    //   const params = { action: "exist-calendar", calendar_id: calendar_id };
-    //   const result = { error: false, message: "" };
-    // },
+    async fetchDaysOfTheMonth(day: DayObject) {
+      const url = new URL("http://localhost/family-calendar-api");
+      const params = {
+        action: "give-days-of-the-month",
+        calendar_id: day.calendarId,
+        number_month: day.numberMonth,
+      };
+      const result = { error: false, message: "" };
+
+      Object.keys(params).forEach(
+        (key) => url.searchParams.append(key, params[key]) //TODO: Zrobic to by ts byl zadwolony
+      );
+    },
   },
 });
