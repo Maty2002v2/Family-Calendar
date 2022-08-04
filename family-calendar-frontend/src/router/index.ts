@@ -3,7 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import CalendarView from "../views/CalendarView.vue";
 import NotFound from "../views/NotFound.vue";
 
-import { useMainStore } from "@/stores/MineStore";
+import { useMainStore } from "@/stores/MainStore";
+import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,8 +18,8 @@ const routes: Array<RouteRecordRaw> = [
     component: CalendarView,
     props: true,
     beforeEnter: (to, from, next) => {
-      const { checkIfThereIsCalendar, switchIncorrectCodeEntered } =
-        useMainStore();
+      const { switchIncorrectCodeEntered } = useMainStore();
+      const { checkIfThereIsCalendar } = useCalendarApiStore();
 
       checkIfThereIsCalendar(to.params.calendarId as string).then(
         (response) => {

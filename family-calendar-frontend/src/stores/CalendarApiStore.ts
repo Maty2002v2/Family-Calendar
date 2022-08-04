@@ -1,21 +1,15 @@
 import { defineStore } from "pinia";
 
-export const useMainStore = defineStore("Mine", {
+export const useCalendarApiStore = defineStore("CalendarApi", {
   state: () => {
     return {
       calendarHash: "",
-      incorrectCodeEntered: false,
     };
   },
-  getters: {
-    getIncorrectCodeEntered: (state) => state.incorrectCodeEntered,
-  },
+  getters: {},
   actions: {
     setCalendarHash(hash: string) {
       this.calendarHash = hash;
-    },
-    switchIncorrectCodeEntered(value: boolean) {
-      this.incorrectCodeEntered = value;
     },
     async createCalendar() {
       const result = { error: false, message: "" };
@@ -61,5 +55,10 @@ export const useMainStore = defineStore("Mine", {
 
       return result;
     },
+    // async fetchDaysOfTheMonth() {
+    //   const url = new URL("http://localhost/family-calendar-api");
+    //   const params = { action: "exist-calendar", calendar_id: calendar_id };
+    //   const result = { error: false, message: "" };
+    // },
   },
 });

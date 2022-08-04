@@ -14,13 +14,13 @@
 
 <script>
 import { defineComponent, ref, computed } from "vue";
-import { useMainStore } from "../../stores/MineStore";
+import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "CreateCalendar",
   setup() {
-    const { createCalendar } = useMainStore();
+    const { createCalendar } = useCalendarApiStore();
     const router = useRouter();
 
     let failedCreation = ref(false);
