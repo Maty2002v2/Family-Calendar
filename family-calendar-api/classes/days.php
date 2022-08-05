@@ -39,9 +39,9 @@ class Days {
         $db = Database::getInstance();
         $sql = "INSERT INTO days 
                 (id, calendar_id, number_day, number_month, number_year, to_repeat, title, description, category_day) VALUES 
-                ('', '$this->calendar_id', $this->number_day, $this->number_month, $this->number_year 
-                $this->to_repeat, '$this->title', '$this->description', $this->category_day )";
-    ;
+                ('', '$this->calendar_id', $this->number_day, $this->number_month, $this->number_year,
+                $this->to_repeat, '$this->title', '$this->description', $this->category_day)";
+        echo $sql;
         if($db->query($sql)) {
             return ["is_ok" => true, "day" => [
                 "calendar_id" => $this->calendar_id, 
