@@ -46,7 +46,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         [],
       ];
 
-      state.days.forEach((day) => dayIndex[day.number_day].push(day));
+      state.days.forEach((day) => dayIndex[day.number_day - 1].push(day));
 
       return dayIndex;
     },
@@ -101,6 +101,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       return result;
     },
     async fetchDaysOfTheMonth(whatDays: InformationDaysDownload) {
+      //FIXME: http://localhost/family-calendar-api/?action=give-days-of-the-month&calendar_id=uNK2r6j&number_month=0 gdy jest 0 to daje blad api
       const url = new URL("http://localhost/family-calendar-api");
       const params = {
         action: "give-days-of-the-month",

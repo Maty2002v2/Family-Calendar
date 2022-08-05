@@ -95,7 +95,7 @@ export default defineComponent({
       width: 100%;
       text-align: center;
 
-      color: $color-day-fiels;
+      color: $color-day-field;
       font-size: 13px;
       font-weight: 100;
       letter-spacing: 1px;

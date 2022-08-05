@@ -48,7 +48,7 @@ export default defineComponent({
     top: 50%;
     left: 15px;
 
-    color: $color-day-fiels;
+    color: $color-day-field;
 
     user-select: none;
     pointer-events: none;

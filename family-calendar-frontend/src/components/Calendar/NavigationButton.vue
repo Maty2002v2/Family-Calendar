@@ -13,7 +13,7 @@ import { defineComponent } from "vue";
 import { useDateStore } from "../../stores/DateStore";
 
 export default defineComponent({
-  name: "CalendarNavigationButton",
+  name: "NavigationButton",
   props: {
     icon: {
       type: String,
@@ -35,7 +35,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .calendar-navigation {
-  width: 50px;
+  // width: 50px;
+  width: 100%;
   height: 30px;
   box-sizing: border-box;
 

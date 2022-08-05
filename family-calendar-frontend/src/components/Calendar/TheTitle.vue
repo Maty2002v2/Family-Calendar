@@ -37,7 +37,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .calendar-title {
-  width: 120px;
+  width: 100%;
   text-align: center;
   box-sizing: border-box;
 
