@@ -1,5 +1,8 @@
 <template>
-  <div class="field">{{ nrDay }}</div>
+  <div class="field">
+    {{ nrDay }}
+    <p v-if="bargainsOnThisday.length">jest</p>
+  </div>
 </template>
 
 <script>
@@ -12,6 +15,11 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    bargainsOnThisday: {
+      type: Array,
+      required: true,
+      default: () => [],
+    },
   },
 });
 </script>
@@ -22,6 +30,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   font-size: 15px;
   font-family: sans-serif;
