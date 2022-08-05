@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import DayObject from "../types/DayObject";
+import DaysOfMonthType from "../types/Day/DaysOfMonthType";
 
 export const useCalendarApiStore = defineStore("CalendarApi", {
   state: () => {
@@ -36,6 +36,36 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       const params = { action: "exist-calendar", calendar_id: calendar_id };
       const result = { error: false, message: "" };
 
+      Object.keys(params).forEach(
+        (key) =>
+          url.searchParams.append(key, params[key as keyof typeof params]) //TODO: Zrobic metode do tworzenia url, by nie powtarzac zaly czas tego samego
+      );
+
+      await fetch(url.toString(), {
+        method: "GET",
+        mode: "cors",
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          result.error = response.error;
+          result.message = response.message;
+        })
+        .catch((error) => {
+          result.error = true;
+          result.message = error;
+        });
+
+      return result;
+    },
+    async fetchDaysOfTheMonth(whatDays: DaysOfMonthType) {
+      const url = new URL("http://localhost/family-calendar-api");
+      const params = {
+        action: "give-days-of-the-month",
+        calendar_id: whatDays.calendarId,
+        number_month: whatDays.numberMonth,
+      };
+      const result = { error: false, message: "" };
+
       Object.keys(params).forEach((key) =>
         url.searchParams.append(key, params[key as keyof typeof params])
       );
@@ -55,19 +85,6 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         });
 
       return result;
-    },
-    async fetchDaysOfTheMonth(day: DayObject) {
-      const url = new URL("http://localhost/family-calendar-api");
-      const params = {
-        action: "give-days-of-the-month",
-        calendar_id: day.calendarId,
-        number_month: day.numberMonth,
-      };
-      const result = { error: false, message: "" };
-
-      Object.keys(params).forEach(
-        (key) => url.searchParams.append(key, params[key]) //TODO: Zrobic to by ts byl zadwolony
-      );
     },
   },
 });
