@@ -1,8 +1,8 @@
 type DayObject = {
   id?: number;
-  calendarId?: number;
+  calendarId: string;
   numberDay?: number;
-  numberMonth?: number;
+  numberMonth: string;
   numberYear?: number;
   toRepeat?: boolean;
   title?: string;

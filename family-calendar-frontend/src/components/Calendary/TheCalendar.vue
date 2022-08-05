@@ -1,5 +1,8 @@
 <template>
-  <div class="calendar">
+  <div
+    class="calendar calendar animate__animated animate__fadeInDown"
+    v-if="days"
+  >
     <div class="calendar__nav">
       <calendar-navigation-button class="" icon="<" :step="-1" />
       <the-calendar-title />
@@ -41,10 +44,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 import { storeToRefs } from "pinia";
 import { useDateStore } from "../../stores/DateStore";
+import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 
 import CalendarNavigationButton from "./NavigationButton.vue";
 import TheCalendarTitle from "./TheTitle.vue";
@@ -57,10 +61,24 @@ export default defineComponent({
     TheCalendarTitle,
     CalendarField,
   },
-  setup() {
+  async setup() {
     const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } =
       storeToRefs(useDateStore());
     const totalNumberFields = getDaysInMonth.value + getFirstMonthDay.value - 1;
+
+    watch(getMounth, () => {
+      console.log("zmiana");
+    });
+
+    const { fetchDaysOfTheMonth } = useCalendarApiStore();
+    const days: any = ref("");
+
+    const result = await fetchDaysOfTheMonth({
+      calendarId: "uNK2r6j",
+      numberMonth: getMounth.value.toString(),
+    });
+
+    days.value = result.message;
 
     const namesDaysOfWeek: string[] = [
       "Pon",
@@ -80,6 +98,7 @@ export default defineComponent({
       getFirstMonthDay,
       totalNumberFields,
       namesDaysOfWeek,
+      days,
     };
   },
 });
