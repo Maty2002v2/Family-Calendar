@@ -1,19 +1,62 @@
 import { defineStore } from "pinia";
-import DaysOfMonthType from "../types/Day/DaysOfMonthType";
+import InformationDaysDownload from "../types/InformationDaysDownload";
+import DaysOfTheMonthDownloaded from "../types/DaysOfTheMonthDownloaded";
 
 export const useCalendarApiStore = defineStore("CalendarApi", {
   state: () => {
     return {
       calendarHash: "",
+      days: [] as DaysOfTheMonthDownloaded[],
     };
   },
-  getters: {},
+  getters: {
+    getDays: (state) => state.days,
+    getSortedDays: (state) => {
+      const dayIndex: DaysOfTheMonthDownloaded[][] = [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+      ];
+
+      state.days.forEach((day) => dayIndex[day.number_day].push(day));
+
+      return dayIndex;
+    },
+  },
   actions: {
     setCalendarHash(hash: string) {
       this.calendarHash = hash;
     },
     async createCalendar() {
-      const result = { error: false, message: "" };
+      const result = { error: false, message: [] };
 
       await fetch("http://localhost/family-calendar-api?action=add-calendar", {
         method: "GET",
@@ -57,14 +100,17 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
 
       return result;
     },
-    async fetchDaysOfTheMonth(whatDays: DaysOfMonthType) {
+    async fetchDaysOfTheMonth(whatDays: InformationDaysDownload) {
       const url = new URL("http://localhost/family-calendar-api");
       const params = {
         action: "give-days-of-the-month",
         calendar_id: whatDays.calendarId,
         number_month: whatDays.numberMonth,
       };
-      const result = { error: false, message: "" };
+      // const result = {
+      //   error: false,
+      //   message: [],
+      // };
 
       Object.keys(params).forEach((key) =>
         url.searchParams.append(key, params[key as keyof typeof params])
@@ -76,15 +122,16 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       })
         .then((response) => response.json())
         .then((response) => {
-          result.error = response.error;
-          result.message = response.message;
-        })
-        .catch((error) => {
-          result.error = true;
-          result.message = error;
+          this.days = response.message;
+          // result.error = response.error;
+          // result.message = response.message;
         });
+      // .catch((error) => {
+      //   result.error = true;
+      //   result.message = error;
+      // });
 
-      return result;
+      // return result;
     },
   },
 });
