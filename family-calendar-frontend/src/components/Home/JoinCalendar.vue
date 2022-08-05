@@ -27,7 +27,7 @@ import { defineComponent, ref, watch } from "vue";
 import SlidingInput from "../SlidingInput.vue";
 
 import { storeToRefs } from "pinia";
-import { useCalendarApiStore } from "../../stores/CalendarApiStore";
+import { useMainStore } from "../../stores/MainStore";
 
 import { useRouter } from "vue-router";
 
@@ -37,8 +37,8 @@ export default defineComponent({
     SlidingInput,
   },
   setup() {
-    const { getIncorrectCodeEntered } = storeToRefs(useCalendarApiStore());
-    const { switchIncorrectCodeEntered } = useCalendarApiStore();
+    const { getIncorrectCodeEntered } = storeToRefs(useMainStore());
+    const { switchIncorrectCodeEntered } = useMainStore();
 
     const router = useRouter();
 
