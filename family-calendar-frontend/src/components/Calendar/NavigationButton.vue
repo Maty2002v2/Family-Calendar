@@ -9,8 +9,10 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import { useDateStore } from "../../stores/DateStore";
+
+import useBreakpoints from "../../utils/WindowWidth";
 
 export default defineComponent({
   name: "NavigationButton",
@@ -24,9 +26,24 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  emits: ["setTransitionName"],
+  setup(props, { emit }) {
     const { changeDateData } = useDateStore();
-    const changeDate = () => changeDateData(props.step);
+    const { width } = useBreakpoints();
+
+    const transitionName = computed(() => {
+      if (width.value > 460) {
+        return props.step > 0 ? "animate__backInRight" : "animate__backInLeft";
+      } else {
+        return props.step > 0 ? "animate__backInDown" : "animate__backInUp";
+      }
+    });
+
+    const changeDate = () => {
+      changeDateData(props.step);
+
+      emit("setTransitionName", transitionName.value);
+    };
 
     return { changeDate };
   },

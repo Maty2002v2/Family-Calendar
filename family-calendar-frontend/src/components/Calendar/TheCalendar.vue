@@ -1,18 +1,31 @@
 <template>
-  <div
-    class="calendar animate__animated animate__fadeInDown"
-    v-if="getSortedDays"
-  >
+  <div class="calendar animate__animated animate__fadeInDown">
     <nav class="calendar__nav calendar__nav--prev">
-      <navigation-button class="" icon="<<" :step="-1" />
-      <navigation-button class="" icon="<" :step="-1" />
+      <navigation-button
+        icon="<<"
+        :step="-1"
+        @setTransitionName="setTransitionName"
+      />
+      <navigation-button
+        icon="<"
+        :step="-1"
+        @setTransitionName="setTransitionName"
+      />
     </nav>
 
     <the-title class="calendar__title" />
 
     <nav class="calendar__nav calendar__nav--next">
-      <navigation-button class="" icon=">" :step="1" />
-      <navigation-button class="" icon=">>" :step="1" />
+      <navigation-button
+        icon=">"
+        :step="1"
+        @setTransitionName="setTransitionName"
+      />
+      <navigation-button
+        icon=">>"
+        :step="1"
+        @setTransitionName="setTransitionName"
+      />
     </nav>
 
     <div class="days-grid">
@@ -20,7 +33,11 @@
         <the-name-day-of-week :totalNumberFields="totalNumberFields" />
       </div>
 
-      <div class="container">
+      <div
+        class="container animate__animated"
+        :class="[calendarTransitionAnimationName]"
+        v-if="!loading"
+      >
         <div
           class="days-grid__day days-grid__day--blank"
           v-for="day in getFirstMonthDay - 1"
@@ -43,6 +60,7 @@
           <field :nrDay="day" :bargainsOnThisday="getSortedDays[day - 1]" />
         </div>
       </div>
+      <app-loader v-else />
     </div>
   </div>
 </template>
@@ -58,6 +76,7 @@ import NavigationButton from "./NavigationButton.vue";
 import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
 import TheTitle from "./TheTitle.vue";
 import Field from "./Field.vue";
+import AppLoader from "../AppLoader.vue";
 
 export default defineComponent({
   name: "TheCalendar",
@@ -66,6 +85,7 @@ export default defineComponent({
     TheNameDayOfWeek,
     TheTitle,
     Field,
+    AppLoader,
   },
   async setup() {
     const { getSortedDays } = storeToRefs(useCalendarApiStore());
@@ -74,17 +94,26 @@ export default defineComponent({
     const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } =
       storeToRefs(useDateStore());
 
+    let loading = ref(false);
+
     watch(getMounth, async () => {
+      loading.value = true;
       await fetchDaysOfTheMonth({
         calendarId: "uNK2r6j",
         numberMonth: getMounth.value.toString(),
-      });
+      }).then(() => (loading.value = false));
     });
 
+    loading.value = true;
     await fetchDaysOfTheMonth({
       calendarId: "uNK2r6j",
       numberMonth: getMounth.value.toString(),
-    });
+    }).then(() => (loading.value = false));
+
+    let calendarTransitionAnimationName = ref("");
+    const setTransitionName = (transitionName: string) => {
+      calendarTransitionAnimationName.value = transitionName;
+    };
 
     const totalNumberFields = computed(
       () => getDaysInMonth.value + getFirstMonthDay.value - 1
@@ -98,6 +127,9 @@ export default defineComponent({
       getFirstMonthDay,
       totalNumberFields,
       getSortedDays,
+      loading,
+      calendarTransitionAnimationName,
+      setTransitionName,
     };
   },
 });
@@ -233,11 +265,13 @@ $size-day-div: calc(100% / 7 - 5px);
 
     .container:first-child {
       flex-basis: 30%;
+      background: $white;
     }
 
     .container:last-child {
       flex-wrap: nowrap;
       flex-basis: 70%;
+      z-index: -1;
     }
   }
 }
