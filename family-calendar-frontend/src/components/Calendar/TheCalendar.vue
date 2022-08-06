@@ -12,9 +12,7 @@
         @setTransitionName="setTransitionName"
       />
     </nav>
-
     <the-title class="calendar__title" />
-
     <nav class="calendar__nav calendar__nav--next">
       <navigation-button
         icon=">"
@@ -60,6 +58,7 @@
           <field :nrDay="day" :bargainsOnThisday="getSortedDays[day - 1]" />
         </div>
       </div>
+
       <div v-else style="width: 100%">
         <app-loader />
       </div>
@@ -144,6 +143,8 @@ $size-day-div: calc(100% / 7 - 5px);
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
 
   &__nav {
     display: flex;
