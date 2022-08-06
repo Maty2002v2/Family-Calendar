@@ -39,9 +39,7 @@ export const useDateStore = defineStore("Date", {
 
       if (newMonthValue < 0) {
         this.year += Math.floor(newMonthValue / 12);
-
         newMonthValue %= 12;
-        console.log(newMonthValue);
 
         newMonthValue === 0
           ? (this.month = 0)

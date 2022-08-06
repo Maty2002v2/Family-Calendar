@@ -50,7 +50,7 @@
       </div>
 
       <div
-        class="container animate__animated"
+        class="container animate__animated animate__fast"
         :class="[calendarTransitionAnimationName]"
         v-if="!loading"
       >
@@ -115,13 +115,17 @@ export default defineComponent({
 
     let loading = ref(false);
 
-    watch(getMounth, async () => {
-      loading.value = true;
-      await fetchDaysOfTheMonth({
-        calendarId: "uNK2r6j",
-        numberMonth: getMounth.value.toString(),
-      }).then(() => (loading.value = false));
-    });
+    watch(
+      useDateStore,
+      async () => {
+        loading.value = true;
+        await fetchDaysOfTheMonth({
+          calendarId: "uNK2r6j",
+          numberMonth: getMounth.value.toString(),
+        }).then(() => (loading.value = false));
+      },
+      { deep: true }
+    );
 
     loading.value = true;
     await fetchDaysOfTheMonth({
