@@ -13,18 +13,18 @@ export default defineComponent({
   setup() {
     const { getMounth, getYear } = storeToRefs(useDateStore());
     const monthNames = [
-      "styczeń",
-      "luty",
-      "marzec",
-      "kwiecień",
-      "maj",
-      "czerwiec",
-      "lipiec",
-      "sierpień",
-      "wrzesień",
-      "październik",
-      "listopad",
-      "grudzień",
+      "Styczeń",
+      "Luty",
+      "Marzec",
+      "Kwiecień",
+      "Maj",
+      "Czerwiec",
+      "Lipiec",
+      "Sierpień",
+      "Wrzesień",
+      "Październik",
+      "Listopad",
+      "Grudzień",
     ];
 
     const title = computed(() => {
@@ -43,7 +43,24 @@ export default defineComponent({
 
   color: #666;
   font-family: sans-serif;
-  font-size: 15px;
+  font-size: 18px;
   line-height: 30px;
+  letter-spacing: 1px;
+
+  background: $background-color;
+}
+
+@media only screen and (max-width: $small) {
+  .calendar-title {
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+
+    font-size: 20px;
+  }
 }
 </style>

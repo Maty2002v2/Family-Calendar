@@ -1,7 +1,7 @@
 <template>
   <div class="field">
     {{ nrDay }}
-    <p v-if="bargainsOnThisday.length">jest</p>
+    <p v-if="specialDayList.length">jest</p>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default defineComponent({
       type: Number,
       required: true,
     },
-    bargainsOnThisday: {
+    specialDayList: {
       type: Array,
       required: true,
       default: () => [],

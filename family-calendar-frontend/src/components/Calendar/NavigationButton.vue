@@ -49,15 +49,19 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .calendar-navigation {
-  // width: 50px;
   width: 100%;
   height: 30px;
   box-sizing: border-box;
 
-  color: #333;
+  color: #666; //#333
   font-family: sans-serif;
 
   background-color: transparent;
+
+  &:hover {
+    background: $hover-blue;
+    cursor: pointer;
+  }
 
   &__icon {
     display: flex;
@@ -65,11 +69,11 @@ export default defineComponent({
     align-items: center;
     width: 100%;
     height: 100%;
+
+    font-size: 25px;
   }
 }
 
-.calendar-navigation:hover {
-  border: 1px solid black;
-  cursor: pointer;
+@media only screen and (max-width: $small) {
 }
 </style>

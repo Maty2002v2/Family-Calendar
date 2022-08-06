@@ -105,7 +105,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       const params = {
         action: "give-days-of-the-month",
         calendar_id: whatDays.calendarId,
-        number_month: whatDays.numberMonth + 1, //By miesiace zaczynaly sie od 1 a nie 0
+        number_month: (parseInt(whatDays.numberMonth) + 1).toString(), //By miesiace zaczynaly sie od 1 a nie 0
       };
 
       Object.keys(params).forEach((key) =>

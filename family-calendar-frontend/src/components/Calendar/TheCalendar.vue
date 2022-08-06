@@ -55,7 +55,7 @@
         v-if="!loading"
       >
         <div
-          class="days-grid__day days-grid__day--blank"
+          class="days-grid__day days-grid__day--blank no-select"
           v-for="day in getFirstMonthDay - 1"
           :key="day"
         >
@@ -73,7 +73,7 @@
               new Date().getFullYear() === getYear,
           }"
         >
-          <field :nrDay="day" :bargainsOnThisday="getSortedDays[day - 1]" />
+          <field :nrDay="day" :specialDayList="getSortedDays[day - 1]" />
         </div>
       </div>
 
@@ -230,7 +230,7 @@ $size-day-div: calc(100% / 7 - 5px);
 @media only screen and (max-width: $small) {
   .calendar {
     flex-direction: column;
-    gap: 20px;
+    // gap: 20px;
 
     &__nav {
       flex-direction: column;
