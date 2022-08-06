@@ -27,17 +27,26 @@ export const useDateStore = defineStore("Date", {
   },
   actions: {
     changeDateData(step: number) {
-      const newMonthValue = this.month + step;
+      let newMonthValue = this.month + step;
 
-      if (newMonthValue < 0) {
-        this.month = 11;
-        this.year--;
+      if (newMonthValue > 11) {
+        this.year += Math.floor(newMonthValue / 12);
+        newMonthValue %= 12;
+        this.month = newMonthValue;
+
         return;
       }
 
-      if (newMonthValue > 11) {
-        this.month = 0;
-        this.year++;
+      if (newMonthValue < 0) {
+        this.year += Math.floor(newMonthValue / 12);
+
+        newMonthValue %= 12;
+        console.log(newMonthValue);
+
+        newMonthValue === 0
+          ? (this.month = 0)
+          : (this.month = 12 + newMonthValue);
+
         return;
       }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="calendar animate__animated animate__fadeInDown">
     <nav class="calendar__nav calendar__nav--prev">
-      <navigation-button :step="-1" @setTransitionName="setTransitionName">
+      <navigation-button :step="-12" @setTransitionName="setTransitionName">
         <template v-slot:desktop-icon>
           <i class="demo-icon icon-angle-double-left"></i>
         </template>
@@ -34,7 +34,7 @@
         </template>
       </navigation-button>
 
-      <navigation-button :step="1" @setTransitionName="setTransitionName">
+      <navigation-button :step="12" @setTransitionName="setTransitionName">
         <template v-slot:desktop-icon>
           <i class="demo-icon icon-angle-double-right"></i>
         </template>
