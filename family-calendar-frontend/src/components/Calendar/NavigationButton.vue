@@ -1,10 +1,9 @@
 <template>
   <div class="calendar-navigation">
-    <div
-      class="calendar-navigation__icon"
-      @click="changeDate()"
-      v-html="icon"
-    ></div>
+    <div class="calendar-navigation__icon" @click="changeDate()">
+      <slot v-if="isDesktopWith" name="desktop-icon"></slot>
+      <slot v-else name="mobile-icon"></slot>
+    </div>
   </div>
 </template>
 
@@ -17,10 +16,6 @@ import useBreakpoints from "../../utils/WindowWidth";
 export default defineComponent({
   name: "NavigationButton",
   props: {
-    icon: {
-      type: String,
-      required: true,
-    },
     step: {
       type: Number,
       required: true,
@@ -31,8 +26,10 @@ export default defineComponent({
     const { changeDateData } = useDateStore();
     const { width } = useBreakpoints();
 
+    const isDesktopWith = computed(() => width.value > 460);
+
     const transitionName = computed(() => {
-      if (width.value > 460) {
+      if (isDesktopWith.value) {
         return props.step > 0 ? "animate__backInRight" : "animate__backInLeft";
       } else {
         return props.step > 0 ? "animate__backInDown" : "animate__backInUp";
@@ -45,7 +42,7 @@ export default defineComponent({
       emit("setTransitionName", transitionName.value);
     };
 
-    return { changeDate };
+    return { changeDate, isDesktopWith };
   },
 });
 </script>

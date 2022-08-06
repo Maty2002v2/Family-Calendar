@@ -1,29 +1,47 @@
 <template>
   <div class="calendar animate__animated animate__fadeInDown">
     <nav class="calendar__nav calendar__nav--prev">
-      <navigation-button
-        icon="<<"
-        :step="-1"
-        @setTransitionName="setTransitionName"
-      />
-      <navigation-button
-        icon="<"
-        :step="-1"
-        @setTransitionName="setTransitionName"
-      />
+      <navigation-button :step="-1" @setTransitionName="setTransitionName">
+        <template v-slot:desktop-icon>
+          <i class="demo-icon icon-angle-double-left"></i>
+        </template>
+
+        <template v-slot:mobile-icon>
+          <i class="demo-icon icon-down-open-mini"></i>
+        </template>
+      </navigation-button>
+
+      <navigation-button :step="-1" @setTransitionName="setTransitionName">
+        <template v-slot:desktop-icon>
+          <i class="demo-icon icon-left-open-mini"></i>
+        </template>
+
+        <template v-slot:mobile-icon>
+          <i class="demo-icon icon-angle-double-down"></i>
+        </template>
+      </navigation-button>
     </nav>
+
     <the-title class="calendar__title" />
+
     <nav class="calendar__nav calendar__nav--next">
-      <navigation-button
-        icon=">"
-        :step="1"
-        @setTransitionName="setTransitionName"
-      />
-      <navigation-button
-        icon=">>"
-        :step="1"
-        @setTransitionName="setTransitionName"
-      />
+      <navigation-button :step="1" @setTransitionName="setTransitionName">
+        <template v-slot:desktop-icon>
+          <i class="demo-icon icon-right-open-mini"></i>
+        </template>
+        <template v-slot:mobile-icon>
+          <i class="demo-icon icon-angle-double-up"></i>
+        </template>
+      </navigation-button>
+
+      <navigation-button :step="1" @setTransitionName="setTransitionName">
+        <template v-slot:desktop-icon>
+          <i class="demo-icon icon-angle-double-right"></i>
+        </template>
+        <template v-slot:mobile-icon>
+          <i class="demo-icon icon-up-open-mini"></i>
+        </template>
+      </navigation-button>
     </nav>
 
     <div class="days-grid">
@@ -237,7 +255,7 @@ $size-day-div: calc(100% / 7 - 5px);
       }
 
       &::-webkit-scrollbar {
-        width: 20px;
+        width: 10px;
       }
 
       &::-webkit-scrollbar-track {
