@@ -11,6 +11,10 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "home",
     component: HomeView,
+    beforeEnter: () => {
+      const { setCalendarHash } = useCalendarApiStore();
+      setCalendarHash("");
+    },
   },
   {
     path: "/calendar/:calendarId",
@@ -19,11 +23,12 @@ const routes: Array<RouteRecordRaw> = [
     props: true,
     beforeEnter: (to, from, next) => {
       const { switchIncorrectCodeEntered } = useMainStore();
-      const { checkIfThereIsCalendar } = useCalendarApiStore();
+      const { checkIfThereIsCalendar, setCalendarHash } = useCalendarApiStore();
 
       checkIfThereIsCalendar(to.params.calendarId as string).then(
         (response) => {
           if (!response.error) {
+            setCalendarHash(to.params.calendarId as string);
             next();
           } else {
             next(false);

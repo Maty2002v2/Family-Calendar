@@ -101,17 +101,12 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       return result;
     },
     async fetchDaysOfTheMonth(whatDays: InformationDaysDownload) {
-      //FIXME: http://localhost/family-calendar-api/?action=give-days-of-the-month&calendar_id=uNK2r6j&number_month=0 gdy jest 0 to daje blad api
       const url = new URL("http://localhost/family-calendar-api");
       const params = {
         action: "give-days-of-the-month",
         calendar_id: whatDays.calendarId,
-        number_month: whatDays.numberMonth,
+        number_month: whatDays.numberMonth + 1, //By miesiace zaczynaly sie od 1 a nie 0
       };
-      // const result = {
-      //   error: false,
-      //   message: [],
-      // };
 
       Object.keys(params).forEach((key) =>
         url.searchParams.append(key, params[key as keyof typeof params])
@@ -124,15 +119,11 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         .then((response) => response.json())
         .then((response) => {
           this.days = response.message;
-          // result.error = response.error;
-          // result.message = response.message;
         });
       // .catch((error) => {
       //   result.error = true;
       //   result.message = error;
       // });
-
-      // return result;
     },
   },
 });
