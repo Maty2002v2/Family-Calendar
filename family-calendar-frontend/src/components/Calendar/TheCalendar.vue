@@ -60,7 +60,9 @@
           <field :nrDay="day" :bargainsOnThisday="getSortedDays[day - 1]" />
         </div>
       </div>
-      <app-loader v-else />
+      <div v-else style="width: 100%">
+        <app-loader />
+      </div>
     </div>
   </div>
 </template>
