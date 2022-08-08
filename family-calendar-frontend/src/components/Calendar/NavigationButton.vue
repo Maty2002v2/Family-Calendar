@@ -73,7 +73,4 @@ export default defineComponent({
     font-size: 25px;
   }
 }
-
-@media only screen and (max-width: $small) {
-}
 </style>

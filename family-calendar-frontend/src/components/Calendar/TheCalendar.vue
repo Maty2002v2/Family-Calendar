@@ -7,7 +7,7 @@
         </template>
 
         <template v-slot:mobile-icon>
-          <i class="demo-icon icon-down-open-mini"></i>
+          <i class="demo-icon icon-angle-double-down"></i>
         </template>
       </navigation-button>
 
@@ -17,7 +17,7 @@
         </template>
 
         <template v-slot:mobile-icon>
-          <i class="demo-icon icon-angle-double-down"></i>
+          <i class="demo-icon icon-down-open-mini"></i>
         </template>
       </navigation-button>
     </nav>
@@ -30,7 +30,7 @@
           <i class="demo-icon icon-right-open-mini"></i>
         </template>
         <template v-slot:mobile-icon>
-          <i class="demo-icon icon-angle-double-up"></i>
+          <i class="demo-icon icon-up-open-mini"></i>
         </template>
       </navigation-button>
 
@@ -39,7 +39,7 @@
           <i class="demo-icon icon-angle-double-right"></i>
         </template>
         <template v-slot:mobile-icon>
-          <i class="demo-icon icon-up-open-mini"></i>
+          <i class="demo-icon icon-angle-double-up"></i>
         </template>
       </navigation-button>
     </nav>
@@ -233,7 +233,7 @@ $size-day-div: calc(100% / 7 - 5px);
     // gap: 20px;
 
     &__nav {
-      flex-direction: column;
+      flex-direction: column-reverse;
       flex-basis: 100%;
     }
 
@@ -298,6 +298,22 @@ $size-day-div: calc(100% / 7 - 5px);
       flex-basis: 70%;
       z-index: -1;
     }
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  .calendar {
+    .days-grid {
+      &__day {
+        height: 80px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .field {
+    font-size: 13px;
   }
 }
 </style>
