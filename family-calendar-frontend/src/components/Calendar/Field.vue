@@ -1,5 +1,5 @@
 <template>
-  <div class="field">
+  <div class="field" @click="showDetailsOfDay = true">
     <div class="fiels__p">
       {{ nrDay }}
     </div>
@@ -7,23 +7,32 @@
       <i
         v-for="(specialDay, index) in theFirstThreeElements"
         :key="index"
-        class="icon-demo icons__i"
-        :class="[specialDay.icon_name]"
+        class="icon-demo icons__i animate__animated animate__pulse animate__faster"
+        :class="[specialDay.icon_name, `animate__delay-${index + 1}s`]"
         :style="{ backgroundColor: specialDay.icon_color }"
       ></i>
       <span
         v-if="specialDayList.length > 3"
-        class="icons__span animate__animated animate__flash animate__slower animate__infinite"
+        class="icons__span animate__animated animate__pulse animate__slower animate__infinite"
         >...</span
       >
     </div>
+    <teleport to="#modal">
+      <the-field-modal
+        v-show="showDetailsOfDay"
+        @closeModal="showDetailsOfDay = false"
+      />
+    </teleport>
   </div>
 </template>
 
 <script>
-import { defineComponent, computed } from "vue";
+import { defineComponent, ref, computed } from "vue";
+
+import TheFieldModal from "./FieldModal/TheFieldModal.vue";
 
 export default defineComponent({
+  components: { TheFieldModal },
   name: "CalendarField",
   props: {
     nrDay: {
@@ -37,6 +46,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    let showDetailsOfDay = ref(false);
     const iconNameList = [
       "icon-shopping-basket",
       "icon-cab",
@@ -54,7 +64,7 @@ export default defineComponent({
       props.specialDayList.slice(0, 3)
     );
 
-    return { iconNameList, theFirstThreeElements };
+    return { iconNameList, theFirstThreeElements, showDetailsOfDay };
   },
 });
 </script>

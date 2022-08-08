@@ -296,7 +296,6 @@ $size-day-div: calc(100% / 7 - 5px);
     .container:last-child {
       flex-wrap: nowrap;
       flex-basis: 70%;
-      z-index: -1;
     }
   }
 }
