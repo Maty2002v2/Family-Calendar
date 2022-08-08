@@ -48,14 +48,9 @@ switch ($action) {
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
         $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);
         $category_day = $request->get('category_day');
-        
-        var_dump($number_month);
 
         $days = new Days('', $calendar_id, $number_day, $number_month, $number_year, $to_repeat, $title, $description, $category_day);
-
         $result = $days->create_day();
-
-        var_dump($result);
 
         if($result['is_ok']) {
             sendResponse(201, $result);
