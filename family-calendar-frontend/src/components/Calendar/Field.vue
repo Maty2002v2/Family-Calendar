@@ -20,6 +20,7 @@
     <teleport to="#modal">
       <the-field-modal
         v-show="showDetailsOfDay"
+        :specialDayList="specialDayList"
         @closeModal="showDetailsOfDay = false"
       />
     </teleport>
@@ -32,7 +33,6 @@ import { defineComponent, ref, computed } from "vue";
 import TheFieldModal from "./FieldModal/TheFieldModal.vue";
 
 export default defineComponent({
-  components: { TheFieldModal },
   name: "CalendarField",
   props: {
     nrDay: {
@@ -45,6 +45,7 @@ export default defineComponent({
       default: () => [],
     },
   },
+  components: { TheFieldModal },
   setup(props) {
     let showDetailsOfDay = ref(false);
     const iconNameList = [
