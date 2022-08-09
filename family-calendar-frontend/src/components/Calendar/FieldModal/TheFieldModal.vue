@@ -1,41 +1,37 @@
 <template>
   <div class="field-modal" @click.self="closeModal">
     <article class="field-modal__content">
-      <section v-if="specialDayList.length" class="field-modal__details-of-day">
-        <app-accordion
-          v-for="(specialDay, index) in specialDayList"
-          :key="index"
-        >
-          <template v-slot:title>
-            <i
-              class="icon icon-demo"
-              :class="[specialDay.icon_name]"
-              :style="{ backgroundColor: specialDay.icon_color }"
-            ></i>
-            <span class="title">
-              {{ specialDay.title }}
-            </span>
-          </template>
-          <template v-slot:content>
-            <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus rem nobis maiores ab at. Possimus molestiae itaque
-              nobis. Illo corporis consequuntur excepturi eaque fugiat vero
-              magnam esse impedit laudantium quia! Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Ullam illo minus esse, odio a unde
-              veritatis vero nostrum iste, numquam inventore velit
-              exercitationem modi tempore ducimus, neque eum mollitia enim?
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia
-              soluta eos provident saepe harum aperiam, sequi numquam porro cum
-              eius voluptatibus, fugit illo sed, rerum itaque aliquid?
-              Voluptates, incidunt porro?
-            </span>
-          </template>
-        </app-accordion>
+      <section v-if="specialDayList.length > 0" class="details-of-day">
+        <header class="details-of-day__header" role="complementary">
+          <h2 class="details-of-day__h2">Details</h2>
+        </header>
+        <div class="accordions">
+          <app-accordion
+            v-for="(specialDay, index) in specialDayList"
+            :key="index"
+          >
+            <template v-slot:title>
+              <i
+                class="accordions__icon icon-demo"
+                :class="[specialDay.icon_name]"
+                :style="{ backgroundColor: specialDay.icon_color }"
+              ></i>
+              <span class="accordions__title">
+                {{ specialDay.title }}
+              </span>
+            </template>
+            <template v-slot:content>
+              <span class="accordions__content">
+                {{ specialDay.description }}
+              </span>
+            </template>
+          </app-accordion>
+        </div>
       </section>
-      <section v-else class="field-modal__info-about-lack-of-days">das</section>
-      <section class="field-modal__create-holiday">
-        <button>klick</button>
+
+      <section v-else class="info-about-lack-of-days">das</section>
+      <section class="create-holiday">
+        <the-new-day-accordion />
       </section>
     </article>
   </div>
@@ -45,6 +41,7 @@
 import { defineComponent } from "vue";
 
 import AppAccordion from "../../AppAccordion.vue";
+import TheNewDayAccordion from "./TheNewDayAccordion.vue";
 
 export default defineComponent({
   name: "TheFieldModal",
@@ -57,6 +54,7 @@ export default defineComponent({
   },
   components: {
     AppAccordion,
+    TheNewDayAccordion,
   },
   emits: ["closeModal"],
   setup(props, { emit }) {
@@ -84,28 +82,52 @@ export default defineComponent({
 
   background: rgba($color: #000000, $alpha: 0.3);
 
-  &__details-of-day {
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      aspect-ratio: 1 / 1;
-      width: 25px;
-      border-radius: 50%;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 500px;
+    margin: 10px;
+    border-radius: 5px;
 
-      color: $white;
-    }
+    background: $background-color;
+  }
+}
 
-    .title {
-      color: $color-day-field;
-      font-size: 20px;
-    }
+.details-of-day {
+  &__header {
+    padding: 20px 0px 20px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-sizing: border-box;
+    background: $active-day;
+  }
+
+  &__h2 {
+    margin: 0px;
+    color: $white;
+  }
+}
+
+.accordions {
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    width: 25px;
+    border-radius: 50%;
+
+    color: $white;
+  }
+
+  &__title {
+    color: $color-day-field;
+    font-size: 20px;
   }
 
   &__content {
-    width: 500px;
-    border-radius: 5px;
-    background: $background-color;
+    color: $color-day-field;
   }
 }
 </style>

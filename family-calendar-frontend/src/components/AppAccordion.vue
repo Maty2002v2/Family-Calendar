@@ -1,13 +1,17 @@
 <template>
   <article class="app-accordion">
     <section class="title" @click="showContent = !showContent">
-      <div class="title__slot">
+      <div class="title__title-slot no-select">
         <slot name="title" />
       </div>
-      <div
-        class="title__char-toggle no-select"
-        :class="{ 'title__char-toggle--active': showContent }"
-      ></div>
+      <div>
+        <slot name="char-toggle">
+          <div
+            class="title__default-char-toggle no-select"
+            :class="{ 'title__default-char-toggle--active': showContent }"
+          ></div>
+        </slot>
+      </div>
     </section>
     <Transition
       name="accordion"
@@ -52,13 +56,13 @@ export default defineComponent({
     height: 50px;
     cursor: pointer;
 
-    &__slot {
+    &__title-slot {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    &__char-toggle {
+    &__default-char-toggle {
       position: relative;
       color: $color-day-field;
       width: 15px;
@@ -70,10 +74,11 @@ export default defineComponent({
         top: 50%;
         left: 50%;
         width: 100%;
-        height: 3px;
+        height: 2px;
         // border: 1px solid $color-day-field;
         border-radius: 20px;
-        background: $color-day-field;
+        // background: $color-day-field;
+        background: $active-day;
         // box-sizing: border-box;
         transform: translate(-50%, -50%);
       }
@@ -83,18 +88,19 @@ export default defineComponent({
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 100%;
-        height: 3px;
+        width: 90%;
+        height: 2px;
         // border: 1px solid $color-day-field;
         border-radius: 20px;
-        background: $color-day-field;
+        // background: $color-day-field;
+        background: $active-day;
         // box-sizing: border-box;
         transition: all 0.2s ease;
         transform: translate(-50%, -50%) rotate(-90deg);
       }
     }
 
-    &__char-toggle--active {
+    &__default-char-toggle--active {
       &:after {
         transform: translate(-50%, -50%) rotate(0deg);
       }
@@ -102,7 +108,7 @@ export default defineComponent({
   }
 
   &__content {
-    margin: 10px 0px 0px 20px;
+    margin: 15px 0px 10px 20px;
     box-sizing: border-box;
   }
 
@@ -117,6 +123,7 @@ export default defineComponent({
     height: 0 !important;
     opacity: 0;
     margin-top: 0px;
+    margin-bottom: 0px;
   }
 }
 </style>
