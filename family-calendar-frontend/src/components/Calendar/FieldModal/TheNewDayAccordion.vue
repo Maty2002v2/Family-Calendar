@@ -19,7 +19,18 @@
       @after-leave="end"
     >
       <article v-show="showContent" class="create-holiday__content">
-        <section class="create-holiday__form">asdasd</section>
+        <section class="create-holiday__form">
+          <div class="create-holiday__input-wrapper">
+            <label>Title</label>
+            <input type="text" class="crate-holiday__input" />
+          </div>
+          <div class="create-holiday__textarea-wrapper">
+            <label for="story">Description</label>
+            <textarea id="story" name="story" rows="5" cols="33">
+               It was a dark and stormy night...
+            </textarea>
+          </div>
+        </section>
       </article>
     </Transition>
   </div>
@@ -68,11 +79,10 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     aspect-ratio: 1/1;
-    width: 50px;
+    width: 40px;
     border-radius: 50%;
 
     color: $active-day;
-    font-size: 40px;
 
     background: $white;
 
@@ -109,6 +119,35 @@ export default defineComponent({
       }
     }
   }
+
+  &__form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 35px 0px;
+    box-sizing: border-box;
+    border: 5px solid $active-day;
+  }
+}
+
+label,
+textarea {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+textarea {
+  padding: 10px;
+  max-width: 100%;
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px $active-day;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
 }
 
 .accordion-enter-active,
