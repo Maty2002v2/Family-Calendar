@@ -12,14 +12,23 @@
               :class="[specialDay.icon_name]"
               :style="{ backgroundColor: specialDay.icon_color }"
             ></i>
-            {{ specialDay.title }}
+            <span class="title">
+              {{ specialDay.title }}
+            </span>
           </template>
           <template v-slot:content>
             <span>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Temporibus rem nobis maiores ab at. Possimus molestiae itaque
               nobis. Illo corporis consequuntur excepturi eaque fugiat vero
-              magnam esse impedit laudantium quia!
+              magnam esse impedit laudantium quia! Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Ullam illo minus esse, odio a unde
+              veritatis vero nostrum iste, numquam inventore velit
+              exercitationem modi tempore ducimus, neque eum mollitia enim?
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia
+              soluta eos provident saepe harum aperiam, sequi numquam porro cum
+              eius voluptatibus, fugit illo sed, rerum itaque aliquid?
+              Voluptates, incidunt porro?
             </span>
           </template>
         </app-accordion>
@@ -60,15 +69,18 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .field-modal {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100vw;
-  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
+  width: 100vw;
+  min-height: 100%;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  box-sizing: border-box;
 
   background: rgba($color: #000000, $alpha: 0.3);
 
@@ -83,11 +95,16 @@ export default defineComponent({
 
       color: $white;
     }
+
+    .title {
+      color: $color-day-field;
+      font-size: 20px;
+    }
   }
 
   &__content {
-    width: 200px;
-    height: 400px;
+    width: 500px;
+    border-radius: 5px;
     background: $background-color;
   }
 }
