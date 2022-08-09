@@ -73,7 +73,11 @@
               new Date().getFullYear() === getYear,
           }"
         >
-          <field :nrDay="day" :specialDayList="getSortedDays[day - 1]" />
+          <field
+            :nrDay="day"
+            :specialDayList="getSortedDays[day - 1]"
+            @click="showThisDay(day - 1)"
+          />
         </div>
       </div>
 
@@ -81,6 +85,14 @@
         <app-loader />
       </div>
     </div>
+
+    <teleport to="#modal">
+      <the-field-modal
+        v-show="showDetailsOfDay"
+        :specialDayList="getSortedDays[indexOfSelectedDay]"
+        @closeModal="showDetailsOfDay = false"
+      />
+    </teleport>
   </div>
 </template>
 
@@ -96,6 +108,7 @@ import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
 import TheTitle from "./TheTitle.vue";
 import Field from "./Field.vue";
 import AppLoader from "../AppLoader.vue";
+import TheFieldModal from "./FieldModal/TheFieldModal.vue";
 
 export default defineComponent({
   name: "TheCalendar",
@@ -105,6 +118,7 @@ export default defineComponent({
     TheTitle,
     Field,
     AppLoader,
+    TheFieldModal,
   },
   async setup() {
     const { getSortedDays } = storeToRefs(useCalendarApiStore());
@@ -138,6 +152,13 @@ export default defineComponent({
       calendarTransitionAnimationName.value = transitionName;
     };
 
+    let showDetailsOfDay = ref(false);
+    let indexOfSelectedDay = ref();
+    const showThisDay = (nrDay: number) => {
+      indexOfSelectedDay.value = nrDay;
+      showDetailsOfDay.value = true;
+    };
+
     const totalNumberFields = computed(
       () => getDaysInMonth.value + getFirstMonthDay.value - 1
     );
@@ -153,6 +174,9 @@ export default defineComponent({
       loading,
       calendarTransitionAnimationName,
       setTransitionName,
+      showDetailsOfDay,
+      indexOfSelectedDay,
+      showThisDay,
     };
   },
 });

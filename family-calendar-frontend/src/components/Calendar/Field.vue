@@ -1,5 +1,5 @@
 <template>
-  <div class="field" @click="showDetailsOfDay = true">
+  <div class="field">
     <div class="fiels__p">
       {{ nrDay }}
     </div>
@@ -17,20 +17,11 @@
         >...</span
       >
     </div>
-    <teleport to="#modal">
-      <the-field-modal
-        v-show="showDetailsOfDay"
-        :specialDayList="specialDayList"
-        @closeModal="showDetailsOfDay = false"
-      />
-    </teleport>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, computed } from "vue";
-
-import TheFieldModal from "./FieldModal/TheFieldModal.vue";
+import { defineComponent, computed } from "vue";
 
 export default defineComponent({
   name: "CalendarField",
@@ -45,27 +36,12 @@ export default defineComponent({
       default: () => [],
     },
   },
-  components: { TheFieldModal },
   setup(props) {
-    let showDetailsOfDay = ref(false);
-    const iconNameList = [
-      "icon-shopping-basket",
-      "icon-cab",
-      "icon-paw",
-      "icon-male",
-      "icon-female",
-      "icon-medkit",
-      "icon-briefcase",
-      "icon-phone",
-      "icon-users",
-      "icon-glass",
-    ];
-
     const theFirstThreeElements = computed(() =>
       props.specialDayList.slice(0, 3)
     );
 
-    return { iconNameList, theFirstThreeElements, showDetailsOfDay };
+    return { theFirstThreeElements };
   },
 });
 </script>
