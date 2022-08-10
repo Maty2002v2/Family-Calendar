@@ -6,21 +6,23 @@
     >
       {{ title }}
     </div>
-    <div
-      :class="{ animate__bounceIn: showList, animate__bounceOut: !showList }"
-      class="selection-popup__list animate__animated animate__faster"
+    <Transition
+      enter-active-class="animate__animated animate__faster  animate__bounceIn"
+      leave-active-class="animate__animated animate__faster animate__bounceOut"
     >
-      <ul class="selection-popup__ul">
-        <li
-          v-for="(item, index) in listItem"
-          :key="index"
-          class="selection-popup__li"
-          @click="selectAListItem(item.name)"
-        >
-          <slot name="item" v-bind="item" />
-        </li>
-      </ul>
-    </div>
+      <div v-show="showList" class="selection-popup__list">
+        <ul class="selection-popup__ul">
+          <li
+            v-for="(item, index) in listItem"
+            :key="index"
+            class="selection-popup__li"
+            @click="selectAListItem(item.name)"
+          >
+            <slot name="item" v-bind="item" />
+          </li>
+        </ul>
+      </div>
+    </Transition>
   </div>
 </template>
 
