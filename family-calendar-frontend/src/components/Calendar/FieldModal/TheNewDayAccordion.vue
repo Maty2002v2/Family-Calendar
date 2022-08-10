@@ -21,14 +21,33 @@
       <article v-show="showContent" class="create-holiday__content">
         <section class="create-holiday__form">
           <div class="create-holiday__input-wrapper">
-            <label>Title</label>
-            <input type="text" class="crate-holiday__input" />
+            <label
+              for="create-holiday__input"
+              class="create-holiday__label-input"
+              >Title <span class="create-holiday__any-span">*</span></label
+            >
+            <input
+              type="text"
+              id="create-holiday__input"
+              class="create-holiday__input"
+            />
           </div>
           <div class="create-holiday__textarea-wrapper">
-            <label for="story">Description</label>
-            <textarea id="story" name="story" rows="5" cols="33">
-               It was a dark and stormy night...
-            </textarea>
+            <label
+              for="create-holiday__textarea"
+              class="create-holiday__label-textarea"
+              >Description
+              <span class="create-holiday__any-span">*</span></label
+            >
+            <textarea
+              id="create-holiday__textarea"
+              class="create-holiday__textarea"
+              rows="5"
+              placeholder="Describe yourself here..."
+            ></textarea>
+          </div>
+          <div class="create-holiday__icon-selection-wrapper">
+            <the-icon-selection />
           </div>
         </section>
       </article>
@@ -39,8 +58,13 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
+import TheIconSelection from "./IconSelection/TheIconSelection.vue";
+
 export default defineComponent({
   name: "TheNewDayAccordion",
+  components: {
+    TheIconSelection,
+  },
   setup() {
     const showContent = ref(false);
 
@@ -123,31 +147,79 @@ export default defineComponent({
   &__form {
     display: flex;
     justify-content: center;
+    // align-items: center;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 30px;
-    padding: 35px 0px;
+    padding: 35px 20px;
     box-sizing: border-box;
     border: 5px solid $active-day;
+
+    color: $color-day-field;
+    font-size: 15px;
+    font-weight: bold;
   }
-}
 
-label,
-textarea {
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-}
-textarea {
-  padding: 10px;
-  max-width: 100%;
-  line-height: 1.5;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-shadow: 1px 1px 1px $active-day;
-}
+  &__any-span {
+    color: $active-day;
+  }
 
-label {
-  display: block;
-  margin-bottom: 10px;
+  // &__input-wrapper {
+  // }
+
+  &__label-input {
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  &__input {
+    width: 100%;
+    line-height: 1.5;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+
+    color: $color-day-field;
+    font-size: 15px;
+
+    transition: all 0.3s ease;
+  }
+
+  &__input:focus {
+    outline-color: $active-day;
+    box-shadow: 0px 0px 3px $active-day;
+  }
+
+  // &__textarea-wrapper {
+  // }
+
+  &__textarea {
+    padding: 10px;
+    width: 100%;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    resize: none;
+
+    color: $color-day-field;
+    font-size: 15px;
+
+    transition: all 0.3s ease;
+  }
+
+  &__textarea:focus {
+    outline-color: $active-day;
+    box-shadow: 0px 0px 3px $active-day;
+  }
+
+  &__label-textarea {
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
+  }
 }
 
 .accordion-enter-active,

@@ -259,6 +259,7 @@ $size-day-div: calc(100% / 7 - 5px);
     &__nav {
       flex-direction: column-reverse;
       flex-basis: 100%;
+      margin: 10px 0px;
     }
 
     &__nav--prev {

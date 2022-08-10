@@ -6,4 +6,6 @@ import router from "./router";
 import "animate.css";
 import "@/assets/icons/css/fontello.css";
 
+// import ClickOutside from './utils/ClickOutside.js'
+
 createApp(App).use(router).use(createPinia()).mount("#app");
