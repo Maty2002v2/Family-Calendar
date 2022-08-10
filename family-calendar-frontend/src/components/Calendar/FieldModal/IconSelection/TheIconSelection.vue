@@ -84,7 +84,7 @@ export default defineComponent({
     ];
 
     const selectedIcon = ref("icon-briefcase");
-    const selectedColor = ref("#e43b3b");
+    const selectedColor = ref("#DE5858");
 
     const previewTemplate = computed(
       () =>
@@ -110,7 +110,7 @@ export default defineComponent({
   &__content {
     display: flex;
     align-items: center;
-    // gap: 70px;
+    gap: 20px;
   }
 
   &__preview {

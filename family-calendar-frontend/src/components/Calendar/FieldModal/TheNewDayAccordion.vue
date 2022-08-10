@@ -47,7 +47,10 @@
             ></textarea>
           </div>
           <div class="create-holiday__icon-selection-wrapper">
-            <the-icon-selection />
+            <the-icon-selection class="create-holiday__icon-selection" />
+            <div class="create-holiday__button-wrapper">
+              <button class="create-holiday__button btn-pils">add</button>
+            </div>
           </div>
         </section>
       </article>
@@ -219,6 +222,40 @@ export default defineComponent({
     letter-spacing: 1px;
     display: block;
     margin-bottom: 10px;
+  }
+
+  &__icon-selection-wrapper {
+    display: flex;
+  }
+
+  &__icon-selection {
+    flex-basis: 50%;
+  }
+
+  &__button-wrapper {
+    flex-basis: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .create-holiday {
+    &__icon-selection-wrapper {
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    &__icon-selection {
+      flex-basis: 100%;
+      justify-content: center;
+    }
+
+    &__button-wrapper {
+      flex-basis: 100%;
+      justify-content: center;
+    }
   }
 }
 
