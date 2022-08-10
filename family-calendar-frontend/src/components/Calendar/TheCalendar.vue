@@ -52,7 +52,7 @@
       <div
         class="container animate__animated animate__fast"
         :class="[calendarTransitionAnimationName]"
-        v-if="!loading"
+        v-if="!getLoadingCalendar"
       >
         <div
           class="days-grid__day days-grid__day--blank no-select"
@@ -102,6 +102,7 @@ import { defineComponent, ref, computed, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useDateStore } from "../../stores/DateStore";
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
+import { useMainStore } from "../../stores/MainStore";
 
 import NavigationButton from "./NavigationButton.vue";
 import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
@@ -127,25 +128,23 @@ export default defineComponent({
     const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } =
       storeToRefs(useDateStore());
 
-    let loading = ref(false);
+    const { getLoadingCalendar } = storeToRefs(useMainStore());
 
     watch(
       useDateStore,
       async () => {
-        loading.value = true;
         await fetchDaysOfTheMonth({
           calendarId: "uNK2r6j",
           numberMonth: getMounth.value.toString(),
-        }).then(() => (loading.value = false));
+        });
       },
       { deep: true }
     );
 
-    loading.value = true;
     await fetchDaysOfTheMonth({
       calendarId: "uNK2r6j",
       numberMonth: getMounth.value.toString(),
-    }).then(() => (loading.value = false));
+    });
 
     let calendarTransitionAnimationName = ref("");
     const setTransitionName = (transitionName: string) => {
@@ -171,7 +170,7 @@ export default defineComponent({
       getFirstMonthDay,
       totalNumberFields,
       getSortedDays,
-      loading,
+      getLoadingCalendar,
       calendarTransitionAnimationName,
       setTransitionName,
       showDetailsOfDay,

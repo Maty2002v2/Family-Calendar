@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import InformationDaysDownload from "../types/InformationDaysDownload";
 import DaysOfTheMonthDownloaded from "../types/DaysOfTheMonthDownloaded";
 
+import { useMainStore } from "./MainStore";
+
 export const useCalendarApiStore = defineStore("CalendarApi", {
   state: () => {
     return {
@@ -101,6 +103,8 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       return result;
     },
     async fetchDaysOfTheMonth(whatDays: InformationDaysDownload) {
+      const { switchLoadingCalendar } = useMainStore();
+
       const url = new URL("http://localhost/family-calendar-api");
       const params = {
         action: "give-days-of-the-month",
@@ -112,6 +116,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         url.searchParams.append(key, params[key as keyof typeof params])
       );
 
+      switchLoadingCalendar(true);
       await fetch(url.toString(), {
         method: "GET",
         mode: "cors",
@@ -119,6 +124,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         .then((response) => response.json())
         .then((response) => {
           this.days = response.message;
+          switchLoadingCalendar(false);
         });
       // .catch((error) => {
       //   result.error = true;
