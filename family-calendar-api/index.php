@@ -48,8 +48,22 @@ switch ($action) {
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
         $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);
         $category_day = $request->get('category_day');
+        $icon_name = $request->get('icon_name');
+        $icon_color = $request->get('icon_color');
 
-        $days = new Days('', $calendar_id, $number_day, $number_month, $number_year, $to_repeat, $title, $description, $category_day);
+        $days = new Days(
+            '', 
+            $calendar_id, 
+            $number_day, 
+            $number_month, 
+            $number_year, 
+            $to_repeat, 
+            $title, 
+            $description, 
+            $category_day, 
+            $icon_name, 
+            $icon_color
+        );
         $result = $days->create_day();
 
         if($result['is_ok']) {

@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: (to, from, next) => {
       const { switchIncorrectCodeEntered } = useMainStore();
       const { checkIfThereIsCalendar, setCalendarHash } = useCalendarApiStore();
-      console.log("asd");
+
       checkIfThereIsCalendar(to.params.calendarId as string).then(
         (response) => {
           if (!response.error) {

@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, watch } from "vue";
 
 import SelectionPopup from "./SelectionPopup.vue";
 
@@ -45,7 +45,8 @@ export default defineComponent({
   components: {
     SelectionPopup,
   },
-  setup() {
+  emits: ["getIconDay"],
+  setup(props, { emit }) {
     const iconNameList = [
       { name: "icon-shopping-basket" },
       { name: "icon-cab" },
@@ -90,6 +91,10 @@ export default defineComponent({
       () =>
         `<i class="icon-demo icon-selection__icon ${selectedIcon.value}" style="background-color: ${selectedColor.value}"></i>`
     );
+
+    watch([selectedIcon, selectedColor], ([newIcon, newColor]) => {
+      emit("getIconDay", { name: newIcon, color: newColor });
+    });
 
     return {
       iconNameList,

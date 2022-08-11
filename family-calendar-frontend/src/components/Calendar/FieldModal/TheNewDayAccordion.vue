@@ -3,12 +3,12 @@
     <header
       class="create-holiday__header"
       role="complementary"
-      @click="showContent = !showContent"
+      @click="switchShowNewDayForm(!getShowNewDayForm)"
     >
       <h2 class="create-holiday__h2">Add a new day</h2>
       <span
         class="create-holiday__char-toggle"
-        :class="{ 'create-holiday__char-toggle--active': showContent }"
+        :class="{ 'create-holiday__char-toggle--active': getShowNewDayForm }"
       ></span>
     </header>
     <Transition
@@ -18,7 +18,7 @@
       @before-leave="start"
       @after-leave="end"
     >
-      <article v-show="showContent" class="create-holiday__content">
+      <article v-show="getShowNewDayForm" class="create-holiday__content">
         <section class="create-holiday__form">
           <div class="create-holiday__input-wrapper">
             <label
@@ -28,6 +28,7 @@
             >
             <input
               type="text"
+              v-model="title"
               id="create-holiday__input"
               class="create-holiday__input"
             />
@@ -41,15 +42,21 @@
             >
             <textarea
               id="create-holiday__textarea"
+              v-model="description"
               class="create-holiday__textarea"
               rows="5"
               placeholder="Describe yourself here..."
             ></textarea>
           </div>
           <div class="create-holiday__icon-selection-wrapper">
-            <the-icon-selection class="create-holiday__icon-selection" />
+            <the-icon-selection
+              class="create-holiday__icon-selection"
+              @getIconDay="(value) => (iconDay = value)"
+            />
             <div class="create-holiday__button-wrapper">
-              <button class="create-holiday__button btn-pils">add</button>
+              <button class="create-holiday__button btn-pils" @click="lol">
+                add
+              </button>
             </div>
           </div>
         </section>
@@ -63,19 +70,64 @@ import { defineComponent, ref } from "vue";
 
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
 
+import { storeToRefs } from "pinia";
+import { useCalendarApiStore } from "../../../stores/CalendarApiStore";
+import { useDateStore } from "../../../stores/DateStore";
+import { useMainStore } from "../../../stores/MainStore";
+
 export default defineComponent({
   name: "TheNewDayAccordion",
+  props: {
+    selectedDayNumber: {
+      type: Number,
+      required: true,
+    },
+  },
   components: {
     TheIconSelection,
   },
-  setup() {
-    const showContent = ref(false);
+  setup(props) {
+    const { getCalendarHash } = storeToRefs(useCalendarApiStore());
+    const { addDayToCalendar } = useCalendarApiStore();
+
+    const { getMounth, getYear } = storeToRefs(useDateStore());
+
+    const { getShowNewDayForm } = storeToRefs(useMainStore());
+    const { switchShowNewDayForm } = useMainStore();
+
+    const title = ref("");
+    const description = ref("");
+    const iconDay = ref({ name: "icon-briefcase", color: "#DE5858" });
+
+    const lol = () => {
+      addDayToCalendar({
+        calendar_id: getCalendarHash.value,
+        number_day: (props.selectedDayNumber + 1).toString(),
+        number_month: (getMounth.value + 1).toString(),
+        number_year: getYear.value.toString(),
+        title: title.value,
+        description: description.value,
+        icon_name: iconDay.value.name,
+        icon_color: iconDay.value.color,
+        category_day: "0",
+        to_repeat: "0",
+      });
+    };
 
     const start = (el: HTMLElement) =>
       (el.style.height = el.scrollHeight + "px");
     const end = (el: HTMLElement) => (el.style.height = "");
 
-    return { showContent, start, end };
+    return {
+      getShowNewDayForm,
+      switchShowNewDayForm,
+      start,
+      end,
+      lol,
+      title,
+      description,
+      iconDay,
+    };
   },
 });
 </script>

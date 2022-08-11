@@ -89,6 +89,7 @@
     <teleport to="#modal">
       <the-field-modal
         v-show="showDetailsOfDay"
+        :selectedDayNumber="indexOfSelectedDay"
         :specialDayList="getSortedDays[indexOfSelectedDay]"
         @closeModal="showDetailsOfDay = false"
       />
@@ -152,7 +153,7 @@ export default defineComponent({
     };
 
     let showDetailsOfDay = ref(false);
-    let indexOfSelectedDay = ref();
+    let indexOfSelectedDay = ref(0);
     const showThisDay = (nrDay: number) => {
       indexOfSelectedDay.value = nrDay;
       showDetailsOfDay.value = true;

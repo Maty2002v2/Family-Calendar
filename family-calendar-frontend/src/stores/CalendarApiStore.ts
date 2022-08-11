@@ -1,8 +1,10 @@
-import { defineStore } from "pinia";
+import { defineStore, storeToRefs } from "pinia";
 import InformationDaysDownload from "../types/InformationDaysDownload";
 import DaysOfTheMonthDownloaded from "../types/DaysOfTheMonthDownloaded";
+import CreateNewDay from "../types/CreateNewDay";
 
 import { useMainStore } from "./MainStore";
+import { useDateStore } from "./DateStore";
 
 export const useCalendarApiStore = defineStore("CalendarApi", {
   state: () => {
@@ -12,6 +14,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
     };
   },
   getters: {
+    getCalendarHash: (state) => state.calendarHash,
     getDays: (state) => state.days,
     getSortedDays: (state) => {
       const dayIndex: DaysOfTheMonthDownloaded[][] = [
@@ -130,6 +133,37 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       //   result.error = true;
       //   result.message = error;
       // });
+    },
+    async addDayToCalendar(day: CreateNewDay) {
+      const { getMounth } = storeToRefs(useDateStore());
+
+      const { switchShowNewDayForm } = useMainStore();
+
+      const url = "http://localhost/family-calendar-api/";
+      const params = Object.assign({ action: "add-day" }, day);
+
+      const formData = new FormData();
+
+      for (const param in params) {
+        formData.append(param, params[param as keyof typeof params] || "");
+      }
+
+      await fetch(url, {
+        method: "POST",
+        body: formData,
+        mode: "cors",
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          // this.days = response.message;
+          // console.log(response);
+          console.log(getMounth.value);
+          switchShowNewDayForm(false);
+          this.fetchDaysOfTheMonth({
+            calendarId: this.calendarHash,
+            numberMonth: getMounth.value.toString(),
+          });
+        });
     },
   },
 });

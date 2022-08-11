@@ -5,11 +5,13 @@ export const useMainStore = defineStore("Main", {
     return {
       incorrectCodeEntered: false,
       loadingCalendar: false,
+      showNewDayForm: false,
     };
   },
   getters: {
     getIncorrectCodeEntered: (state) => state.incorrectCodeEntered,
     getLoadingCalendar: (state) => state.loadingCalendar,
+    getShowNewDayForm: (state) => state.showNewDayForm,
   },
   actions: {
     switchIncorrectCodeEntered(value: boolean) {
@@ -17,6 +19,9 @@ export const useMainStore = defineStore("Main", {
     },
     switchLoadingCalendar(value: boolean) {
       this.loadingCalendar = value;
+    },
+    switchShowNewDayForm(value: boolean) {
+      this.showNewDayForm = value;
     },
   },
 });

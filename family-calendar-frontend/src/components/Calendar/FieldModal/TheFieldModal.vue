@@ -31,7 +31,7 @@
 
       <section v-else class="info-about-lack-of-days">das</section>
       <section class="create-holiday">
-        <the-new-day-accordion />
+        <the-new-day-accordion :selectedDayNumber="selectedDayNumber" />
       </section>
     </article>
   </div>
@@ -46,6 +46,10 @@ import TheNewDayAccordion from "./TheNewDayAccordion.vue";
 export default defineComponent({
   name: "TheFieldModal",
   props: {
+    selectedDayNumber: {
+      type: Number,
+      required: true,
+    },
     specialDayList: {
       type: Array,
       required: true,
