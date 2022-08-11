@@ -29,7 +29,12 @@
         </div>
       </section>
 
-      <section v-else class="info-about-lack-of-days">das</section>
+      <section v-else class="info-about-lack-of-days">
+        <h2 class="info-about-lack-of-days__h2">You have a day off!</h2>
+        <div class="info-about-lack-of-days__div">
+          <i class="demo-icon icon-ok"></i>
+        </div>
+      </section>
       <section class="create-holiday">
         <the-new-day-accordion :selectedDayNumber="selectedDayNumber" />
       </section>
@@ -42,6 +47,8 @@ import { defineComponent } from "vue";
 
 import AppAccordion from "../../AppAccordion.vue";
 import TheNewDayAccordion from "./TheNewDayAccordion.vue";
+
+import { useMainStore } from "../../../stores/MainStore";
 
 export default defineComponent({
   name: "TheFieldModal",
@@ -62,7 +69,12 @@ export default defineComponent({
   },
   emits: ["closeModal"],
   setup(props, { emit }) {
-    const closeModal = () => emit("closeModal");
+    const { switchShowNewDayForm } = useMainStore();
+
+    const closeModal = () => {
+      emit("closeModal");
+      switchShowNewDayForm(false);
+    };
 
     return { closeModal };
   },
@@ -132,6 +144,33 @@ export default defineComponent({
 
   &__content {
     color: $color-day-field;
+  }
+}
+
+.info-about-lack-of-days {
+  &__h2 {
+    text-align: center;
+    color: $active-day;
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+  &__div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border: 2px solid $active-day;
+    border-radius: 50%;
+    margin: auto;
+    box-sizing: border-box;
+
+    color: $active-day;
+    font-size: 30px;
+
+    background: $white;
   }
 }
 </style>

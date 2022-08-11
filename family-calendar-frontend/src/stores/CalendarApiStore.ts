@@ -155,14 +155,13 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       })
         .then((response) => response.json())
         .then((response) => {
-          // this.days = response.message;
-          // console.log(response);
-          console.log(getMounth.value);
-          switchShowNewDayForm(false);
-          this.fetchDaysOfTheMonth({
-            calendarId: this.calendarHash,
-            numberMonth: getMounth.value.toString(),
-          });
+          if (!response.error) {
+            switchShowNewDayForm(false);
+            this.fetchDaysOfTheMonth({
+              calendarId: this.calendarHash,
+              numberMonth: getMounth.value.toString(),
+            });
+          }
         });
     },
   },

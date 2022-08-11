@@ -1,7 +1,14 @@
 <template>
-  <div class="input-counter" v-show="inputLength > 0">
-    <span class="input-counter__span">{{ inputLength }} / {{ maxLength }}</span>
-  </div>
+  <Transition
+    enter-active-class="animate__animated animate__faster animate__fadeIn"
+    leave-active-class="animate__animated animate__faster animate__fadeOut"
+  >
+    <div class="input-counter" v-show="inputLength > 0">
+      <span class="input-counter__span"
+        >{{ inputLength }} / {{ maxLength }}</span
+      >
+    </div>
+  </Transition>
 </template>
 
 <script lang="ts">

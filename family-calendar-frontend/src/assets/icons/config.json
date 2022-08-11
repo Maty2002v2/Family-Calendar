@@ -113,6 +113,12 @@
       "css": "shopping-basket",
       "code": 62097,
       "src": "fontawesome"
+    },
+    {
+      "uid": "7b16b22168e762c88333f465da862098",
+      "css": "ok",
+      "code": 59400,
+      "src": "websymbols"
     }
   ]
 }
