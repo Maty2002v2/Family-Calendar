@@ -123,19 +123,22 @@ export default defineComponent({
     TheFieldModal,
   },
   async setup() {
-    const { getSortedDays } = storeToRefs(useCalendarApiStore());
+    const { getSortedDays, getCalendarHash } = storeToRefs(
+      useCalendarApiStore()
+    );
     const { fetchDaysOfTheMonth } = useCalendarApiStore();
 
+    const dataStore = useDateStore();
     const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } =
       storeToRefs(useDateStore());
 
     const { getLoadingCalendar } = storeToRefs(useMainStore());
 
     watch(
-      useDateStore,
+      dataStore,
       async () => {
         await fetchDaysOfTheMonth({
-          calendarId: "uNK2r6j",
+          calendarId: getCalendarHash.value,
           numberMonth: getMounth.value.toString(),
         });
       },
@@ -143,7 +146,7 @@ export default defineComponent({
     );
 
     await fetchDaysOfTheMonth({
-      calendarId: "uNK2r6j",
+      calendarId: getCalendarHash.value,
       numberMonth: getMounth.value.toString(),
     });
 

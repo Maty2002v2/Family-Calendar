@@ -29,8 +29,14 @@
             <input
               type="text"
               v-model="title"
+              :maxlength="15"
               id="create-holiday__input"
               class="create-holiday__input"
+            />
+            <app-input-counter
+              class="create-holiday__input-counter"
+              :inputLength="title.length"
+              maxLength="15"
             />
           </div>
           <div class="create-holiday__textarea-wrapper">
@@ -46,7 +52,13 @@
               class="create-holiday__textarea"
               rows="5"
               placeholder="Describe yourself here..."
+              maxlength="50"
             ></textarea>
+            <app-input-counter
+              class="create-holiday__input-counter"
+              :inputLength="description.length"
+              maxLength="50"
+            />
           </div>
           <div class="create-holiday__icon-selection-wrapper">
             <the-icon-selection
@@ -54,7 +66,7 @@
               @getIconDay="(value) => (iconDay = value)"
             />
             <div class="create-holiday__button-wrapper">
-              <button class="create-holiday__button btn-pils" @click="lol">
+              <button class="create-holiday__button btn-pils" @click="addDay">
                 add
               </button>
             </div>
@@ -69,6 +81,7 @@
 import { defineComponent, ref } from "vue";
 
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
+import AppInputCounter from "../../AppInputCounter.vue";
 
 import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "../../../stores/CalendarApiStore";
@@ -85,6 +98,7 @@ export default defineComponent({
   },
   components: {
     TheIconSelection,
+    AppInputCounter,
   },
   setup(props) {
     const { getCalendarHash } = storeToRefs(useCalendarApiStore());
@@ -99,7 +113,7 @@ export default defineComponent({
     const description = ref("");
     const iconDay = ref({ name: "icon-briefcase", color: "#DE5858" });
 
-    const lol = () => {
+    const addDay = () => {
       addDayToCalendar({
         calendar_id: getCalendarHash.value,
         number_day: (props.selectedDayNumber + 1).toString(),
@@ -111,6 +125,9 @@ export default defineComponent({
         icon_color: iconDay.value.color,
         category_day: "0",
         to_repeat: "0",
+      }).then(() => {
+        title.value = "";
+        description.value = "";
       });
     };
 
@@ -123,7 +140,7 @@ export default defineComponent({
       switchShowNewDayForm,
       start,
       end,
-      lol,
+      addDay,
       title,
       description,
       iconDay,
@@ -245,6 +262,11 @@ export default defineComponent({
   &__input:focus {
     outline-color: $active-day;
     box-shadow: 0px 0px 3px $active-day;
+  }
+
+  &__input-counter {
+    margin: 5px;
+    text-align: end;
   }
 
   // &__textarea-wrapper {
