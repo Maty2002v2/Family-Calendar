@@ -1,6 +1,6 @@
 # family-calendar
 
-Movie with the project https://www.youtube.com/watch?v=MZuhKL0m-94&ab_channel=Arage
+Movie with the project https://youtu.be/w04r2CZrjc0
 
 ## Project setup
 
