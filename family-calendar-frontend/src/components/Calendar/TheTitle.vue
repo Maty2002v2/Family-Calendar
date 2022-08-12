@@ -55,12 +55,13 @@ export default defineComponent({
     position: sticky;
     top: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexbox;
+    @include flex-centering;
     min-height: 50px;
 
     font-size: 20px;
+
+    z-index: 1;
   }
 }
 </style>

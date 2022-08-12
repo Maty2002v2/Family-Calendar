@@ -64,9 +64,8 @@ export default defineComponent({
   }
 
   &__icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexbox;
+    @include flex-centering;
     width: 100%;
     height: 100%;
 

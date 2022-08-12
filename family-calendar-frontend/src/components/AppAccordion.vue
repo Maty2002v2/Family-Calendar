@@ -1,6 +1,9 @@
 <template>
   <article class="app-accordion">
-    <section class="title" @click="showContent = !showContent">
+    <section
+      class="title app-accordion__title"
+      @click="showContent = !showContent"
+    >
       <div class="title__title-slot no-select">
         <slot name="title" />
       </div>
@@ -14,7 +17,7 @@
       </div>
     </section>
     <Transition
-      name="accordion"
+      name="app-accordion"
       @enter="start"
       @after-enter="end"
       @before-leave="start"
@@ -50,61 +53,11 @@ export default defineComponent({
   padding: 5px 10px;
   border-bottom: 1px solid #ebebeb;
 
-  .title {
-    display: flex;
-    justify-content: space-between;
+  &__title {
+    @include flexbox;
+    @include flex-centering(space-between, stretch);
     height: 50px;
     cursor: pointer;
-
-    &__title-slot {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    &__default-char-toggle {
-      position: relative;
-      color: $color-day-field;
-      width: 15px;
-      height: 50px;
-
-      &:before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 2px;
-        // border: 1px solid $color-day-field;
-        border-radius: 20px;
-        // background: $color-day-field;
-        background: $active-day;
-        // box-sizing: border-box;
-        transform: translate(-50%, -50%);
-      }
-
-      &:after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 90%;
-        height: 2px;
-        // border: 1px solid $color-day-field;
-        border-radius: 20px;
-        // background: $color-day-field;
-        background: $active-day;
-        // box-sizing: border-box;
-        transition: all 0.2s ease;
-        transform: translate(-50%, -50%) rotate(-90deg);
-      }
-    }
-
-    &__default-char-toggle--active {
-      &:after {
-        transform: translate(-50%, -50%) rotate(0deg);
-      }
-    }
   }
 
   &__content {
@@ -112,18 +65,60 @@ export default defineComponent({
     box-sizing: border-box;
   }
 
-  .accordion-enter-active,
-  .accordion-leave-active {
+  &-enter-active,
+  &-leave-active {
     transition: all 0.3s ease;
     overflow: hidden;
   }
 
-  .accordion-enter-from,
-  .accordion-leave-to {
+  &-enter-from,
+  &-leave-to {
     height: 0 !important;
     opacity: 0;
     margin-top: 0px;
     margin-bottom: 0px;
+  }
+}
+
+.title {
+  &__title-slot {
+    @include flexbox;
+    @include align-items(center);
+    gap: 10px;
+  }
+
+  %pseudo-elements {
+    content: "";
+    @include position(absolute, 50%, 0, 0, 50%);
+    height: 2px;
+    border-radius: 20px;
+    background: $active-day;
+  }
+
+  &__default-char-toggle {
+    position: relative;
+    color: $color-day-field;
+    width: 15px;
+    height: 50px;
+
+    &:before {
+      @extend %pseudo-elements;
+      width: 100%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:after {
+      @extend %pseudo-elements;
+      width: 90%;
+      transition: all 0.2s ease;
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
+  }
+
+  &__default-char-toggle--active {
+    &:after {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
   }
 }
 </style>

@@ -113,22 +113,21 @@ export default defineComponent({
   height: 100%;
 
   &__content {
-    display: flex;
-    align-items: center;
+    @include flexbox;
+    @include align-items(center);
     gap: 20px;
   }
 
   &__preview {
-    flex-basis: 50%;
-    display: flex;
-    justify-content: center;
+    @include flex-basis(50%);
+    @include flexbox;
+    @include justify-content(center);
     height: 100%;
   }
 
   &:deep(.icon-selection__icon) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexbox;
+    @include flex-centering;
     aspect-ratio: 1 / 1;
     width: 50px;
     border-radius: 50%;
@@ -138,10 +137,10 @@ export default defineComponent({
   }
 
   &__choice {
-    flex-basis: 50%;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
+    @include flex-basis(50%);
+    @include flexbox;
+    @include justify-content(flex-start);
+    @include flex-direction(column);
     gap: 10px;
   }
 

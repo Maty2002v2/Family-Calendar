@@ -71,8 +71,8 @@ export default defineComponent({
 $size-day-div: calc(100% / 7 - 5px);
 
 .name-day-of-week {
-  display: flex;
-  flex-wrap: wrap;
+  @include flexbox;
+  // @include flex-wrap(wrap);
   gap: 5px;
   width: 100%;
   text-align: center;
@@ -97,12 +97,12 @@ $size-day-div: calc(100% / 7 - 5px);
 
 @media only screen and (max-width: $small) {
   .name-day-of-week {
-    flex-direction: column;
+    @include flex-direction(column);
     margin: 0px;
 
     &__div {
-      display: flex;
-      align-items: center;
+      @include flexbox;
+      @include align-items(center);
       min-height: 100px;
 
       font-size: 30px;

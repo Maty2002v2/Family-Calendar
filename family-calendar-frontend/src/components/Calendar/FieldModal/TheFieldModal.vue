@@ -83,13 +83,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .field-modal {
-  position: absolute;
-  top: 0;
-  left: 0;
+  @include position($top: 0px, $left: 0px);
 
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
+  @include flexbox;
+  @include justify-content(center);
   width: 100vw;
   min-height: 100%;
   padding-top: 10vh;
@@ -99,8 +96,8 @@ export default defineComponent({
   background: rgba($color: #000000, $alpha: 0.3);
 
   &__content {
-    display: flex;
-    flex-direction: column;
+    @include flexbox;
+    @include flex-direction(column);
     gap: 20px;
     width: 500px;
     margin: 10px;
@@ -127,9 +124,8 @@ export default defineComponent({
 
 .accordions {
   &__icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexbox;
+    @include flex-centering;
     aspect-ratio: 1 / 1;
     width: 25px;
     border-radius: 50%;
@@ -156,15 +152,14 @@ export default defineComponent({
   }
 
   &__div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexbox;
+    @include flex-centering;
     width: 50px;
     height: 50px;
     padding: 10px;
     border: 2px solid $active-day;
     border-radius: 50%;
-    margin: auto;
+    @include margin-auto;
     box-sizing: border-box;
 
     color: $active-day;

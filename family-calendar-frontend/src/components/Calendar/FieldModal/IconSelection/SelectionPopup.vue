@@ -66,9 +66,10 @@ export default defineComponent({
   }
 
   &__list {
-    position: absolute;
-    bottom: 120%;
-    left: 0%;
+    @include position($bottom: 120%, $left: 0%);
+    // position: absolute;
+    // bottom: 120%;
+    // left: 0%;
 
     border: 2px solid #ccc;
     border-radius: 5px;
@@ -83,18 +84,17 @@ export default defineComponent({
   }
 
   &__ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    @include flexbox;
+    @include flex-wrap(wrap);
+    @include justify-content(center);
     padding: 5px;
 
     list-style: none;
   }
 
   &__li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexbox;
+    @include flex-centering;
     width: 20px;
     height: 20px;
     padding: 5px;

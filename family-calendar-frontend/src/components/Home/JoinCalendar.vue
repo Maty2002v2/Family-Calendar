@@ -5,13 +5,13 @@
     <div class="join-calendar__title-with-information">
       <h2 class="join-calendar__h2">Join already existing calendar.</h2>
     </div>
-    <div class="form">
+    <div class="join-calendar__form">
       <sliding-input label="CODE" v-model="calendarHash" />
       <button class="btn-rectangle--gradient" @click="pushWithQuery">
         join
       </button>
       <span
-        class="animate__animated"
+        class="join-calendar__invalid-code animate__animated"
         :class="{
           animate__rubberBand: getIncorrectCodeEntered,
           animate__bounceOut: !getIncorrectCodeEntered,
@@ -70,9 +70,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .join-calendar {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  @include flexbox;
+  @include align-items(center);
+  @include flex-direction(column);
   gap: (100%) / 4;
   height: 100%;
   padding: 0px 20px;
@@ -84,22 +84,21 @@ export default defineComponent({
     font-size: max(5vw, 40px);
   }
 
-  .form {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+  &__form {
+    @include flexbox;
+    @include justify-content(center);
+    @include flex-wrap(wrap);
     gap: 10px;
+  }
 
-    span {
-      //TODO: Nadać klase nie zostawaic selektora.
-      width: 100%;
-      text-align: center;
+  &__invalid-code {
+    width: 100%;
+    text-align: center;
 
-      color: $color-day-field;
-      font-size: 13px;
-      font-weight: 100;
-      letter-spacing: 1px;
-    }
+    color: $color-day-field;
+    font-size: 13px;
+    font-weight: 100;
+    letter-spacing: 1px;
   }
 }
 

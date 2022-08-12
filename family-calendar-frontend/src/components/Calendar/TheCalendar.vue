@@ -58,9 +58,7 @@
           class="days-grid__day days-grid__day--blank no-select"
           v-for="day in getFirstMonthDay - 1"
           :key="day"
-        >
-          .
-        </div>
+        ></div>
 
         <div
           v-for="day in getDaysInMonth"
@@ -189,151 +187,149 @@ export default defineComponent({
 $size-day-div: calc(100% / 7 - 5px);
 
 .calendar {
-  display: flex;
-  flex-wrap: wrap;
+  @include flexbox;
+  @include flex-wrap(wrap);
   width: 100%;
   padding: 5px;
   box-sizing: border-box;
 
   &__nav {
-    display: flex;
-    justify-content: space-around;
-    flex-basis: 40%;
+    //TODO: Poprawic to ze przy granicy zmiany z desckt namobile nawigazja przeskakuje
+    @include flexbox;
+    @include justify-content(space-around);
+    @include flex-basis(40%);
     width: 100%;
   }
 
   &__title {
-    flex-basis: 20%;
+    @include flex-basis(20%);
+  }
+}
+
+.days-grid {
+  @include flexbox;
+  @include flex-wrap(wrap);
+  @include flex-basis(100%);
+  margin-top: 20px;
+
+  .container {
+    @include flexbox;
+    @include flex-wrap(wrap);
+    gap: 5px;
+    width: 100%;
   }
 
-  .days-grid {
-    display: flex;
-    flex-wrap: wrap;
-    flex-basis: 100%;
-    margin-top: 20px;
+  &__day {
+    display: inline-block;
+    width: $size-day-div;
+    height: 100px;
+    border: 1px solid rgb(149, 148, 148);
+    box-sizing: border-box;
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      width: 100%;
-    }
+    color: $color-day-field;
 
-    &__day {
-      display: inline-block;
-      width: $size-day-div;
-      height: 100px;
-      border: 1px solid rgb(149, 148, 148);
-      box-sizing: border-box;
+    background: $background-field;
 
-      color: $color-day-field;
-
-      background: $background-field;
-    }
-
-    &__day:hover {
+    &:hover {
       background: $hover-blue;
       cursor: pointer;
     }
 
-    &__day--blank {
-      color: $background-field;
-      background: none;
+    &--blank {
       border: none;
+      background: none;
     }
 
-    &__day--active {
+    &--active {
       color: #fff;
       font-weight: bold;
       background: $active-day;
-    }
 
-    &__day--active:hover {
-      background: $hover-active-day;
+      &:hover {
+        background: $hover-active-day;
+      }
     }
   }
 }
 
 @media only screen and (max-width: $small) {
   .calendar {
-    flex-direction: column;
+    @include flex-direction(column);
     // gap: 20px;
 
     &__nav {
-      flex-direction: column-reverse;
-      flex-basis: 100%;
+      @include flex-direction(column-reverse);
+      @include flex-basis(100%);
       margin: 10px 0px;
     }
 
     &__nav--prev {
-      order: 1;
+      @include order(1);
     }
 
     &__title {
-      flex-basis: 100%;
+      @include flex-basis(100%);
     }
+  }
 
-    .days-grid {
-      flex-wrap: nowrap;
-      margin-top: 0px;
-      padding: 0px 20px;
-      gap: 10px;
+  .days-grid {
+    @include flex-wrap;
+    margin-top: 0px;
+    padding: 0px 20px;
+    gap: 10px;
 
-      overflow-y: auto;
-
-      &::-webkit-scrollbar-thumb {
-        scrollbar-color: #d4aa70 #e4e4e4;
-        scrollbar-width: thin;
-      }
-
-      &::-webkit-scrollbar {
-        width: 10px;
-      }
-
-      &::-webkit-scrollbar-track {
-        background-color: #e4e4e4;
-        border-radius: 100px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        border-radius: 100px;
-        background-image: linear-gradient(
-          180deg,
-          $active-day 0%,
-          $background-field 99%
-        );
-        box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-      }
-
-      &__day {
-        width: 100%;
-        min-height: 100px;
-      }
-    }
+    overflow-y: auto;
 
     .container {
-      flex-direction: column;
+      @include flex-direction(column);
       max-height: 600px;
     }
 
     .container:first-child {
-      flex-basis: 30%;
+      @include flex-basis(30%);
       background: $white;
     }
 
     .container:last-child {
-      flex-wrap: nowrap;
-      flex-basis: 70%;
+      @include flex-wrap;
+      @include flex-basis(70%);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      scrollbar-color: #d4aa70 #e4e4e4;
+      scrollbar-width: thin;
+    }
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #e4e4e4;
+      border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 100px;
+      background-image: linear-gradient(
+        180deg,
+        $active-day 0%,
+        $background-field 99%
+      );
+      box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    }
+
+    &__day {
+      width: 100%;
+      min-height: 100px;
     }
   }
 }
 
 @media only screen and (max-width: 660px) {
-  .calendar {
-    .days-grid {
-      &__day {
-        height: 80px;
-      }
+  .days-grid {
+    &__day {
+      height: 80px;
     }
   }
 }

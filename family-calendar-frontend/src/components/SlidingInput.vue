@@ -44,9 +44,7 @@ export default defineComponent({
   }
 
   &__label {
-    position: absolute;
-    top: 50%;
-    left: 15px;
+    @include position($top: 50%, $left: 15px);
 
     color: $color-day-field;
 

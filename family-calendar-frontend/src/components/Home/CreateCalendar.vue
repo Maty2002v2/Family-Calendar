@@ -57,14 +57,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .create-calendar {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  @include flexbox;
+  @include align-items(center);
+  @include flex-direction(column);
   gap: (100%) / 4;
   height: 100%;
   padding: 0px 20px;
-
-  height: 100%;
 
   &__h2 {
     text-align: center;

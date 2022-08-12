@@ -36,7 +36,7 @@
             <app-input-counter
               class="create-holiday__input-counter"
               :inputLength="title.length"
-              maxLength="15"
+              :maxLength="15"
             />
           </div>
           <div class="create-holiday__textarea-wrapper">
@@ -57,7 +57,7 @@
             <app-input-counter
               class="create-holiday__input-counter"
               :inputLength="description.length"
-              maxLength="50"
+              :maxLength="50"
             />
           </div>
           <div class="create-holiday__icon-selection-wrapper">
