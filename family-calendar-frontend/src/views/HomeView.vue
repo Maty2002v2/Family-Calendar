@@ -27,7 +27,6 @@ export default defineComponent({
 @mixin home__segments($color, $background-color) {
   width: 100%;
   height: 100%;
-
   box-sizing: border-box;
 
   color: $color;
@@ -36,8 +35,8 @@ export default defineComponent({
 }
 
 .home {
-  display: flex;
-  flex-direction: row;
+  @include flexbox;
+  @include flex-direction(row);
   width: 100%;
   height: max(100vh, 600px);
 
@@ -52,7 +51,7 @@ export default defineComponent({
 
 @media only screen and (max-width: $medium) {
   .home {
-    flex-direction: column;
+    @include flex-direction(column);
   }
 }
 </style>
