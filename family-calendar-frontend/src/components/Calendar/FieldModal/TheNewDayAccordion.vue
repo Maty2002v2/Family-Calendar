@@ -56,6 +56,9 @@
               :maxLength="50"
             />
           </div>
+          <div class="form-repeat-selection">
+            <the-repeat-selection-checkbox @getCheckboxValue="setToRepeat" />
+          </div>
           <div class="form__icon-selection-container">
             <the-icon-selection
               class="form__icon-selection"
@@ -82,6 +85,7 @@ import { defineComponent, ref, computed } from "vue";
 
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
 import AppInputCounter from "../../AppInputCounter.vue";
+import TheRepeatSelectionCheckbox from "./TheRepeatSelectionCheckbox.vue";
 
 import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "../../../stores/CalendarApiStore";
@@ -99,6 +103,7 @@ export default defineComponent({
   components: {
     TheIconSelection,
     AppInputCounter,
+    TheRepeatSelectionCheckbox,
   },
   setup(props) {
     const { getCalendarHash } = storeToRefs(useCalendarApiStore());
@@ -111,6 +116,7 @@ export default defineComponent({
 
     const title = ref("");
     const description = ref("");
+    const toRepeat = ref(false);
     const iconDay = ref({ name: "icon-briefcase", color: "#DE5858" });
     const titleOfButton = ref("add");
 
@@ -130,7 +136,7 @@ export default defineComponent({
           icon_name: iconDay.value.name,
           icon_color: iconDay.value.color,
           category_day: "0",
-          to_repeat: "0",
+          to_repeat: (+toRepeat.value).toString(),
         }).then(() => {
           title.value = "";
           description.value = "";
@@ -143,6 +149,8 @@ export default defineComponent({
       }
     };
 
+    const setToRepeat = (value: boolean) => (toRepeat.value = value);
+
     const start = (el: HTMLElement) =>
       (el.style.height = el.scrollHeight + "px");
     const end = (el: HTMLElement) => (el.style.height = "");
@@ -154,6 +162,7 @@ export default defineComponent({
       iconDay,
       titleOfButton,
       switchShowNewDayForm,
+      setToRepeat,
       start,
       end,
       addDay,
