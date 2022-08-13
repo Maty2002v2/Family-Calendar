@@ -62,7 +62,13 @@
               @getIconDay="(value) => (iconDay = value)"
             />
             <div class="form__button-container">
-              <button class="btn-pils form__button" @click="addDay">add</button>
+              <button
+                class="btn-pils form__button animate__animated"
+                :class="[titleOfButton === 'give data' ? 'animate__jello' : '']"
+                @click="addDay"
+              >
+                {{ titleOfButton }}
+              </button>
             </div>
           </div>
         </form>
@@ -72,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
 
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
 import AppInputCounter from "../../AppInputCounter.vue";
@@ -106,23 +112,35 @@ export default defineComponent({
     const title = ref("");
     const description = ref("");
     const iconDay = ref({ name: "icon-briefcase", color: "#DE5858" });
+    const titleOfButton = ref("add");
+
+    const correctData = computed(
+      () => title.value.length > 0 && description.value.length > 0
+    );
 
     const addDay = () => {
-      addDayToCalendar({
-        calendar_id: getCalendarHash.value,
-        number_day: (props.selectedDayNumber + 1).toString(),
-        number_month: (getMounth.value + 1).toString(),
-        number_year: getYear.value.toString(),
-        title: title.value,
-        description: description.value,
-        icon_name: iconDay.value.name,
-        icon_color: iconDay.value.color,
-        category_day: "0",
-        to_repeat: "0",
-      }).then(() => {
-        title.value = "";
-        description.value = "";
-      });
+      if (correctData.value) {
+        addDayToCalendar({
+          calendar_id: getCalendarHash.value,
+          number_day: (props.selectedDayNumber + 1).toString(),
+          number_month: (getMounth.value + 1).toString(),
+          number_year: getYear.value.toString(),
+          title: title.value,
+          description: description.value,
+          icon_name: iconDay.value.name,
+          icon_color: iconDay.value.color,
+          category_day: "0",
+          to_repeat: "0",
+        }).then(() => {
+          title.value = "";
+          description.value = "";
+        });
+      } else {
+        if (titleOfButton.value === "add") {
+          titleOfButton.value = "give data";
+          setTimeout(() => (titleOfButton.value = "add"), 2000);
+        }
+      }
     };
 
     const start = (el: HTMLElement) =>
@@ -131,13 +149,14 @@ export default defineComponent({
 
     return {
       getShowNewDayForm,
+      title,
+      description,
+      iconDay,
+      titleOfButton,
       switchShowNewDayForm,
       start,
       end,
       addDay,
-      title,
-      description,
-      iconDay,
     };
   },
 });
