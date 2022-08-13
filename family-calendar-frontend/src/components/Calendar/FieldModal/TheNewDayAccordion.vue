@@ -18,61 +18,55 @@
       @before-leave="start"
       @after-leave="end"
     >
-      <article v-show="getShowNewDayForm" class="create-holiday__content">
-        <section class="create-holiday__form">
-          <div class="create-holiday__input-wrapper">
-            <label
-              for="create-holiday__input"
-              class="create-holiday__label-input"
-              >Title <span class="create-holiday__any-span">*</span></label
+      <div v-show="getShowNewDayForm" class="create-holiday__content">
+        <form class="form create-holiday__form">
+          <div class="form__input-container">
+            <label for="form__title-input" class="form__label-input"
+              >Title <span class="form__optional-span">*</span></label
             >
             <input
               type="text"
               v-model="title"
               :maxlength="15"
-              id="create-holiday__input"
-              class="create-holiday__input"
+              id="form__title-input"
+              class="form__title"
+              placeholder="Meeting with in-laws..."
             />
             <app-input-counter
-              class="create-holiday__input-counter"
+              class="form__input-counter"
               :inputLength="title.length"
               :maxLength="15"
             />
           </div>
-          <div class="create-holiday__textarea-wrapper">
-            <label
-              for="create-holiday__textarea"
-              class="create-holiday__label-textarea"
-              >Description
-              <span class="create-holiday__any-span">*</span></label
+          <div class="form__textarea-container">
+            <label for="form__description-textarea" class="form__label-textarea"
+              >Description <span class="form__optional-span">*</span></label
             >
             <textarea
-              id="create-holiday__textarea"
+              id="form__description-textarea"
               v-model="description"
-              class="create-holiday__textarea"
+              class="form__description"
               rows="5"
-              placeholder="Describe yourself here..."
+              placeholder="At 15:00. Don't be drunk..."
               maxlength="50"
             ></textarea>
             <app-input-counter
-              class="create-holiday__input-counter"
+              class="form__input-counter"
               :inputLength="description.length"
               :maxLength="50"
             />
           </div>
-          <div class="create-holiday__icon-selection-wrapper">
+          <div class="form__icon-selection-container">
             <the-icon-selection
-              class="create-holiday__icon-selection"
+              class="form__icon-selection"
               @getIconDay="(value) => (iconDay = value)"
             />
-            <div class="create-holiday__button-wrapper">
-              <button class="create-holiday__button btn-pils" @click="addDay">
-                add
-              </button>
+            <div class="form__button-container">
+              <button class="btn-pils form__button" @click="addDay">add</button>
             </div>
           </div>
-        </section>
-      </article>
+        </form>
+      </div>
     </Transition>
   </div>
 </template>
@@ -166,14 +160,20 @@ export default defineComponent({
     color: $white;
   }
 
-  &__char-toggle {
-    position: absolute;
-    top: 50%;
-    right: 40px;
+  %pseudo-elements {
+    content: "";
+    @include position(absolute, 50%, 0, 0, 50%);
+    width: 50%;
+    height: 2px;
+    border-radius: 20px;
+    background: $active-day;
+  }
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &__char-toggle {
+    @include position($top: 50%, $right: 40px);
+
+    @include flexbox;
+    @include flex-centering;
     aspect-ratio: 1/1;
     width: 40px;
     border-radius: 50%;
@@ -185,26 +185,12 @@ export default defineComponent({
     transform: translate(50%, -50%);
 
     &:before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 50%;
-      height: 2px;
-      border-radius: 20px;
-      background: $active-day;
+      @extend %pseudo-elements;
       transform: translate(-50%, -50%);
     }
 
     &:after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 50%;
-      height: 2px;
-      border-radius: 20px;
-      background: $active-day;
+      @extend %pseudo-elements;
       transition: all 0.2s ease;
       transform: translate(-50%, -50%) rotate(-90deg);
     }
@@ -215,37 +201,34 @@ export default defineComponent({
       }
     }
   }
+}
 
-  &__form {
-    display: flex;
-    justify-content: center;
-    // align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 35px 20px;
-    box-sizing: border-box;
-    border: 5px solid $active-day;
+.form {
+  @include flexbox;
+  @include justify-content(center);
+  @include flex-direction(column);
+  @include flex-wrap(wrap);
+  gap: 30px;
+  padding: 35px 20px;
+  box-sizing: border-box;
+  border: 5px solid $active-day;
 
-    color: $color-day-field;
-    font-size: 15px;
-    font-weight: bold;
-  }
+  color: $color-day-field;
+  font-size: 15px;
+  font-weight: bold;
 
-  &__any-span {
+  &__optional-span {
     color: $active-day;
   }
 
-  // &__input-wrapper {
-  // }
-
   &__label-input {
-    letter-spacing: 1px;
     display: block;
     margin-bottom: 10px;
+    letter-spacing: 1px;
   }
 
-  &__input {
+  &__title,
+  &__description {
     width: 100%;
     line-height: 1.5;
     padding: 10px;
@@ -259,74 +242,55 @@ export default defineComponent({
     transition: all 0.3s ease;
   }
 
-  &__input:focus {
+  &__title:focus {
     outline-color: $active-day;
     box-shadow: 0px 0px 3px $active-day;
   }
 
   &__input-counter {
-    margin: 5px;
     text-align: end;
+    margin: 5px;
   }
 
-  // &__textarea-wrapper {
-  // }
-
-  &__textarea {
-    padding: 10px;
-    width: 100%;
-    line-height: 1.5;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+  &__description {
     resize: none;
-
-    color: $color-day-field;
-    font-size: 15px;
-
-    transition: all 0.3s ease;
   }
 
-  &__textarea:focus {
+  &__description:focus {
     outline-color: $active-day;
     box-shadow: 0px 0px 3px $active-day;
   }
 
   &__label-textarea {
-    letter-spacing: 1px;
     display: block;
     margin-bottom: 10px;
+    letter-spacing: 1px;
   }
 
-  &__icon-selection-wrapper {
-    display: flex;
+  &__icon-selection-container {
+    @include flexbox;
   }
 
   &__icon-selection {
-    flex-basis: 50%;
+    @include flex-basis(50%);
   }
 
-  &__button-wrapper {
-    flex-basis: 50%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  &__button-container {
+    @include flex-basis(50%);
+    @include flexbox;
+    @include flex-centering(flex-end, center);
   }
 }
 
 @media only screen and (max-width: 300px) {
-  .create-holiday {
-    &__icon-selection-wrapper {
-      flex-wrap: wrap;
+  .form {
+    &__icon-selection-container {
+      @include flex-wrap(wrap);
       gap: 40px;
     }
 
-    &__icon-selection {
-      flex-basis: 100%;
-      justify-content: center;
-    }
-
-    &__button-wrapper {
+    &__icon-selection,
+    &__button-container {
       flex-basis: 100%;
       justify-content: center;
     }
