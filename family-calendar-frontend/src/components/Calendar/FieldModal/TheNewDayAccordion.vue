@@ -266,6 +266,7 @@ export default defineComponent({
 
     color: $color-day-field;
     font-size: 15px;
+    letter-spacing: 1px;
 
     transition: all 0.3s ease;
   }

@@ -7,7 +7,7 @@
       {{ title }}
     </div>
     <Transition
-      enter-active-class="animate__animated animate__faster  animate__bounceIn"
+      enter-active-class="animate__animated animate__faster animate__bounceIn"
       leave-active-class="animate__animated animate__faster animate__bounceOut"
     >
       <div v-show="showList" class="selection-popup__list">

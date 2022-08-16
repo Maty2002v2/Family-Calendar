@@ -86,7 +86,7 @@
 
     <teleport to="#modal">
       <the-field-modal
-        v-show="showDetailsOfDay"
+        :isShow="showDetailsOfDay"
         :selectedDayNumber="indexOfSelectedDay"
         :specialDayList="getSortedDays[indexOfSelectedDay]"
         @closeModal="showDetailsOfDay = false"
