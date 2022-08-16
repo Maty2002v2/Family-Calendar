@@ -68,9 +68,12 @@ class Days {
 
     }
 
-    public function give_days_of_the_month($calendar_id, $number_month): array {
+    public function give_days_of_the_month($calendar_id, $number_month, $number_year): array {
         $db = Database::getInstance();
-        $sql = "SELECT * FROM `days`WHERE number_month = $number_month AND calendar_id = '$calendar_id'";
+        $sql = "SELECT * FROM `days`WHERE 
+                ((number_month = $number_month AND number_year = $number_year) OR 
+                (number_month = $number_month AND to_repeat = 1)) AND 
+                calendar_id = '$calendar_id'";
 
         $result = $db->rows($db->query($sql));
 

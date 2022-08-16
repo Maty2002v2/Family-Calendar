@@ -77,9 +77,10 @@ switch ($action) {
         if ($request->get('calendar_id', false) &&  $request->get('number_month', false)) {
             $calendar_id = $request->get('calendar_id');
             $number_month = $request->get('number_month');
+            $number_year = $request->get('number_year');
             $days = new Days();
 
-            sendResponse(200, $days->give_days_of_the_month($calendar_id, $number_month));
+            sendResponse(200, $days->give_days_of_the_month($calendar_id, $number_month, $number_year));
         } else {
             sendResponse(400, "Missing or incorrect data");
         }

@@ -138,6 +138,7 @@ export default defineComponent({
         await fetchDaysOfTheMonth({
           calendarId: getCalendarHash.value,
           numberMonth: getMounth.value.toString(),
+          numberYear: getYear.value.toString(),
         });
       },
       { deep: true }
@@ -146,6 +147,7 @@ export default defineComponent({
     await fetchDaysOfTheMonth({
       calendarId: getCalendarHash.value,
       numberMonth: getMounth.value.toString(),
+      numberYear: getYear.value.toString(),
     });
 
     let calendarTransitionAnimationName = ref("");

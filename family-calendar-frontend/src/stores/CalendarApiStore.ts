@@ -113,6 +113,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         action: "give-days-of-the-month",
         calendar_id: whatDays.calendarId,
         number_month: (parseInt(whatDays.numberMonth) + 1).toString(), //By miesiace zaczynaly sie od 1 a nie 0
+        number_year: whatDays.numberYear.toString(),
       };
 
       Object.keys(params).forEach((key) =>
@@ -135,7 +136,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       // });
     },
     async addDayToCalendar(day: CreateNewDay) {
-      const { getMounth } = storeToRefs(useDateStore());
+      const { getMounth, getYear } = storeToRefs(useDateStore());
 
       const { switchShowNewDayForm } = useMainStore();
 
@@ -160,6 +161,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
             this.fetchDaysOfTheMonth({
               calendarId: this.calendarHash,
               numberMonth: getMounth.value.toString(),
+              numberYear: getYear.value.toString(),
             });
           }
         });
