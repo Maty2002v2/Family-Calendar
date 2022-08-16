@@ -15,12 +15,15 @@
 <script>
 import { defineComponent, ref, computed } from "vue";
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
+import { useMainStore } from "../../stores/MainStore";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "CreateCalendar",
   setup() {
     const { createCalendar } = useCalendarApiStore();
+    const { switchShowModalOfNewCalendar } = useMainStore();
+
     const router = useRouter();
 
     let failedCreation = ref(false);
@@ -35,6 +38,7 @@ export default defineComponent({
                 calendarId: response.message,
               },
             });
+            setTimeout(() => switchShowModalOfNewCalendar(true), 1000);
           } else {
             failedCreation.value = true;
             setTimeout(() => (failedCreation.value = false), 4000);

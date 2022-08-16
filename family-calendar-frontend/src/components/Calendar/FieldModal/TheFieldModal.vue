@@ -1,73 +1,60 @@
 <template>
-  <Transition
-    enter-active-class="animate__animated animate__faster animate__fadeIn"
-    leave-active-class="animate__animated animate__faster animate__fadeOut"
-  >
-    <div class="field-modal" v-show="isShow" @click.self="closeModal">
-      <Transition
-        enter-active-class="animate__animated animate__faster animate__backInDown"
-        leave-active-class="animate__animated animate__faster animate__fadeOut"
-      >
-        <article class="field-modal__content" v-show="isShow">
-          <section v-if="specialDayList.length > 0" class="details-of-day">
-            <header class="details-of-day__header" role="complementary">
-              <h2 class="details-of-day__h2">Details</h2>
-            </header>
-            <div class="accordions">
-              <app-accordion
-                v-for="(specialDay, index) in specialDayList"
-                :key="index"
-              >
-                <template v-slot:title>
-                  <i
-                    class="accordions__icon icon-demo"
-                    :class="[specialDay.icon_name]"
-                    :style="{ backgroundColor: specialDay.icon_color }"
-                  ></i>
-                  <span class="accordions__title">
-                    {{ specialDay.title }}
-                  </span>
-                </template>
-                <template v-slot:content>
-                  <span class="accordions__content">
-                    {{ specialDay.description }}
-                  </span>
-                </template>
-              </app-accordion>
-            </div>
-          </section>
+  <app-modal :isShow="getShowModalDetailsOffDay" @closeModal="closeModal">
+    <article class="field-modal">
+      <section v-if="specialDayList.length > 0" class="details-of-day">
+        <header class="details-of-day__header" role="complementary">
+          <h2 class="details-of-day__h2">Details</h2>
+        </header>
+        <div class="accordions">
+          <app-accordion
+            v-for="(specialDay, index) in specialDayList"
+            :key="index"
+          >
+            <template v-slot:title>
+              <i
+                class="accordions__icon icon-demo"
+                :class="[specialDay.icon_name]"
+                :style="{ backgroundColor: specialDay.icon_color }"
+              ></i>
+              <span class="accordions__title">
+                {{ specialDay.title }}
+              </span>
+            </template>
+            <template v-slot:content>
+              <span class="accordions__content">
+                {{ specialDay.description }}
+              </span>
+            </template>
+          </app-accordion>
+        </div>
+      </section>
 
-          <section v-else class="info-about-lack-of-days">
-            <h2 class="info-about-lack-of-days__h2">You have a day off!</h2>
-            <div class="info-about-lack-of-days__div">
-              <i class="demo-icon icon-ok"></i>
-            </div>
-          </section>
-          <section class="create-holiday">
-            <the-new-day-accordion :selectedDayNumber="selectedDayNumber" />
-          </section>
-        </article>
-      </Transition>
-    </div>
-  </Transition>
+      <section v-else class="info-about-lack-of-days">
+        <h2 class="info-about-lack-of-days__h2">You have a day off!</h2>
+        <div class="info-about-lack-of-days__div">
+          <i class="demo-icon icon-ok"></i>
+        </div>
+      </section>
+      <section class="create-holiday">
+        <the-new-day-accordion :selectedDayNumber="selectedDayNumber" />
+      </section>
+    </article>
+  </app-modal>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import AppModal from "../../AppModal.vue";
 import AppAccordion from "../../AppAccordion.vue";
 import TheNewDayAccordion from "./TheNewDayAccordion.vue";
 
+import { storeToRefs } from "pinia";
 import { useMainStore } from "../../../stores/MainStore";
 
 export default defineComponent({
   name: "TheFieldModal",
   props: {
-    isShow: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
     selectedDayNumber: {
       type: Number,
       required: true,
@@ -79,49 +66,36 @@ export default defineComponent({
     },
   },
   components: {
+    AppModal,
     AppAccordion,
     TheNewDayAccordion,
   },
-  emits: ["closeModal"],
-  setup(props, { emit }) {
-    const { switchShowNewDayForm } = useMainStore();
+  setup() {
+    const { getShowModalDetailsOffDay } = storeToRefs(useMainStore());
+    const { switchShowNewDayForm, switchShowModalDetailsOffDay } =
+      useMainStore();
 
     const closeModal = () => {
-      emit("closeModal");
+      switchShowModalDetailsOffDay(false);
       switchShowNewDayForm(false);
     };
 
-    return { closeModal };
+    return { getShowModalDetailsOffDay, closeModal };
   },
 });
 </script>
 
 <style lang="scss" scoped>
 .field-modal {
-  @include position($top: 0px, $left: 0px);
-
   @include flexbox;
-  @include justify-content(center);
-  width: 100vw;
-  min-height: 100%;
-  padding-top: 10vh;
-  padding-bottom: 10vh;
-  // box-sizing: border-box;
+  @include flex-direction(column);
+  gap: 20px;
+  width: 500px;
+  height: 50%;
+  margin: 10px;
+  border-radius: 5px;
 
-  background: rgba($color: #000000, $alpha: 0.3);
-
-  &__content {
-    @include flexbox;
-    @include flex-direction(column);
-    gap: 20px;
-    width: 500px;
-    height: 50%;
-    // max-height: 700px;
-    margin: 10px;
-    border-radius: 5px;
-
-    background: $background-color;
-  }
+  background: $background-color;
 }
 
 .details-of-day {

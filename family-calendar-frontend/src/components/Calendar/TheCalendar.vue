@@ -86,11 +86,12 @@
 
     <teleport to="#modal">
       <the-field-modal
-        :isShow="showDetailsOfDay"
         :selectedDayNumber="indexOfSelectedDay"
         :specialDayList="getSortedDays[indexOfSelectedDay]"
-        @closeModal="showDetailsOfDay = false"
       />
+    </teleport>
+    <teleport to="#modal">
+      <the-modal-of-new-calendar />
     </teleport>
   </div>
 </template>
@@ -109,6 +110,7 @@ import TheTitle from "./TheTitle.vue";
 import Field from "./Field.vue";
 import AppLoader from "../AppLoader.vue";
 import TheFieldModal from "./FieldModal/TheFieldModal.vue";
+import TheModalOfNewCalendar from "./TheModalOfNewCalendar.vue";
 
 export default defineComponent({
   name: "TheCalendar",
@@ -119,6 +121,7 @@ export default defineComponent({
     Field,
     AppLoader,
     TheFieldModal,
+    TheModalOfNewCalendar,
   },
   async setup() {
     const { getSortedDays, getCalendarHash } = storeToRefs(
@@ -131,6 +134,7 @@ export default defineComponent({
       storeToRefs(useDateStore());
 
     const { getLoadingCalendar } = storeToRefs(useMainStore());
+    const { switchShowModalDetailsOffDay } = useMainStore();
 
     watch(
       dataStore,
@@ -155,11 +159,10 @@ export default defineComponent({
       calendarTransitionAnimationName.value = transitionName;
     };
 
-    let showDetailsOfDay = ref(false);
     let indexOfSelectedDay = ref(0);
     const showThisDay = (nrDay: number) => {
       indexOfSelectedDay.value = nrDay;
-      showDetailsOfDay.value = true;
+      switchShowModalDetailsOffDay(true);
     };
 
     const totalNumberFields = computed(
@@ -177,7 +180,6 @@ export default defineComponent({
       getLoadingCalendar,
       calendarTransitionAnimationName,
       setTransitionName,
-      showDetailsOfDay,
       indexOfSelectedDay,
       showThisDay,
     };
