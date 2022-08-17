@@ -84,6 +84,8 @@
       </div>
     </div>
 
+    <the-list-of-whole-month />
+
     <teleport to="#modal">
       <the-field-modal
         :selectedDayNumber="indexOfSelectedDay"
@@ -111,6 +113,7 @@ import Field from "./Field.vue";
 import AppLoader from "../AppLoader.vue";
 import TheFieldModal from "./FieldModal/TheFieldModal.vue";
 import TheModalOfNewCalendar from "./TheModalOfNewCalendar.vue";
+import TheListOfWholeMonth from ".//TheListOfWholeMonth.vue";
 
 export default defineComponent({
   name: "TheCalendar",
@@ -122,6 +125,7 @@ export default defineComponent({
     AppLoader,
     TheFieldModal,
     TheModalOfNewCalendar,
+    TheListOfWholeMonth,
   },
   async setup() {
     const { getSortedDays, getCalendarHash } = storeToRefs(
@@ -193,20 +197,24 @@ $size-day-div: calc(100% / 7 - 5px);
 .calendar {
   @include flexbox;
   @include flex-wrap(wrap);
+  @include align-content(flex-start);
   width: 100%;
+  height: 100vh;
   padding: 5px;
   box-sizing: border-box;
 
   &__nav {
-    //TODO: Poprawic to ze przy granicy zmiany z desckt namobile nawigazja przeskakuje
+    // todo: Poprawic to ze przy granicy zmiany z desckt namobile nawigazja przeskakuje
     @include flexbox;
     @include justify-content(space-around);
     @include flex-basis(40%);
     width: 100%;
+    height: 30px;
   }
 
   &__title {
     @include flex-basis(20%);
+    height: 30px;
   }
 }
 
@@ -215,6 +223,7 @@ $size-day-div: calc(100% / 7 - 5px);
   @include flex-wrap(wrap);
   @include flex-basis(100%);
   margin-top: 20px;
+  max-height: 567px;
 
   .container {
     @include flexbox;
@@ -258,8 +267,7 @@ $size-day-div: calc(100% / 7 - 5px);
 
 @media only screen and (max-width: $small) {
   .calendar {
-    @include flex-direction(column);
-    // gap: 20px;
+    gap: 20px;
 
     &__nav {
       @include flex-direction(column-reverse);

@@ -59,7 +59,7 @@ export default defineComponent({
   font-family: sans-serif;
 
   &__p {
-    z-index: 100;
+    // z-index: 1;
   }
 
   &__icons {

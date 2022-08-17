@@ -52,7 +52,8 @@ export default defineComponent({
 
   &__slot {
     @include flexbox;
-    @include justify-content(center);
+    max-width: 500px;
+    @include margin-auto;
   }
 }
 </style>
