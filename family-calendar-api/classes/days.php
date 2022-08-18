@@ -73,7 +73,7 @@ class Days {
         $sql = "SELECT * FROM `days`WHERE 
                 ((number_month = $number_month AND number_year = $number_year) OR 
                 (number_month = $number_month AND to_repeat = 1)) AND 
-                calendar_id = '$calendar_id'";
+                calendar_id = '$calendar_id' ORDER BY number_day";
 
         $result = $db->rows($db->query($sql));
 
