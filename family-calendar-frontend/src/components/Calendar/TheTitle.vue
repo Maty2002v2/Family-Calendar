@@ -61,7 +61,7 @@ export default defineComponent({
 
     font-size: 20px;
 
-    z-index: 1;
+    // z-index: 1;
   }
 }
 </style>

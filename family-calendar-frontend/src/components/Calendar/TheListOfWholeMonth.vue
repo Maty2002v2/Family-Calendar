@@ -1,44 +1,64 @@
 <template>
-  <div class="list-of-whole-month">
+  <div>
     <Transition
-      enter-active-class="animate__animated animate__faster animate__bounceInRight"
-      leave-active-class="animate__animated animate__faster animate__bounceOut"
+      enter-active-class="animate__animated animate__faster animate__fadeIn"
+      leave-active-class="animate__animated animate__faster animate__fadeOut"
     >
       <div
         v-show="showList"
-        class="list list-of-whole-month__list"
-        :class="[showList ? 'list list-of-whole-month__list--active' : '']"
+        class="darkened-background"
+        @click="showList = !showList"
+      ></div
+    ></Transition>
+    <div class="list-of-whole-month">
+      <Transition
+        enter-active-class="animate__animated animate__faster animate__bounceInRight"
+        leave-active-class="animate__animated animate__faster animate__bounceOut"
       >
-        <app-accordion v-for="(specialDay, index) in getDays" :key="index">
-          <template v-slot:title>
-            <i class="list__date">{{
-              convertingDate(
-                specialDay.number_year,
-                specialDay.number_month,
-                specialDay.number_day
-              )
-            }}</i>
-            <i
-              class="list__icon icon-demo"
-              :class="[specialDay.icon_name]"
-              :style="{ backgroundColor: specialDay.icon_color }"
-            ></i>
-
-            <span class="list__title">
-              {{ specialDay.title }}
-            </span>
-          </template>
-          <template v-slot:content>
-            <span class="list__content">
-              {{ specialDay.description }}
-            </span>
-          </template>
-        </app-accordion>
+        <div
+          v-show="showList"
+          class="list list-of-whole-month__list"
+          :class="[showList ? 'list list-of-whole-month__list--active' : '']"
+        >
+          <app-accordion v-for="(specialDay, index) in getDays" :key="index">
+            <template v-slot:title>
+              <span class="list__date">{{
+                convertingDate(
+                  specialDay.number_year,
+                  specialDay.number_month,
+                  specialDay.number_day
+                )
+              }}</span>
+              <i
+                class="list__icon icon-demo"
+                :class="[specialDay.icon_name]"
+                :style="{ backgroundColor: specialDay.icon_color }"
+              ></i>
+            </template>
+            <template v-slot:content>
+              <div class="list__content">
+                <h2 class="list__title">
+                  {{ specialDay.title }}
+                </h2>
+                <span class="list__description">
+                  {{ specialDay.description }}
+                </span>
+              </div>
+            </template>
+          </app-accordion>
+        </div>
+      </Transition>
+      <div class="list-of-whole-month__button" @click="showList = !showList">
+        <Transition
+          enter-active-class="animate__animated animate__faster animate__bounceIn"
+          leave-active-class="animate__animated animate__faster animate__bounceOut"
+        >
+          <span class="list-of-whole-month__counter" v-show="!showList">{{
+            getDays.length
+          }}</span>
+        </Transition>
+        <i class="demo-icon icon-calendar"></i>
       </div>
-    </Transition>
-    <div class="list-of-whole-month__button" @click="showList = !showList">
-      <span class="list-of-whole-month__counter">{{ getDays.length }}</span>
-      <i class="demo-icon icon-calendar"></i>
     </div>
   </div>
 </template>
@@ -76,10 +96,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.darkened-background {
+  @include position($top: 0px, $left: 0px);
+  width: 100vw;
+  min-height: 100%;
+  background: rgba($color: #000000, $alpha: 0.3);
+  cursor: pointer;
+}
+
 .list-of-whole-month {
   position: fixed;
   bottom: 10px;
   right: 10px;
+  margin-left: 10px;
   width: 50px;
   height: 50px;
   transform: translate(-50%, -50%);
@@ -130,21 +159,44 @@ export default defineComponent({
     position: absolute;
     bottom: -25px;
     right: -25px;
-
-    width: 400px;
-    padding-bottom: 100px;
-
-    border: 1px solid $active-day;
-    border-radius: 5px;
-
-    background: $background-color;
-
-    &--active {
-    }
   }
 }
 
 .list {
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 10px 10px 100px 10px;
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-sizing: border-box;
+  width: min(400px, (100vw - 20px));
+  background: $background-color;
+
+  &::-webkit-scrollbar-thumb {
+    scrollbar-color: #d4aa70 #e4e4e4;
+    scrollbar-width: thin;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-image: linear-gradient(
+      180deg,
+      $active-day 0%,
+      $background-field 99%
+    );
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+  }
+
   &__icon {
     @include flexbox;
     @include flex-centering;
@@ -161,8 +213,24 @@ export default defineComponent({
     color: $color-day-field;
   }
 
+  &__content {
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(space-between);
+    gap: 20px;
+  }
+
   &__title {
+    margin: 0px;
     font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: $small) {
+  .list-of-whole-month {
+    &__button {
+      transform: translate(0%, 0%);
+    }
   }
 }
 </style>
