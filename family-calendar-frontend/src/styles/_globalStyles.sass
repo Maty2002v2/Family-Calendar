@@ -1,28 +1,10 @@
 body 
+  @extend .custom-scrollbar
   padding: 0px
   margin: 0px
   overflow-x: hidden
   font-family: sans-serif
   background-color: $background-color
-
-body::-webkit-scrollbar-thumb 
-  scrollbar-color: #d4aa70 #e4e4e4
-  scrollbar-width: thin
-      
-
-body::-webkit-scrollbar 
-  width: 10px
-      
-
-body::-webkit-scrollbar-track 
-  background-color: #e4e4e4
-  border-radius: 100px
-      
-
-body::-webkit-scrollbar-thumb 
-  border-radius: 100px
-  background-image: linear-gradient(180deg,$active-day 0%,$background-field 99%)
-  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5)
 
 
 .no-select 
@@ -31,3 +13,24 @@ body::-webkit-scrollbar-thumb
   -webkit-user-select: none
   -ms-user-select: none
   user-select: none
+
+
+.custom-scrollbar
+  &::-webkit-scrollbar-thumb 
+    scrollbar-color: #d4aa70 #e4e4e4
+    scrollbar-width: thin
+      
+
+  &::-webkit-scrollbar 
+    width: 10px
+      
+
+  &::-webkit-scrollbar-track 
+    background-color: #e4e4e4
+    border-radius: 100px
+      
+
+  &::-webkit-scrollbar-thumb 
+    border-radius: 100px
+    background-image: linear-gradient(180deg,$active-day 0%,$background-field 99%)
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5)
