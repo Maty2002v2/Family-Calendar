@@ -166,5 +166,33 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
           }
         });
     },
+    async deleteDay(idDay: string) {
+      const { getMounth, getYear } = storeToRefs(useDateStore());
+
+      const url = "http://localhost/family-calendar-api/";
+      const params = Object.assign({ action: "delete-day" }, { id: idDay });
+
+      const formData = new FormData();
+
+      for (const param in params) {
+        formData.append(param, params[param as keyof typeof params] || "");
+      }
+
+      await fetch(url, {
+        method: "POST",
+        body: formData,
+        mode: "cors",
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          if (!response.error) {
+            this.fetchDaysOfTheMonth({
+              calendarId: this.calendarHash,
+              numberMonth: getMounth.value.toString(),
+              numberYear: getYear.value.toString(),
+            });
+          }
+        });
+    },
   },
 });

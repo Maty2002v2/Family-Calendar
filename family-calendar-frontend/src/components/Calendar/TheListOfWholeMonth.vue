@@ -44,11 +44,16 @@
                   {{ specialDay.description }}
                 </span>
               </div>
+              <app-delete-day-button :id="specialDay.id" />
             </template>
           </app-accordion>
         </div>
       </Transition>
-      <div class="list-of-whole-month__button" @click="showList = !showList">
+      <div
+        class="list-of-whole-month__button"
+        @click="showList = !showList"
+        v-show="getDays.length"
+      >
         <Transition
           enter-active-class="animate__animated animate__faster animate__bounceIn"
           leave-active-class="animate__animated animate__faster animate__bounceOut"
@@ -67,6 +72,7 @@
 import { defineComponent, ref } from "vue";
 
 import AppAccordion from "../AppAccordion.vue";
+import AppDeleteDayButton from "../AppDeleteDayButton.vue";
 
 import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
@@ -75,6 +81,7 @@ export default defineComponent({
   name: "TheListOfWholeMonth",
   components: {
     AppAccordion,
+    AppDeleteDayButton,
   },
   setup() {
     const { getDays } = storeToRefs(useCalendarApiStore());
@@ -151,8 +158,6 @@ export default defineComponent({
     font-weight: 600;
 
     background: $white;
-
-    // transform: translate(-50%, -50%);
   }
 
   &__list {
@@ -163,39 +168,16 @@ export default defineComponent({
 }
 
 .list {
+  @extend .custom-scrollbar;
   max-height: 90vh;
   overflow-y: auto;
   padding: 10px 10px 100px 10px;
   border: 2px solid rgba(0, 0, 0, 0.35);
-  border-radius: 5px;
+  border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   box-sizing: border-box;
   width: min(400px, (100vw - 20px));
   background: $background-color;
-
-  &::-webkit-scrollbar-thumb {
-    scrollbar-color: #d4aa70 #e4e4e4;
-    scrollbar-width: thin;
-  }
-
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: #e4e4e4;
-    border-radius: 100px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 100px;
-    background-image: linear-gradient(
-      180deg,
-      $active-day 0%,
-      $background-field 99%
-    );
-    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-  }
 
   &__icon {
     @include flexbox;

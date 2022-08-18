@@ -24,6 +24,7 @@
               <span class="accordions__content">
                 {{ specialDay.description }}
               </span>
+              <app-delete-day-button :id="specialDay.id" />
             </template>
           </app-accordion>
         </div>
@@ -47,6 +48,7 @@ import { defineComponent } from "vue";
 
 import AppModal from "../../AppModal.vue";
 import AppAccordion from "../../AppAccordion.vue";
+import AppDeleteDayButton from "../../AppDeleteDayButton.vue";
 import TheNewDayAccordion from "./TheNewDayAccordion.vue";
 
 import { storeToRefs } from "pinia";
@@ -69,6 +71,7 @@ export default defineComponent({
     AppModal,
     AppAccordion,
     TheNewDayAccordion,
+    AppDeleteDayButton,
   },
   setup() {
     const { getShowModalDetailsOffDay } = storeToRefs(useMainStore());
