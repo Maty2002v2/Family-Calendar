@@ -95,6 +95,10 @@
     <teleport to="#modal">
       <the-modal-of-new-calendar />
     </teleport>
+
+    <teleport to="#pnotify">
+      <app-pnotify />
+    </teleport>
   </div>
 </template>
 
@@ -114,6 +118,7 @@ import AppLoader from "../AppLoader.vue";
 import TheFieldModal from "./FieldModal/TheFieldModal.vue";
 import TheModalOfNewCalendar from "./TheModalOfNewCalendar.vue";
 import TheListOfWholeMonth from ".//TheListOfWholeMonth.vue";
+import AppPnotify from "../AppPnotify.vue";
 
 export default defineComponent({
   name: "TheCalendar",
@@ -126,6 +131,7 @@ export default defineComponent({
     TheFieldModal,
     TheModalOfNewCalendar,
     TheListOfWholeMonth,
+    AppPnotify,
   },
   async setup() {
     const { getSortedDays, getCalendarHash } = storeToRefs(

@@ -47,13 +47,23 @@ export default defineComponent({
   min-height: 100%;
   padding-top: 10vh;
   padding-bottom: 10vh;
+  box-sizing: border-box;
 
   background: rgba($color: #000000, $alpha: 0.3);
+
+  cursor: pointer;
 
   &__slot {
     @include flexbox;
     max-width: 500px;
     @include margin-auto;
+    cursor: default;
+  }
+}
+
+@media only screen and (max-width: $small) {
+  .app-modal {
+    min-height: 120vh;
   }
 }
 </style>

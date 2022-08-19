@@ -138,7 +138,8 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
     async addDayToCalendar(day: CreateNewDay) {
       const { getMounth, getYear } = storeToRefs(useDateStore());
 
-      const { switchShowNewDayForm } = useMainStore();
+      const { switchShowNewDayForm, switchShowPnotify, setPnotifyOptions } =
+        useMainStore();
 
       const url = "http://localhost/family-calendar-api/";
       const params = Object.assign({ action: "add-day" }, day);
@@ -157,17 +158,30 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         .then((response) => response.json())
         .then((response) => {
           if (!response.error) {
+            setPnotifyOptions(
+              "success",
+              "Success",
+              `Added "${response.message.day.title}" to your calendar`
+            );
+            switchShowPnotify(true);
+
             switchShowNewDayForm(false);
+
             this.fetchDaysOfTheMonth({
               calendarId: this.calendarHash,
               numberMonth: getMounth.value.toString(),
               numberYear: getYear.value.toString(),
             });
+          } else {
+            setPnotifyOptions("danger", "We are sorry", response.message);
+            switchShowPnotify(true);
           }
         });
     },
     async deleteDay(idDay: string) {
       const { getMounth, getYear } = storeToRefs(useDateStore());
+
+      const { switchShowPnotify, setPnotifyOptions } = useMainStore();
 
       const url = "http://localhost/family-calendar-api/";
       const params = Object.assign({ action: "delete-day" }, { id: idDay });
@@ -186,11 +200,16 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         .then((response) => response.json())
         .then((response) => {
           if (!response.error) {
+            setPnotifyOptions("success", "Success", response.message);
+            switchShowPnotify(true);
             this.fetchDaysOfTheMonth({
               calendarId: this.calendarHash,
               numberMonth: getMounth.value.toString(),
               numberYear: getYear.value.toString(),
             });
+          } else {
+            setPnotifyOptions("danger", "We are sorry", response.message);
+            switchShowPnotify(true);
           }
         });
     },

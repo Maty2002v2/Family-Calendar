@@ -209,6 +209,10 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: $small) {
+  .darkened-background {
+    min-height: 120vh;
+  }
+
   .list-of-whole-month {
     &__button {
       transform: translate(0%, 0%);
