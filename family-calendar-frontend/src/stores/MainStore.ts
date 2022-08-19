@@ -8,6 +8,12 @@ export const useMainStore = defineStore("Main", {
       showNewDayForm: false,
       showModalDetailsOffDay: false,
       showModalOfNewCalendar: false,
+      showPnotify: false,
+      pnotifyOptions: {
+        type: "success",
+        title: "asd",
+        message: "asd",
+      },
     };
   },
   getters: {
@@ -16,6 +22,8 @@ export const useMainStore = defineStore("Main", {
     getShowNewDayForm: (state) => state.showNewDayForm,
     getShowModalDetailsOffDay: (state) => state.showModalDetailsOffDay,
     getShowModalOfNewCalendar: (state) => state.showModalOfNewCalendar,
+    getShowPnotify: (state) => state.showPnotify,
+    getPnotifyOptions: (state) => state.pnotifyOptions,
   },
   actions: {
     switchIncorrectCodeEntered(value: boolean) {
@@ -32,6 +40,14 @@ export const useMainStore = defineStore("Main", {
     },
     switchShowModalOfNewCalendar(value: boolean) {
       this.showModalOfNewCalendar = value;
+    },
+    switchShowPnotify(value: boolean) {
+      this.showPnotify = value;
+    },
+    setPnotifyOptions(type: string, title: string, message: string) {
+      this.pnotifyOptions.type = type;
+      this.pnotifyOptions.title = title;
+      this.pnotifyOptions.message = message;
     },
   },
 });
