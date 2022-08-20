@@ -55,7 +55,7 @@ export default defineComponent({
 
   &__title {
     @include flexbox;
-    @include flex-centering(space-between, stretch); //TODO: DO POPRAWY
+    @include justify-content(space-between);
     height: 50px;
     cursor: pointer;
   }

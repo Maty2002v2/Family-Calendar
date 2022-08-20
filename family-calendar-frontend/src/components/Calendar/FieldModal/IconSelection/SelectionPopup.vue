@@ -67,9 +67,6 @@ export default defineComponent({
 
   &__list {
     @include position($bottom: 120%, $left: 0%);
-    // position: absolute;
-    // bottom: 120%;
-    // left: 0%;
 
     border: 2px solid #ccc;
     border-radius: 5px;

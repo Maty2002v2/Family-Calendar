@@ -30,17 +30,16 @@ export default defineComponent({
     const { width } = useBreakpoints();
 
     const namesDaysOfWeek: string[] = [
-      "Pon",
-      "Wto",
-      "Śro",
-      "Czw",
-      "Pią",
-      "Sob",
-      "Nie",
+      "Mon",
+      "Tues",
+      "Wed",
+      "Thurs",
+      "Fri",
+      "Sat",
+      "Sun",
     ];
 
     const templateNamesDaysOfWeek = computed(() => {
-      //TODO: poprawic bo za kazdym razem jak zmiania sie szerokosc przekladarki to odpala sie funkcja
       if (width.value < 460) {
         //460 to breakpoint w css ($samll) w _variabels.sass
         let total = props.totalNumberFields;
@@ -72,7 +71,6 @@ $size-day-div: calc(100% / 7 - 5px);
 
 .name-day-of-week {
   @include flexbox;
-  // @include flex-wrap(wrap);
   gap: 5px;
   width: 100%;
   text-align: center;

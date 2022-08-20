@@ -175,7 +175,7 @@ export default defineComponent({
 .create-holiday {
   &__header {
     position: relative;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
     box-sizing: border-box;
 
     background: $active-day;

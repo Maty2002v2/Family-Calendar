@@ -58,10 +58,6 @@ export default defineComponent({
   font-size: 15px;
   font-family: sans-serif;
 
-  &__p {
-    // z-index: 1;
-  }
-
   &__icons {
     @include position($bottom: 0px, $left: 0px);
   }
@@ -69,6 +65,7 @@ export default defineComponent({
 
 .icons {
   $gap: 5px;
+
   @mixin sizing-icons-childs {
     aspect-ratio: 1 / 1;
     width: min(calc(100% / 4 - $gap), 25px);

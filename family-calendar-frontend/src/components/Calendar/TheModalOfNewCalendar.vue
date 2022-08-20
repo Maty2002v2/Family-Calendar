@@ -36,8 +36,6 @@ import { storeToRefs } from "pinia";
 import { useMainStore } from "../../stores/MainStore";
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 
-import { copyText } from "vue3-clipboard";
-
 export default defineComponent({
   name: "TheModalOfNewCalendar",
   components: {
@@ -51,19 +49,7 @@ export default defineComponent({
     const { getCalendarHash } = storeToRefs(useCalendarApiStore());
 
     const codeSpan = ref();
-    const closeAndCopy = () => {
-      copyText("Hello Clipborad", undefined, (error: any, event: any) => {
-        if (error) {
-          alert("Can not copy");
-          console.log(error);
-        } else {
-          alert("Copied");
-          console.log(event);
-        }
-      });
-
-      switchShowModalOfNewCalendar(false);
-    };
+    const closeAndCopy = () => switchShowModalOfNewCalendar(false);
 
     const closeModal = () => {
       emit("closeModal");
@@ -116,8 +102,8 @@ export default defineComponent({
   }
 
   &__button {
-    height: auto;
     max-width: 200px;
+    height: auto;
   }
 }
 </style>

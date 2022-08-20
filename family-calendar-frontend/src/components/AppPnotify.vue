@@ -70,10 +70,15 @@ export default defineComponent({
   }
 }
 
+@mixin pnotify-variants($border-color, $color, $background) {
+  border: 1px solid $border-color;
+  color: $color;
+  background: rgba($color: $background, $alpha: 0.8);
+  @content;
+}
+
 .app-pnotify {
-  position: fixed;
-  top: 5vh;
-  right: 5vw;
+  @include position($position: fixed, $top: 5vh, $right: 5vw);
 
   @include flexbox;
   @include flex-direction(column);
@@ -89,27 +94,19 @@ export default defineComponent({
   transition: all 0.3s ease;
 
   &--success {
-    color: #3c763d;
-    background: rgba($color: #dff0d8, $alpha: 0.8);
-    border-color: #d6e9c6;
+    @include pnotify-variants(#d6e9c6, #3c763d, #dff0d8);
   }
 
   &--warning {
-    border: 1px solid #faebcc;
-    color: #8a6d3b;
-    background: rgba($color: #fcf8e3, $alpha: 0.8);
+    @include pnotify-variants(#faebcc, #8a6d3b, #fcf8e3);
   }
 
   &--info {
-    border: 1px solid #bce8f1;
-    color: #31708f;
-    background: rgba($color: #d9edf7, $alpha: 0.8);
+    @include pnotify-variants(#bce8f1, #31708f, #d9edf7);
   }
 
   &--danger {
-    color: $white;
-    border: 1px solid $active-day;
-    background: rgba($color: $active-day, $alpha: 0.8);
+    @include pnotify-variants($active-day, $white, $active-day);
   }
 
   &__h2 {
@@ -129,7 +126,6 @@ export default defineComponent({
   &__line {
     display: inline-block;
     height: 2px;
-    background: red;
     animation-name: coldownLine;
     animation-timing-function: linear;
 

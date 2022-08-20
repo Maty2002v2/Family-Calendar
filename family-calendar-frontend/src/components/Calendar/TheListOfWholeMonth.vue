@@ -5,7 +5,7 @@
       leave-active-class="animate__animated animate__faster animate__fadeOut"
     >
       <div
-        v-show="showList"
+        v-show="showList && getDays.length > 0"
         class="darkened-background"
         @click="showList = !showList"
       ></div
@@ -16,7 +16,7 @@
         leave-active-class="animate__animated animate__faster animate__bounceOut"
       >
         <div
-          v-show="showList"
+          v-show="showList && getDays.length > 0"
           class="list list-of-whole-month__list"
           :class="[showList ? 'list list-of-whole-month__list--active' : '']"
         >
@@ -112,18 +112,14 @@ export default defineComponent({
 }
 
 .list-of-whole-month {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  margin-left: 10px;
+  @include position($position: fixed, $right: 10px, $bottom: 10px);
   width: 50px;
   height: 50px;
+  margin-left: 10px;
   transform: translate(-50%, -50%);
 
   &__button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    @include position($top: 50%, $left: 50%);
 
     @include flexbox;
     @include flex-centering;
@@ -142,9 +138,7 @@ export default defineComponent({
   }
 
   &__counter {
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    @include position($top: 0px, $left: 0px);
 
     @include flexbox;
     @include flex-centering;
@@ -161,22 +155,21 @@ export default defineComponent({
   }
 
   &__list {
-    position: absolute;
-    bottom: -25px;
-    right: -25px;
+    @include position($bottom: -25px, $right: -25px);
   }
 }
 
 .list {
   @extend .custom-scrollbar;
+  width: min(400px, (100vw - 20px));
   max-height: 90vh;
-  overflow-y: auto;
   padding: 10px 10px 100px 10px;
   border: 2px solid rgba(0, 0, 0, 0.35);
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   box-sizing: border-box;
-  width: min(400px, (100vw - 20px));
+  overflow-y: auto;
+
   background: $background-color;
 
   &__icon {
