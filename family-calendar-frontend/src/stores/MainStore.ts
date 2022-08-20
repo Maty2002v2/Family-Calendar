@@ -10,9 +10,10 @@ export const useMainStore = defineStore("Main", {
       showModalOfNewCalendar: false,
       showPnotify: false,
       pnotifyOptions: {
-        type: "success",
-        title: "asd",
-        message: "asd",
+        type: "",
+        title: "",
+        message: "",
+        time: 5,
       },
     };
   },
@@ -44,10 +45,11 @@ export const useMainStore = defineStore("Main", {
     switchShowPnotify(value: boolean) {
       this.showPnotify = value;
     },
-    setPnotifyOptions(type: string, title: string, message: string) {
+    setPnotifyOptions(type: string, title: string, message: string, time = 5) {
       this.pnotifyOptions.type = type;
       this.pnotifyOptions.title = title;
       this.pnotifyOptions.message = message;
+      this.pnotifyOptions.time = time;
     },
   },
 });

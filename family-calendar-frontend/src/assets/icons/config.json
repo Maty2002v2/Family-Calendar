@@ -245,6 +245,30 @@
       "css": "moon-inv",
       "code": 59411,
       "src": "iconic"
+    },
+    {
+      "uid": "43ab845088317bd348dee1d975700c48",
+      "css": "ok-circled",
+      "code": 59412,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "3ab229dd9bccaaaf6c71096da4b72c04",
+      "css": "error",
+      "code": 59414,
+      "src": "elusive"
+    },
+    {
+      "uid": "3c0ef77f5fbb5c933c23f2c437d8cab8",
+      "css": "error-alt",
+      "code": 59413,
+      "src": "elusive"
+    },
+    {
+      "uid": "e82cedfa1d5f15b00c5a81c9bd731ea2",
+      "css": "info-circled",
+      "code": 59415,
+      "src": "fontawesome"
     }
   ]
 }

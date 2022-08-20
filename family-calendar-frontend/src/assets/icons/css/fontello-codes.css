@@ -19,6 +19,10 @@
 .icon-wrench:before { content: '\e811'; } /* '' */
 .icon-pencil:before { content: '\e812'; } /* '' */
 .icon-moon-inv:before { content: '\e813'; } /* '' */
+.icon-ok-circled:before { content: '\e814'; } /* '' */
+.icon-error-alt:before { content: '\e815'; } /* '' */
+.icon-error:before { content: '\e816'; } /* '' */
+.icon-info-circled:before { content: '\e817'; } /* '' */
 .icon-mail-alt:before { content: '\f0e0'; } /* '' */
 .icon-coffee:before { content: '\f0f4'; } /* '' */
 .icon-food:before { content: '\f0f5'; } /* '' */

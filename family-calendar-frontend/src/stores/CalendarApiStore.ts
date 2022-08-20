@@ -173,7 +173,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
               numberYear: getYear.value.toString(),
             });
           } else {
-            setPnotifyOptions("danger", "We are sorry", response.message);
+            setPnotifyOptions("danger", "We are sorry", response.message, 10);
             switchShowPnotify(true);
           }
         });
@@ -208,7 +208,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
               numberYear: getYear.value.toString(),
             });
           } else {
-            setPnotifyOptions("danger", "We are sorry", response.message);
+            setPnotifyOptions("danger", "We are sorry", response.message, 10);
             switchShowPnotify(true);
           }
         });

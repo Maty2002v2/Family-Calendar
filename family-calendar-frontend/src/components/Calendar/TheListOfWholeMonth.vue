@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="z-index: 2">
     <Transition
       enter-active-class="animate__animated animate__faster animate__fadeIn"
       leave-active-class="animate__animated animate__faster animate__fadeOut"

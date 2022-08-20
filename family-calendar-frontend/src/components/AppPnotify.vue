@@ -8,21 +8,36 @@
       :class="`app-pnotify--${type}`"
       v-show="getShowPnotify"
     >
-      <h2 class="app-pnotify__h2">{{ title }}</h2>
-      <p class="app-pnotify__p">{{ message }}</p>
+      <div class="app-pnotify__title">
+        <i
+          class="app-pnotify__icon icon-demo"
+          :class="[iconName]"
+          v-show="iconName.length"
+        ></i>
+        <h2 class="app-pnotify__h2">{{ title }}</h2>
+        <i
+          v-show="message.length > 0"
+          class="app-pnotify__open-content"
+          :class="[
+            showContent ? 'icon-up-open-mini' : 'icon-demo icon-down-open-mini',
+          ]"
+          @click="showContent = !showContent"
+        ></i>
+      </div>
       <div class="app-pnotify__timer">
         <span
           class="app-pnotify__line"
           :class="`app-pnotify__line--${type}`"
-          :style="`animation-duration: ${howLong}s`"
+          :style="`animation-duration: ${time}s`"
         ></span>
       </div>
+      <p v-show="showContent" class="app-pnotify__p">{{ message }}</p>
     </div>
   </Transition>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRefs, watch } from "vue";
+import { defineComponent, ref, toRefs, computed, watch } from "vue";
 
 import { storeToRefs } from "pinia";
 import { useMainStore } from "../stores/MainStore";
@@ -33,8 +48,9 @@ export default defineComponent({
     const { getShowPnotify, getPnotifyOptions } = storeToRefs(useMainStore());
     const { switchShowPnotify } = useMainStore();
 
-    const howLong = 3; //liczba sekund dla timera
-    let timerValue = ref(howLong);
+    const showContent = ref(false);
+
+    let timerValue = ref(getPnotifyOptions.value.time);
 
     watch(getShowPnotify, (newVal) => {
       if (newVal) {
@@ -44,17 +60,39 @@ export default defineComponent({
           } else {
             clearInterval(interval);
             switchShowPnotify(false);
+            showContent.value = false;
 
-            setTimeout(() => (timerValue.value = howLong), 1000);
+            setTimeout(
+              () => (timerValue.value = getPnotifyOptions.value.time),
+              1000
+            );
           }
         }, 1000);
       }
     });
 
+    const iconName = computed(() => {
+      switch (getPnotifyOptions.value.type) {
+        case "success":
+          return "icon-ok-circled";
+
+        case "warning":
+          return "icon-attention";
+
+        case "info":
+          return "icon-info-circled";
+
+        case "danger":
+          return "icon-error";
+      }
+      return "";
+    });
+
     return {
       getShowPnotify,
       ...toRefs(getPnotifyOptions.value),
-      howLong,
+      iconName,
+      showContent,
     };
   },
 });
@@ -67,6 +105,18 @@ export default defineComponent({
   }
   100% {
     width: 0%;
+  }
+}
+
+@keyframes flashColdownLine {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
   }
 }
 
@@ -109,7 +159,19 @@ export default defineComponent({
     @include pnotify-variants($active-day, $white, $active-day);
   }
 
+  &__title {
+    @include flexbox;
+    gap: 5px;
+  }
+
+  &__icon {
+    @include flex-basis(10%);
+    @include flexbox;
+    @include flex-centering;
+  }
+
   &__h2 {
+    @include flex-basis(80%);
     margin: 0px;
     font-weight: 500;
   }
@@ -121,6 +183,8 @@ export default defineComponent({
   &__timer {
     width: 100%;
     height: 20px;
+    text-align: center;
+    animation: flashColdownLine 1s ease infinite;
   }
 
   &__line {
@@ -144,6 +208,11 @@ export default defineComponent({
     &--danger {
       background: $active-day;
     }
+  }
+
+  &__open-content {
+    @include flex-basis(10%);
+    cursor: pointer;
   }
 }
 </style>
