@@ -1,5 +1,5 @@
 <template>
-  <div class="selection-popup">
+  <div class="selection-popup" ref="myref">
     <div
       class="selection-popup__title no-select"
       @click.prevent="showList = !showList"
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted, onUnmounted } from "vue";
 
 export default defineComponent({
   name: "SelectionPopup",
@@ -44,13 +44,35 @@ export default defineComponent({
   emits: ["getValue"],
   setup(props, { emit }) {
     const showList = ref(false);
+    const myref = ref();
+    const controller = new AbortController();
+
+    onMounted(() => {
+      document.addEventListener(
+        "click",
+        (e) => {
+          if (
+            myref.value !== undefined &&
+            myref.value.contains(e.target) === false
+          ) {
+            console.log("asd");
+            showList.value = false;
+          }
+        },
+        { signal: controller.signal }
+      );
+    });
+
+    onUnmounted(() => {
+      controller.abort();
+    });
 
     const selectAListItem = (element: string) => {
       showList.value = !showList.value;
       emit("getValue", element);
     };
 
-    return { showList, selectAListItem };
+    return { showList, selectAListItem, myref };
   },
 });
 </script>
