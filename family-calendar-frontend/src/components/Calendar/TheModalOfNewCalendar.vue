@@ -33,8 +33,8 @@ import { defineComponent, ref } from "vue";
 import AppModal from "../AppModal.vue";
 
 import { storeToRefs } from "pinia";
-import { useMainStore } from "../../stores/MainStore";
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
+import { useMainStore } from "../../stores/MainStore";
 
 export default defineComponent({
   name: "TheModalOfNewCalendar",

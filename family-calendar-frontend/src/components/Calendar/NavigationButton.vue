@@ -9,6 +9,7 @@
 
 <script>
 import { defineComponent, computed } from "vue";
+
 import { useDateStore } from "../../stores/DateStore";
 
 import useBreakpoints from "../../utils/WindowWidth";

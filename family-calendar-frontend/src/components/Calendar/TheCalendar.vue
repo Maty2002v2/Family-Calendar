@@ -105,11 +105,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
 
-import { storeToRefs } from "pinia";
-import { useDateStore } from "../../stores/DateStore";
-import { useCalendarApiStore } from "../../stores/CalendarApiStore";
-import { useMainStore } from "../../stores/MainStore";
-
 import NavigationButton from "./NavigationButton.vue";
 import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
 import TheTitle from "./TheTitle.vue";
@@ -119,6 +114,11 @@ import TheFieldModal from "./FieldModal/TheFieldModal.vue";
 import TheModalOfNewCalendar from "./TheModalOfNewCalendar.vue";
 import TheListOfWholeMonth from ".//TheListOfWholeMonth.vue";
 import AppPnotify from "../AppPnotify.vue";
+
+import { storeToRefs } from "pinia";
+import { useCalendarApiStore } from "../../stores/CalendarApiStore";
+import { useDateStore } from "../../stores/DateStore";
+import { useMainStore } from "../../stores/MainStore";
 
 export default defineComponent({
   name: "TheCalendar",

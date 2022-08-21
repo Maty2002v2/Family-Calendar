@@ -14,9 +14,10 @@
 
 <script>
 import { defineComponent, ref, computed } from "vue";
+import { useRouter } from "vue-router";
+
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 import { useMainStore } from "../../stores/MainStore";
-import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "CreateCalendar",
