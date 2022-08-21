@@ -45,7 +45,7 @@ export const useMainStore = defineStore("Main", {
     switchShowPnotify(value: boolean) {
       this.showPnotify = value;
     },
-    setPnotifyOptions(type: string, title: string, message: string, time = 5) {
+    setPnotifyOptions(type: string, title: string, message: string, time = 4) {
       this.pnotifyOptions.type = type;
       this.pnotifyOptions.title = title;
       this.pnotifyOptions.message = message;

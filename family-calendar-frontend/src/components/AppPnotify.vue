@@ -31,7 +31,15 @@
           :style="`animation-duration: ${time}s`"
         ></span>
       </div>
-      <p v-show="showContent" class="app-pnotify__p">{{ message }}</p>
+      <Transition
+        name="app-pnotify"
+        @enter="start"
+        @after-enter="end"
+        @before-leave="start"
+        @after-leave="end"
+      >
+        <p v-show="showContent" class="app-pnotify__p">{{ message }}</p>
+      </Transition>
     </div>
   </Transition>
 </template>
@@ -88,11 +96,17 @@ export default defineComponent({
       return "";
     });
 
+    const start = (el: HTMLElement) =>
+      (el.style.height = el.scrollHeight + "px");
+    const end = (el: HTMLElement) => (el.style.height = "");
+
     return {
       getShowPnotify,
       ...toRefs(getPnotifyOptions.value),
       iconName,
       showContent,
+      start,
+      end,
     };
   },
 });
@@ -213,6 +227,20 @@ export default defineComponent({
   &__open-content {
     @include flex-basis(10%);
     cursor: pointer;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    height: 0 !important;
+    opacity: 0;
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
 }
 </style>
