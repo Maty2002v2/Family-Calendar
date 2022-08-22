@@ -21,7 +21,7 @@
         class="btn-pils modal-of-new-calendar__button"
         @click="closeAndCopy"
       >
-        Copy and close
+        Close
       </button>
     </div>
   </app-modal>

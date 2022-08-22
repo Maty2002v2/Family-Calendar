@@ -170,7 +170,7 @@ export default defineComponent({
   }
 
   &--danger {
-    @include pnotify-variants($active-day, $white, $active-day);
+    @include pnotify-variants(#ebccd1, #a94442, #f2dede);
   }
 
   &__title {
@@ -220,7 +220,7 @@ export default defineComponent({
     }
 
     &--danger {
-      background: $active-day;
+      background: #a94442;
     }
   }
 

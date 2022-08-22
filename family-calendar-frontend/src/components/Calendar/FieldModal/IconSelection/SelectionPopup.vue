@@ -1,5 +1,5 @@
 <template>
-  <div class="selection-popup" ref="myref">
+  <div class="selection-popup" ref="popup">
     <div
       class="selection-popup__title no-select"
       @click.prevent="showList = !showList"
@@ -44,7 +44,7 @@ export default defineComponent({
   emits: ["getValue"],
   setup(props, { emit }) {
     const showList = ref(false);
-    const myref = ref();
+    const popup = ref();
     const controller = new AbortController();
 
     onMounted(() => {
@@ -52,10 +52,9 @@ export default defineComponent({
         "click",
         (e) => {
           if (
-            myref.value !== undefined &&
-            myref.value.contains(e.target) === false
+            popup.value !== undefined &&
+            popup.value.contains(e.target) === false
           ) {
-            console.log("asd");
             showList.value = false;
           }
         },
@@ -72,7 +71,7 @@ export default defineComponent({
       emit("getValue", element);
     };
 
-    return { showList, selectAListItem, myref };
+    return { showList, selectAListItem, popup };
   },
 });
 </script>
