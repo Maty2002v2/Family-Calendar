@@ -63,10 +63,13 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
     async createCalendar() {
       const result = { error: false, message: [] };
 
-      await fetch("http://localhost/family-calendar-api?action=add-calendar", {
-        method: "GET",
-        mode: "cors",
-      })
+      await fetch(
+        "https://matikster1.ct8.pl/family-calendar-api/?action=add-calendar",
+        {
+          method: "GET",
+          mode: "cors",
+        }
+      )
         .then((response) => response.json())
         .then((response) => {
           result.error = response.error;
@@ -80,13 +83,13 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       return result;
     },
     async checkIfThereIsCalendar(calendar_id: string) {
-      const url = new URL("http://localhost/family-calendar-api");
+      const url = new URL("https://matikster1.ct8.pl/family-calendar-api/");
       const params = { action: "exist-calendar", calendar_id: calendar_id };
       const result = { error: false, message: "" };
 
       Object.keys(params).forEach(
         (key) =>
-          url.searchParams.append(key, params[key as keyof typeof params]) //TODO: Zrobic metode do tworzenia url, by nie powtarzac zaly czas tego samego
+          url.searchParams.append(key, params[key as keyof typeof params]) //TODO: Zrobic metode do tworzenia url, by nie powtarzac caly czas tego samego
       );
 
       await fetch(url.toString(), {
@@ -108,7 +111,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
     async fetchDaysOfTheMonth(whatDays: InformationDaysDownload) {
       const { switchLoadingCalendar } = useMainStore();
 
-      const url = new URL("http://localhost/family-calendar-api");
+      const url = new URL("https://matikster1.ct8.pl/family-calendar-api/");
       const params = {
         action: "give-days-of-the-month",
         calendar_id: whatDays.calendarId,
@@ -141,7 +144,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       const { switchShowNewDayForm, switchShowPnotify, setPnotifyOptions } =
         useMainStore();
 
-      const url = "http://localhost/family-calendar-api/";
+      const url = "https://matikster1.ct8.pl/family-calendar-api/";
       const params = Object.assign({ action: "add-day" }, day);
 
       const formData = new FormData();
@@ -183,7 +186,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
 
       const { switchShowPnotify, setPnotifyOptions } = useMainStore();
 
-      const url = "http://localhost/family-calendar-api/";
+      const url = "https://matikster1.ct8.pl/family-calendar-api/";
       const params = Object.assign({ action: "delete-day" }, { id: idDay });
 
       const formData = new FormData();
