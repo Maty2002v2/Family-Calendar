@@ -1,9 +1,10 @@
 
 
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 export const useCopyText = () => {
   const copyTextState = ref<boolean|null>(null);
+  const resetCopyTextState = ref<number|null>(null);
 
   const fallbackCopyTextToClipboard = (text: string) => {
     const textArea = document.createElement('textarea');
@@ -38,6 +39,18 @@ export const useCopyText = () => {
       }
     );
   };
+
+  watch(
+    copyTextState,
+    (newSate) => {
+      if(newSate === null) return;
+      if(resetCopyTextState.value) clearTimeout(resetCopyTextState.value);
+      
+      resetCopyTextState.value = setTimeout(
+        () => copyTextState.value = null,
+        3000
+      )
+  })
 
   return { 
     copyTextState,
