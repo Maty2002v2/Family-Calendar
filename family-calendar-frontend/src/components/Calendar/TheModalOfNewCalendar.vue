@@ -7,9 +7,9 @@
       <h2 class="modal-of-new-calendar__h2">
         <span class="modal-of-new-calendar__thickening-span">Hey</span>, here's
         the code for this calendar
-        <span class="modal-of-new-calendar__thickening-span" ref="codeSpan">{{
-          getCalendarHash
-        }}</span
+        <span class="modal-of-new-calendar__thickening-span modal-of-new-calendar__hash" ref="codeSpan" @click="copyHash">
+          {{ getCalendarHash }}
+        </span
         >.
       </h2>
       <p class="modal-of-new-calendar__p">
@@ -35,6 +35,7 @@ import AppModal from "../AppModal.vue";
 import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 import { useMainStore } from "../../stores/MainStore";
+import { useCopyText } from "../../composables/useCopyText";
 
 export default defineComponent({
   name: "TheModalOfNewCalendar",
@@ -48,6 +49,8 @@ export default defineComponent({
 
     const { getCalendarHash } = storeToRefs(useCalendarApiStore());
 
+    const { copyTextToClipboard, copyTextState } = useCopyText();
+
     const codeSpan = ref();
     const closeAndCopy = () => switchShowModalOfNewCalendar(false);
 
@@ -55,13 +58,19 @@ export default defineComponent({
       emit("closeModal");
     };
 
+    const copyHash = () => {
+      copyTextToClipboard(getCalendarHash.value)
+    }
+
     return {
+      copyTextState,
       getCalendarHash,
       getShowModalOfNewCalendar,
       codeSpan,
       switchShowModalOfNewCalendar,
       closeAndCopy,
       closeModal,
+      copyHash,
     };
   },
 });
@@ -86,6 +95,19 @@ export default defineComponent({
 
   &__thickening-span {
     font-weight: 600;
+  }
+
+  &__hash {
+    display: inline-block;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; 
+    cursor: pointer;
+
+    &:active {
+      transition: all 0.2 ease-in-out;
+      transform: scale(0.9);
+    }
   }
 
   &__h2 {
