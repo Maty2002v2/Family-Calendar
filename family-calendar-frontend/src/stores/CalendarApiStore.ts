@@ -64,13 +64,13 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       const result = { error: false, message: [] };
 
       await fetch(
-        "https://matikster21.smallhost.pl/family-calendar-api?action=add-calendar",
+        "https://matikster21.smallhost.pl/family-calendar-api/?action=add-calendar",
         {
           method: "GET",
           mode: "cors",
         }
       )
-        .then((response) => {console.log(response);return response.json()})
+        .then((response) => response.json())
         .then((response) => {
           result.error = response.error;
           result.message = response.message;
@@ -83,7 +83,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       return result;
     },
     async checkIfThereIsCalendar(calendar_id: string) {
-      const url = new URL("https://matikster21.smallhost.pl/family-calendar-api");
+      const url = new URL("https://matikster21.smallhost.pl/family-calendar-api/");
       const params = { action: "exist-calendar", calendar_id: calendar_id };
       const result = { error: false, message: "" };
 
@@ -111,7 +111,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
     async fetchDaysOfTheMonth(whatDays: InformationDaysDownload) {
       const { switchLoadingCalendar } = useMainStore();
 
-      const url = new URL("https://matikster21.smallhost.pl/family-calendar-api");
+      const url = new URL("https://matikster21.smallhost.pl/family-calendar-api/");
       const params = {
         action: "give-days-of-the-month",
         calendar_id: whatDays.calendarId,
@@ -144,7 +144,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       const { switchShowNewDayForm, switchShowPnotify, setPnotifyOptions } =
         useMainStore();
 
-      const url = "https://matikster21.smallhost.pl/family-calendar-api";
+      const url = "https://matikster21.smallhost.pl/family-calendar-api/";
       const params = Object.assign({ action: "add-day" }, day);
 
       const formData = new FormData();
@@ -186,7 +186,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
 
       const { switchShowPnotify, setPnotifyOptions } = useMainStore();
 
-      const url = "https://matikster21.smallhost.pl/family-calendar-api";
+      const url = "https://matikster21.smallhost.pl/family-calendar-api/";
       const params = Object.assign({ action: "delete-day" }, { id: idDay });
 
       const formData = new FormData();
