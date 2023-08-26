@@ -5,7 +5,7 @@
 		<div
 			v-show="isShow"
 			class="darkened-background"
-			@click="$emit('clickBackdrop')">
+			@click.self="$emit('clickBackdrop')">
         <slot></slot>
       </div>
 	</Transition>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-	name: 'AtomaBackdrop',
+	name: 'AtomBackdrop',
 	props: {
 		isShow: {
 			type: Boolean,
