@@ -1,15 +1,6 @@
 <template>
   <div style="z-index: 2">
-    <Transition
-      enter-active-class="animate__animated animate__faster animate__fadeIn"
-      leave-active-class="animate__animated animate__faster animate__fadeOut"
-    >
-      <div
-        v-show="showList && getDays.length > 0"
-        class="darkened-background"
-        @click="showList = !showList"
-      ></div
-    ></Transition>
+    <atom-backdrop :isShow="showList && getDays.length > 0" @clickBackdrop="showList = false" />
     <div class="list-of-whole-month">
       <Transition
         enter-active-class="animate__animated animate__faster animate__bounceInRight"
@@ -71,6 +62,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
+import AtomBackdrop from '../atoms/AtomBackdrop.vue';
 import AppAccordion from "../AppAccordion.vue";
 import AppDeleteDayButton from "../AppDeleteDayButton.vue";
 
@@ -80,6 +72,7 @@ import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 export default defineComponent({
   name: "TheListOfWholeMonth",
   components: {
+    AtomBackdrop,
     AppAccordion,
     AppDeleteDayButton,
   },
@@ -103,14 +96,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.darkened-background {
-  @include position($top: 0px, $left: 0px);
-  width: 100vw;
-  min-height: 100%;
-  background: rgba($color: #000000, $alpha: 0.3);
-  cursor: pointer;
-}
-
 .list-of-whole-month {
   @include position($position: fixed, $right: 10px, $bottom: 10px);
   width: 50px;
@@ -202,10 +187,6 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: $small) {
-  .darkened-background {
-    min-height: 120vh;
-  }
-
   .list-of-whole-month {
     &__button {
       transform: translate(0%, 0%);
