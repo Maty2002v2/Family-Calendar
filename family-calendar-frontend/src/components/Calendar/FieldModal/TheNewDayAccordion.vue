@@ -65,13 +65,12 @@
               @getIconDay="(value) => (iconDay = value)"
             />
             <div class="form__button-container">
-              <button
-                class="btn-pils form__button animate__animated"
-                :class="[titleOfButton === 'give data' ? 'animate__jello' : '']"
+              <atom-pill-button
+                :jelloAniamted="titleOfButton === 'give data'"
                 @click="addDay"
               >
                 {{ titleOfButton }}
-              </button>
+              </atom-pill-button>
             </div>
           </div>
         </form>
@@ -83,6 +82,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
 
+import AtomPillButton from "../../atoms/AtomPillButton.vue";
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
 import AppInputCounter from "../../AppInputCounter.vue";
 import TheRepeatSelectionCheckbox from "./TheRepeatSelectionCheckbox.vue";
@@ -101,6 +101,7 @@ export default defineComponent({
     },
   },
   components: {
+    AtomPillButton,
     TheIconSelection,
     AppInputCounter,
     TheRepeatSelectionCheckbox,
@@ -121,7 +122,7 @@ export default defineComponent({
     const titleOfButton = ref("add");
 
     const correctData = computed(
-      () => title.value.length > 0 && description.value.length > 0
+      () => title.value.length > 0 && description.value.length  > 0
     );
 
     const addDay = () => {
@@ -156,6 +157,7 @@ export default defineComponent({
     const end = (el: HTMLElement) => (el.style.height = "");
 
     return {
+      correctData,
       getShowNewDayForm,
       title,
       description,
