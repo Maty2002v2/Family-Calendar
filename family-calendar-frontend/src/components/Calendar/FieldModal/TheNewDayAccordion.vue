@@ -1,24 +1,22 @@
 <template>
   <div class="create-holiday">
-    <header
-      class="create-holiday__header"
-      role="complementary"
-      @click="switchShowNewDayForm(!getShowNewDayForm)"
-    >
-      <h2 class="create-holiday__h2">Add a new day</h2>
+  <molecule-accordion 
+    :accordionHeaderStyle="accordionHeaderStyles" 
+    :showContent="getShowNewDayForm"
+    @update:showContent="newValue => switchShowNewDayForm(newValue)">
+
+    <template v-slot:title>
+      <h2 class="create-holiday__h2 ">Add a new day</h2>
+    </template>
+    <template v-slot:char-toggle>
       <span
         class="create-holiday__char-toggle"
         :class="{ 'create-holiday__char-toggle--active': getShowNewDayForm }"
       ></span>
-    </header>
-    <Transition
-      name="accordion"
-      @enter="start"
-      @after-enter="end"
-      @before-leave="start"
-      @after-leave="end"
-    >
-      <div v-show="getShowNewDayForm" class="create-holiday__content">
+    </template>
+
+    <template v-slot:content>
+      <div class="create-holiday__content">
         <form class="form create-holiday__form">
           <div class="form__input-container">
             <label for="form__title-input" class="form__label-input"
@@ -75,13 +73,15 @@
           </div>
         </form>
       </div>
-    </Transition>
+    </template>
+  </molecule-accordion>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, reactive } from "vue";
 
+import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
 import AppInputCounter from "../../AppInputCounter.vue";
@@ -101,6 +101,7 @@ export default defineComponent({
     },
   },
   components: {
+    MoleculeAccordion,
     AtomPillButton,
     TheIconSelection,
     AppInputCounter,
@@ -120,6 +121,12 @@ export default defineComponent({
     const toRepeat = ref(false);
     const iconDay = ref({ name: "icon-briefcase", color: "#DE5858" });
     const titleOfButton = ref("add");
+    const showAccordionContent = ref(getShowNewDayForm.value);
+
+    const accordionHeaderStyles = reactive({
+      background: '#F15C5C',
+      position: 'relative',
+    });
 
     const correctData = computed(
       () => title.value.length > 0 && description.value.length  > 0
@@ -157,12 +164,13 @@ export default defineComponent({
     const end = (el: HTMLElement) => (el.style.height = "");
 
     return {
-      correctData,
+      showAccordionContent,
       getShowNewDayForm,
       title,
       description,
       iconDay,
       titleOfButton,
+      accordionHeaderStyles,
       switchShowNewDayForm,
       setToRepeat,
       start,

@@ -11,7 +11,7 @@
           class="list list-of-whole-month__list"
           :class="[showList ? 'list list-of-whole-month__list--active' : '']"
         >
-          <app-accordion v-for="(specialDay, index) in getDays" :key="index">
+          <molecule-accordion v-for="(specialDay, index) in getDays" :key="index">
             <template v-slot:title>
               <span class="list__date">{{
                 convertingDate(
@@ -35,9 +35,9 @@
                   {{ specialDay.description }}
                 </span>
               </div>
-              <app-delete-day-button :id="specialDay.id" />
+              <app-delete-day-button class="delete-button" :id="specialDay.id" />
             </template>
-          </app-accordion>
+          </molecule-accordion>
         </div>
       </Transition>
       <div
@@ -63,7 +63,7 @@
 import { defineComponent, ref } from "vue";
 
 import AtomBackdrop from '../atoms/AtomBackdrop.vue';
-import AppAccordion from "../AppAccordion.vue";
+import MoleculeAccordion from "../molecules/MoleculeAccordion.vue";
 import AppDeleteDayButton from "../AppDeleteDayButton.vue";
 
 import { storeToRefs } from "pinia";
@@ -73,7 +73,7 @@ export default defineComponent({
   name: "TheListOfWholeMonth",
   components: {
     AtomBackdrop,
-    AppAccordion,
+    MoleculeAccordion,
     AppDeleteDayButton,
   },
   setup() {
@@ -184,6 +184,10 @@ export default defineComponent({
     margin: 0px;
     font-size: 20px;
   }
+}
+
+.delete-button {
+  padding-bottom: 10px;
 }
 
 @media only screen and (max-width: $small) {

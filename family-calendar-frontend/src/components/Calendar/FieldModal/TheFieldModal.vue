@@ -6,7 +6,7 @@
           <h2 class="details-of-day__h2">Details</h2>
         </header>
         <div class="accordions">
-          <app-accordion
+          <molecule-accordion
             v-for="(specialDay, index) in specialDayList"
             :key="index"
           >
@@ -24,9 +24,9 @@
               <span class="accordions__content">
                 {{ specialDay.description }}
               </span>
-              <app-delete-day-button :id="specialDay.id" />
+              <app-delete-day-button class="delete-button" :id="specialDay.id" />
             </template>
-          </app-accordion>
+          </molecule-accordion>
         </div>
       </section>
 
@@ -47,7 +47,7 @@
 import { defineComponent } from "vue";
 
 import AppModal from "../../AppModal.vue";
-import AppAccordion from "../../AppAccordion.vue";
+import MoleculeAccordion from "../../molecules/MoleculeAccordion.vue";
 import AppDeleteDayButton from "../../AppDeleteDayButton.vue";
 import TheNewDayAccordion from "./TheNewDayAccordion.vue";
 
@@ -69,7 +69,7 @@ export default defineComponent({
   },
   components: {
     AppModal,
-    AppAccordion,
+    MoleculeAccordion,
     TheNewDayAccordion,
     AppDeleteDayButton,
   },
@@ -133,6 +133,7 @@ export default defineComponent({
   }
 
   &__content {
+    padding: 10px;
     color: $color-day-field;
   }
 }
@@ -161,5 +162,9 @@ export default defineComponent({
 
     background: $white;
   }
+}
+
+.delete-button {
+  padding-bottom: 10px;
 }
 </style>
