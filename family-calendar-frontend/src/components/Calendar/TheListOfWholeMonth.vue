@@ -11,7 +11,10 @@
           class="list list-of-whole-month__list"
           :class="[showList ? 'list list-of-whole-month__list--active' : '']"
         >
-          <molecule-accordion v-for="(specialDay, index) in getDays" :key="index">
+          <molecule-accordion 
+            v-for="(specialDay, index) in getDays" 
+            :key="index"
+            :showUnderline="true">
             <template v-slot:title>
               <span class="list__date">{{
                 convertingDate(

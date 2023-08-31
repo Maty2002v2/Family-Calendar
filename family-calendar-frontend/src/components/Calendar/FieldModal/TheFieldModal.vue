@@ -9,6 +9,7 @@
           <molecule-accordion
             v-for="(specialDay, index) in specialDayList"
             :key="index"
+            :showUnderline="true"
           >
             <template v-slot:title>
               <i

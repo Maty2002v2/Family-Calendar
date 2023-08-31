@@ -1,5 +1,5 @@
 <template>
-  <article class="app-accordion">
+  <article :class="accordionClassObject">
     <section
       class="header app-accordion__header"
       :style="accordionHeaderStyle"
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, computed, watch } from "vue";
 
 export default defineComponent({
   name: "MoleculeAccordion",
@@ -45,10 +45,19 @@ export default defineComponent({
     showContent: {
       type: Boolean,
       default: false
+    },
+    showUnderline: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props, { emit }) {
     const isShowContent = ref(props.showContent);
+
+    const accordionClassObject = computed(() => ({
+      'app-accordion': true,
+      'app-accordion--underline': props.showUnderline
+    }))
 
     const switchShowContent = () => {
       isShowContent.value = !isShowContent.value;
@@ -66,6 +75,7 @@ export default defineComponent({
 
     return {
       isShowContent,
+      accordionClassObject,
       switchShowContent,
       end,
       start,
@@ -76,7 +86,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .app-accordion {
-  border-bottom: 1px solid #ebebeb;
+  
+  &--underline {
+    border-bottom: 1px solid #ebebeb;
+  }
 
   &__header {
     @include flexbox;
