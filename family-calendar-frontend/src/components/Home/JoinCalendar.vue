@@ -7,9 +7,9 @@
     </div>
     <div class="join-calendar__form">
       <sliding-input label="CODE" v-model="calendarHash" />
-      <button class="btn-rectangle--gradient" @click="pushWithQuery">
+      <atom-square-button variant="btn-rectangle--gradient" @click="pushWithQuery">
         join
-      </button>
+      </atom-square-button>
       <span
         class="join-calendar__invalid-code animate__animated"
         :class="{
@@ -25,6 +25,7 @@
 <script>
 import { defineComponent, ref, watch } from "vue";
 import SlidingInput from "../SlidingInput.vue";
+import AtomSquareButton from "@/components/atoms/AtomSquareButton.vue";
 
 import { storeToRefs } from "pinia";
 import { useMainStore } from "../../stores/MainStore";
@@ -35,6 +36,7 @@ export default defineComponent({
   name: "JoinCalendar",
   components: {
     SlidingInput,
+    AtomSquareButton,
   },
   setup() {
     const { getIncorrectCodeEntered } = storeToRefs(useMainStore());

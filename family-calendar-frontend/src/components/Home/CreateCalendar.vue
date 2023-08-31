@@ -3,12 +3,9 @@
     <div class="create-calendar__title-with-information">
       <h2 class="create-calendar__h2">Create your calendar.</h2>
     </div>
-    <button
-      v-html="messageButton"
-      class="btn-rectangle animate__animated"
-      :class="{ animate__shakeX: failedCreation }"
-      @click="create"
-    ></button>
+    <atom-square-button @click="create">
+      {{ messageButton }}
+    </atom-square-button>
   </div>
 </template>
 
@@ -19,8 +16,13 @@ import { useRouter } from "vue-router";
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 import { useMainStore } from "../../stores/MainStore";
 
+import AtomSquareButton from "@/components/atoms/AtomSquareButton.vue";
+
 export default defineComponent({
   name: "CreateCalendar",
+  components: {
+    AtomSquareButton
+  },
   setup() {
     const { createCalendar } = useCalendarApiStore();
     const { switchShowModalOfNewCalendar } = useMainStore();
