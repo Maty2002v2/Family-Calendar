@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue';
+import { defineComponent, computed } from 'vue';
 
-export default {
+export default defineComponent({
 	name: 'AtomPillButton',
 	props: {
 		jelloAniamted: {
@@ -17,7 +17,7 @@ export default {
 			default: false
 		},
 	},
-	setup(props: any) {//TODO: refactor this
+	setup(props) {
 		const classObject = computed(() => ({
 			'btn-pils': true,
 			animate__animated: true,
@@ -26,7 +26,7 @@ export default {
 
 		return { classObject };
 	},
-};
+});
 </script>
 
 <style lang="scss">
