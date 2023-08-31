@@ -30,7 +30,7 @@
               class="form__title"
               placeholder="Meeting with in-laws..."
             />
-            <app-input-counter
+            <atom-input-counter
               class="form__input-counter"
               :inputLength="title.length"
               :maxLength="15"
@@ -84,7 +84,7 @@ import { defineComponent, ref, computed, reactive } from "vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
-import AppInputCounter from "../../AppInputCounter.vue";
+import AtomCounterForInput from "@/components/atoms/AtomCounterForInput.vue";
 import TheRepeatSelectionCheckbox from "./TheRepeatSelectionCheckbox.vue";
 
 import { storeToRefs } from "pinia";
@@ -104,7 +104,7 @@ export default defineComponent({
     MoleculeAccordion,
     AtomPillButton,
     TheIconSelection,
-    AppInputCounter,
+    AtomCounterForInput,
     TheRepeatSelectionCheckbox,
   },
   setup(props) {

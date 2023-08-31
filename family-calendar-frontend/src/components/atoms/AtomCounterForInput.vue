@@ -15,7 +15,7 @@
 import { defineComponent, watch } from "vue";
 
 export default defineComponent({
-  name: "AppInputCounter",
+  name: "AtomCounterForInput",
   props: {
     inputLength: {
       type: Number,
