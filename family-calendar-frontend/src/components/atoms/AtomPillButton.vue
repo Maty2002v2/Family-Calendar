@@ -14,10 +14,10 @@ export default {
 	props: {
 		jelloAniamted: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 	},
-	setup(props) {
+	setup(props: any) {//TODO: refactor this
 		const classObject = computed(() => ({
 			'btn-pils': true,
 			animate__animated: true,
