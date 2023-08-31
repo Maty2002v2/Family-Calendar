@@ -10,10 +10,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import { useCalendarApiStore } from "../stores/CalendarApiStore";
+import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 
 export default defineComponent({
-  name: "AppDeleteDayButton",
+  name: "AtomDeleteDayButton",
   props: {
     id: {
       type: String,
