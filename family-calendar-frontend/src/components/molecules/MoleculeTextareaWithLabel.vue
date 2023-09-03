@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="molecule-textarea-with-label">
     <atom-input-label :inputId="textareaId" :label="label" :requaied="requaied" />
     <atom-textarea
       :modelValue="modelValue"
@@ -7,7 +7,14 @@
       :maxLength="maxLength"
       :placeholder="placeholder"
       :rows="rows"
+      class="molecule-textarea-with-label__textarea"
       @input="$emit('update:modelValue', $event.target.value)"
+    />
+    <atom-counter-for-input
+      v-if="showCounter"
+      :inputLength="modelValue.length"
+      :maxLength="maxLength"
+      class="molecule-textarea-with-label__length-counter"
     />
   </div>
 </template>
@@ -16,12 +23,14 @@ import { getCurrentInstance, computed } from "vue";
 
 import AtomInputLabel from "@/components/atoms/AtomInputLabel.vue";
 import AtomTextarea from "@/components/atoms/AtomTextarea.vue";
+import AtomCounterForInput from "../atoms/AtomCounterForInput.vue";
 
 export default {
   name: "MoleculeTextareaWithText",
   components: {
     AtomInputLabel,
     AtomTextarea,
+    AtomCounterForInput,
   },
   props: {
     modelValue: {
@@ -48,11 +57,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    showCounter: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup() {
     const { uid } = getCurrentInstance();
 
-    const textareaId = computed(() => `molecule-input-with-label-${uid}`);
+    const textareaId = computed(() => `molecule-textarea-with-label-${uid}`);
 
     return {
       textareaId,
@@ -60,4 +73,15 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.molecule-textarea-with-label {
+  &__textarea {
+    margin-bottom: 5px;
+  }
+
+  &__length-counter {
+    text-align: end;
+    margin: 5px;
+  }
+}
+</style>

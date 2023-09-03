@@ -18,31 +18,23 @@
       <template v-slot:content>
         <div class="create-holiday__content">
           <form class="form create-holiday__form">
-            <div>
-              <molecule-input-with-label
-                v-model="title"
-                :maxLength="15"
-                placeholder="Meeting with in-laws..."
-                label="Title"
-                :requaied="true"
-                :showCounter="true"
-              />
-            </div>
-            <div>
-              <molecule-textarea-with-label
-                v-model="description"
-                placeholder="At 15:00. Don't be drunk..."
-                label="Description"
-                maxlength="50"
-                :rows="5"
-                :requaied="true"
-              />
-              <atom-counter-for-input
-                class="form__input-counter"
-                :inputLength="description.length"
-                :maxLength="50"
-              />
-            </div>
+            <molecule-input-with-label
+              v-model="title"
+              :maxLength="15"
+              placeholder="Meeting with in-laws..."
+              label="Title"
+              :requaied="true"
+              :showCounter="true"
+            />
+            <molecule-textarea-with-label
+              v-model="description"
+              placeholder="At 15:00. Don't be drunk..."
+              label="Description"
+              :maxLength="50"
+              :rows="5"
+              :requaied="true"
+              :showCounter="true"
+            />
             <div class="form-repeat-selection">
               <the-repeat-selection-checkbox @getCheckboxValue="setToRepeat" />
             </div>
@@ -74,7 +66,6 @@ import MoleculeTextareaWithLabel from "@/components/molecules/MoleculeTextareaWi
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
-import AtomCounterForInput from "@/components/atoms/AtomCounterForInput.vue";
 import MoleculeInputWithLabel from "@/components/molecules/MoleculeInputWithLabel.vue";
 import TheRepeatSelectionCheckbox from "./TheRepeatSelectionCheckbox.vue";
 
@@ -97,7 +88,6 @@ export default defineComponent({
     MoleculeAccordion,
     AtomPillButton,
     TheIconSelection,
-    AtomCounterForInput,
     TheRepeatSelectionCheckbox,
   },
   setup(props) {
