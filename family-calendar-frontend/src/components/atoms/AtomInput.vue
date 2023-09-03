@@ -2,13 +2,14 @@
   <div>
     <input 
       :type="type" 
-      :value="value"
+      :value="modelValue"
+      :placeholder="placeholder"
       class="atom-input" 
       @input="$emit('update:modelValue', $event.target.value)"
     >
   </div>
 </template>
-<script>
+<script lang="ts">
 export default {
   name: "AtomInput",
   props: {
@@ -19,14 +20,14 @@ export default {
     type: {
       type: String,
       default: 'text',
-      validator(value) {
+      validator(value: string) {
         return ['text', 'email', 'tel', 'number'].includes(value);
       },
     },
-    required: {
-      type: Boolean,
-      default: false
-    }
+    placeholder: {
+      type: String,
+      default: ''
+    },
   }
 }
 </script>
