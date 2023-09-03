@@ -1,8 +1,6 @@
 <template>
   <div class="molecule-input-with-label">
-    <label v-if="label.length" :for="inputId" class="molecule-input-with-label__label-input">
-      {{ label }} <span v-if="requaied" class="molecule-input-with-label__optional-span">*</span>
-    </label>
+    <atom-input-label :inputId="inputId" :label="label" :requaied="requaied" />
     <atom-input 
       :type="type" 
       :modelValue="modelValue"
@@ -15,12 +13,15 @@
 </template>
 <script lang="ts">
 import { getCurrentInstance, computed } from 'vue';
+
 import AtomInput from '@/components/atoms/AtomInput.vue';
+import AtomInputLabel from '../atoms/AtomInputLabel.vue';
 
 export default {
   name: 'MoleculeInputWithLabel',
   components: {
-    AtomInput
+    AtomInput,
+    AtomInputLabel,
   },
   props: {
     modelValue: {
@@ -62,16 +63,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.molecule-input-with-label {
-  &__optional-span {
-    color: $active-day;
-  }
-
-  &__label-input {
-    display: block;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-  }
-}
-</style>

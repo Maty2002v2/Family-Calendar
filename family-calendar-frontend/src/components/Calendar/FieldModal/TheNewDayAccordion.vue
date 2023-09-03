@@ -18,7 +18,7 @@
     <template v-slot:content>
       <div class="create-holiday__content">
         <form class="form create-holiday__form">
-          <div class="form__input-container">
+          <div>
             <molecule-input-with-label 
               v-model="title"
               :maxLength="15" 
@@ -32,10 +32,8 @@
               :maxLength="15"
             />
           </div>
-          <div class="form__textarea-container">
-            <label for="form__description-textarea" class="form__label-textarea"
-              >Description <span class="form__optional-span">*</span></label
-            >
+          <div>
+            <atom-input-label inputId="form__description-textarea" label="Description" :requaied="true"  />
             <textarea
               id="form__description-textarea"
               v-model="description"
@@ -77,6 +75,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, reactive } from "vue";
 
+import AtomInputLabel from "@/components/atoms/AtomInputLabel.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
@@ -98,6 +97,7 @@ export default defineComponent({
     },
   },
   components: {
+    AtomInputLabel,
     MoleculeInputWithLabel,
     MoleculeAccordion,
     AtomPillButton,
