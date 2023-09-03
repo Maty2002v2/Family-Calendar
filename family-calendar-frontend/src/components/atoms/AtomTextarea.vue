@@ -4,6 +4,7 @@
       :value="modelValue"
       :placeholder="placeholder"
       :maxlength="maxLength"
+      :rows="rows"
       :id="textareaId"
       class="atom-textarea" 
       @textarea="$emit('update:modelValue', $event.target.value)"
@@ -29,7 +30,11 @@ export default {
     textareaId: {
       type: String,
       default: ''
-    }
+    },
+    rows: {
+      type: Number,
+      default: 10,
+    },
   }
 }
 </script>
