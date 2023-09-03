@@ -19,18 +19,14 @@
       <div class="create-holiday__content">
         <form class="form create-holiday__form">
           <div class="form__input-container">
-            <label for="form__title-input" class="form__label-input"
-              >Title <span class="form__optional-span">*</span></label
-            >
-            <input
-              type="text"
+            <molecule-input-with-label 
               v-model="title"
-              :maxlength="15"
-              id="form__title-input"
-              class="form__title"
+              :maxLength="15" 
               placeholder="Meeting with in-laws..."
+              label="Title"
+              :requaied="true"
             />
-            <atom-input-counter
+            <atom-counter-for-input
               class="form__input-counter"
               :inputLength="title.length"
               :maxLength="15"
@@ -48,7 +44,7 @@
               placeholder="At 15:00. Don't be drunk..."
               maxlength="50"
             ></textarea>
-            <app-input-counter
+            <atom-counter-for-input
               class="form__input-counter"
               :inputLength="description.length"
               :maxLength="50"
@@ -85,6 +81,7 @@ import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
 import AtomCounterForInput from "@/components/atoms/AtomCounterForInput.vue";
+import MoleculeInputWithLabel from '@/components/molecules/MoleculeInputWithLabel.vue';
 import TheRepeatSelectionCheckbox from "./TheRepeatSelectionCheckbox.vue";
 
 import { storeToRefs } from "pinia";
@@ -101,6 +98,7 @@ export default defineComponent({
     },
   },
   components: {
+    MoleculeInputWithLabel,
     MoleculeAccordion,
     AtomPillButton,
     TheIconSelection,
@@ -257,12 +255,6 @@ export default defineComponent({
 
   &__optional-span {
     color: $active-day;
-  }
-
-  &__label-input {
-    display: block;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
   }
 
   &__title,
