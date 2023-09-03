@@ -4,6 +4,8 @@
       :type="type" 
       :value="modelValue"
       :placeholder="placeholder"
+      :maxlength="maxLength"
+      :id="inputId"
       class="atom-input" 
       @input="$emit('update:modelValue', $event.target.value)"
     >
@@ -28,6 +30,14 @@ export default {
       type: String,
       default: ''
     },
+    maxLength: {
+      type: Number,
+      default: null
+    },
+    inputId: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>
