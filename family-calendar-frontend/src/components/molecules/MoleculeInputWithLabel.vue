@@ -1,75 +1,80 @@
 <template>
   <div class="molecule-input-with-label">
     <atom-input-label :inputId="inputId" :label="label" :requaied="requaied" />
-    <atom-input 
-      :type="type" 
+    <atom-input
+      :type="type"
       :modelValue="modelValue"
       :placeholder="placeholder"
       :maxLength="maxLength"
       :inputId="inputId"
-      class="molecule-input-with-label__input" 
+      class="molecule-input-with-label__input"
       @input="$emit('update:modelValue', $event.target.value)"
-     />
-     <atom-counter-for-input v-if="showCounter" :inputLength="modelValue.length" :maxLength="maxLength" class="molecule-input-with-label__length-counter"  />
+    />
+    <atom-counter-for-input
+      v-if="showCounter"
+      :inputLength="modelValue.length"
+      :maxLength="maxLength"
+      class="molecule-input-with-label__length-counter"
+    />
   </div>
 </template>
 <script lang="ts">
-import { getCurrentInstance, computed } from 'vue';
+import { getCurrentInstance, computed } from "vue";
 
-import AtomInput from '@/components/atoms/AtomInput.vue';
-import AtomInputLabel from '../atoms/AtomInputLabel.vue';
-import AtomCounterForInput from '../atoms/AtomCounterForInput.vue';
+import AtomInput from "@/components/atoms/AtomInput.vue";
+import AtomInputLabel from "../atoms/AtomInputLabel.vue";
+import AtomCounterForInput from "../atoms/AtomCounterForInput.vue";
 
 export default {
-  name: 'MoleculeInputWithLabel',
+  name: "MoleculeInputWithLabel",
   components: {
     AtomInput,
     AtomInputLabel,
-    AtomCounterForInput
+    AtomCounterForInput,
   },
   props: {
     modelValue: {
       type: String,
-      default: '',
+      default: "",
     },
     type: {
       type: String,
-      default: 'text',
+      default: "text",
       validator(value: string) {
-        return ['text', 'email', 'tel', 'number'].includes(value);
+        return ["text", "email", "tel", "number"].includes(value);
       },
     },
     placeholder: {
       type: String,
-      default: ''
+      default: "",
     },
     maxLength: {
       type: Number,
-      default: null
+      default: null,
     },
     label: {
       type: String,
-      default: ''
+      default: "",
     },
     requaied: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showCounter: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   setup() {
     const { uid } = getCurrentInstance();
 
-    const inputId = computed(() => `molecule-input-with-label-${uid}`)
+    const inputId = computed(() => `molecule-input-with-label-${uid}`);
 
     return {
-      inputId
-    }
-  }
-}
+      inputId,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
