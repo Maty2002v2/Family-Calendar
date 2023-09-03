@@ -1,86 +1,85 @@
 <template>
   <div class="create-holiday">
-  <molecule-accordion 
-    :accordionHeaderStyle="accordionHeaderStyles" 
-    :showContent="getShowNewDayForm"
-    @update:showContent="newValue => switchShowNewDayForm(newValue)">
+    <molecule-accordion
+      :accordionHeaderStyle="accordionHeaderStyles"
+      :showContent="getShowNewDayForm"
+      @update:showContent="(newValue) => switchShowNewDayForm(newValue)"
+    >
+      <template v-slot:title>
+        <h2 class="create-holiday__h2">Add a new day</h2>
+      </template>
+      <template v-slot:char-toggle>
+        <span
+          class="create-holiday__char-toggle"
+          :class="{ 'create-holiday__char-toggle--active': getShowNewDayForm }"
+        ></span>
+      </template>
 
-    <template v-slot:title>
-      <h2 class="create-holiday__h2 ">Add a new day</h2>
-    </template>
-    <template v-slot:char-toggle>
-      <span
-        class="create-holiday__char-toggle"
-        :class="{ 'create-holiday__char-toggle--active': getShowNewDayForm }"
-      ></span>
-    </template>
-
-    <template v-slot:content>
-      <div class="create-holiday__content">
-        <form class="form create-holiday__form">
-          <div>
-            <molecule-input-with-label 
-              v-model="title"
-              :maxLength="15" 
-              placeholder="Meeting with in-laws..."
-              label="Title"
-              :requaied="true"
-            />
-            <atom-counter-for-input
-              class="form__input-counter"
-              :inputLength="title.length"
-              :maxLength="15"
-            />
-          </div>
-          <div>
-            <atom-input-label inputId="form__description-textarea" label="Description" :requaied="true"  />
-            <textarea
-              id="form__description-textarea"
-              v-model="description"
-              class="form__description"
-              rows="5"
-              placeholder="At 15:00. Don't be drunk..."
-              maxlength="50"
-            ></textarea>
-            <atom-counter-for-input
-              class="form__input-counter"
-              :inputLength="description.length"
-              :maxLength="50"
-            />
-          </div>
-          <div class="form-repeat-selection">
-            <the-repeat-selection-checkbox @getCheckboxValue="setToRepeat" />
-          </div>
-          <div class="form__icon-selection-container">
-            <the-icon-selection
-              class="form__icon-selection"
-              @getIconDay="(value) => (iconDay = value)"
-            />
-            <div class="form__button-container">
-              <atom-pill-button
-                :jelloAniamted="titleOfButton === 'give data'"
-                @click="addDay"
-              >
-                {{ titleOfButton }}
-              </atom-pill-button>
+      <template v-slot:content>
+        <div class="create-holiday__content">
+          <form class="form create-holiday__form">
+            <div>
+              <molecule-input-with-label
+                v-model="title"
+                :maxLength="15"
+                placeholder="Meeting with in-laws..."
+                label="Title"
+                :requaied="true"
+              />
+              <atom-counter-for-input
+                class="form__input-counter"
+                :inputLength="title.length"
+                :maxLength="15"
+              />
             </div>
-          </div>
-        </form>
-      </div>
-    </template>
-  </molecule-accordion>
+            <div>
+              <molecule-textarea-with-label
+                v-model="description"
+                placeholder="At 15:00. Don't be drunk..."
+                label="Description"
+                maxlength="50"
+                :rows="5"
+                :requaied="true"
+              />
+              <atom-counter-for-input
+                class="form__input-counter"
+                :inputLength="description.length"
+                :maxLength="50"
+              />
+            </div>
+            <div class="form-repeat-selection">
+              <the-repeat-selection-checkbox @getCheckboxValue="setToRepeat" />
+            </div>
+            <div class="form__icon-selection-container">
+              <the-icon-selection
+                class="form__icon-selection"
+                @getIconDay="(value) => (iconDay = value)"
+              />
+              <div class="form__button-container">
+                <atom-pill-button
+                  :jelloAniamted="titleOfButton === 'give data'"
+                  @click="addDay"
+                >
+                  {{ titleOfButton }}
+                </atom-pill-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </template>
+    </molecule-accordion>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, computed, reactive } from "vue";
 
-import AtomInputLabel from "@/components/atoms/AtomInputLabel.vue";
+import MoleculeTextareaWithLabel from "@/components/molecules/MoleculeTextareaWithLabel.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
 import TheIconSelection from "./IconSelection/TheIconSelection.vue";
 import AtomCounterForInput from "@/components/atoms/AtomCounterForInput.vue";
-import MoleculeInputWithLabel from '@/components/molecules/MoleculeInputWithLabel.vue';
+import MoleculeInputWithLabel from "@/components/molecules/MoleculeInputWithLabel.vue";
 import TheRepeatSelectionCheckbox from "./TheRepeatSelectionCheckbox.vue";
 
 import { storeToRefs } from "pinia";
@@ -97,7 +96,7 @@ export default defineComponent({
     },
   },
   components: {
-    AtomInputLabel,
+    MoleculeTextareaWithLabel,
     MoleculeInputWithLabel,
     MoleculeAccordion,
     AtomPillButton,
@@ -122,12 +121,12 @@ export default defineComponent({
     const showAccordionContent = ref(getShowNewDayForm.value);
 
     const accordionHeaderStyles = reactive({
-      background: '#F15C5C',
-      position: 'relative',
+      background: "#F15C5C",
+      position: "relative",
     });
 
     const correctData = computed(
-      () => title.value.length > 0 && description.value.length  > 0
+      () => title.value.length > 0 && description.value.length > 0
     );
 
     const addDay = () => {
@@ -157,8 +156,7 @@ export default defineComponent({
 
     const setToRepeat = (value: boolean) => (toRepeat.value = value);
 
-    const start = (el: HTMLElement) =>
-      (el.style.height = el.scrollHeight + "px");
+    const start = (el: HTMLElement) => (el.style.height = el.scrollHeight + "px");
     const end = (el: HTMLElement) => (el.style.height = "");
 
     return {
@@ -253,49 +251,9 @@ export default defineComponent({
   font-size: 15px;
   font-weight: bold;
 
-  &__optional-span {
-    color: $active-day;
-  }
-
-  &__title,
-  &__description {
-    width: 100%;
-    line-height: 1.5;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-
-    color: $color-day-field;
-    font-size: 15px;
-    letter-spacing: 1px;
-
-    transition: all 0.3s ease;
-  }
-
-  &__title:focus {
-    outline-color: $active-day;
-    box-shadow: 0px 0px 3px $active-day;
-  }
-
   &__input-counter {
     text-align: end;
     margin: 5px;
-  }
-
-  &__description {
-    resize: none;
-  }
-
-  &__description:focus {
-    outline-color: $active-day;
-    box-shadow: 0px 0px 3px $active-day;
-  }
-
-  &__label-textarea {
-    display: block;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
   }
 
   &__icon-selection-container {
