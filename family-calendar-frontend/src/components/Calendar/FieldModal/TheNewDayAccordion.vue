@@ -25,11 +25,7 @@
                 placeholder="Meeting with in-laws..."
                 label="Title"
                 :requaied="true"
-              />
-              <atom-counter-for-input
-                class="form__input-counter"
-                :inputLength="title.length"
-                :maxLength="15"
+                :showCounter="true"
               />
             </div>
             <div>
@@ -250,11 +246,6 @@ export default defineComponent({
   color: $color-day-field;
   font-size: 15px;
   font-weight: bold;
-
-  &__input-counter {
-    text-align: end;
-    margin: 5px;
-  }
 
   &__icon-selection-container {
     @include flexbox;

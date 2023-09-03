@@ -5,10 +5,12 @@
       :type="type" 
       :modelValue="modelValue"
       :placeholder="placeholder"
+      :maxLength="maxLength"
       :inputId="inputId"
       class="molecule-input-with-label__input" 
       @input="$emit('update:modelValue', $event.target.value)"
      />
+     <atom-counter-for-input v-if="showCounter" :inputLength="modelValue.length" :maxLength="maxLength" class="molecule-input-with-label__length-counter"  />
   </div>
 </template>
 <script lang="ts">
@@ -16,12 +18,14 @@ import { getCurrentInstance, computed } from 'vue';
 
 import AtomInput from '@/components/atoms/AtomInput.vue';
 import AtomInputLabel from '../atoms/AtomInputLabel.vue';
+import AtomCounterForInput from '../atoms/AtomCounterForInput.vue';
 
 export default {
   name: 'MoleculeInputWithLabel',
   components: {
     AtomInput,
     AtomInputLabel,
+    AtomCounterForInput
   },
   props: {
     modelValue: {
@@ -50,6 +54,10 @@ export default {
     requaied: {
       type: Boolean,
       default: false
+    },
+    showCounter: {
+      type: Boolean,
+      default: false,
     }
   },
   setup() {
@@ -63,3 +71,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.molecule-input-with-label {
+  &__input {
+    margin-bottom: 5px;
+  }
+
+  &__length-counter {
+    text-align: end;
+    margin: 5px;
+  }
+}
+</style>
