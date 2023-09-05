@@ -1,21 +1,26 @@
 <template>
-  <div class="sliding-input">
+  <div class="molecule-input-floating-label">
     <input
       type="text"
-      class="input sliding-input__input"
+      class="input molecule-input-floating-label__input"
       :value="modelValue"
       @input="updateValue"
       required
     />
-    <label class="sliding-input__label">{{ label }}</label>
+    <atom-input-label class="molecule-input-floating-label__label" :label="label" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import AtomInputLabel from "../atoms/AtomInputLabel.vue";
+
 export default defineComponent({
-  name: "SlidingInput",
+  name: "MoleculeInputFloatingLabel",
+  components: {
+    AtomInputLabel
+  },
   props: {
     label: {
       type: String,
@@ -36,7 +41,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.sliding-input {
+.molecule-input-floating-label {
   position: relative;
 
   &__input {

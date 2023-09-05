@@ -6,7 +6,7 @@
       <h2 class="join-calendar__h2">Join already existing calendar.</h2>
     </div>
     <div class="join-calendar__form">
-      <sliding-input label="CODE" v-model="calendarHash" />
+      <molecule-input-floating-label label="CODE" v-model="calendarHash" />
       <atom-square-button variant="btn-rectangle--gradient" @click="pushWithQuery">
         join
       </atom-square-button>
@@ -24,7 +24,7 @@
 
 <script>
 import { defineComponent, ref, watch } from "vue";
-import SlidingInput from "../SlidingInput.vue";
+import MoleculeInputFloatingLabel from "@/components/molecules/MoleculeInputFloatingLabel.vue"
 import AtomSquareButton from "@/components/atoms/AtomSquareButton.vue";
 
 import { storeToRefs } from "pinia";
@@ -35,7 +35,7 @@ import { useRouter } from "vue-router";
 export default defineComponent({
   name: "JoinCalendar",
   components: {
-    SlidingInput,
+    MoleculeInputFloatingLabel,
     AtomSquareButton,
   },
   setup() {
