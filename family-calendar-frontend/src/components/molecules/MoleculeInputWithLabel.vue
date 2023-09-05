@@ -66,7 +66,12 @@ export default {
     },
   },
   setup() {
-    const { uid } = getCurrentInstance();
+    const componentInstance = getCurrentInstance();
+    let uid = 0;
+
+    if(componentInstance) {
+      uid = componentInstance.uid;
+    }
 
     const inputId = computed(() => `molecule-input-with-label-${uid}`);
 

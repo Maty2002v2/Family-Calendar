@@ -63,7 +63,12 @@ export default {
     },
   },
   setup() {
-    const { uid } = getCurrentInstance();
+    const componentInstance = getCurrentInstance();
+    let uid = 0;
+
+    if(componentInstance) {
+      uid = componentInstance.uid;
+    }
 
     const textareaId = computed(() => `molecule-textarea-with-label-${uid}`);
 
