@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <input 
-      :type="type" 
-      :value="modelValue"
-      :placeholder="placeholder"
-      :maxlength="maxLength"
-      :id="inputId"
-      class="atom-input" 
-      @input="$emit('update:modelValue', $event.target.value)"
-    >
-  </div>
+  <input 
+    :type="type" 
+    :value="modelValue"
+    :placeholder="placeholder"
+    :maxlength="maxLength"
+    :id="inputId"
+    class="atom-input" 
+    @input="$emit('update:modelValue', $event.target.value)"
+  >
 </template>
 <script lang="ts">
 export default {

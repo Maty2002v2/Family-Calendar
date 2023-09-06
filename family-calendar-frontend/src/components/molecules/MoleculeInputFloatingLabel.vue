@@ -1,11 +1,11 @@
 <template>
   <div class="molecule-input-floating-label">
-    <input
+    <atom-input
       type="text"
       class="input molecule-input-floating-label__input"
       :value="modelValue"
       @input="updateValue"
-      required
+      :required="true"
     />
     <atom-input-label class="molecule-input-floating-label__label" :label="label" />
   </div>
@@ -14,11 +14,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import AtomInput from "../atoms/AtomInput.vue";
 import AtomInputLabel from "../atoms/AtomInputLabel.vue";
 
 export default defineComponent({
   name: "MoleculeInputFloatingLabel",
   components: {
+    AtomInput,
     AtomInputLabel
   },
   props: {
