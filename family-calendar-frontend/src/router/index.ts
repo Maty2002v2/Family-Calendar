@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import PageInitCalendar from "@/pages/PageInitCalendar.vue";
 import CalendarView from "../views/CalendarView.vue";
 import NotFound from "../views/NotFound.vue";
 
@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: PageInitCalendar,
     beforeEnter: () => {
       const { setCalendarHash } = useCalendarApiStore();
       setCalendarHash("");

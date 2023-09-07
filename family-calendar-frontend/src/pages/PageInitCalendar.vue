@@ -1,24 +1,24 @@
 <template>
   <div class="home">
     <div class="home__create-calendar">
-      <create-calendar />
+      <organism-create-calendar />
     </div>
     <div class="home__join-calendar">
-      <join-calendar />
+      <organism-join-calendar />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import CreateCalendar from "../components/Home/CreateCalendar.vue";
-import JoinCalendar from "../components/Home/JoinCalendar.vue";
+import OrganismCreateCalendar from "@/components/organisms/OrganismCreateCalendar.vue";
+import OrganismJoinCalendar from "@/components/organisms/OrganismJoinCalendar.vue";
 
 export default defineComponent({
-  name: "HomeView",
+  name: "PageInitCalendar",
   components: {
-    CreateCalendar,
-    JoinCalendar,
+    OrganismCreateCalendar,
+    OrganismJoinCalendar,
   },
 });
 </script>
