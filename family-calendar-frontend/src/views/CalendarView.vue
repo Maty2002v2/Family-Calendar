@@ -5,7 +5,7 @@
         <the-calendar />
       </template>
       <template #fallback>
-        <app-loader />
+        <atom-loader />
       </template>
     </Suspense>
   </div>
@@ -14,13 +14,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import TheCalendar from "../components/Calendar/TheCalendar.vue"; // @ is an alias to /src
-import AppLoader from "../components/AppLoader.vue"; // @ is an alias to /src
+import AtomLoader from "@/components/atoms/AtomLoader.vue"; // @ is an alias to /src
 
 export default defineComponent({
   name: "CalendarView",
   components: {
     TheCalendar,
-    AppLoader,
+    AtomLoader,
   },
 });
 </script>

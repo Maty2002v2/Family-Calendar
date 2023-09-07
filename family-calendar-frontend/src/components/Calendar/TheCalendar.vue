@@ -80,7 +80,7 @@
       </div>
 
       <div v-else style="width: 100%">
-        <app-loader />
+        <atom-loader />
       </div>
     </div>
 
@@ -109,7 +109,7 @@ import NavigationButton from "./NavigationButton.vue";
 import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
 import TheTitle from "./TheTitle.vue";
 import Field from "./Field.vue";
-import AppLoader from "../AppLoader.vue";
+import AtomLoader from "@/components/atoms/AtomLoader.vue";
 import TheFieldModal from "./FieldModal/TheFieldModal.vue";
 import TheModalOfNewCalendar from "./TheModalOfNewCalendar.vue";
 import TheListOfWholeMonth from ".//TheListOfWholeMonth.vue";
@@ -127,7 +127,7 @@ export default defineComponent({
     TheNameDayOfWeek,
     TheTitle,
     Field,
-    AppLoader,
+    AtomLoader,
     TheFieldModal,
     TheModalOfNewCalendar,
     TheListOfWholeMonth,
