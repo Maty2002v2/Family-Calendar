@@ -1,5 +1,5 @@
 <template>
-	<app-modal
+	<molecule-modal
 		:isShow="getShowModalOfNewCalendar"
 		@closeModal="switchShowModalOfNewCalendar(false)">
 		<div class="modal-of-new-calendar">
@@ -24,14 +24,14 @@
 				>Close</atom-pill-button
 			>
 		</div>
-	</app-modal>
+	</molecule-modal>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
 import AtomPillButton from '../atoms/AtomPillButton.vue';
-import AppModal from '../AppModal.vue';
+import MoleculeModal from '@/components/molecules/MoleculeModal.vue';
 
 import { storeToRefs } from 'pinia';
 import { useCalendarApiStore } from '../../stores/CalendarApiStore';
@@ -42,7 +42,7 @@ export default defineComponent({
 	name: 'TheModalOfNewCalendar',
 	components: {
 		AtomPillButton,
-		AppModal,
+		MoleculeModal,
 	},
 	emits: ['closeModal'],
 	setup(props, { emit }) {

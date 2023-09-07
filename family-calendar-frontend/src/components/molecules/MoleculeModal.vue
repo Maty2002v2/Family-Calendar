@@ -18,10 +18,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import AtomBackdrop from './atoms/AtomBackdrop.vue';
+import AtomBackdrop from '@/components/atoms/AtomBackdrop.vue';
 
 export default defineComponent({
-	name: 'AppModal',
+	name: 'MoleculeModal',
 	components: {
 		AtomBackdrop,
 	},

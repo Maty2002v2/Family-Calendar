@@ -1,5 +1,5 @@
 <template>
-  <app-modal :isShow="getShowModalDetailsOffDay" @closeModal="closeModal">
+  <molecule-modal :isShow="getShowModalDetailsOffDay" @closeModal="closeModal">
     <article class="field-modal">
       <section v-if="specialDayList.length > 0" class="details-of-day">
         <header class="details-of-day__header" role="complementary">
@@ -41,13 +41,13 @@
         <the-new-day-accordion :selectedDayNumber="selectedDayNumber" />
       </section>
     </article>
-  </app-modal>
+  </molecule-modal>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import AppModal from "../../AppModal.vue";
+import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
 import MoleculeAccordion from "../../molecules/MoleculeAccordion.vue";
 import AtomDeleteDayButton from "@/components/atoms//AtomDeleteDayButton.vue";
 import TheNewDayAccordion from "./TheNewDayAccordion.vue";
@@ -69,7 +69,7 @@ export default defineComponent({
     },
   },
   components: {
-    AppModal,
+    MoleculeModal,
     MoleculeAccordion,
     TheNewDayAccordion,
     AtomDeleteDayButton,
