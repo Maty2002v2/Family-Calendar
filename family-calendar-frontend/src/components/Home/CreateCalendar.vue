@@ -1,7 +1,7 @@
 <template>
   <div class="create-calendar animate__animated animate__fadeInDown">
     <div class="create-calendar__title-with-information">
-      <h2 class="create-calendar__h2">Create your calendar.</h2>
+      <atom-title tag="h2" content="Create your calendar." class="create-calendar__h2" />
     </div>
     <atom-square-button @click="create">
       {{ messageButton }}
@@ -9,18 +9,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 import { useMainStore } from "../../stores/MainStore";
 
+import AtomTitle from "../atoms/AtomTitle.vue";
 import AtomSquareButton from "@/components/atoms/AtomSquareButton.vue";
 
 export default defineComponent({
   name: "CreateCalendar",
   components: {
+    AtomTitle,
     AtomSquareButton
   },
   setup() {

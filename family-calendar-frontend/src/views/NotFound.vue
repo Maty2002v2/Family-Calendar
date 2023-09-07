@@ -1,13 +1,23 @@
 <template>
   <div class="not-found">
     <div class="not-found__container">
-      <h1 class="not-found__h1 animate__animated animate__jello">404</h1>
+      <atom-title tag="h1" content="404" class="not-found__h1 animate__animated animate__jello" />
       <p class="not-found__p">No calendar with such #hash</p>
     </div>
   </div>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+
+import AtomTitle from '@/components/atoms/AtomTitle.vue';
+
+export default {
+  name: "MoleculeAccordion",
+  components: {
+    AtomTitle
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .not-found {

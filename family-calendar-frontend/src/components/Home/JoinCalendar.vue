@@ -3,7 +3,7 @@
     class="join-calendar animate__animated animate__zoomIn animate__delay-1s"
   >
     <div class="join-calendar__title-with-information">
-      <h2 class="join-calendar__h2">Join already existing calendar.</h2>
+      <atom-title tag="h2" content="Join already existing calendar." class="join-calendar__h2" />
     </div>
     <molecule-join-calendar-form class="join-calendar__form" />
   </div>
@@ -11,11 +11,14 @@
 
 <script lang="ts">
 import { defineComponent} from "vue";
+
+import AtomTitle from "../atoms/AtomTitle.vue";
 import MoleculeJoinCalendarForm from "@/components/molecules/MoleculeJoinCalendarForm.vue"
 
 export default defineComponent({
   name: "JoinCalendar",
   components: {
+    AtomTitle,
     MoleculeJoinCalendarForm
   }
 });

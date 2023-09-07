@@ -3,7 +3,7 @@
     <article class="field-modal">
       <section v-if="specialDayList.length > 0" class="details-of-day">
         <header class="details-of-day__header" role="complementary">
-          <h2 class="details-of-day__h2">Details</h2>
+          <atom-title tag="h2" content="Details" class="details-of-day__h2" />
         </header>
         <div class="accordions">
           <molecule-accordion
@@ -32,7 +32,7 @@
       </section>
 
       <section v-else class="info-about-lack-of-days">
-        <h2 class="info-about-lack-of-days__h2">You have a day off!</h2>
+        <atom-title tag="h2" content="You have a day off!" class="info-about-lack-of-days__h2" />
         <div class="info-about-lack-of-days__div">
           <i class="demo-icon icon-ok"></i>
         </div>
@@ -47,6 +47,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
 import MoleculeAccordion from "../../molecules/MoleculeAccordion.vue";
 import AtomDeleteDayButton from "@/components/atoms//AtomDeleteDayButton.vue";
@@ -69,6 +70,7 @@ export default defineComponent({
     },
   },
   components: {
+    AtomTitle,
     MoleculeModal,
     MoleculeAccordion,
     TheNewDayAccordion,

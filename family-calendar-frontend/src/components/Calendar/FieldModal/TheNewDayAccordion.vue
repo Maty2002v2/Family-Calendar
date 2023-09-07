@@ -6,7 +6,7 @@
       @update:showContent="(newValue) => switchShowNewDayForm(newValue)"
     >
       <template v-slot:title>
-        <h2 class="create-holiday__h2">Add a new day</h2>
+        <atom-title tag="h2" content="Add a new day" class="create-holiday__h2" />
       </template>
       <template v-slot:char-toggle>
         <span
@@ -62,6 +62,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, reactive } from "vue";
 
+import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeTextareaWithLabel from "@/components/molecules/MoleculeTextareaWithLabel.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
@@ -83,6 +84,7 @@ export default defineComponent({
     },
   },
   components: {
+    AtomTitle,
     MoleculeTextareaWithLabel,
     MoleculeInputWithLabel,
     MoleculeAccordion,

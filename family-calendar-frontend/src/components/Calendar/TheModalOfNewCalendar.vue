@@ -3,7 +3,7 @@
 		:isShow="getShowModalOfNewCalendar"
 		@closeModal="switchShowModalOfNewCalendar(false)">
 		<div class="modal-of-new-calendar">
-			<h2 class="modal-of-new-calendar__h2">
+			<atom-title tag="h2" class="modal-of-new-calendar__h2">
 				<span class="modal-of-new-calendar__thickening-span">Hey</span>, here's
 				the code for this calendar
 				<span
@@ -12,7 +12,7 @@
 					@click="copyHash">
 					{{ getCalendarHash }} </span
 				>.
-			</h2>
+			</atom-title>
 			<p class="modal-of-new-calendar__p">
 				You can
 				<span class="modal-of-new-calendar__thickening-span">share</span> it
@@ -30,6 +30,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
+import AtomTitle from '../atoms/AtomTitle.vue';
 import AtomPillButton from '../atoms/AtomPillButton.vue';
 import MoleculeModal from '@/components/molecules/MoleculeModal.vue';
 
@@ -41,6 +42,7 @@ import { useCopyText } from '../../composables/useCopyText';
 export default defineComponent({
 	name: 'TheModalOfNewCalendar',
 	components: {
+		AtomTitle,
 		AtomPillButton,
 		MoleculeModal,
 	},

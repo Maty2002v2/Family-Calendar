@@ -31,9 +31,7 @@
             </template>
             <template v-slot:content>
               <div class="list__content">
-                <h2 class="list__title">
-                  {{ specialDay.title }}
-                </h2>
+                <atom-title tag="h2" content="specialDay.title" class="list__title" />
                 <span class="list__description">
                   {{ specialDay.description }}
                 </span>
@@ -65,6 +63,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
+import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import AtomBackdrop from '../atoms/AtomBackdrop.vue';
 import MoleculeAccordion from "../molecules/MoleculeAccordion.vue";
 import AtomDeleteDayButton from "@/components/atoms/AtomDeleteDayButton.vue";
@@ -75,6 +74,7 @@ import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 export default defineComponent({
   name: "TheListOfWholeMonth",
   components: {
+    AtomTitle,
     AtomBackdrop,
     MoleculeAccordion,
     AtomDeleteDayButton,
