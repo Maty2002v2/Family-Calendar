@@ -5,68 +5,19 @@
     <div class="join-calendar__title-with-information">
       <h2 class="join-calendar__h2">Join already existing calendar.</h2>
     </div>
-    <div class="join-calendar__form">
-      <molecule-input-floating-label label="CODE" v-model="calendarHash" />
-      <atom-square-button variant="btn-rectangle--gradient" @click="pushWithQuery">
-        join
-      </atom-square-button>
-      <span
-        class="join-calendar__invalid-code animate__animated"
-        :class="{
-          animate__rubberBand: getIncorrectCodeEntered,
-          animate__bounceOut: !getIncorrectCodeEntered,
-        }"
-        >BAD CODE</span
-      >
-    </div>
+    <molecule-join-calendar-form class="join-calendar__form" />
   </div>
 </template>
 
-<script>
-import { defineComponent, ref, watch } from "vue";
-import MoleculeInputFloatingLabel from "@/components/molecules/MoleculeInputFloatingLabel.vue"
-import AtomSquareButton from "@/components/atoms/AtomSquareButton.vue";
-
-import { storeToRefs } from "pinia";
-import { useMainStore } from "../../stores/MainStore";
-
-import { useRouter } from "vue-router";
+<script lang="ts">
+import { defineComponent} from "vue";
+import MoleculeJoinCalendarForm from "@/components/molecules/MoleculeJoinCalendarForm.vue"
 
 export default defineComponent({
   name: "JoinCalendar",
   components: {
-    MoleculeInputFloatingLabel,
-    AtomSquareButton,
-  },
-  setup() {
-    const { getIncorrectCodeEntered } = storeToRefs(useMainStore());
-    const { switchIncorrectCodeEntered } = useMainStore();
-
-    const router = useRouter();
-
-    const calendarHash = ref("");
-
-    const pushWithQuery = () => {
-      if (calendarHash.value.length > 0) {
-        router.push({
-          name: "calendar",
-          params: {
-            calendarId: calendarHash.value,
-          },
-        });
-      } else {
-        switchIncorrectCodeEntered(true); //TODO: Zrobic by mozna bylo przekazywac wiadomosci a nie tylko BAD CODE, np pusty kod
-      }
-    };
-
-    watch(getIncorrectCodeEntered, (newValue) => {
-      if (newValue) {
-        setTimeout(() => switchIncorrectCodeEntered(false), 3000);
-      }
-    });
-
-    return { calendarHash, getIncorrectCodeEntered, pushWithQuery };
-  },
+    MoleculeJoinCalendarForm
+  }
 });
 </script>
 
@@ -91,16 +42,6 @@ export default defineComponent({
     @include justify-content(center);
     @include flex-wrap(wrap);
     gap: 10px;
-  }
-
-  &__invalid-code {
-    width: 100%;
-    text-align: center;
-
-    color: $color-day-field;
-    font-size: 13px;
-    font-weight: 100;
-    letter-spacing: 1px;
   }
 }
 
