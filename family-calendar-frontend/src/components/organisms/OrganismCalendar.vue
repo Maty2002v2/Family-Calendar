@@ -4,7 +4,7 @@
 
     <div class="days-grid">
       <div class="container">
-        <the-name-day-of-week :totalNumberFields="totalNumberFields" />
+        <molecule-names-days-of-week :totalNumberFields="totalNumberFields" />
       </div>
 
       <div
@@ -64,7 +64,7 @@
 import { defineComponent, ref, computed, watch } from "vue";
 
 import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeCalendarNavigation.vue"
-import TheNameDayOfWeek from "@/components/Calendar/TheNameDayOfWeek.vue";
+import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
 import Field from "@/components/Calendar/Field.vue";
 import AtomLoader from "@/components/atoms/AtomLoader.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
@@ -81,7 +81,7 @@ export default defineComponent({
   name: "OrganismCalendar",
   components: {
     MoleculeCalendarNavigaion,
-    TheNameDayOfWeek,
+    MoleculeNamesDaysOfWeek,
     Field,
     AtomLoader,
     MoleculeModalDayDetails,

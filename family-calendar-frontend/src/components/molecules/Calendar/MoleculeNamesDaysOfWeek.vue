@@ -1,11 +1,11 @@
 <template>
-  <div class="name-day-of-week">
+  <div class="molecule-names-days-of-week">
     <div
       v-for="(name, index) in templateNamesDaysOfWeek"
       :key="index"
-      class="name-day-of-week__div"
+      class="molecule-names-days-of-week__div"
       :class="{
-        'name-day-of-week__div--sunday': name == namesDaysOfWeek[0],
+        'molecule-names-days-of-week__div--sunday': name == namesDaysOfWeek[0],
       }"
     >
       {{ name }}
@@ -16,10 +16,10 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 
-import useBreakpoints from "../../utils/WindowWidth";
+import useBreakpoints from "@/utils/WindowWidth";
 
 export default defineComponent({
-  name: "TheNameDayOfWeek",
+  name: "MoleculeNamesDaysOfWeek",
   props: {
     totalNumberFields: {
       type: Number,
@@ -69,7 +69,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 $size-day-div: calc(100% / 7 - 5px);
 
-.name-day-of-week {
+.molecule-names-days-of-week {
   @include flexbox;
   gap: 5px;
   width: 100%;
@@ -94,7 +94,7 @@ $size-day-div: calc(100% / 7 - 5px);
 }
 
 @media only screen and (max-width: $small) {
-  .name-day-of-week {
+  .molecule-names-days-of-week {
     @include flex-direction(column);
     margin: 0px;
 
