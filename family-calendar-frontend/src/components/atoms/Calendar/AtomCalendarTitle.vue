@@ -1,15 +1,15 @@
 <template>
-  <div class="calendar-title">{{ title }}</div>
+  <div class="atom-calendar-title">{{ title }}</div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, computed } from "vue";
 
 import { storeToRefs } from "pinia";
-import { useDateStore } from "../../stores/DateStore";
+import { useDateStore } from "@/stores/DateStore";
 
 export default defineComponent({
-  name: "TheCalendarTitle",
+  name: "AtomCalendarTitle",
   setup() {
     const { getMounth, getYear } = storeToRefs(useDateStore());
     const monthNames = [
@@ -36,7 +36,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.calendar-title {
+.atom-calendar-title {
   width: 100%;
   text-align: center;
   box-sizing: border-box;
@@ -53,7 +53,7 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: $small) {
-  .calendar-title {
+  .atom-calendar-title {
     @include position($position: sticky, $top: 0);
 
     @include flexbox;

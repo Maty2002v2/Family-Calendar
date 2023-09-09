@@ -22,7 +22,7 @@
       </navigation-button>
     </nav>
 
-    <the-title class="calendar__title" />
+    <atom-calendar-title class="calendar__title" />
 
     <nav class="calendar__nav calendar__nav--next">
       <navigation-button :step="1" @setTransitionName="setTransitionName">
@@ -107,7 +107,7 @@ import { defineComponent, ref, computed, watch } from "vue";
 
 import NavigationButton from "./NavigationButton.vue";
 import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
-import TheTitle from "./TheTitle.vue";
+import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue";
 import Field from "./Field.vue";
 import AtomLoader from "@/components/atoms/AtomLoader.vue";
 import TheFieldModal from "./FieldModal/TheFieldModal.vue";
@@ -125,7 +125,7 @@ export default defineComponent({
   components: {
     NavigationButton,
     TheNameDayOfWeek,
-    TheTitle,
+    AtomCalendarTitle,
     Field,
     AtomLoader,
     TheFieldModal,
