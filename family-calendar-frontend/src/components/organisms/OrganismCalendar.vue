@@ -45,7 +45,7 @@
     <the-list-of-whole-month />
 
     <teleport to="#modal">
-      <the-field-modal
+      <molecule-modal-day-details
         :selectedDayNumber="indexOfSelectedDay"
         :specialDayList="getSortedDays[indexOfSelectedDay]"
       />
@@ -67,7 +67,7 @@ import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeC
 import TheNameDayOfWeek from "@/components/Calendar/TheNameDayOfWeek.vue";
 import Field from "@/components/Calendar/Field.vue";
 import AtomLoader from "@/components/atoms/AtomLoader.vue";
-import TheFieldModal from "@/components/Calendar/FieldModal/TheFieldModal.vue";
+import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
 import TheListOfWholeMonth from "@/components/Calendar/TheListOfWholeMonth.vue";
 import AppPnotify from "../AppPnotify.vue";
@@ -84,7 +84,7 @@ export default defineComponent({
     TheNameDayOfWeek,
     Field,
     AtomLoader,
-    TheFieldModal,
+    MoleculeModalDayDetails,
     MoleculeModalOfNewCalendar,
     TheListOfWholeMonth,
     AppPnotify,

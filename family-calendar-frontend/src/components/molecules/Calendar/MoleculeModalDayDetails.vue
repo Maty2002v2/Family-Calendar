@@ -51,13 +51,13 @@ import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
 import MoleculeAccordion from "../../molecules/MoleculeAccordion.vue";
 import AtomDeleteDayButton from "@/components/atoms//AtomDeleteDayButton.vue";
-import TheNewDayAccordion from "./TheNewDayAccordion.vue";
+import TheNewDayAccordion from "@/components/Calendar/FieldModal/TheNewDayAccordion.vue";
 
 import { storeToRefs } from "pinia";
-import { useMainStore } from "../../../stores/MainStore";
+import { useMainStore } from "@/stores/MainStore";
 
 export default defineComponent({
-  name: "TheFieldModal",
+  name: "MoleculeModalDayDetails",
   props: {
     selectedDayNumber: {
       type: Number,
