@@ -1,7 +1,7 @@
 <template>
   <div class="calendar animate__animated animate__fadeInDown">
     <nav class="calendar__nav calendar__nav--prev">
-      <navigation-button :step="-12" @setTransitionName="setTransitionName">
+      <atom-navigation-button :step="-12" @setTransitionName="setTransitionName">
         <template v-slot:desktop-icon>
           <i class="demo-icon icon-angle-double-left"></i>
         </template>
@@ -9,9 +9,9 @@
         <template v-slot:mobile-icon>
           <i class="demo-icon icon-angle-double-down"></i>
         </template>
-      </navigation-button>
+      </atom-navigation-button>
 
-      <navigation-button :step="-1" @setTransitionName="setTransitionName">
+      <atom-navigation-button :step="-1" @setTransitionName="setTransitionName">
         <template v-slot:desktop-icon>
           <i class="demo-icon icon-left-open-mini"></i>
         </template>
@@ -19,29 +19,29 @@
         <template v-slot:mobile-icon>
           <i class="demo-icon icon-down-open-mini"></i>
         </template>
-      </navigation-button>
+      </atom-navigation-button>
     </nav>
 
     <atom-calendar-title class="calendar__title" />
 
     <nav class="calendar__nav calendar__nav--next">
-      <navigation-button :step="1" @setTransitionName="setTransitionName">
+      <atom-navigation-button :step="1" @setTransitionName="setTransitionName">
         <template v-slot:desktop-icon>
           <i class="demo-icon icon-right-open-mini"></i>
         </template>
         <template v-slot:mobile-icon>
           <i class="demo-icon icon-up-open-mini"></i>
         </template>
-      </navigation-button>
+      </atom-navigation-button>
 
-      <navigation-button :step="12" @setTransitionName="setTransitionName">
+      <atom-navigation-button :step="12" @setTransitionName="setTransitionName">
         <template v-slot:desktop-icon>
           <i class="demo-icon icon-angle-double-right"></i>
         </template>
         <template v-slot:mobile-icon>
           <i class="demo-icon icon-angle-double-up"></i>
         </template>
-      </navigation-button>
+      </atom-navigation-button>
     </nav>
 
     <div class="days-grid">
@@ -105,7 +105,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
 
-import NavigationButton from "./NavigationButton.vue";
+import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
 import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
 import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue";
 import Field from "./Field.vue";
@@ -123,7 +123,7 @@ import { useMainStore } from "../../stores/MainStore";
 export default defineComponent({
   name: "TheCalendar",
   components: {
-    NavigationButton,
+    AtomNavigationButton,
     TheNameDayOfWeek,
     AtomCalendarTitle,
     Field,

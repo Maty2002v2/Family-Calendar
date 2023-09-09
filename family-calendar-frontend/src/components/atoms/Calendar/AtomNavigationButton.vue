@@ -7,15 +7,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, computed } from "vue";
 
-import { useDateStore } from "../../stores/DateStore";
+import { useDateStore } from "@/stores/DateStore";
 
-import useBreakpoints from "../../utils/WindowWidth";
+import useBreakpoints from "@/utils/WindowWidth";
 
 export default defineComponent({
-  name: "NavigationButton",
+  name: "AtomNavigationButton",
   props: {
     step: {
       type: Number,
