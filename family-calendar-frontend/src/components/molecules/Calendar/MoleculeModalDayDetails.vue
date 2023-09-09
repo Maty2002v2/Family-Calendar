@@ -1,6 +1,6 @@
 <template>
   <molecule-modal :isShow="getShowModalDetailsOffDay" @closeModal="closeModal">
-    <article class="field-modal">
+    <article class="molecule-modal-day-details">
       <section v-if="specialDayList.length > 0" class="details-of-day">
         <header class="details-of-day__header" role="complementary">
           <atom-title tag="h2" content="Details" class="details-of-day__h2" />
@@ -92,7 +92,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.field-modal {
+.molecule-modal-day-details {
   @include flexbox;
   @include flex-direction(column);
   gap: 20px;
