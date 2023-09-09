@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import PageInitCalendar from "@/pages/PageInitCalendar.vue";
 import PageCalendar from "@/pages/PageCalendar.vue";
-import NotFound from "../views/NotFound.vue";
+import PageNotFound from "@/pages/PageNotFound.vue";
 
 import { useMainStore } from "@/stores/MainStore";
 import { useCalendarApiStore } from "@/stores/CalendarApiStore";
@@ -41,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/:pathMatch(.*)*",
     name: "not-found",
-    component: NotFound,
+    component: PageNotFound,
   },
   // {
   //   path: '/about',
