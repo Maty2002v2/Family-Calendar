@@ -1,48 +1,6 @@
 <template>
   <div class="calendar animate__animated animate__fadeInDown">
-    <nav class="calendar__nav calendar__nav--prev">
-      <atom-navigation-button :step="-12" @setTransitionName="setTransitionName">
-        <template v-slot:desktop-icon>
-          <i class="demo-icon icon-angle-double-left"></i>
-        </template>
-
-        <template v-slot:mobile-icon>
-          <i class="demo-icon icon-angle-double-down"></i>
-        </template>
-      </atom-navigation-button>
-
-      <atom-navigation-button :step="-1" @setTransitionName="setTransitionName">
-        <template v-slot:desktop-icon>
-          <i class="demo-icon icon-left-open-mini"></i>
-        </template>
-
-        <template v-slot:mobile-icon>
-          <i class="demo-icon icon-down-open-mini"></i>
-        </template>
-      </atom-navigation-button>
-    </nav>
-
-    <atom-calendar-title class="calendar__title" />
-
-    <nav class="calendar__nav calendar__nav--next">
-      <atom-navigation-button :step="1" @setTransitionName="setTransitionName">
-        <template v-slot:desktop-icon>
-          <i class="demo-icon icon-right-open-mini"></i>
-        </template>
-        <template v-slot:mobile-icon>
-          <i class="demo-icon icon-up-open-mini"></i>
-        </template>
-      </atom-navigation-button>
-
-      <atom-navigation-button :step="12" @setTransitionName="setTransitionName">
-        <template v-slot:desktop-icon>
-          <i class="demo-icon icon-angle-double-right"></i>
-        </template>
-        <template v-slot:mobile-icon>
-          <i class="demo-icon icon-angle-double-up"></i>
-        </template>
-      </atom-navigation-button>
-    </nav>
+    <molecule-calendar-navigaion @setTransitionName="(transitionName) => calendarTransitionAnimationName = transitionName" />
 
     <div class="days-grid">
       <div class="container">
@@ -105,9 +63,8 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
 
-import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
+import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeCalendarNavigation.vue"
 import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
-import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue";
 import Field from "./Field.vue";
 import AtomLoader from "@/components/atoms/AtomLoader.vue";
 import TheFieldModal from "./FieldModal/TheFieldModal.vue";
@@ -123,9 +80,8 @@ import { useMainStore } from "../../stores/MainStore";
 export default defineComponent({
   name: "TheCalendar",
   components: {
-    AtomNavigationButton,
+    MoleculeCalendarNavigaion,
     TheNameDayOfWeek,
-    AtomCalendarTitle,
     Field,
     AtomLoader,
     TheFieldModal,
@@ -146,6 +102,8 @@ export default defineComponent({
     const { getLoadingCalendar } = storeToRefs(useMainStore());
     const { switchShowModalDetailsOffDay } = useMainStore();
 
+    const calendarTransitionAnimationName = ref('');
+
     watch(
       dataStore,
       async () => {
@@ -163,11 +121,6 @@ export default defineComponent({
       numberMonth: getMounth.value.toString(),
       numberYear: getYear.value.toString(),
     });
-
-    let calendarTransitionAnimationName = ref("");
-    const setTransitionName = (transitionName: string) => {
-      calendarTransitionAnimationName.value = transitionName;
-    };
 
     let indexOfSelectedDay = ref(0);
     const showThisDay = (nrDay: number) => {
@@ -189,7 +142,6 @@ export default defineComponent({
       getSortedDays,
       getLoadingCalendar,
       calendarTransitionAnimationName,
-      setTransitionName,
       indexOfSelectedDay,
       showThisDay,
     };
@@ -208,20 +160,6 @@ $size-day-div: calc(100% / 7 - 5px);
   height: 100vh;
   padding: 5px;
   box-sizing: border-box;
-
-  &__nav {
-    // todo: Poprawic to ze przy granicy zmiany z desckt namobile nawigazja przeskakuje
-    @include flexbox;
-    @include justify-content(space-around);
-    @include flex-basis(40%);
-    width: 100%;
-    height: 30px;
-  }
-
-  &__title {
-    @include flex-basis(20%);
-    height: 30px;
-  }
 }
 
 .days-grid {
@@ -274,20 +212,6 @@ $size-day-div: calc(100% / 7 - 5px);
 @media only screen and (max-width: $small) {
   .calendar {
     gap: 20px;
-
-    &__nav {
-      @include flex-direction(column-reverse);
-      @include flex-basis(100%);
-      margin: 10px 0px;
-    }
-
-    &__nav--prev {
-      @include order(1);
-    }
-
-    &__title {
-      @include flex-basis(100%);
-    }
   }
 
   .days-grid {
