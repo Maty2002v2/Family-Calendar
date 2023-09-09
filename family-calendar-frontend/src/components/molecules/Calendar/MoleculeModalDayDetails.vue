@@ -49,7 +49,7 @@ import { defineComponent } from "vue";
 
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
-import MoleculeAccordion from "../../molecules/MoleculeAccordion.vue";
+import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomDeleteDayButton from "@/components/atoms//AtomDeleteDayButton.vue";
 import TheNewDayAccordion from "@/components/Calendar/FieldModal/TheNewDayAccordion.vue";
 

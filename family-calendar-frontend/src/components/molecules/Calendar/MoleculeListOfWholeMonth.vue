@@ -64,15 +64,15 @@
 import { defineComponent, ref } from "vue";
 
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
-import AtomBackdrop from '../atoms/AtomBackdrop.vue';
-import MoleculeAccordion from "../molecules/MoleculeAccordion.vue";
+import AtomBackdrop from '@/components/atoms/AtomBackdrop.vue';
+import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomDeleteDayButton from "@/components/atoms/AtomDeleteDayButton.vue";
 
 import { storeToRefs } from "pinia";
-import { useCalendarApiStore } from "../../stores/CalendarApiStore";
+import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 
 export default defineComponent({
-  name: "TheListOfWholeMonth",
+  name: "MoleculeListOfWholeMonth",
   components: {
     AtomTitle,
     AtomBackdrop,

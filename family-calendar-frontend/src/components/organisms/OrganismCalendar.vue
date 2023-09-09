@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <the-list-of-whole-month />
+    <molecule-list-of-whole-month />
 
     <teleport to="#modal">
       <molecule-modal-day-details
@@ -69,7 +69,7 @@ import Field from "@/components/Calendar/Field.vue";
 import AtomLoader from "@/components/atoms/AtomLoader.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
-import TheListOfWholeMonth from "@/components/Calendar/TheListOfWholeMonth.vue";
+import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
 import AppPnotify from "../AppPnotify.vue";
 
 import { storeToRefs } from "pinia";
@@ -86,7 +86,7 @@ export default defineComponent({
     AtomLoader,
     MoleculeModalDayDetails,
     MoleculeModalOfNewCalendar,
-    TheListOfWholeMonth,
+    MoleculeListOfWholeMonth,
     AppPnotify,
   },
   async setup() {
