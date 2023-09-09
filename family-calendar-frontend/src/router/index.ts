@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import PageInitCalendar from "@/pages/PageInitCalendar.vue";
-import CalendarView from "../views/CalendarView.vue";
+import PageCalendar from "@/pages/PageCalendar.vue";
 import NotFound from "../views/NotFound.vue";
 
 import { useMainStore } from "@/stores/MainStore";
@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/calendar/:calendarId",
     name: "calendar",
-    component: CalendarView,
+    component: PageCalendar,
     props: true,
     beforeEnter: (to, from, next) => {
       const { switchIncorrectCodeEntered } = useMainStore();
