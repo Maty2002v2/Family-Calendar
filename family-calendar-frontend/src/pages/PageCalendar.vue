@@ -17,7 +17,7 @@ import TheCalendar from "../components/Calendar/TheCalendar.vue"; // @ is an ali
 import AtomLoader from "@/components/atoms/AtomLoader.vue"; // @ is an alias to /src
 
 export default defineComponent({
-  name: "CalendarView",
+  name: "PageCalendar",
   components: {
     TheCalendar,
     AtomLoader,
