@@ -51,7 +51,7 @@
       />
     </teleport>
     <teleport to="#modal">
-      <the-modal-of-new-calendar />
+      <molecule-modal-of-new-calendar />
     </teleport>
 
     <teleport to="#pnotify">
@@ -68,7 +68,7 @@ import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
 import Field from "./Field.vue";
 import AtomLoader from "@/components/atoms/AtomLoader.vue";
 import TheFieldModal from "./FieldModal/TheFieldModal.vue";
-import TheModalOfNewCalendar from "./TheModalOfNewCalendar.vue";
+import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
 import TheListOfWholeMonth from ".//TheListOfWholeMonth.vue";
 import AppPnotify from "../AppPnotify.vue";
 
@@ -85,7 +85,7 @@ export default defineComponent({
     Field,
     AtomLoader,
     TheFieldModal,
-    TheModalOfNewCalendar,
+    MoleculeModalOfNewCalendar,
     TheListOfWholeMonth,
     AppPnotify,
   },

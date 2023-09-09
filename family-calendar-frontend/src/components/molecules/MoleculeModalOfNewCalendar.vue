@@ -40,7 +40,7 @@ import { useMainStore } from '../../stores/MainStore';
 import { useCopyText } from '../../composables/useCopyText';
 
 export default defineComponent({
-	name: 'TheModalOfNewCalendar',
+	name: 'MoleculeModalOfNewCalendar',
 	components: {
 		AtomTitle,
 		AtomPillButton,
