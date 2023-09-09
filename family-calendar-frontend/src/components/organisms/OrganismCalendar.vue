@@ -64,21 +64,21 @@
 import { defineComponent, ref, computed, watch } from "vue";
 
 import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeCalendarNavigation.vue"
-import TheNameDayOfWeek from "./TheNameDayOfWeek.vue";
-import Field from "./Field.vue";
+import TheNameDayOfWeek from "@/components/Calendar/TheNameDayOfWeek.vue";
+import Field from "@/components/Calendar/Field.vue";
 import AtomLoader from "@/components/atoms/AtomLoader.vue";
-import TheFieldModal from "./FieldModal/TheFieldModal.vue";
+import TheFieldModal from "@/components/Calendar/FieldModal/TheFieldModal.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
-import TheListOfWholeMonth from ".//TheListOfWholeMonth.vue";
+import TheListOfWholeMonth from "@/components/Calendar/TheListOfWholeMonth.vue";
 import AppPnotify from "../AppPnotify.vue";
 
 import { storeToRefs } from "pinia";
-import { useCalendarApiStore } from "../../stores/CalendarApiStore";
-import { useDateStore } from "../../stores/DateStore";
-import { useMainStore } from "../../stores/MainStore";
+import { useCalendarApiStore } from "@/stores/CalendarApiStore";
+import { useDateStore } from "@/stores/DateStore";
+import { useMainStore } from "@/stores/MainStore";
 
 export default defineComponent({
-  name: "TheCalendar",
+  name: "OrganismCalendar",
   components: {
     MoleculeCalendarNavigaion,
     TheNameDayOfWeek,
