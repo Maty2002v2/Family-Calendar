@@ -1,11 +1,9 @@
 <template>
-  <div class="repeat-selection-checkbox">
-    <div class="repeat-selection-checkbox__title">
-      <label class="repeat-selection-checkbox__label"
-        >Do you repeat every year</label
-      >
-    </div>
-    <div class="repeat-selection-checkbox__content">
+  <div class="molecule-repeat-every-year-checkbox">
+    <label class="molecule-repeat-every-year-checkbox__label"
+      >Do you repeat every year</label
+    >
+    <div class="molecule-repeat-every-year-checkbox__content">
       <molecule-checkbox-form firstOption="Disposable" secoundOption="Repeat every year" @valueToggle="(value) => switchValue = value"/>
     </div>
   </div>
@@ -17,7 +15,7 @@ import { defineComponent, ref, watchEffect } from "vue";
 import MoleculeCheckboxForm from "@/components/molecules/MoleculeCheckboxForm.vue";
 
 export default defineComponent({
-  name: "TheRepeatSelectionCheckbox",
+  name: "MoleculeRepeatEveryYearCheckbox",
   emits: ["getCheckboxValue"],
   components: {
     MoleculeCheckboxForm
@@ -33,7 +31,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.repeat-selection-checkbox {
+.molecule-repeat-every-year-checkbox {
   @include flexbox;
   @include flex-direction(column);
   padding: 2px;
@@ -41,12 +39,9 @@ export default defineComponent({
 
   letter-spacing: 1px;
 
-  &__title {
-    margin-bottom: 10px;
-  }
-
   &__label {
     @include flex-basis(100%);
+    margin-bottom: 10px;
   }
 
   &__content {
@@ -56,7 +51,7 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: $small) {
-  .repeat-selection-checkbox {
+  .molecule-repeat-every-year-checkbox {
     &__content {
       @include flex-centering(flex-start, stretch);
       @include flex-direction(column);

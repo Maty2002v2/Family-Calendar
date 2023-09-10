@@ -33,7 +33,7 @@
               :showCounter="true"
             />
             <div class="form-repeat-selection">
-              <the-repeat-selection-checkbox @getCheckboxValue="setToRepeat" />
+              <molecule-repeat-every-year-checkbox @getCheckboxValue="setToRepeat" />
             </div>
             <div class="form__icon-selection-container">
               <the-icon-selection
@@ -66,7 +66,7 @@ import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
 import TheIconSelection from "@/components/Calendar/FieldModal/IconSelection/TheIconSelection.vue";
 import MoleculeInputWithLabel from "@/components/molecules/MoleculeInputWithLabel.vue";
-import TheRepeatSelectionCheckbox from "@/components/Calendar/FieldModal/TheRepeatSelectionCheckbox.vue";
+import MoleculeRepeatEveryYearCheckbox from "@/components/molecules/Calendar/MoleculeRepeatEveryYearCheckbox.vue";
 
 import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "../../../stores/CalendarApiStore";
@@ -89,7 +89,7 @@ export default defineComponent({
     MoleculeAccordion,
     AtomPillButton,
     TheIconSelection,
-    TheRepeatSelectionCheckbox,
+    MoleculeRepeatEveryYearCheckbox,
   },
   setup(props) {
     const { getCalendarHash } = storeToRefs(useCalendarApiStore());
