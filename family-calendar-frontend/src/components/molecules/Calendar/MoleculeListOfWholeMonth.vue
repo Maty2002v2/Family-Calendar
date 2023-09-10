@@ -1,15 +1,15 @@
 <template>
   <div style="z-index: 2">
     <atom-backdrop :isShow="showList && getDays.length > 0" @clickBackdrop="showList = false" />
-    <div class="list-of-whole-month">
+    <div class="molecule-list-of-whole-month">
       <Transition
         enter-active-class="animate__animated animate__faster animate__bounceInRight"
         leave-active-class="animate__animated animate__faster animate__bounceOut"
       >
         <div
           v-show="showList && getDays.length > 0"
-          class="list list-of-whole-month__list"
-          :class="[showList ? 'list list-of-whole-month__list--active' : '']"
+          class="list molecule-list-of-whole-month__list"
+          :class="[showList ? 'list molecule-list-of-whole-month__list--active' : '']"
         >
           <molecule-accordion 
             v-for="(specialDay, index) in getDays" 
@@ -42,7 +42,7 @@
         </div>
       </Transition>
       <div
-        class="list-of-whole-month__button"
+        class="molecule-list-of-whole-month__button"
         @click="showList = !showList"
         v-show="getDays.length"
       >
@@ -50,7 +50,7 @@
           enter-active-class="animate__animated animate__faster animate__bounceIn"
           leave-active-class="animate__animated animate__faster animate__bounceOut"
         >
-          <span class="list-of-whole-month__counter" v-show="!showList">{{
+          <span class="molecule-list-of-whole-month__counter" v-show="!showList">{{
             getDays.length
           }}</span>
         </Transition>
@@ -99,7 +99,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.list-of-whole-month {
+.molecule-list-of-whole-month {
   @include position($position: fixed, $right: 10px, $bottom: 10px);
   width: 50px;
   height: 50px;
@@ -194,7 +194,7 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: $small) {
-  .list-of-whole-month {
+  .molecule-list-of-whole-month {
     &__button {
       transform: translate(0%, 0%);
     }
