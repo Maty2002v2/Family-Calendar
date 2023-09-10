@@ -12,11 +12,10 @@
             :showUnderline="true"
           >
             <template v-slot:title>
-              <i
-                class="accordions__icon icon-demo"
-                :class="[specialDay.icon_name]"
+              <atom-icon
+                :class="['accordions__icon', specialDay.icon_name]"
                 :style="{ backgroundColor: specialDay.icon_color }"
-              ></i>
+              />
               <span class="accordions__title">
                 {{ specialDay.title }}
               </span>
@@ -47,6 +46,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
@@ -70,6 +70,7 @@ export default defineComponent({
     },
   },
   components: {
+    AtomIcon,
     AtomTitle,
     MoleculeModal,
     MoleculeAccordion,

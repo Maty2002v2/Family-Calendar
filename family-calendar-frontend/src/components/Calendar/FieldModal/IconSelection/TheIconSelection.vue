@@ -3,8 +3,9 @@
     <article class="icon-selection__content">
       <section
         class="icon-selection__preview"
-        v-html="previewTemplate"
-      ></section>
+      >
+        <atom-icon :class="['icon-selection__icon', selectedIcon]" :style="{'background-color': selectedColor}" />
+      </section>
       <section class="icon-selection__choice">
         <selection-popup
           title="icon"
@@ -13,7 +14,7 @@
         >
           <template #item="{ name }">
             <div class="icon-selection__item-list">
-              <i class="icon-demo" :class="[name]"></i>
+              <atom-icon :class="[name]" />
             </div>
           </template>
         </selection-popup>
@@ -38,11 +39,13 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
 
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import SelectionPopup from "./SelectionPopup.vue";
 
 export default defineComponent({
   name: "TheIconSelection",
   components: {
+    AtomIcon,
     SelectionPopup,
   },
   emits: ["getIconDay"],
@@ -106,11 +109,6 @@ export default defineComponent({
     const selectedIcon = ref("icon-briefcase");
     const selectedColor = ref("#DE5858");
 
-    const previewTemplate = computed(
-      () =>
-        `<i class="icon-demo icon-selection__icon ${selectedIcon.value}" style="background-color: ${selectedColor.value}"></i>`
-    );
-
     watch([selectedIcon, selectedColor], ([newIcon, newColor]) => {
       emit("getIconDay", { name: newIcon, color: newColor });
     });
@@ -120,7 +118,6 @@ export default defineComponent({
       colorList,
       selectedIcon,
       selectedColor,
-      previewTemplate,
     };
   },
 });

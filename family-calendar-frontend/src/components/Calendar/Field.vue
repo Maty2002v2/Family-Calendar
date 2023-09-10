@@ -1,16 +1,16 @@
 <template>
   <div class="field">
-    <div class="field__p">
+    <p class="field__p">
       {{ nrDay }}
-    </div>
+    </p>
     <div v-if="specialDayList.length" class="icons field__icons">
-      <i
+      <atom-icon
         v-for="(specialDay, index) in theFirstThreeElements"
         :key="index"
-        class="icon-demo icons__i animate__animated animate__pulse animate__faster"
+        class="icons__i animate__animated animate__pulse animate__faster"
         :class="[specialDay.icon_name, `animate__delay-${index + 1}s`]"
         :style="{ backgroundColor: specialDay.icon_color }"
-      ></i>
+      />
       <span
         v-if="specialDayList.length > 3"
         class="icons__span animate__animated animate__pulse animate__slower animate__infinite"
@@ -20,11 +20,16 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, computed } from "vue";
+
+import AtomIcon from '@/components/atoms/AtomIcon.vue';
 
 export default defineComponent({
   name: "CalendarField",
+  components: {
+    AtomIcon
+  },  
   props: {
     nrDay: {
       type: Number,

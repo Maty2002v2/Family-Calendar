@@ -23,11 +23,10 @@
                   specialDay.number_day
                 )
               }}</span>
-              <i
-                class="list__icon icon-demo"
-                :class="[specialDay.icon_name]"
+              <atom-icon
+                :class="['list__icon', specialDay.icon_name]"
                 :style="{ backgroundColor: specialDay.icon_color }"
-              ></i>
+              />
             </template>
             <template v-slot:content>
               <div class="list__content">
@@ -63,6 +62,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import AtomBackdrop from '@/components/atoms/AtomBackdrop.vue';
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
@@ -74,6 +74,7 @@ import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 export default defineComponent({
   name: "MoleculeListOfWholeMonth",
   components: {
+    AtomIcon,
     AtomTitle,
     AtomBackdrop,
     MoleculeAccordion,
