@@ -37,7 +37,7 @@
         </div>
       </section>
       <section class="create-holiday">
-        <the-new-day-accordion :selectedDayNumber="selectedDayNumber" />
+        <molecule-new-day-accordion :selectedDayNumber="selectedDayNumber" />
       </section>
     </article>
   </molecule-modal>
@@ -51,7 +51,7 @@ import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomDeleteDayButton from "@/components/atoms//AtomDeleteDayButton.vue";
-import TheNewDayAccordion from "@/components/Calendar/FieldModal/TheNewDayAccordion.vue";
+import MoleculeNewDayAccordion from "@/components/molecules/Calendar/MoleculeNewDayAccordion.vue";
 
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/stores/MainStore";
@@ -74,7 +74,7 @@ export default defineComponent({
     AtomTitle,
     MoleculeModal,
     MoleculeAccordion,
-    TheNewDayAccordion,
+    MoleculeNewDayAccordion,
     AtomDeleteDayButton,
   },
   setup() {

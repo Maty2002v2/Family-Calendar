@@ -1,20 +1,20 @@
 <template>
-  <div class="create-holiday">
+  <div class="molecule-new-day-accordion">
     <molecule-accordion
       :accordionHeaderStyle="accordionHeaderStyles"
       :showContent="getShowNewDayForm"
       @update:showContent="(newValue) => switchShowNewDayForm(newValue)"
     >
       <template v-slot:title>
-        <atom-title tag="h2" content="Add a new day" class="create-holiday__h2" />
+        <atom-title tag="h2" content="Add a new day" class="molecule-new-day-accordion__h2" />
       </template>
       <template v-slot:char-toggle>
         <atom-plus-minus-switch class="char-toggle" :isOpen="getShowNewDayForm" />
       </template>
 
       <template v-slot:content>
-        <div class="create-holiday__content">
-          <form class="form create-holiday__form">
+        <div class="molecule-new-day-accordion__content">
+          <form class="form molecule-new-day-accordion__form">
             <molecule-input-with-label
               v-model="title"
               :maxLength="15"
@@ -64,9 +64,9 @@ import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeTextareaWithLabel from "@/components/molecules/MoleculeTextareaWithLabel.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
-import TheIconSelection from "./IconSelection/TheIconSelection.vue";
+import TheIconSelection from "@/components/Calendar/FieldModal/IconSelection/TheIconSelection.vue";
 import MoleculeInputWithLabel from "@/components/molecules/MoleculeInputWithLabel.vue";
-import TheRepeatSelectionCheckbox from "./TheRepeatSelectionCheckbox.vue";
+import TheRepeatSelectionCheckbox from "@/components/Calendar/FieldModal/TheRepeatSelectionCheckbox.vue";
 
 import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "../../../stores/CalendarApiStore";
@@ -74,7 +74,7 @@ import { useDateStore } from "../../../stores/DateStore";
 import { useMainStore } from "../../../stores/MainStore";
 
 export default defineComponent({
-  name: "TheNewDayAccordion",
+  name: "MoleculeNewDayAccordion",
   props: {
     selectedDayNumber: {
       type: Number,
@@ -143,9 +143,6 @@ export default defineComponent({
 
     const setToRepeat = (value: boolean) => (toRepeat.value = value);
 
-    const start = (el: HTMLElement) => (el.style.height = el.scrollHeight + "px");
-    const end = (el: HTMLElement) => (el.style.height = "");
-
     return {
       showAccordionContent,
       getShowNewDayForm,
@@ -156,8 +153,6 @@ export default defineComponent({
       accordionHeaderStyles,
       switchShowNewDayForm,
       setToRepeat,
-      start,
-      end,
       addDay,
     };
   },
@@ -165,7 +160,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.create-holiday {
+.molecule-new-day-accordion {
   &__header {
     position: relative;
     padding: 20px;
@@ -239,19 +234,5 @@ export default defineComponent({
       justify-content: center;
     }
   }
-}
-
-.accordion-enter-active,
-.accordion-leave-active {
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
-
-.accordion-enter-from,
-.accordion-leave-to {
-  height: 0 !important;
-  opacity: 0;
-  margin-top: 0px;
-  margin-bottom: 0px;
 }
 </style>
