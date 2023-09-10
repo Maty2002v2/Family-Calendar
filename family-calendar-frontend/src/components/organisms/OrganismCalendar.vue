@@ -3,9 +3,7 @@
     <molecule-calendar-navigaion @setTransitionName="(transitionName) => calendarTransitionAnimationName = transitionName" />
 
     <div class="days-grid">
-      <div class="container">
-        <molecule-names-days-of-week :totalNumberFields="totalNumberFields" />
-      </div>
+      <molecule-names-days-of-week :totalNumberFields="totalNumberFields" />
 
       <atom-animated-wrapper
         class="container animate__fast"
@@ -36,10 +34,8 @@
           />
         </div>
       </atom-animated-wrapper>
-
-      <div v-else style="width: 100%">
-        <atom-loader />
-      </div>
+      
+      <atom-loader v-else/>
     </div>
 
     <molecule-list-of-whole-month />
