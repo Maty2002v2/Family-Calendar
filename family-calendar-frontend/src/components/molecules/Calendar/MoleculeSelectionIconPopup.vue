@@ -1,7 +1,7 @@
 <template>
-  <div class="selection-popup" ref="popup">
+  <div class="molecule-selection-icon-popup" ref="popup">
     <div
-      class="selection-popup__title no-select"
+      class="molecule-selection-icon-popup__title no-select"
       @click.prevent="showList = !showList"
     >
       {{ title }}
@@ -10,12 +10,12 @@
       enter-active-class="animate__animated animate__faster animate__bounceIn"
       leave-active-class="animate__animated animate__faster animate__bounceOut"
     >
-      <div v-show="showList" class="selection-popup__list">
-        <ul class="selection-popup__ul">
+      <div v-show="showList" class="molecule-selection-icon-popup__list">
+        <ul class="molecule-selection-icon-popup__ul">
           <li
             v-for="(item, index) in listItem"
             :key="index"
-            class="selection-popup__li"
+            class="molecule-selection-icon-popup__li"
             @click="selectAListItem(item.name)"
           >
             <slot name="item" v-bind="item" />
@@ -30,7 +30,7 @@
 import { defineComponent, ref, onMounted, onUnmounted } from "vue";
 
 export default defineComponent({
-  name: "SelectionPopup",
+  name: "MoleculeSelectionIconPopup",
   props: {
     title: {
       type: String,
@@ -77,7 +77,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.selection-popup {
+.molecule-selection-icon-popup {
   position: relative;
 
   &__title {

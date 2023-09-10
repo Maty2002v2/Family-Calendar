@@ -1,52 +1,50 @@
 <template>
-  <div class="icon-selection">
-    <article class="icon-selection__content">
-      <section
-        class="icon-selection__preview"
+  <article class="icon-selection">
+    <section
+      class="icon-selection__preview"
+    >
+      <atom-icon :class="['icon-selection__icon', selectedIcon]" :style="{'background-color': selectedColor}" />
+    </section>
+    <section class="icon-selection__choice">
+      <molecule-selection-icon-popup
+        title="icon"
+        :listItem="iconNameList"
+        @getValue="(element) => (selectedIcon = element)"
       >
-        <atom-icon :class="['icon-selection__icon', selectedIcon]" :style="{'background-color': selectedColor}" />
-      </section>
-      <section class="icon-selection__choice">
-        <selection-popup
-          title="icon"
-          :listItem="iconNameList"
-          @getValue="(element) => (selectedIcon = element)"
-        >
-          <template #item="{ name }">
-            <div class="icon-selection__item-list">
-              <atom-icon :class="[name]" />
-            </div>
-          </template>
-        </selection-popup>
+        <template #item="{ name }">
+          <div class="icon-selection__item-list">
+            <atom-icon :class="[name]" />
+          </div>
+        </template>
+      </molecule-selection-icon-popup>
 
-        <selection-popup
-          title="color"
-          :listItem="colorList"
-          @getValue="(element) => (selectedColor = element)"
-        >
-          <template #item="{ name }">
-            <div
-              class="icon-selection__item-list"
-              :style="{ background: name }"
-            ></div>
-          </template>
-        </selection-popup>
-      </section>
-    </article>
-  </div>
+      <molecule-selection-icon-popup
+        title="color"
+        :listItem="colorList"
+        @getValue="(element) => (selectedColor = element)"
+      >
+        <template #item="{ name }">
+          <div
+            class="icon-selection__item-list"
+            :style="{ background: name }"
+          ></div>
+        </template>
+      </molecule-selection-icon-popup>
+    </section>
+  </article>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
-import SelectionPopup from "./SelectionPopup.vue";
+import MoleculeSelectionIconPopup from "@/components/molecules/Calendar/MoleculeSelectionIconPopup.vue";
 
 export default defineComponent({
   name: "TheIconSelection",
   components: {
     AtomIcon,
-    SelectionPopup,
+    MoleculeSelectionIconPopup,
   },
   emits: ["getIconDay"],
   setup(props, { emit }) {
@@ -127,12 +125,9 @@ export default defineComponent({
 .icon-selection {
   width: 100%;
   height: 100%;
-
-  &__content {
-    @include flexbox;
-    @include align-items(center);
-    gap: 20px;
-  }
+  @include flexbox;
+  @include align-items(center);
+  gap: 20px;
 
   &__preview {
     @include flex-basis(50%);
