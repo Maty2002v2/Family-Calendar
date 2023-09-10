@@ -14,7 +14,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import TheCalendar from "@/components/organisms/OrganismCalendar.vue"; // @ is an alias to /src
-import AtomLoader from "@/components/atoms/AtomLoader.vue"; // @ is an alias to /src
+import AtomLoader from "@/components/molecules/MoleculeLoader.vue"; // @ is an alias to /src
 
 export default defineComponent({
   name: "PageCalendar",

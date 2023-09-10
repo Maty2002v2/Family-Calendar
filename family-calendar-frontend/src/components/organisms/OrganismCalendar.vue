@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar animate__animated animate__fadeInDown">
+  <atom-animated-wrapper class="calendar animate__fadeInDown">
     <molecule-calendar-navigaion @setTransitionName="(transitionName) => calendarTransitionAnimationName = transitionName" />
 
     <div class="days-grid">
@@ -7,8 +7,8 @@
         <molecule-names-days-of-week :totalNumberFields="totalNumberFields" />
       </div>
 
-      <div
-        class="container animate__animated animate__fast"
+      <atom-animated-wrapper
+        class="container animate__fast"
         :class="[calendarTransitionAnimationName]"
         v-if="!getLoadingCalendar"
       >
@@ -35,7 +35,7 @@
             @click="showThisDay(day - 1)"
           />
         </div>
-      </div>
+      </atom-animated-wrapper>
 
       <div v-else style="width: 100%">
         <atom-loader />
@@ -57,16 +57,17 @@
     <teleport to="#pnotify">
       <app-pnotify />
     </teleport>
-  </div>
+  </atom-animated-wrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
 
+import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeCalendarNavigation.vue"
 import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
 import MoleculeDayField from "@/components/molecules/Calendar/MoleculeDayField.vue";
-import AtomLoader from "@/components/atoms/AtomLoader.vue";
+import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
@@ -80,6 +81,7 @@ import { useMainStore } from "@/stores/MainStore";
 export default defineComponent({
   name: "OrganismCalendar",
   components: {
+    AtomAnimatedWrapper,
     MoleculeCalendarNavigaion,
     MoleculeNamesDaysOfWeek,
     MoleculeDayField,

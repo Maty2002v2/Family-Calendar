@@ -7,15 +7,17 @@
       <atom-icon
         v-for="(specialDay, index) in theFirstThreeElements"
         :key="index"
-        class="icons__i animate__animated animate__pulse animate__faster"
+        class="icons__i animate__pulse animate__faster"
         :class="[specialDay.icon_name, `animate__delay-${index + 1}s`]"
         :style="{ backgroundColor: specialDay.icon_color }"
       />
-      <span
+      
+      <atom-animated-wrapper
         v-if="specialDayList.length > 3"
         class="icons__span animate__animated animate__pulse animate__slower animate__infinite"
-        >...</span
-      >
+        >
+          ...
+        </atom-animated-wrapper>
     </div>
   </div>
 </template>
@@ -23,12 +25,14 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 
+import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import AtomIcon from '@/components/atoms/AtomIcon.vue';
 
 export default defineComponent({
   name: "MoleculeDayField",
   components: {
-    AtomIcon
+    AtomIcon,
+    AtomAnimatedWrapper
   },  
   props: {
     nrDay: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="animate__animated animate__fadeIn">
+  <atom-animated-wrapper class="animate__fadeIn">
     <div class="loadingio-spinner-double-ring-j4uqqjzx04">
       <div class="ldio-udrx6d3rqep">
         <div></div>
@@ -8,14 +8,19 @@
         <div><div></div></div>
       </div>
     </div>
-  </div>
+  </atom-animated-wrapper>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 
+import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
+
 export default defineComponent({
-  name: "AtomLoader",
+  name: "MoleculeLoader",
+  components: {
+    AtomAnimatedWrapper
+  }
 });
 </script>
 

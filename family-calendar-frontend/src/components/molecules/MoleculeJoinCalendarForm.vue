@@ -4,18 +4,22 @@
     <atom-square-button variant="btn-rectangle--gradient" @click="pushWithQuery">
       join
     </atom-square-button>
-    <span
-      class="molecule-join-calendar-form__invalid-code animate__animated"
+
+    <atom-animated-wrapper
+      class="molecule-join-calendar-form__invalid-code"
       :class="{
         animate__rubberBand: getIncorrectCodeEntered,
         animate__bounceOut: !getIncorrectCodeEntered,
       }"
-      >BAD CODE</span
-    >
+      >
+        BAD CODE
+      </atom-animated-wrapper>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
+
+import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import MoleculeInputFloatingLabel from "@/components/molecules/MoleculeInputFloatingLabel.vue"
 import AtomSquareButton from "@/components/atoms/AtomSquareButton.vue";
 
@@ -29,6 +33,7 @@ export default defineComponent({
   components: {
     MoleculeInputFloatingLabel,
     AtomSquareButton,
+    AtomAnimatedWrapper,
   },
   setup() {
     const { getIncorrectCodeEntered } = storeToRefs(useMainStore());
