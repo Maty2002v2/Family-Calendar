@@ -24,7 +24,7 @@
               <span class="accordions__content">
                 {{ specialDay.description }}
               </span>
-              <atom-delete-day-button class="delete-button" :id="specialDay.id" />
+              <molecule-delete-day-button class="delete-button" :id="specialDay.id" />
             </template>
           </molecule-accordion>
         </div>
@@ -50,7 +50,7 @@ import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
-import AtomDeleteDayButton from "@/components/atoms//AtomDeleteDayButton.vue";
+import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayButton.vue";
 import MoleculeNewDayAccordion from "@/components/molecules/Calendar/MoleculeNewDayAccordion.vue";
 
 import { storeToRefs } from "pinia";
@@ -75,7 +75,7 @@ export default defineComponent({
     MoleculeModal,
     MoleculeAccordion,
     MoleculeNewDayAccordion,
-    AtomDeleteDayButton,
+    MoleculeDeleteDayButton,
   },
   setup() {
     const { getShowModalDetailsOffDay } = storeToRefs(useMainStore());

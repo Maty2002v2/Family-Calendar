@@ -35,7 +35,7 @@
                   {{ specialDay.description }}
                 </span>
               </div>
-              <atom-delete-day-button class="delete-button" :id="specialDay.id" />
+              <molecule-delete-day-button class="delete-button" :id="specialDay.id" />
             </template>
           </molecule-accordion>
         </div>
@@ -53,7 +53,7 @@
             getDays.length
           }}</span>
         </Transition>
-        <i class="demo-icon icon-calendar"></i>
+        <atom-icon class="icon-calendar" />
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@ import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import AtomBackdrop from '@/components/atoms/AtomBackdrop.vue';
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
-import AtomDeleteDayButton from "@/components/atoms/AtomDeleteDayButton.vue";
+import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayButton.vue";
 
 import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "@/stores/CalendarApiStore";
@@ -78,7 +78,7 @@ export default defineComponent({
     AtomTitle,
     AtomBackdrop,
     MoleculeAccordion,
-    AtomDeleteDayButton,
+    MoleculeDeleteDayButton,
   },
   setup() {
     const { getDays } = storeToRefs(useCalendarApiStore());

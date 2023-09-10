@@ -1,9 +1,9 @@
 <template>
-  <div class="delete-button">
-    <i
-      class="delete-button__icon demo-icon icon-trash-empty"
+  <div class="molecule-delete-day-button">
+    <atom-icon
+      class="molecule-delete-day-button__icon demo-icon icon-trash-empty"
       @click="eraseDay"
-    ></i>
+    ></atom-icon>
   </div>
 </template>
 
@@ -12,8 +12,13 @@ import { defineComponent } from "vue";
 
 import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+
 export default defineComponent({
-  name: "AtomDeleteDayButton",
+  name: "MoleculeDeleteDayButton",
+  components: {
+    AtomIcon
+  },
   props: {
     id: {
       type: String,
@@ -31,7 +36,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.delete-button {
+.molecule-delete-day-button {
   margin-top: 10px;
   text-align: right;
 
