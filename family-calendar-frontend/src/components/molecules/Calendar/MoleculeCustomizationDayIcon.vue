@@ -41,7 +41,7 @@ import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import MoleculeSelectionIconPopup from "@/components/molecules/Calendar/MoleculeSelectionIconPopup.vue";
 
 export default defineComponent({
-  name: "TheIconSelection",
+  name: "MoleculeCustomizationDayIcon",
   components: {
     AtomIcon,
     MoleculeSelectionIconPopup,

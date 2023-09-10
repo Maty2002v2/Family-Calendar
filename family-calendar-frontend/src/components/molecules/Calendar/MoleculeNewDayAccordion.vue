@@ -36,7 +36,7 @@
               <molecule-repeat-every-year-checkbox @getCheckboxValue="setToRepeat" />
             </div>
             <div class="form__icon-selection-container">
-              <the-icon-selection
+              <molecule-customization-day-icon
                 class="form__icon-selection"
                 @getIconDay="(value) => (iconDay = value)"
               />
@@ -64,7 +64,7 @@ import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeTextareaWithLabel from "@/components/molecules/MoleculeTextareaWithLabel.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import AtomPillButton from "../../atoms/AtomPillButton.vue";
-import TheIconSelection from "@/components/Calendar/FieldModal/IconSelection/TheIconSelection.vue";
+import MoleculeCustomizationDayIcon from "@/components/molecules/Calendar/MoleculeCustomizationDayIcon.vue";
 import MoleculeInputWithLabel from "@/components/molecules/MoleculeInputWithLabel.vue";
 import MoleculeRepeatEveryYearCheckbox from "@/components/molecules/Calendar/MoleculeRepeatEveryYearCheckbox.vue";
 
@@ -88,7 +88,7 @@ export default defineComponent({
     MoleculeInputWithLabel,
     MoleculeAccordion,
     AtomPillButton,
-    TheIconSelection,
+    MoleculeCustomizationDayIcon,
     MoleculeRepeatEveryYearCheckbox,
   },
   setup(props) {
