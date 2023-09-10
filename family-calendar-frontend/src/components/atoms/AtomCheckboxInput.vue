@@ -25,7 +25,7 @@ export default defineComponent({
   position: relative;
   display: inline-block;
   max-width: 80px;
-  height: 34px;
+  min-height: 34px;
 
   &__input {
     opacity: 0;
