@@ -30,7 +30,7 @@
             </template>
             <template v-slot:content>
               <div class="list__content">
-                <atom-title tag="h2" content="specialDay.title" class="list__title" />
+                <atom-title tag="h2" :content="specialDay.title" class="list__title" />
                 <span class="list__description">
                   {{ specialDay.description }}
                 </span>
