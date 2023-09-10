@@ -29,7 +29,7 @@
               new Date().getFullYear() === getYear,
           }"
         >
-          <field
+          <molecule-day-field
             :nrDay="day"
             :specialDayList="getSortedDays[day - 1]"
             @click="showThisDay(day - 1)"
@@ -65,7 +65,7 @@ import { defineComponent, ref, computed, watch } from "vue";
 
 import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeCalendarNavigation.vue"
 import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
-import Field from "@/components/Calendar/Field.vue";
+import MoleculeDayField from "@/components/molecules/Calendar/MoleculeDayField.vue";
 import AtomLoader from "@/components/atoms/AtomLoader.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
@@ -82,7 +82,7 @@ export default defineComponent({
   components: {
     MoleculeCalendarNavigaion,
     MoleculeNamesDaysOfWeek,
-    Field,
+    MoleculeDayField,
     AtomLoader,
     MoleculeModalDayDetails,
     MoleculeModalOfNewCalendar,

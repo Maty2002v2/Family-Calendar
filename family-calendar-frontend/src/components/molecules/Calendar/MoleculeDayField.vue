@@ -1,9 +1,9 @@
 <template>
-  <div class="field">
-    <p class="field__p">
+  <div class="molecule-day-field">
+    <p class="molecule-day-field__p">
       {{ nrDay }}
     </p>
-    <div v-if="specialDayList.length" class="icons field__icons">
+    <div v-if="specialDayList.length" class="icons molecule-day-field__icons">
       <atom-icon
         v-for="(specialDay, index) in theFirstThreeElements"
         :key="index"
@@ -26,7 +26,7 @@ import { defineComponent, computed } from "vue";
 import AtomIcon from '@/components/atoms/AtomIcon.vue';
 
 export default defineComponent({
-  name: "CalendarField",
+  name: "MoleculeDayField",
   components: {
     AtomIcon
   },  
@@ -52,7 +52,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.field {
+.molecule-day-field {
   position: relative;
 
   @include flexbox;
@@ -121,7 +121,7 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: 300px) {
-  .field {
+  .molecule-day-field {
     font-size: 13px;
   }
 }
