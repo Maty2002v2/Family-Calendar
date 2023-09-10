@@ -1,7 +1,7 @@
 <template>
   <div class="molecule-delete-day-button">
     <atom-icon
-      class="molecule-delete-day-button__icon demo-icon icon-trash-empty"
+      class="molecule-delete-day-button__icon icon-trash-empty"
       @click="eraseDay"
     ></atom-icon>
   </div>

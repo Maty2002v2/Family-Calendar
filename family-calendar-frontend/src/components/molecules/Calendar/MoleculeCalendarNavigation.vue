@@ -5,11 +5,11 @@
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <i class="demo-icon icon-angle-double-left"></i>
+        <atom-icon class="icon-angle-double-left"/>
       </template>
 
       <template v-slot:mobile-icon>
-        <i class="demo-icon icon-angle-double-down"></i>
+        <atom-icon class="icon-angle-double-down"/>
       </template>
     </atom-navigation-button>
 
@@ -18,11 +18,11 @@
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <i class="demo-icon icon-left-open-mini"></i>
+        <atom-icon class="icon-left-open-mini"/>
       </template>
 
       <template v-slot:mobile-icon>
-        <i class="demo-icon icon-down-open-mini"></i>
+        <atom-icon class="icon-down-open-mini"/>
       </template>
     </atom-navigation-button>
   </nav>
@@ -35,10 +35,10 @@
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <i class="demo-icon icon-right-open-mini"></i>
+        <atom-icon class="icon-right-open-mini"/>
       </template>
       <template v-slot:mobile-icon>
-        <i class="demo-icon icon-up-open-mini"></i>
+        <atom-icon class="icon-up-open-mini"/>
       </template>
     </atom-navigation-button>
 
@@ -47,24 +47,26 @@
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <i class="demo-icon icon-angle-double-right"></i>
+        <atom-icon class="icon-angle-double-right"/>
       </template>
       <template v-slot:mobile-icon>
-        <i class="demo-icon icon-angle-double-up"></i>
+        <atom-icon class="icon-angle-double-up"/>
       </template>
     </atom-navigation-button>
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
 import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue";
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
 
 export default defineComponent({
   name: "MoleculeCalendarNavigation",
   components: {
+    AtomIcon,
     AtomNavigationButton,
     AtomCalendarTitle,
   },

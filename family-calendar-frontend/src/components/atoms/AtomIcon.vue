@@ -1,5 +1,5 @@
 <template>
-  <i class="icon-demo"></i>
+  <i class="demo-icon"></i>
 </template>
 
 <script lang="ts">

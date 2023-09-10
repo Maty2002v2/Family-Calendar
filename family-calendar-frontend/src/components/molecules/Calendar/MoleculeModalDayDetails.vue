@@ -33,7 +33,7 @@
       <section v-else class="info-about-lack-of-days">
         <atom-title tag="h2" content="You have a day off!" class="info-about-lack-of-days__h2" />
         <div class="info-about-lack-of-days__div">
-          <i class="demo-icon icon-ok"></i>
+          <atom-icon class="icon-ok" />
         </div>
       </section>
       <section class="create-holiday">
