@@ -9,10 +9,7 @@
         <atom-title tag="h2" content="Add a new day" class="create-holiday__h2" />
       </template>
       <template v-slot:char-toggle>
-        <span
-          class="create-holiday__char-toggle"
-          :class="{ 'create-holiday__char-toggle--active': getShowNewDayForm }"
-        ></span>
+        <atom-plus-minus-switch class="char-toggle" :isOpen="getShowNewDayForm" />
       </template>
 
       <template v-slot:content>
@@ -62,6 +59,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, reactive } from "vue";
 
+import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeTextareaWithLabel from "@/components/molecules/MoleculeTextareaWithLabel.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
@@ -84,6 +82,7 @@ export default defineComponent({
     },
   },
   components: {
+    AtomPlusMinusSwitch,
     AtomTitle,
     MoleculeTextareaWithLabel,
     MoleculeInputWithLabel,
@@ -181,50 +180,23 @@ export default defineComponent({
     margin: 0px;
     color: $white;
   }
-
-  %pseudo-elements {
-    content: "";
-    @include position(absolute, 50%, 0, 0, 50%);
-    width: 50%;
-    height: 2px;
-    border-radius: 20px;
-    background: $active-day;
-  }
-
-  &__char-toggle {
-    @include position($top: 50%, $right: 40px);
-
-    @include flexbox;
-    @include flex-centering;
-    aspect-ratio: 1/1;
-    width: 40px;
-    border-radius: 50%;
-
-    color: $active-day;
-
-    background: $white;
-
-    transform: translate(50%, -50%);
-
-    &:before {
-      @extend %pseudo-elements;
-      transform: translate(-50%, -50%);
-    }
-
-    &:after {
-      @extend %pseudo-elements;
-      transition: all 0.2s ease;
-      transform: translate(-50%, -50%) rotate(-90deg);
-    }
-
-    &--active {
-      &:after {
-        transform: translate(-50%, -50%) rotate(0deg);
-      }
-    }
-  }
 }
 
+.char-toggle {
+  @include position($top: 50%, $right: 40px);
+
+  @include flexbox;
+  @include flex-centering;
+  aspect-ratio: 1/1;
+  width: 40px;
+  border-radius: 50%;
+
+  color: $active-day;
+
+  background: $white;
+
+  transform: translate(50%, -50%);
+}
 .form {
   @include flexbox;
   @include justify-content(center);

@@ -10,10 +10,7 @@
       </div>
       <div>
         <slot name="char-toggle">
-          <div
-            class="header__default-char-toggle no-select"
-            :class="{ 'header__default-char-toggle--active': isShowContent }"
-          ></div>
+          <atom-plus-minus-switch class="header__default-char-toggle no-select" :isOpen="isShowContent" />
         </slot>
       </div>
     </section>
@@ -34,9 +31,14 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
 
+import AtomPlusMinusSwitch from "../atoms/AtomPlusMinusSwitch.vue";
+
 export default defineComponent({
   name: "MoleculeAccordion",
   emits: ['update:showContent'],
+  components: {
+    AtomPlusMinusSwitch
+  },
   props: {
     accordionHeaderStyle: {
       type: Object,
@@ -126,39 +128,12 @@ export default defineComponent({
     margin: 10px;
   }
 
-  %pseudo-elements {
-    content: "";
-    @include position(absolute, 50%, 0, 0, 50%);
-    height: 2px;
-    border-radius: 20px;
-    background: $active-day;
-  }
-
   &__default-char-toggle {
     position: relative;
     color: $color-day-field;
-    width: 15px;
-    height: 50px;
-    margin: 10px;
-
-    &:before {
-      @extend %pseudo-elements;
-      width: 100%;
-      transform: translate(-50%, -50%);
-    }
-
-    &:after {
-      @extend %pseudo-elements;
-      width: 90%;
-      transition: all 0.2s ease;
-      transform: translate(-50%, -50%) rotate(-90deg);
-    }
-  }
-
-  &__default-char-toggle--active {
-    &:after {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
+    height: 100%;
+    width: 30px;
+    margin: 0px 10px;
   }
 }
 </style>
