@@ -12,10 +12,7 @@
       >
         Disposable
       </p>
-      <label class="switch repeat-selection-checkbox__switch">
-        <input class="switch__input" type="checkbox" v-model="switchValue" />
-        <span class="switch__span round"></span>
-      </label>
+      <atom-checkbox-input class="repeat-selection-checkbox__switch" v-model:checked="switchValue" />
       <p
         class="repeat-selection-checkbox__p"
         :class="{ 'repeat-selection-checkbox__p--active': switchValue }"
@@ -29,9 +26,14 @@
 <script lang="ts">
 import { defineComponent, ref, watchEffect } from "vue";
 
+import AtomCheckboxInput from "@/components/atoms/AtomCheckboxInput.vue";
+
 export default defineComponent({
   name: "TheRepeatSelectionCheckbox",
   emits: ["getCheckboxValue"],
+  components: {
+    AtomCheckboxInput
+  },
   setup(props, { emit }) {
     const switchValue = ref(false);
 
@@ -70,61 +72,12 @@ export default defineComponent({
 
   &__p {
     @include flex-basis((100% / 3));
-    font-weight: 500;
+    font-weight: 600;
     white-space: nowrap;
     transition: all 0.3s ease;
 
     &--active {
-      font-weight: 600;
       color: $active-day;
-    }
-  }
-}
-.switch {
-  position: relative;
-  display: inline-block;
-  max-width: 80px;
-  height: 34px;
-
-  &__input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-
-    &:checked + .switch__span::before {
-      -webkit-transform: translateX(26px);
-      -ms-transform: translateX(26px);
-      left: 100%;
-      transform: translate(-110%, -50%);
-    }
-  }
-
-  &__span {
-    @include position($top: 0px, $right: 0px, $bottom: 0px, $left: 0px);
-
-    border: 2px solid $active-day;
-    border-radius: 34px;
-
-    background-color: $white;
-
-    cursor: pointer;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-
-    &::before {
-      content: "";
-
-      @include position($top: 50%, $left: 4%);
-
-      height: 26px;
-      width: 26px;
-      border-radius: 50%;
-
-      background-color: $active-day;
-
-      -webkit-transition: 0.4s;
-      transition: 0.4s;
-      transform: translateY(-50%);
     }
   }
 }
