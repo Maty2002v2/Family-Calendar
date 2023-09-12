@@ -51,7 +51,7 @@
     </teleport>
 
     <teleport to="#pnotify">
-      <app-pnotify />
+      <molecule-pnotify />
     </teleport>
   </atom-animated-wrapper>
 </template>
@@ -67,7 +67,7 @@ import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
-import AppPnotify from "../AppPnotify.vue";
+import MoleculePnotify from "@/components/molecules/MoleculePnotify.vue";
 
 import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "@/stores/CalendarApiStore";
@@ -85,7 +85,7 @@ export default defineComponent({
     MoleculeModalDayDetails,
     MoleculeModalOfNewCalendar,
     MoleculeListOfWholeMonth,
-    AppPnotify,
+    MoleculePnotify,
   },
   async setup() {
     const { getSortedDays, getCalendarHash } = storeToRefs(

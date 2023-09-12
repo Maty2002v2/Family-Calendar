@@ -4,41 +4,37 @@
     leave-active-class="animate__animated animate__faster animate__bounceOut"
   >
     <div
-      class="app-pnotify"
-      :class="`app-pnotify--${type}`"
+      class="molecule-pnotify"
+      :class="`molecule-pnotify--${type}`"
       v-show="getShowPnotify"
     >
-      <div class="app-pnotify__title">
-        <i
-          class="app-pnotify__icon icon-demo"
-          :class="[iconName]"
+      <div class="molecule-pnotify__title">
+        <atom-icon
+          :class="['molecule-pnotify__icon', iconName]"
           v-show="iconName.length"
-        ></i>
-        <h2 class="app-pnotify__h2">{{ title }}</h2>
-        <i
+        />
+        <atom-title tag="h2" :content="title" class="molecule-pnotify__h2" />
+        <atom-icon
           v-show="message.length > 0"
-          class="app-pnotify__open-content"
-          :class="[
-            showContent ? 'icon-up-open-mini' : 'icon-demo icon-down-open-mini',
-          ]"
+          :class="classObjectShowDetails"
           @click="showContent = !showContent"
-        ></i>
+        />
       </div>
-      <div class="app-pnotify__timer">
+      <div class="molecule-pnotify__timer">
         <span
-          class="app-pnotify__line"
-          :class="`app-pnotify__line--${type}`"
+          class="molecule-pnotify__line"
+          :class="`molecule-pnotify__line--${type}`"
           :style="`animation-duration: ${time}s`"
         ></span>
       </div>
       <Transition
-        name="app-pnotify"
+        name="molecule-pnotify"
         @enter="start"
         @after-enter="end"
         @before-leave="start"
         @after-leave="end"
       >
-        <p v-show="showContent" class="app-pnotify__p">{{ message }}</p>
+        <p v-show="showContent" class="molecule-pnotify__p">{{ message }}</p>
       </Transition>
     </div>
   </Transition>
@@ -47,16 +43,29 @@
 <script lang="ts">
 import { defineComponent, ref, toRefs, computed, watch } from "vue";
 
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+
 import { storeToRefs } from "pinia";
-import { useMainStore } from "../stores/MainStore";
+import { useMainStore } from "@/stores/MainStore";
+
+import AtomTitle from "@/components/atoms/AtomTitle.vue";
 
 export default defineComponent({
-  name: "AppPnotify",
+  name: "MoleculePnotify",
+  components: {
+    AtomTitle,
+    AtomIcon
+  },
   setup() {
     const { getShowPnotify, getPnotifyOptions } = storeToRefs(useMainStore());
     const { switchShowPnotify } = useMainStore();
 
     const showContent = ref(false);
+    const classObjectShowDetails = computed(() => ({
+      'molecule-pnotify__open-content': true,
+      'icon-up-open-mini': showContent.value,
+      'icon-down-open-mini': !showContent.value,
+    }));
 
     let timerValue = ref(getPnotifyOptions.value.time);
 
@@ -102,6 +111,7 @@ export default defineComponent({
 
     return {
       getShowPnotify,
+      classObjectShowDetails,
       ...toRefs(getPnotifyOptions.value),
       iconName,
       showContent,
@@ -141,7 +151,7 @@ export default defineComponent({
   @content;
 }
 
-.app-pnotify {
+.molecule-pnotify {
   @include position($position: fixed, $top: 5vh, $right: 5vw);
 
   @include flexbox;
