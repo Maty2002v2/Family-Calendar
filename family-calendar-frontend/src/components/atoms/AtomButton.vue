@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('click')">
+  <button>
     <slot></slot>
   </button>
 </template>
@@ -9,6 +9,5 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "AtomButton",
-  
 })
 </script>
