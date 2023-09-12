@@ -1,9 +1,9 @@
 <template>
   <atom-animated-wrapper class="organism-create-calendar animate__fadeInDown">
     <atom-title tag="h2" content="Create your calendar." class="organism-create-calendar__h2" />
-    <atom-square-button @click="create">
+    <molecule-square-button @click="create">
       {{ messageButton }}
-    </atom-square-button>
+    </molecule-square-button>
   </atom-animated-wrapper>
 </template>
 
@@ -16,14 +16,14 @@ import { useMainStore } from "../../stores/MainStore";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import AtomTitle from "../atoms/AtomTitle.vue";
-import AtomSquareButton from "@/components/atoms/AtomSquareButton.vue";
+import MoleculeSquareButton from "@/components/molecules/MoleculeSquareButton.vue";
 
 export default defineComponent({
   name: "OrganismCreateCalendar",
   components: {
     AtomTitle,
     AtomAnimatedWrapper,
-    AtomSquareButton
+    MoleculeSquareButton
   },
   setup() {
     const { createCalendar } = useCalendarApiStore();

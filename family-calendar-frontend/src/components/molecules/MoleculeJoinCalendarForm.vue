@@ -1,9 +1,9 @@
 <template>
   <div>
     <molecule-input-floating-label label="CODE" v-model="calendarHash" />
-    <atom-square-button variant="btn-rectangle--gradient" @click="pushWithQuery">
+    <molecule-square-button variant="btn-rectangle--gradient" @click="pushWithQuery">
       join
-    </atom-square-button>
+    </molecule-square-button>
 
     <atom-animated-wrapper
       class="molecule-join-calendar-form__invalid-code"
@@ -21,7 +21,7 @@ import { defineComponent, ref, watch } from "vue";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import MoleculeInputFloatingLabel from "@/components/molecules/MoleculeInputFloatingLabel.vue"
-import AtomSquareButton from "@/components/atoms/AtomSquareButton.vue";
+import MoleculeSquareButton from "@/components/molecules/MoleculeSquareButton.vue";
 
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/stores/MainStore";
@@ -32,7 +32,7 @@ export default defineComponent({
   name: "MoleculeJoinCalendarForm",
   components: {
     MoleculeInputFloatingLabel,
-    AtomSquareButton,
+    MoleculeSquareButton,
     AtomAnimatedWrapper,
   },
   setup() {

@@ -41,12 +41,12 @@
                 @getIconDay="(value) => (iconDay = value)"
               />
               <div class="form__button-container">
-                <atom-pill-button
+                <molecule-pill-button
                   :jelloAniamted="titleOfButton === 'give data'"
                   @click="addDay"
                 >
                   {{ titleOfButton }}
-                </atom-pill-button>
+                </molecule-pill-button>
               </div>
             </div>
           </form>
@@ -63,7 +63,7 @@ import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeTextareaWithLabel from "@/components/molecules/MoleculeTextareaWithLabel.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
-import AtomPillButton from "../../atoms/AtomPillButton.vue";
+import MoleculePillButton from "@/components/molecules/MoleculePillButton.vue";
 import MoleculeCustomizationDayIcon from "@/components/molecules/Calendar/MoleculeCustomizationDayIcon.vue";
 import MoleculeInputWithLabel from "@/components/molecules/MoleculeInputWithLabel.vue";
 import MoleculeRepeatEveryYearCheckbox from "@/components/molecules/Calendar/MoleculeRepeatEveryYearCheckbox.vue";
@@ -87,7 +87,7 @@ export default defineComponent({
     MoleculeTextareaWithLabel,
     MoleculeInputWithLabel,
     MoleculeAccordion,
-    AtomPillButton,
+    MoleculePillButton,
     MoleculeCustomizationDayIcon,
     MoleculeRepeatEveryYearCheckbox,
   },

@@ -1,14 +1,19 @@
 <template>
-  <button :class="[classObject, variant?.length ? variant : '']" type="button" @click="$emit('click')">
+  <atom-button :class="[classObject, variant?.length ? variant : '']" type="button" @click="$emit('click')">
     <slot></slot>
-  </button>
+  </atom-button>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 
+import AtomButton from "@/components/atoms/AtomButton.vue";
+
 export default defineComponent({
-  name: "AtomSquareButton",
+  name: "MoleculeSquareButton",
+  components: {
+    AtomButton
+  },
   props: {
     shakeXAnimate: {
       type: Boolean,
@@ -21,7 +26,7 @@ export default defineComponent({
       },
     }
   },
-  setup(props) {
+  setup(props: any) {
 
     const classObject = computed(() => ({
       "btn-rectangle": true,

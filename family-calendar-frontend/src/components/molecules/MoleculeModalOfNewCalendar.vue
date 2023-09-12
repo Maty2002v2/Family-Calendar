@@ -18,10 +18,10 @@
 				<span class="modal-of-new-calendar__thickening-span">share</span> it
 				with those you want to give access.
 			</p>
-			<atom-pill-button
+			<molecule-pill-button
 				class="modal-of-new-calendar__button"
 				@click="closeAndCopy"
-				>Close</atom-pill-button
+				>Close</molecule-pill-button
 			>
 		</div>
 	</molecule-modal>
@@ -31,7 +31,7 @@
 import { defineComponent, ref } from 'vue';
 
 import AtomTitle from '../atoms/AtomTitle.vue';
-import AtomPillButton from '../atoms/AtomPillButton.vue';
+import MoleculePillButton from '@/components/molecules/MoleculePillButton.vue';
 import MoleculeModal from '@/components/molecules/MoleculeModal.vue';
 
 import { storeToRefs } from 'pinia';
@@ -43,7 +43,7 @@ export default defineComponent({
 	name: 'MoleculeModalOfNewCalendar',
 	components: {
 		AtomTitle,
-		AtomPillButton,
+		MoleculePillButton,
 		MoleculeModal,
 	},
 	emits: ['closeModal'],

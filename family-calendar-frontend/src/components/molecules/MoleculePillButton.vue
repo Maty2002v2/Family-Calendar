@@ -1,16 +1,21 @@
 <template>
-	<button
+	<atom-button
 		:class="classObject"
 		type="button">
 		<slot></slot>
-	</button>
+	</atom-button>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 
+import AtomButton from '@/components/atoms/AtomButton.vue';
+
 export default defineComponent({
-	name: 'AtomPillButton',
+	name: 'MoleculePillButton',
+	components: {
+		AtomButton
+	},
 	props: {
 		jelloAniamted: {
 			type: Boolean,
