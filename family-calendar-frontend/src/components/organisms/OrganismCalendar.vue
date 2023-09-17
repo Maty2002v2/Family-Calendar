@@ -1,9 +1,9 @@
 <template>
-  <atom-animated-wrapper class="calendar animate__fadeInDown">
+  <atom-animated-wrapper class="calendar animate__fadeInDown full-height">
     <molecule-calendar-navigaion @setTransitionName="(transitionName) => calendarTransitionAnimationName = transitionName" />
 
     <div class="days-grid">
-      <molecule-names-days-of-week :totalNumberFields="totalNumberFields" />
+      <molecule-names-days-of-week v-if="false" :totalNumberFields="totalNumberFields" />
 
       <atom-animated-wrapper
         class="container animate__fast"
@@ -37,9 +37,10 @@
       
       <atom-loader v-else/>
     </div>
-
-    <molecule-list-of-whole-month />
-
+    
+    <teleport to="#modal">
+      <molecule-list-of-whole-month />
+    </teleport>
     <teleport to="#modal">
       <molecule-modal-day-details
         :selectedDayNumber="indexOfSelectedDay"
@@ -165,7 +166,7 @@ $size-day-div: calc(100% / 7 - 5px);
   @include flex-wrap(wrap);
   @include flex-basis(100%);
   margin-top: 20px;
-  max-height: 567px;
+  // max-height: 567px;
 
   .container {
     @include flexbox;
@@ -215,14 +216,13 @@ $size-day-div: calc(100% / 7 - 5px);
   .days-grid {
     @include flex-wrap;
     margin-top: 0px;
-    padding: 0px 20px;
+    padding: 0px;
     gap: 10px;
 
-    overflow-y: auto;
+    justify-content: center;
 
     .container {
       @include flex-direction(column);
-      max-height: 600px;
     }
 
     .container:first-child {
@@ -262,6 +262,10 @@ $size-day-div: calc(100% / 7 - 5px);
     &__day {
       width: 100%;
       min-height: 100px;
+
+      &--blank {
+        display: none;
+      }
     }
   }
 }
@@ -269,7 +273,7 @@ $size-day-div: calc(100% / 7 - 5px);
 @media only screen and (max-width: 660px) {
   .days-grid {
     &__day {
-      height: 80px;
+      height: 120px;
     }
   }
 }
