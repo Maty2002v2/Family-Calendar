@@ -33,7 +33,7 @@ export default defineComponent({
       if (isDesktopWith.value) {
         return props.step > 0 ? "animate__backInRight" : "animate__backInLeft";
       } else {
-        return props.step > 0 ? "animate__backInDown" : "animate__backInUp";
+        return "animate__fadeInDown";
       }
     });
 
