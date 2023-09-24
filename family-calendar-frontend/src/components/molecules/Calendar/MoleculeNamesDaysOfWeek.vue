@@ -95,16 +95,7 @@ $size-day-div: calc(100% / 7 - 5px);
 
 @media only screen and (max-width: $small) {
   .molecule-names-days-of-week {
-    @include flex-direction(column);
-    margin: 0px;
-
-    &__div {
-      @include flexbox;
-      @include align-items(center);
-      min-height: 100px;
-
-      font-size: 30px;
-    }
+    display: none;
   }
 }
 </style>
