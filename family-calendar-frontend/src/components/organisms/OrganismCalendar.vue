@@ -211,6 +211,7 @@ $size-day-div: calc(100% / 7 - 5px);
 @media only screen and (max-width: $small) {
   .calendar {
     gap: 20px;
+    padding: 5px 0px;
   }
 
   .days-grid {
