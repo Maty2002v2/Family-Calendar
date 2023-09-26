@@ -37,16 +37,23 @@
       
       <atom-loader v-else/>
     </div>
+
+    <teleport to='#mobile-menu'>
+      <molecule-mobile-menu />
+    </teleport>
     
+    <!-- modals -->
     <teleport to="#modal">
       <molecule-list-of-whole-month />
     </teleport>
+
     <teleport to="#modal">
       <molecule-modal-day-details
         :selectedDayNumber="indexOfSelectedDay"
         :specialDayList="getSortedDays[indexOfSelectedDay]"
       />
     </teleport>
+
     <teleport to="#modal">
       <molecule-modal-of-new-calendar />
     </teleport>
@@ -65,6 +72,7 @@ import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeC
 import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
 import MoleculeDayField from "@/components/molecules/Calendar/MoleculeDayField.vue";
 import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
+import MoleculeMobileMenu from "@/components/molecules/MoleculeMobileMenu.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
@@ -83,6 +91,7 @@ export default defineComponent({
     MoleculeNamesDaysOfWeek,
     MoleculeDayField,
     AtomLoader,
+    MoleculeMobileMenu,
     MoleculeModalDayDetails,
     MoleculeModalOfNewCalendar,
     MoleculeListOfWholeMonth,
@@ -212,6 +221,7 @@ $size-day-div: calc(100% / 7 - 5px);
   .calendar {
     gap: 20px;
     padding: 5px 0px;
+    margin-bottom: 100px
   }
 
   .days-grid {
