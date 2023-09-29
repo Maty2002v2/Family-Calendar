@@ -4,14 +4,29 @@
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--0">0</div>
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--1">1</div>
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--2">2</div>
-    </div>
+
+    <atom-navigation-button
+      :step="-12"
+    >
+      <template v-slot:mobile-icon>
+        <atom-icon class="icon-angle-double-down"/>
+      </template>
+    </atom-navigation-button>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
+
 export default defineComponent({
   name: "MoleculeMobileMenu",
+  components: {
+    AtomIcon,
+    AtomNavigationButton,
+  },
   setup() {
     const mobileMenuElement = ref<HTMLDivElement>();
     const trigerButton = ref<HTMLButtonElement>();
@@ -45,17 +60,18 @@ export default defineComponent({
   box-sizing: border-box;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 
-  background: radial-gradient(circle at top, rgba(238, 238, 238, 0) 0%, rgba(238, 238, 238, 0) 25%, rgb(238, 238, 238) 24%, rgb(238, 238, 238) 100%);
+  background: radial-gradient(circle at top, rgba(238, 238, 238, 0) 0%, rgba(238, 238, 238, 0) 23%, rgb(238, 238, 238) 22%, rgb(238, 238, 238) 100%);
 
   &__triger {
-    @include position($position: absolute, $bottom: 80px, $left: calc(50% - 40px));
+    @include position($position: absolute, $bottom: 80px, $left: calc(50% - 35px));
 
-    width: 80px;
-    height: 80px;
-    background: #008EFA;
+    width: 70px;
+    height: 70px;
+    background: #FFFFFF;
     border: none;
     border-radius: 50%;
     padding: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     cursor: pointer;
     transform: translateY(50%);
     transition: .35s ease;
@@ -65,7 +81,7 @@ export default defineComponent({
       position: absolute;
       top: 50%;
       left: 50%;
-      background: #FFFFFF;
+      background: $active-day;
       transform: translate(-50%, -50%);
     }
 
@@ -78,9 +94,18 @@ export default defineComponent({
       height: 2px;
       width: 30px;
     }
+
+    &.is-rotate {
+      transform: translateY(40%) rotateZ(225deg);
+      background-color: $active-day;
+
+      &::after, &::before{
+        background: #FFFFFF;
+      }
+    }
   }
 
-  &__item{
+  &__item {
       @include position($position: absolute, $top: -10px);
 
       display: flex;
@@ -129,11 +154,6 @@ export default defineComponent({
     top: -100px; 
     right: calc(50% - 130px); 
     opacity: 1;
-  }
-
-  .is-rotate {
-    transform: translateY(40%) rotateZ(225deg);
-    background-color: #FF207A;
   }
 }
 </style>
