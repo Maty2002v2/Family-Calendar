@@ -44,7 +44,7 @@
     
     <!-- modals -->
     <teleport to="#modal">
-      <molecule-list-of-whole-month />
+      <molecule-list-of-whole-month v-if="!isMobile" />
     </teleport>
 
     <teleport to="#modal">
@@ -83,6 +83,8 @@ import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 import { useDateStore } from "@/stores/DateStore";
 import { useMainStore } from "@/stores/MainStore";
 
+import useBreakpoints from "@/utils/WindowWidth";
+
 export default defineComponent({
   name: "OrganismCalendar",
   components: {
@@ -110,7 +112,11 @@ export default defineComponent({
     const { getLoadingCalendar } = storeToRefs(useMainStore());
     const { switchShowModalDetailsOffDay } = useMainStore();
 
+    const { width } = useBreakpoints();
+
     const calendarTransitionAnimationName = ref('');
+
+    const isMobile = computed(() => width.value <= 460);
 
     watch(
       dataStore,
@@ -141,6 +147,7 @@ export default defineComponent({
     );
 
     return {
+      isMobile,
       getDay,
       getMounth,
       getYear,

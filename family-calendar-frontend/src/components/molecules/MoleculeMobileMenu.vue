@@ -1,9 +1,11 @@
 <template>
-  <div class="molecule-mobile-menu" ref="mobileMenuElement">
+  <div v-show="!modalIsOpen" class="molecule-mobile-menu" ref="mobileMenuElement">
     <button class="molecule-mobile-menu__triger" @click="switchState" ref="trigerButton"></button>
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--0">0</div>
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--1">1</div>
-    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--2">2</div>
+    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--2">
+      <molecule-list-of-whole-month />
+    </div>
 
     <div class="molecule-mobile-menu__navgation-buttons-wrapper">
       <molecule-navigation-button
@@ -45,17 +47,24 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
 import MoleculeNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
+
+import { useMainStore } from '@/stores/MainStore';
 
 export default defineComponent({
   name: "MoleculeMobileMenu",
   components: {
     AtomIcon,
+    MoleculeListOfWholeMonth,
     MoleculeNavigationButton,
   },
   setup() {
+    const { modalIsOpen } = storeToRefs(useMainStore());
+
     const mobileMenuElement = ref<HTMLDivElement>();
     const trigerButton = ref<HTMLButtonElement>();
 
@@ -64,12 +73,11 @@ export default defineComponent({
       if(!trigerButton.value || !menuItems) return;
 
       trigerButton.value.classList.toggle("is-rotate");
-      for (var i = 0; i < menuItems.length; i++) {
-        menuItems[i].classList.toggle(`item-${i}`);
-      }
+      menuItems.forEach((item, index) => item.classList.toggle(`item-${index}`))
     }
 
     return {
+      modalIsOpen,
       mobileMenuElement,
       trigerButton,
       switchState
@@ -82,7 +90,7 @@ export default defineComponent({
 .molecule-mobile-menu {
   @include position($position: fixed, $bottom: 0px);
 
-  display: flex;
+  display: none;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
@@ -143,9 +151,9 @@ export default defineComponent({
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 30px;
-      height: 30px;
-      padding: 20px;
+      width: 50px;
+      height: 50px;
+      padding: 10px;
       border-radius: 50%;
 
       background: #FFFFFF;
@@ -178,7 +186,7 @@ export default defineComponent({
 
   .item-1 { 
     top: -140px; 
-    left: calc(50% - 30px); 
+    left: calc(50% - 35px); 
     opacity: 1;
   }
 
@@ -192,5 +200,11 @@ export default defineComponent({
     display: flex;
     gap: 10px;
   }
+}
+
+@media only screen and (max-width: $small) {
+	.molecule-mobile-menu {
+		display: flex;
+	}
 }
 </style>

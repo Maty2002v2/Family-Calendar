@@ -1,46 +1,48 @@
 <template>
-  <atom-backdrop :isShow="showList && getDays.length > 0" @clickBackdrop="showList = false" >
-  <div class="molecule-list-of-whole-month">
-    <Transition
-      enter-active-class="animate__animated animate__faster animate__bounceInRight"
-      leave-active-class="animate__animated animate__faster animate__bounceOut"
-    >
-      <div
-        v-show="showList && getDays.length > 0"
-        class="list molecule-list-of-whole-month__list"
-        :class="[showList ? 'list molecule-list-of-whole-month__list--active' : '']"
+  <teleport to='#mobile-menu'>
+    <atom-backdrop :isShow="showList && getDays.length > 0" @clickBackdrop="showList = false" >
+    <div class="molecule-list-of-whole-month">
+      <Transition
+        enter-active-class="animate__animated animate__faster animate__bounceInRight"
+        leave-active-class="animate__animated animate__faster animate__bounceOut"
       >
-        <molecule-accordion 
-          v-for="(specialDay, index) in getDays" 
-          :key="index"
-          :showUnderline="true">
-          <template v-slot:title>
-            <span class="list__date">{{
-              convertingDate(
-                specialDay.number_year,
-                specialDay.number_month,
-                specialDay.number_day
-              )
-            }}</span>
-            <atom-icon
-              :class="['list__icon', specialDay.icon_name]"
-              :style="{ backgroundColor: specialDay.icon_color }"
-            />
-          </template>
-          <template v-slot:content>
-            <div class="list__content">
-              <atom-title tag="h2" :content="specialDay.title" class="list__title" />
-              <span class="list__description">
-                {{ specialDay.description }}
-              </span>
-            </div>
-            <molecule-delete-day-button class="delete-button" :id="specialDay.id" />
-          </template>
-        </molecule-accordion>
-      </div>
-    </Transition>
-  </div>
-  </atom-backdrop>
+        <div
+          v-show="showList && getDays.length > 0"
+          class="list molecule-list-of-whole-month__list"
+          :class="[showList ? 'list molecule-list-of-whole-month__list--active' : '']"
+        >
+          <molecule-accordion 
+            v-for="(specialDay, index) in getDays" 
+            :key="index"
+            :showUnderline="true">
+            <template v-slot:title>
+              <span class="list__date">{{
+                convertingDate(
+                  specialDay.number_year,
+                  specialDay.number_month,
+                  specialDay.number_day
+                )
+              }}</span>
+              <atom-icon
+                :class="['list__icon', specialDay.icon_name]"
+                :style="{ backgroundColor: specialDay.icon_color }"
+              />
+            </template>
+            <template v-slot:content>
+              <div class="list__content">
+                <atom-title tag="h2" :content="specialDay.title" class="list__title" />
+                <span class="list__description">
+                  {{ specialDay.description }}
+                </span>
+              </div>
+              <molecule-delete-day-button class="delete-button" :id="specialDay.id" />
+            </template>
+          </molecule-accordion>
+        </div>
+      </Transition>
+    </div>
+    </atom-backdrop>
+  </teleport>
   <div
       class="molecule-list-of-whole-month__button"
       @click="showList = !showList"
@@ -59,7 +61,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
+import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -67,8 +70,8 @@ import AtomBackdrop from '@/components/atoms/AtomBackdrop.vue';
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayButton.vue";
 
-import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "@/stores/CalendarApiStore";
+import { useMainStore } from '@/stores/MainStore';
 
 export default defineComponent({
 name: "MoleculeListOfWholeMonth",
@@ -80,6 +83,8 @@ components: {
   MoleculeDeleteDayButton,
 },
 setup() {
+  const { switchAppModalState } = useMainStore();
+
   const { getDays } = storeToRefs(useCalendarApiStore());
   const showList = ref(false);
 
@@ -93,7 +98,15 @@ setup() {
     } - ${number_day < 9 ? "0" + number_day : number_day})`;
   };
 
-  return { showList, getDays, convertingDate };
+  watch(showList , (newVlaue) => {
+    switchAppModalState(newVlaue);
+  })
+
+  return { 
+    showList, 
+    getDays, 
+    convertingDate,
+  };
 },
 });
 </script>
@@ -196,6 +209,7 @@ padding-bottom: 10px;
 @media only screen and (max-width: $small) {
 .molecule-list-of-whole-month {
   &__button {
+    @include position($position: static);
     transform: translate(0%, 0%);
   }
 }
