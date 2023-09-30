@@ -83,7 +83,7 @@ import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 import { useDateStore } from "@/stores/DateStore";
 import { useMainStore } from "@/stores/MainStore";
 
-import useBreakpoints from "@/utils/WindowWidth";
+import { useWidthWindow } from "@/composables/useWidthWindow";
 
 export default defineComponent({
   name: "OrganismCalendar",
@@ -112,7 +112,7 @@ export default defineComponent({
     const { getLoadingCalendar } = storeToRefs(useMainStore());
     const { switchShowModalDetailsOffDay } = useMainStore();
 
-    const { width } = useBreakpoints();
+    const { width } = useWidthWindow();
 
     const calendarTransitionAnimationName = ref('');
 

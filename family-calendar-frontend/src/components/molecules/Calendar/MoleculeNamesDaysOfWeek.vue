@@ -16,7 +16,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 
-import useBreakpoints from "@/utils/WindowWidth";
+import { useWidthWindow } from "@/composables/useWidthWindow";
 
 export default defineComponent({
   name: "MoleculeNamesDaysOfWeek",
@@ -27,7 +27,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { width } = useBreakpoints();
+    const { width } = useWidthWindow();
 
     const namesDaysOfWeek: string[] = [
       "Mon",

@@ -12,7 +12,7 @@ import { defineComponent, computed } from "vue";
 
 import { useDateStore } from "@/stores/DateStore";
 
-import useBreakpoints from "@/utils/WindowWidth";
+import { useWidthWindow } from "@/composables/useWidthWindow";
 
 export default defineComponent({
   name: "AtomNavigationButton",
@@ -25,7 +25,7 @@ export default defineComponent({
   emits: ["setTransitionName"],
   setup(props, { emit }) {
     const { changeDateData } = useDateStore();
-    const { width } = useBreakpoints();
+    const { width } = useWidthWindow();
 
     const isDesktopWith = computed(() => width.value > 460);
 
