@@ -5,13 +5,41 @@
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--1">1</div>
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--2">2</div>
 
-    <atom-navigation-button
-      :step="-12"
-    >
-      <template v-slot:mobile-icon>
-        <atom-icon class="icon-angle-double-down"/>
-      </template>
-    </atom-navigation-button>
+    <div class="molecule-mobile-menu__navgation-buttons-wrapper">
+      <molecule-navigation-button
+        :step="-1"
+        >
+          <template v-slot:mobile-icon>
+            <atom-icon class="icon-left-open-mini"/>
+          </template>
+      </molecule-navigation-button>
+
+      <molecule-navigation-button
+        :step="-12"
+      >
+        <template v-slot:mobile-icon>
+          <atom-icon class="icon-angle-double-left"/>
+        </template>
+      </molecule-navigation-button>
+    </div>
+    
+    <div class="molecule-mobile-menu__navgation-buttons-wrapper">
+      <molecule-navigation-button
+        :step="12"
+      >
+        <template v-slot:mobile-icon>
+          <atom-icon class="icon-angle-double-right"/>
+        </template>
+      </molecule-navigation-button>
+
+      <molecule-navigation-button
+        :step="1"
+        >
+          <template v-slot:mobile-icon>
+            <atom-icon class="icon-right-open-mini"/>
+          </template>
+      </molecule-navigation-button>
+    </div>
   </div>
 </template>
 
@@ -19,13 +47,13 @@
 import { defineComponent, ref } from "vue";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
-import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
+import MoleculeNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
 
 export default defineComponent({
   name: "MoleculeMobileMenu",
   components: {
     AtomIcon,
-    AtomNavigationButton,
+    MoleculeNavigationButton,
   },
   setup() {
     const mobileMenuElement = ref<HTMLDivElement>();
@@ -54,9 +82,13 @@ export default defineComponent({
 .molecule-mobile-menu {
   @include position($position: fixed, $bottom: 0px);
 
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
   height: 80px;
   width: 100%;
-  padding: 30px;
+  padding: 10px 30px;
   box-sizing: border-box;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 
@@ -154,6 +186,11 @@ export default defineComponent({
     top: -100px; 
     right: calc(50% - 130px); 
     opacity: 1;
+  }
+
+  &__navgation-buttons-wrapper {
+    display: flex;
+    gap: 10px;
   }
 }
 </style>
