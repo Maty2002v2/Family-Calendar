@@ -25,16 +25,16 @@ export default {
 
 <style lang="scss" scoped>
 .darkened-background {
-	@include position($top: 0px, $left: 0px);
+	@include position($position: fixed, $top: 0px, $bottom: 0px);
 	width: 100vw;
-	min-height: 100%;
 	background: rgba($color: #000000, $alpha: 0.3);
+	overflow: auto;
 	cursor: pointer;
 }
 
 @media only screen and (max-width: $small) {
 	.darkened-background {
-		min-height: 120vh;
+		min-height: 105vh;
 	}
 }
 </style>

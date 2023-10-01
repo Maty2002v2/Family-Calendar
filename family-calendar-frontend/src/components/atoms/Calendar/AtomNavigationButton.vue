@@ -1,7 +1,7 @@
 <template>
   <div class="calendar-navigation">
     <div class="calendar-navigation__icon" @click="changeDate()">
-      <slot v-if="isDesktopWith" name="desktop-icon"></slot>
+      <slot v-if="!isMobile" name="desktop-icon"></slot>
       <slot v-else name="mobile-icon"></slot>
     </div>
   </div>
@@ -12,7 +12,7 @@ import { defineComponent, computed } from "vue";
 
 import { useDateStore } from "@/stores/DateStore";
 
-import useBreakpoints from "@/utils/WindowWidth";
+import { useWidthWindow } from "@/composables/useWidthWindow";
 
 export default defineComponent({
   name: "AtomNavigationButton",
@@ -25,15 +25,13 @@ export default defineComponent({
   emits: ["setTransitionName"],
   setup(props, { emit }) {
     const { changeDateData } = useDateStore();
-    const { width } = useBreakpoints();
-
-    const isDesktopWith = computed(() => width.value > 460);
+    const { isMobile } = useWidthWindow();
 
     const transitionName = computed(() => {
-      if (isDesktopWith.value) {
+      if (!isMobile.value) {
         return props.step > 0 ? "animate__backInRight" : "animate__backInLeft";
       } else {
-        return props.step > 0 ? "animate__backInDown" : "animate__backInUp";
+        return "animate__fadeInDown";
       }
     });
 
@@ -43,7 +41,10 @@ export default defineComponent({
       emit("setTransitionName", transitionName.value);
     };
 
-    return { changeDate, isDesktopWith };
+    return {
+      isMobile,
+      changeDate, 
+    };
   },
 });
 </script>

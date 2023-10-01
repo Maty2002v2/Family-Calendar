@@ -1,8 +1,7 @@
 <template>
   <div class="molecule-day-field">
-    <p class="molecule-day-field__p">
-      {{ nrDay }}
-    </p>
+    <p class="molecule-day-field__day-name">{{ translatedDayOfWeek}}</p>
+    <p>{{ nrDay }}</p>
     <div v-if="specialDayList.length" class="icons molecule-day-field__icons">
       <atom-icon
         v-for="(specialDay, index) in theFirstThreeElements"
@@ -24,6 +23,9 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
+import { storeToRefs } from "pinia";
+
+import { useDateStore } from "@/stores/DateStore";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import AtomIcon from '@/components/atoms/AtomIcon.vue';
@@ -43,14 +45,26 @@ export default defineComponent({
       type: Array,
       required: true,
       default: () => [],
-    },
+    }
   },
   setup(props) {
+    const { 
+      getFirstMonthDay, 
+      getNamesDaysOfWeek 
+    } = storeToRefs(useDateStore());
+
+    const translatedDayOfWeek = computed(() => 
+      getNamesDaysOfWeek.value[((getFirstMonthDay.value - 1) + props.nrDay) % 7]
+    );
+
     const theFirstThreeElements = computed(() =>
       props.specialDayList.slice(0, 3)
     );
 
-    return { theFirstThreeElements };
+    return { 
+      theFirstThreeElements,
+      translatedDayOfWeek
+    };
   },
 });
 </script>
@@ -66,6 +80,13 @@ export default defineComponent({
 
   font-size: 15px;
   font-family: sans-serif;
+
+  &__day-name {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 10px;
+  }
 
   &__icons {
     @include position($bottom: 0px, $left: 0px);
@@ -110,6 +131,12 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: $small) {
+
+  .molecule-day-field {
+    &__day-name {
+      display: block;
+    }
+  }
   .icons {
     &__i {
       width: 27px;

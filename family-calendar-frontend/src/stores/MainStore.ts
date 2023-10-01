@@ -15,6 +15,7 @@ export const useMainStore = defineStore("Main", {
         message: "",
         time: 5,
       },
+      modalIsOpen: false,
     };
   },
   getters: {
@@ -25,6 +26,7 @@ export const useMainStore = defineStore("Main", {
     getShowModalOfNewCalendar: (state) => state.showModalOfNewCalendar,
     getShowPnotify: (state) => state.showPnotify,
     getPnotifyOptions: (state) => state.pnotifyOptions,
+    getAppModalState: (state) => state.modalIsOpen,
   },
   actions: {
     switchIncorrectCodeEntered(value: boolean) {
@@ -51,5 +53,8 @@ export const useMainStore = defineStore("Main", {
       this.pnotifyOptions.message = message;
       this.pnotifyOptions.time = time;
     },
+    switchAppModalState(value: boolean) {
+      this.modalIsOpen = value
+    }
   },
 });
