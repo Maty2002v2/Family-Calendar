@@ -1,8 +1,8 @@
 <template>
   <div v-show="!modalIsOpen" class="molecule-mobile-menu" ref="mobileMenuElement">
     <button class="molecule-mobile-menu__triger" @click="switchState" ref="trigerButton"></button>
-    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--0">0</div>
-    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--1">1</div>
+    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--0"></div>
+    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--1"></div>
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--2">
       <molecule-list-of-whole-month />
     </div>
@@ -166,11 +166,13 @@ export default defineComponent({
     &__item--0{ 
       transition: .35s ease; 
       left: calc(50% - 30px);
+      background-color: $background-field;
     }
 
     &__item--1{ 
       transition: .35s ease .1s; 
       left: calc(50% - 30px);
+      background-color: $background-field;
     }
 
     &__item--2{ 
