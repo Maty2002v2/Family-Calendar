@@ -54,7 +54,7 @@ export default defineComponent({
 
   &__p {
     @include flex-basis((100% / 3));
-    font-weight: 600;
+    font-weight: 500;
     white-space: nowrap;
     transition: all 0.3s ease;
 

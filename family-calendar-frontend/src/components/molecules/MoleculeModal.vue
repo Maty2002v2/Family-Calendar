@@ -16,9 +16,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-
+import { defineComponent, watch } from 'vue';
 import AtomBackdrop from '@/components/atoms/AtomBackdrop.vue';
+import { useMainStore } from '@/stores/MainStore';
 
 export default defineComponent({
 	name: 'MoleculeModal',
@@ -34,9 +34,18 @@ export default defineComponent({
 	},
 	emits: ['closeModal'],
 	setup(props, { emit }) {
+		const { switchAppModalState	} = useMainStore(); 
+
 		const closeModal = () => {
 			emit('closeModal');
 		};
+
+		watch(
+			() => props.isShow, 
+			(newValue) =>{
+				switchAppModalState(newValue);
+			}
+		)
 
 		return { closeModal };
 	},

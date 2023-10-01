@@ -1,5 +1,5 @@
 <template>
-  <atom-animated-wrapper class="calendar animate__fadeInDown">
+  <atom-animated-wrapper class="calendar animate__fadeInDown full-height">
     <molecule-calendar-navigaion @setTransitionName="(transitionName) => calendarTransitionAnimationName = transitionName" />
 
     <div class="days-grid">
@@ -38,7 +38,14 @@
       <atom-loader v-else/>
     </div>
 
-    <molecule-list-of-whole-month />
+    <teleport to='#mobile-menu'>
+      <molecule-mobile-menu />
+    </teleport>
+    
+    <!-- modals -->
+    <teleport to="#modal">
+      <molecule-list-of-whole-month v-if="!isMobile" />
+    </teleport>
 
     <teleport to="#modal">
       <molecule-modal-day-details
@@ -46,6 +53,7 @@
         :specialDayList="getSortedDays[indexOfSelectedDay]"
       />
     </teleport>
+
     <teleport to="#modal">
       <molecule-modal-of-new-calendar />
     </teleport>
@@ -64,6 +72,7 @@ import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeC
 import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
 import MoleculeDayField from "@/components/molecules/Calendar/MoleculeDayField.vue";
 import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
+import MoleculeMobileMenu from "@/components/molecules/MoleculeMobileMenu.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
@@ -74,6 +83,8 @@ import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 import { useDateStore } from "@/stores/DateStore";
 import { useMainStore } from "@/stores/MainStore";
 
+import { useWidthWindow } from "@/composables/useWidthWindow";
+
 export default defineComponent({
   name: "OrganismCalendar",
   components: {
@@ -82,6 +93,7 @@ export default defineComponent({
     MoleculeNamesDaysOfWeek,
     MoleculeDayField,
     AtomLoader,
+    MoleculeMobileMenu,
     MoleculeModalDayDetails,
     MoleculeModalOfNewCalendar,
     MoleculeListOfWholeMonth,
@@ -100,7 +112,11 @@ export default defineComponent({
     const { getLoadingCalendar } = storeToRefs(useMainStore());
     const { switchShowModalDetailsOffDay } = useMainStore();
 
+    const { width } = useWidthWindow();
+
     const calendarTransitionAnimationName = ref('');
+
+    const isMobile = computed(() => width.value <= 460);
 
     watch(
       dataStore,
@@ -131,6 +147,7 @@ export default defineComponent({
     );
 
     return {
+      isMobile,
       getDay,
       getMounth,
       getYear,
@@ -165,7 +182,7 @@ $size-day-div: calc(100% / 7 - 5px);
   @include flex-wrap(wrap);
   @include flex-basis(100%);
   margin-top: 20px;
-  max-height: 567px;
+  // max-height: 567px;
 
   .container {
     @include flexbox;
@@ -210,19 +227,20 @@ $size-day-div: calc(100% / 7 - 5px);
 @media only screen and (max-width: $small) {
   .calendar {
     gap: 20px;
+    padding: 5px 0px;
+    margin-bottom: 100px
   }
 
   .days-grid {
     @include flex-wrap;
     margin-top: 0px;
-    padding: 0px 20px;
+    padding: 0px;
     gap: 10px;
 
-    overflow-y: auto;
+    justify-content: center;
 
     .container {
       @include flex-direction(column);
-      max-height: 600px;
     }
 
     .container:first-child {
@@ -262,6 +280,10 @@ $size-day-div: calc(100% / 7 - 5px);
     &__day {
       width: 100%;
       min-height: 100px;
+
+      &--blank {
+        display: none;
+      }
     }
   }
 }
@@ -269,7 +291,7 @@ $size-day-div: calc(100% / 7 - 5px);
 @media only screen and (max-width: 660px) {
   .days-grid {
     &__day {
-      height: 80px;
+      height: 120px;
     }
   }
 }

@@ -221,6 +221,15 @@ export default defineComponent({
   }
 }
 
+
+
+@media only screen and (max-width: $small) {
+  .form {
+    gap: 13px;
+    padding: 18px 15px 15px 15px;
+  }
+}
+
 @media only screen and (max-width: 300px) {
   .form {
     &__icon-selection-container {
