@@ -44,6 +44,7 @@
     </atom-backdrop>
   </teleport>
   <div
+      v-show="(!isMobile && getDays.length > 0) || isMobile"
       :class="listButtonClassObject"
       @click="switchShowListAction"
     >
@@ -60,7 +61,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, watch } from "vue";
+import { defineComponent, ref, computed, watch } from "vue";
 import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
@@ -91,10 +92,10 @@ setup() {
   const { getDays } = storeToRefs(useCalendarApiStore());
   const showList = ref(false);
 
-  const listButtonClassObject = reactive({
+  const listButtonClassObject = computed(() => ({
     'molecule-list-of-whole-month__button': true,
     'molecule-list-of-whole-month__button--desabled': getDays.value.length < 1,
-  })
+  }))
 
   const convertingDate = (
     number_year: number,
