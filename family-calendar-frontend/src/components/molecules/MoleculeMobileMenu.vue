@@ -146,7 +146,7 @@ export default defineComponent({
   }
 
   &__item {
-      @include position($position: absolute, $top: -10px);
+      @include position($position: absolute, $top: -25px);
 
       display: flex;
       justify-content: center;
