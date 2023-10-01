@@ -44,9 +44,8 @@
     </atom-backdrop>
   </teleport>
   <div
-      class="molecule-list-of-whole-month__button"
-      @click="showList = !showList"
-      v-show="getDays.length"
+      :class="listButtonClassObject"
+      @click="switchShowListAction"
     >
       <Transition
         enter-active-class="animate__animated animate__faster animate__bounceIn"
@@ -61,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, reactive, watch } from "vue";
 import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
@@ -69,6 +68,8 @@ import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import AtomBackdrop from '@/components/atoms/AtomBackdrop.vue';
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayButton.vue";
+
+import { useWidthWindow } from "@/composables/useWidthWindow";
 
 import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 import { useMainStore } from '@/stores/MainStore';
@@ -83,10 +84,17 @@ components: {
   MoleculeDeleteDayButton,
 },
 setup() {
+  const { isMobile } = useWidthWindow();
+
   const { switchAppModalState } = useMainStore();
 
   const { getDays } = storeToRefs(useCalendarApiStore());
   const showList = ref(false);
+
+  const listButtonClassObject = reactive({
+    'molecule-list-of-whole-month__button': true,
+    'molecule-list-of-whole-month__button--desabled': getDays.value.length < 1,
+  })
 
   const convertingDate = (
     number_year: number,
@@ -98,14 +106,23 @@ setup() {
     } - ${number_day < 9 ? "0" + number_day : number_day})`;
   };
 
+  const switchShowListAction = () => {
+    if(getDays.value.length > 0) {
+      showList.value = !showList.value;
+    }
+  };
+
   watch(showList , (newVlaue) => {
     switchAppModalState(newVlaue);
   })
 
-  return { 
+  return {
+    isMobile,
     showList, 
-    getDays, 
+    getDays,
+    listButtonClassObject,
     convertingDate,
+    switchShowListAction,
   };
 },
 });
@@ -136,6 +153,10 @@ transform: translate(-50%, -50%);
   cursor: pointer;
   transform: translate(-50%, -50%);
   transition: all 0.3s ease;
+
+  &--desabled {
+    opacity: 0.4;
+  }
 }
 
 &__counter {
