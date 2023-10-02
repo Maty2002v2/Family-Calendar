@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
+import { useI18n } from 'vue-i18n';
 
 import { storeToRefs } from "pinia";
 import { useDateStore } from "@/stores/DateStore";
@@ -11,6 +12,8 @@ import { useDateStore } from "@/stores/DateStore";
 export default defineComponent({
   name: "AtomCalendarTitle",
   setup() {
+    const { t } = useI18n();
+
     const { getMounth, getYear } = storeToRefs(useDateStore());
     const monthNames = [
       "January",
@@ -27,8 +30,10 @@ export default defineComponent({
       "December",
     ];
 
+    const monuhName = computed(() => t(`months.${monthNames[getMounth.value]}`))
+
     const title = computed(() => {
-      return `${monthNames[getMounth.value]} ${getYear.value}`;
+      return `${monuhName.value} ${getYear.value}`;
     });
     return { title };
   },
