@@ -1,6 +1,6 @@
 <template>
   <div class="molecule-day-field">
-    <p class="molecule-day-field__day-name">{{ translatedDayOfWeek}}</p>
+    <p class="molecule-day-field__day-name">{{ translatedDayOfWeek }}</p>
     <p>{{ nrDay }}</p>
     <div v-if="specialDayList.length" class="icons molecule-day-field__icons">
       <atom-icon
@@ -24,6 +24,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useI18n } from 'vue-i18n';
 
 import { useDateStore } from "@/stores/DateStore";
 
@@ -50,18 +51,20 @@ export default defineComponent({
   setup(props) {
     const { 
       getFirstMonthDay, 
-      getNamesDaysOfWeek 
+      getNamesDaysOfWeek,
     } = storeToRefs(useDateStore());
 
+    const { t } = useI18n();
+
     const translatedDayOfWeek = computed(() => 
-      getNamesDaysOfWeek.value[((getFirstMonthDay.value - 1) + props.nrDay) % 7]
+      t(`shortNamesDaysOfWeek.${getNamesDaysOfWeek.value[((getFirstMonthDay.value - 2) + props.nrDay) % 7]}`)
     );
 
     const theFirstThreeElements = computed(() =>
       props.specialDayList.slice(0, 3)
     );
 
-    return { 
+    return {
       theFirstThreeElements,
       translatedDayOfWeek
     };

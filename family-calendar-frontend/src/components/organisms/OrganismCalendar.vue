@@ -3,7 +3,7 @@
     <molecule-calendar-navigaion @setTransitionName="(transitionName) => calendarTransitionAnimationName = transitionName" />
 
     <div class="days-grid">
-      <molecule-names-days-of-week :totalNumberFields="totalNumberFields" />
+      <molecule-names-days-of-week />
 
       <atom-animated-wrapper
         class="container animate__fast"
@@ -142,10 +142,6 @@ export default defineComponent({
       switchShowModalDetailsOffDay(true);
     };
 
-    const totalNumberFields = computed(
-      () => getDaysInMonth.value + getFirstMonthDay.value - 1
-    );
-
     return {
       isMobile,
       getDay,
@@ -153,7 +149,6 @@ export default defineComponent({
       getYear,
       getDaysInMonth,
       getFirstMonthDay,
-      totalNumberFields,
       getSortedDays,
       getLoadingCalendar,
       calendarTransitionAnimationName,

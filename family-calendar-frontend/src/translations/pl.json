@@ -12,5 +12,14 @@
     "October": "Październik",
     "November": "Listopad",
     "December": "Grudzień"
+  },
+  "shortNamesDaysOfWeek": {
+    "Sun": "Niedz",
+    "Mon": "Pon",
+    "Tues": "Wt",
+    "Wed": "Śr",
+    "Thurs": "Czw",
+    "Fri": "Pt",
+    "Sat": "Sob"
   }
 }
