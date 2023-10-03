@@ -34,5 +34,22 @@
     "youCanShare": "Możesz <span style='font-weight: 600;' >udostępnić</span> go tym z którymi chcesz dzielić dostęp."
   },
   "close": "Zamknij",
-  "dayOff": "Masz dziś wolny dzień!"
+  "Details": "Szczegóły",
+  "addToDayModal": {
+    "DayOff": "Masz dziś wolny dzień!",
+    "AddToDay": "Dodaj do dnia",
+    "Title": "Tytuł",
+    "Description": "Opis",
+    "placeholders": {
+      "title": "Spotkanie z teściami...",
+      "description": "O 15:00. Nie bądź pijany"
+    },
+    "giveData": "podaj dane",
+    "add": "dodaj",
+    "DoYouRepeat": "Czy powtarzać co roku?",
+    "Disposable": "Jednorazowo",
+    "repeatEveryYear": "Powtarzaj co roku",
+    "Icon": "Ikona",
+    "Color": "Kolor"
+  }
 }

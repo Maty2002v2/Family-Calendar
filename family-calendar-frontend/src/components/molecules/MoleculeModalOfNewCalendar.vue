@@ -121,6 +121,10 @@ export default defineComponent({
 		letter-spacing: 1px;
 	}
 
+	&__thickening-span {
+		font-weight: 600;
+	}
+
 	&__button {
 		max-width: 200px;
 		height: auto;
