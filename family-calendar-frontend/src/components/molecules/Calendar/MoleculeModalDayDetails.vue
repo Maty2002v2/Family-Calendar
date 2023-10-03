@@ -31,7 +31,7 @@
       </section>
 
       <section v-else class="info-about-lack-of-days">
-        <atom-title tag="h2" content="You have a day off!" class="info-about-lack-of-days__h2" />
+        <atom-title tag="h2" :content="t('dayOff')" class="info-about-lack-of-days__h2" />
         <div class="info-about-lack-of-days__div">
           <atom-icon class="icon-ok" />
         </div>
@@ -45,6 +45,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useI18n } from 'vue-i18n';
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -82,12 +83,18 @@ export default defineComponent({
     const { switchShowNewDayForm, switchShowModalDetailsOffDay } =
       useMainStore();
 
+    const { t } = useI18n();
+
     const closeModal = () => {
       switchShowModalDetailsOffDay(false);
       switchShowNewDayForm(false);
     };
 
-    return { getShowModalDetailsOffDay, closeModal };
+    return { 
+      getShowModalDetailsOffDay,
+      closeModal,
+      t
+    };
   },
 });
 </script>

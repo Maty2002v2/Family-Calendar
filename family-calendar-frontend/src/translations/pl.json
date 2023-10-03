@@ -21,5 +21,18 @@
     "Thurs": "Czw",
     "Fri": "Pt",
     "Sat": "Sob"
-  }
+  },
+  "CreateCalendar": "Stwórz swój kalendarz",
+  "JoinExisting": "Dołącz do już istniejącego",
+  "create": "stwórz",
+  "SomethingWentWrongTryLater": "Coś jest nie tak <br /> Spróbuj później",
+  "join": "Dołącz",
+  "BadCode": "Zły kod",
+  "CODE": "KOD",
+  "startAlert": {
+    "hereIsYourCode": "<span style='font-weight: 600;' >Cześć</span>, oto twój kod do tego kalendarza ",
+    "youCanShare": "Możesz <span style='font-weight: 600;' >udostępnić</span> go tym z którymi chcesz dzielić dostęp."
+  },
+  "close": "Zamknij",
+  "dayOff": "Masz dziś wolny dzień!"
 }
