@@ -21,5 +21,18 @@
     "Thurs": "Thurs",
     "Fri": "Fri",
     "Sat": "Sat"
-  }
+  },
+  "CreateCalendar": "Create your calendar",
+  "JoinExisting": "Join already existing calendar",
+  "create": "create",
+  "SomethingWentWrongTryLater": "Something went wrong <br /> Try leater",
+  "join": "join",
+  "BadCode": "Bad code",
+  "CODE": "CODE",
+  "startAlert": {
+    "hereIsYourCode": "<span class='modal-of-new-calendar__thickening-span'>Hey</span>, here's the code for this calendar",
+    "youCanShare": "You can <span class='modal-of-new-calendar__thickening-span'>share</span> it with those you want to give access."
+  },
+  "close": "Close",
+  "dayIff": "You have a day off!"
 }
