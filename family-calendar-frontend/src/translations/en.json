@@ -34,5 +34,22 @@
     "youCanShare": "You can <span class='modal-of-new-calendar__thickening-span'>share</span> it with those you want to give access."
   },
   "close": "Close",
-  "dayIff": "You have a day off!"
+  "Details": "Szczegóły",
+  "addToDayModal": {
+    "DayOff": "You have a day off!",
+    "AddToDay": "Add to day",
+    "Title": "Title",
+    "Description": "Description",
+    "placeholders": {
+      "title": "Meeting with in-laws...",
+      "description": "At 15:00. Don't be drunk"
+    },
+    "giveData": "give data",
+    "add": "add",
+    "DoYouRepeat": "Do you repeat every year?",
+    "Disposable": "Disposable",
+    "repeatEveryYear": "Repeat every year",
+    "Icon": "Icon",
+    "Color": "Color"
+  }
 }

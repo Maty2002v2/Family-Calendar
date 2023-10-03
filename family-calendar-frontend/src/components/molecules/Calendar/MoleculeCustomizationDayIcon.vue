@@ -7,7 +7,7 @@
     </section>
     <section class="icon-selection__choice">
       <molecule-selection-icon-popup
-        title="icon"
+        :title="t('addToDayModal.Icon')"
         :listItem="iconNameList"
         @getValue="(element) => (selectedIcon = element)"
       >
@@ -19,7 +19,7 @@
       </molecule-selection-icon-popup>
 
       <molecule-selection-icon-popup
-        title="color"
+        :title="t('addToDayModal.Color')"
         :listItem="colorList"
         @getValue="(element) => (selectedColor = element)"
       >
@@ -36,6 +36,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
+import { useI18n } from 'vue-i18n';
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import MoleculeSelectionIconPopup from "@/components/molecules/Calendar/MoleculeSelectionIconPopup.vue";
@@ -48,6 +49,8 @@ export default defineComponent({
   },
   emits: ["getIconDay"],
   setup(props, { emit }) {
+    const { t } = useI18n();
+
     const iconNameList = [
       { name: "icon-shopping-basket" },
       { name: "icon-cab" },
@@ -58,7 +61,7 @@ export default defineComponent({
       { name: "icon-briefcase" },
       { name: "icon-phone" },
       { name: "icon-users" },
-      { name: "icon-glass" }, //
+      { name: "icon-glass" },
       { name: "icon-calendar" },
       { name: "icon-hourglass-2" },
       { name: "icon-venus-mars" },
@@ -116,6 +119,7 @@ export default defineComponent({
       colorList,
       selectedIcon,
       selectedColor,
+      t,
     };
   },
 });
