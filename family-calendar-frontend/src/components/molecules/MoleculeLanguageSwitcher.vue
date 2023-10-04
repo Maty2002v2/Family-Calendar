@@ -2,61 +2,30 @@
   <div 
     :style="styleObject" 
     class="molecule-language-switcher" 
-    @click="languageIndexIncremental"
+    @click="tapNextLanguage"
   >
     {{ currentLanguage.code }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
-import { i18n } from '@/translations/main'
+import { defineComponent, computed } from "vue";
+import { useLanguages } from "@/composables/useLanguages";
 
-type languageCode = 'pl' | 'en';
-
-type languageBlock = {
-  code: languageCode,
-  background: string,
-}
 
 export default defineComponent({
   name: "MoleculeLanguageSwitcher",
   setup() {
-    const { locale } = i18n.global;
+    const { currentLanguage, tapNextLanguage } = useLanguages();
 
-    const languageIndex = ref(0);
-
-    const avaibleLanguages: Array<languageBlock> = [
-      {
-        code: "pl",
-        background: "#DE5858"
-      },
-      {
-        code: "en",
-        background: "#FF8000"
-      }
-    ];
-
-    const currentLanguage = computed(() => avaibleLanguages[languageIndex.value]);
     const styleObject = computed(() => ({
       backgroundColor: currentLanguage.value.background
     }));
 
-    const languageIndexIncremental = () => {
-      languageIndex.value++;
-
-      if(languageIndex.value >= avaibleLanguages.length) {
-        languageIndex.value = 0;
-      }
-
-      locale.value = currentLanguage.value.code;
-    }
-
     return {
-      languageIndex,
       styleObject,
       currentLanguage,
-      languageIndexIncremental,
+      tapNextLanguage,
     }
   }
 })
