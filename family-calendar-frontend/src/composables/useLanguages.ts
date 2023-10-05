@@ -1,4 +1,5 @@
-import { ref, computed } from "vue";
+import { onMounted, ref, computed } from "vue";
+import { useLocalStorage } from "@/composables/useLocalStorage";
 import { i18n } from '@/translations/main';
 
 type languageCode = 'pl' | 'en';
@@ -6,10 +7,6 @@ type languageBlock = {
   code: languageCode,
   background: string,
 }
-
-const { locale } = i18n.global;
-
-const languageIndex = ref(0);
 
 const avaibleLanguages: Array<languageBlock> = [
   {
@@ -22,19 +19,37 @@ const avaibleLanguages: Array<languageBlock> = [
   }
 ];
 
-const currentLanguage = computed(() => avaibleLanguages[languageIndex.value]);
+export const useLanguages = () => {
+  const { locale } = i18n.global;
+  const localStorageLanguage = useLocalStorage('lang', avaibleLanguages[0].code);
 
-const tapNextLanguage = () => {
-  languageIndex.value++;
+  const languageIndex = ref(0);
 
-  if(languageIndex.value >= avaibleLanguages.length) {
-    languageIndex.value = 0;
+  const currentLanguage = computed(() => avaibleLanguages[languageIndex.value]);
+
+  //private functions
+  const findLanguageIndexInAvible = (isoCode: string) => {
+    const index = avaibleLanguages.findIndex(language => language.code === isoCode);
+    return index < 0 ? 0 : index;
   }
 
-  locale.value = currentLanguage.value.code;
-}
+  //public functions
+  const tapNextLanguage = () => {
+    languageIndex.value++;
 
-export const useLanguages = () => {
+    if(languageIndex.value >= avaibleLanguages.length) {
+      languageIndex.value = 0;
+    }
+
+    locale.value = currentLanguage.value.code;
+    localStorageLanguage.value = currentLanguage.value.code;
+  }
+
+  onMounted(() => {
+    languageIndex.value = findLanguageIndexInAvible(localStorageLanguage.value);
+    locale.value = currentLanguage.value.code;
+  })
+
   return {
     avaibleLanguages,
     tapNextLanguage,
