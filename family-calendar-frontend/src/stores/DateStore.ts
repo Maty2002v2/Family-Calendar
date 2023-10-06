@@ -7,13 +7,13 @@ export const useDateStore = defineStore("Date", {
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
       namesDaysOfWeek: <string[]>[
-        "Sun",
         "Mon",
         "Tues",
         "Wed",
         "Thurs",
         "Fri",
         "Sat",
+        "Sun",
       ]
     }
   },

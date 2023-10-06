@@ -1,8 +1,8 @@
 <template>
   <div>
-    <molecule-input-floating-label label="CODE" v-model="calendarHash" />
+    <molecule-input-floating-label :label="t('CODE')" v-model="calendarHash" />
     <molecule-square-button variant="btn-rectangle--gradient" @click="pushWithQuery">
-      join
+      {{ t('join') }}
     </molecule-square-button>
 
     <atom-animated-wrapper
@@ -12,12 +12,13 @@
         animate__bounceOut: !getIncorrectCodeEntered,
       }"
       >
-        BAD CODE
+        {{ t('BadCode') }}
       </atom-animated-wrapper>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
+import { useI18n } from 'vue-i18n';
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import MoleculeInputFloatingLabel from "@/components/molecules/MoleculeInputFloatingLabel.vue"
@@ -40,6 +41,7 @@ export default defineComponent({
     const { switchIncorrectCodeEntered } = useMainStore();
 
     const router = useRouter();
+    const { t } = useI18n();
 
     const calendarHash = ref("");
 
@@ -62,7 +64,12 @@ export default defineComponent({
       }
     });
 
-    return { calendarHash, getIncorrectCodeEntered, pushWithQuery };
+    return { 
+      calendarHash, 
+      getIncorrectCodeEntered, 
+      pushWithQuery,
+      t 
+    };
   }
 });
 </script>
@@ -77,6 +84,7 @@ export default defineComponent({
     font-size: 13px;
     font-weight: 100;
     letter-spacing: 1px;
+    text-transform: uppercase;
   }
 }
 </style>

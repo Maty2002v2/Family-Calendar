@@ -1,0 +1,55 @@
+{
+  "months": {
+    "January": "Styczeń",
+    "February": "Luty",
+    "March": "Marzec",
+    "April": "Kwiecień",
+    "May": "Maj",
+    "June": "Czerwiec",
+    "July": "Lipiec",
+    "August": "Sierpień",
+    "September": "Wrzesień",
+    "October": "Październik",
+    "November": "Listopad",
+    "December": "Grudzień"
+  },
+  "shortNamesDaysOfWeek": {
+    "Sun": "Niedz",
+    "Mon": "Pon",
+    "Tues": "Wt",
+    "Wed": "Śr",
+    "Thurs": "Czw",
+    "Fri": "Pt",
+    "Sat": "Sob"
+  },
+  "CreateCalendar": "Stwórz swój kalendarz",
+  "JoinExisting": "Dołącz do już istniejącego",
+  "create": "stwórz",
+  "SomethingWentWrongTryLater": "Coś jest nie tak <br /> Spróbuj później",
+  "join": "Dołącz",
+  "BadCode": "Zły kod",
+  "CODE": "KOD",
+  "startAlert": {
+    "hereIsYourCode": "<span style='font-weight: 600;' >Cześć</span>, oto twój kod do tego kalendarza ",
+    "youCanShare": "Możesz <span style='font-weight: 600;' >udostępnić</span> go tym z którymi chcesz dzielić dostęp."
+  },
+  "close": "Zamknij",
+  "Details": "Szczegóły",
+  "addToDayModal": {
+    "DayOff": "Masz dziś wolny dzień!",
+    "AddToDay": "Dodaj do dnia",
+    "Title": "Tytuł",
+    "Description": "Opis",
+    "placeholders": {
+      "title": "Spotkanie z teściami...",
+      "description": "O 15:00. Nie bądź pijany"
+    },
+    "giveData": "podaj dane",
+    "add": "dodaj",
+    "DoYouRepeat": "Czy powtarzać co roku?",
+    "Disposable": "Jednorazowo",
+    "repeatEveryYear": "Powtarzaj co roku",
+    "Icon": "Ikona",
+    "Color": "Kolor"
+  }
+}

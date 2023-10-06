@@ -4,8 +4,7 @@
 		@closeModal="switchShowModalOfNewCalendar(false)">
 		<div class="modal-of-new-calendar">
 			<atom-title tag="h2" class="modal-of-new-calendar__h2">
-				<span class="modal-of-new-calendar__thickening-span">Hey</span>, here's
-				the code for this calendar
+				<span v-html="t('startAlert.hereIsYourCode')"></span>
 				<span
 					class="modal-of-new-calendar__thickening-span modal-of-new-calendar__hash"
 					ref="codeSpan"
@@ -13,15 +12,11 @@
 					{{ getCalendarHash }} </span
 				>.
 			</atom-title>
-			<p class="modal-of-new-calendar__p">
-				You can
-				<span class="modal-of-new-calendar__thickening-span">share</span> it
-				with those you want to give access.
-			</p>
+			<p v-html="t('startAlert.youCanShare')" class="modal-of-new-calendar__p"></p>
 			<molecule-pill-button
 				class="modal-of-new-calendar__button"
 				@click="closeAndCopy"
-				>Close</molecule-pill-button
+				>{{ t('close') }}</molecule-pill-button
 			>
 		</div>
 	</molecule-modal>
@@ -29,6 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import AtomTitle from '../atoms/AtomTitle.vue';
 import MoleculePillButton from '@/components/molecules/MoleculePillButton.vue';
@@ -54,6 +50,7 @@ export default defineComponent({
 		const { getCalendarHash } = storeToRefs(useCalendarApiStore());
 
 		const { copyTextToClipboard, copyTextState } = useCopyText();
+		const { t } = useI18n();
 
 		const codeSpan = ref();
 		const closeAndCopy = () => switchShowModalOfNewCalendar(false);
@@ -75,6 +72,7 @@ export default defineComponent({
 			closeAndCopy,
 			closeModal,
 			copyHash,
+			t,
 		};
 	},
 });
@@ -96,10 +94,6 @@ export default defineComponent({
 	color: $active-day;
 
 	background: $background-color;
-
-	&__thickening-span {
-		font-weight: 600;
-	}
 
 	&__hash {
 		display: inline-block;
@@ -125,6 +119,10 @@ export default defineComponent({
 	&__p {
 		font-weight: 500;
 		letter-spacing: 1px;
+	}
+
+	&__thickening-span {
+		font-weight: 600;
 	}
 
 	&__button {

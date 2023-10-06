@@ -3,7 +3,7 @@
     <article class="molecule-modal-day-details">
       <section v-if="specialDayList.length > 0" class="details-of-day">
         <header class="details-of-day__header" role="complementary">
-          <atom-title tag="h2" content="Details" class="details-of-day__h2" />
+          <atom-title tag="h2" :content="t('Details')" class="details-of-day__h2" />
         </header>
         <div class="accordions">
           <molecule-accordion
@@ -31,7 +31,7 @@
       </section>
 
       <section v-else class="info-about-lack-of-days">
-        <atom-title tag="h2" content="You have a day off!" class="info-about-lack-of-days__h2" />
+        <atom-title tag="h2" :content="t('addToDayModal.DayOff')" class="info-about-lack-of-days__h2" />
         <div class="info-about-lack-of-days__div">
           <atom-icon class="icon-ok" />
         </div>
@@ -45,6 +45,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useI18n } from 'vue-i18n';
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -82,12 +83,18 @@ export default defineComponent({
     const { switchShowNewDayForm, switchShowModalDetailsOffDay } =
       useMainStore();
 
+    const { t } = useI18n();
+
     const closeModal = () => {
       switchShowModalDetailsOffDay(false);
       switchShowNewDayForm(false);
     };
 
-    return { getShowModalDetailsOffDay, closeModal };
+    return { 
+      getShowModalDetailsOffDay,
+      closeModal,
+      t
+    };
   },
 });
 </script>

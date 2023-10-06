@@ -2,45 +2,47 @@
   <div v-show="!modalIsOpen" class="molecule-mobile-menu" ref="mobileMenuElement">
     <button class="molecule-mobile-menu__triger" @click="switchState" ref="trigerButton"></button>
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--0"></div>
-    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--1"></div>
+    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--1">
+      <molecule-language-switcher />
+    </div>
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--2">
       <molecule-list-of-whole-month />
     </div>
 
     <div class="molecule-mobile-menu__navgation-buttons-wrapper">
-      <molecule-navigation-button
+      <atom-navigation-button
         :step="-1"
         >
           <template v-slot:mobile-icon>
             <atom-icon class="icon-left-open-mini"/>
           </template>
-      </molecule-navigation-button>
+      </atom-navigation-button>
 
-      <molecule-navigation-button
+      <atom-navigation-button
         :step="-12"
       >
         <template v-slot:mobile-icon>
           <atom-icon class="icon-angle-double-left"/>
         </template>
-      </molecule-navigation-button>
+      </atom-navigation-button>
     </div>
     
     <div class="molecule-mobile-menu__navgation-buttons-wrapper">
-      <molecule-navigation-button
+      <atom-navigation-button
         :step="12"
       >
         <template v-slot:mobile-icon>
           <atom-icon class="icon-angle-double-right"/>
         </template>
-      </molecule-navigation-button>
+      </atom-navigation-button>
 
-      <molecule-navigation-button
+      <atom-navigation-button
         :step="1"
         >
           <template v-slot:mobile-icon>
             <atom-icon class="icon-right-open-mini"/>
           </template>
-      </molecule-navigation-button>
+      </atom-navigation-button>
     </div>
   </div>
 </template>
@@ -50,8 +52,9 @@ import { defineComponent, ref } from "vue";
 import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
+import MoleculeLanguageSwitcher from "@/components/molecules/MoleculeLanguageSwitcher.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
-import MoleculeNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
 
 import { useMainStore } from '@/stores/MainStore';
 
@@ -59,8 +62,9 @@ export default defineComponent({
   name: "MoleculeMobileMenu",
   components: {
     AtomIcon,
+    AtomNavigationButton,
+    MoleculeLanguageSwitcher,
     MoleculeListOfWholeMonth,
-    MoleculeNavigationButton,
   },
   setup() {
     const { modalIsOpen } = storeToRefs(useMainStore());
