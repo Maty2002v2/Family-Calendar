@@ -1,10 +1,11 @@
 import { onMounted, ref, watch } from 'vue'
 
-export const useLocalStorage = (key: string, defaultValue: string) => {
+export const useLocalStorage = (key: string, defaultValue = '') => {
   const localStorageValue = ref('');
   
   onMounted(() => {
     const localStorageInitValue = localStorage.getItem(key);
+    
     if(localStorageInitValue) {
       localStorageValue.value = localStorageInitValue;
       return;
@@ -16,7 +17,7 @@ export const useLocalStorage = (key: string, defaultValue: string) => {
   
 
   watch(localStorageValue, (newValue) => {
-    localStorage.setItem(key, newValue);
+    localStorage.setItem(key, newValue ?? '');
   });
 
   return localStorageValue;
