@@ -6,7 +6,7 @@
       @update:showContent="(newValue) => switchShowNewDayForm(newValue)"
     >
       <template v-slot:title>
-        <atom-title tag="h2" content="Add a new day" class="molecule-new-day-accordion__h2" />
+        <atom-title tag="h2" :content="t('addToDayModal.AddToDay')" class="molecule-new-day-accordion__h2" />
       </template>
       <template v-slot:char-toggle>
         <atom-plus-minus-switch class="char-toggle" :isOpen="getShowNewDayForm" />
@@ -18,15 +18,15 @@
             <molecule-input-with-label
               v-model="title"
               :maxLength="15"
-              placeholder="Meeting with in-laws..."
-              label="Title"
+              :placeholder="t('addToDayModal.placeholders.title')"
+              :label="t('addToDayModal.Title')"
               :requaied="true"
               :showCounter="true"
             />
             <molecule-textarea-with-label
               v-model="description"
-              placeholder="At 15:00. Don't be drunk..."
-              label="Description"
+              :placeholder="t('addToDayModal.placeholders.description')"
+              :label="t('addToDayModal.Description')"
               :maxLength="50"
               :rows="5"
               :requaied="true"
@@ -42,7 +42,7 @@
               />
               <div class="form__button-container">
                 <molecule-pill-button
-                  :jelloAniamted="titleOfButton === 'give data'"
+                  :jelloAniamted="titleOfButton === t('addToDayModal.giveData')"
                   @click="addDay"
                 >
                   {{ titleOfButton }}
@@ -58,6 +58,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, reactive } from "vue";
+import { useI18n } from 'vue-i18n';
 
 import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -99,12 +100,14 @@ export default defineComponent({
 
     const { getShowNewDayForm } = storeToRefs(useMainStore());
     const { switchShowNewDayForm } = useMainStore();
+    
+    const { t } = useI18n();
 
     const title = ref("");
     const description = ref("");
     const toRepeat = ref(false);
     const iconDay = ref({ name: "icon-briefcase", color: "#DE5858" });
-    const titleOfButton = ref("add");
+    const titleOfButton = ref(t('addToDayModal.add'));
     const showAccordionContent = ref(getShowNewDayForm.value);
 
     const accordionHeaderStyles = reactive({
@@ -134,9 +137,9 @@ export default defineComponent({
           description.value = "";
         });
       } else {
-        if (titleOfButton.value === "add") {
-          titleOfButton.value = "give data";
-          setTimeout(() => (titleOfButton.value = "add"), 2000);
+        if (titleOfButton.value === t('addToDayModal.add')) {
+          titleOfButton.value = t('addToDayModal.giveData');
+          setTimeout(() => (titleOfButton.value = t('addToDayModal.add')), 2000);
         }
       }
     };
@@ -154,6 +157,7 @@ export default defineComponent({
       switchShowNewDayForm,
       setToRepeat,
       addDay,
+      t,
     };
   },
 });

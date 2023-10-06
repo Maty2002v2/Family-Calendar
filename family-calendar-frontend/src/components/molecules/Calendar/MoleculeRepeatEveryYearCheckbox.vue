@@ -1,16 +1,21 @@
 <template>
   <div class="molecule-repeat-every-year-checkbox">
     <label class="molecule-repeat-every-year-checkbox__label"
-      >Do you repeat every year</label
+      >{{ t('addToDayModal.DoYouRepeat') }}</label
     >
     <div class="molecule-repeat-every-year-checkbox__content">
-      <molecule-checkbox-form firstOption="Disposable" secoundOption="Repeat every year" @valueToggle="(value) => switchValue = value"/>
+      <molecule-checkbox-form 
+        :firstOption="t('addToDayModal.Disposable')" 
+        :secoundOption="t('addToDayModal.repeatEveryYear')" 
+        @valueToggle="(value) => switchValue = value"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, watchEffect } from "vue";
+import { useI18n } from 'vue-i18n';
 
 import MoleculeCheckboxForm from "@/components/molecules/MoleculeCheckboxForm.vue";
 
@@ -21,11 +26,16 @@ export default defineComponent({
     MoleculeCheckboxForm
   },
   setup(props, { emit }) {
+    const { t } = useI18n();
+
     const switchValue = ref(false);
 
     watchEffect(() => emit("getCheckboxValue", switchValue.value));
 
-    return { switchValue };
+    return { 
+      switchValue,
+      t,
+    };
   },
 });
 </script>

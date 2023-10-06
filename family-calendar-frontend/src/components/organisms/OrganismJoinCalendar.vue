@@ -2,17 +2,18 @@
   <atom-animated-wrapper
     class="organism-join-calendar animate__zoomIn animate__delay-1s"
   >
-    <atom-title tag="h2" content="Join already existing calendar." class="organism-join-calendar__h2" />
+    <atom-title tag="h2" :content="`${t('JoinExisting')}.`" class="organism-join-calendar__h2" />
     <molecule-join-calendar-form class="organism-join-calendar__form" />
   </atom-animated-wrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent} from "vue";
+import { useI18n } from 'vue-i18n';
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import AtomTitle from "../atoms/AtomTitle.vue";
-import MoleculeJoinCalendarForm from "@/components/molecules/MoleculeJoinCalendarForm.vue"
+import MoleculeJoinCalendarForm from "@/components/molecules/MoleculeJoinCalendarForm.vue";
 
 export default defineComponent({
   name: "OrganismJoinCalendar",
@@ -20,6 +21,13 @@ export default defineComponent({
     AtomTitle,
     AtomAnimatedWrapper,
     MoleculeJoinCalendarForm
+  },
+  setup() {
+    const { t } = useI18n();
+
+    return {
+      t
+    }
   }
 });
 </script>
