@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, reactive } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import { useI18n } from 'vue-i18n';
 
 import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
@@ -73,6 +73,8 @@ import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "../../../stores/CalendarApiStore";
 import { useDateStore } from "../../../stores/DateStore";
 import { useMainStore } from "../../../stores/MainStore";
+
+import { useTheme } from '@/composables/useTheme';
 
 export default defineComponent({
   name: "MoleculeNewDayAccordion",
@@ -93,6 +95,8 @@ export default defineComponent({
     MoleculeRepeatEveryYearCheckbox,
   },
   setup(props) {
+    const { mainColor } = useTheme();
+    
     const { getCalendarHash } = storeToRefs(useCalendarApiStore());
     const { addDayToCalendar } = useCalendarApiStore();
 
@@ -110,10 +114,10 @@ export default defineComponent({
     const titleOfButton = ref(t('addToDayModal.add'));
     const showAccordionContent = ref(getShowNewDayForm.value);
 
-    const accordionHeaderStyles = reactive({
-      background: "#F15C5C",
+    const accordionHeaderStyles = computed(() => ({
+      background: mainColor.value,
       position: "relative",
-    });
+    }));
 
     const correctData = computed(
       () => title.value.length > 0 && description.value.length > 0
@@ -170,14 +174,14 @@ export default defineComponent({
     padding: 20px;
     box-sizing: border-box;
 
-    background: $active-day;
+    background: $main-color;
 
     cursor: pointer;
   }
 
   &__h2 {
     margin: 0px;
-    color: $white;
+    color: $modal-headers-color;
   }
 }
 
@@ -190,9 +194,9 @@ export default defineComponent({
   width: 40px;
   border-radius: 50%;
 
-  color: $active-day;
+  color: $main-color;
 
-  background: $white;
+  background: $modal-headers-color;
 
   transform: translate(50%, -50%);
 }
@@ -204,9 +208,10 @@ export default defineComponent({
   gap: 30px;
   padding: 35px 20px;
   box-sizing: border-box;
-  border: 5px solid $active-day;
+  border: 5px solid $main-color;
+  border-top: none;
 
-  color: $color-day-field;
+  color: $main-font-color;
   font-size: 15px;
   font-weight: bold;
 

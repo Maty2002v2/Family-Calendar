@@ -41,6 +41,8 @@ import { useI18n } from 'vue-i18n';
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import MoleculeSelectionIconPopup from "@/components/molecules/Calendar/MoleculeSelectionIconPopup.vue";
 
+import { useTheme } from '@/composables/useTheme';
+
 export default defineComponent({
   name: "MoleculeCustomizationDayIcon",
   components: {
@@ -50,6 +52,7 @@ export default defineComponent({
   emits: ["getIconDay"],
   setup(props, { emit }) {
     const { t } = useI18n();
+    const { mainColor } = useTheme();
 
     const iconNameList = [
       { name: "icon-shopping-basket" },
@@ -108,11 +111,15 @@ export default defineComponent({
     ];
 
     const selectedIcon = ref("icon-briefcase");
-    const selectedColor = ref("#DE5858");
+    const selectedColor = ref(mainColor.value);
 
     watch([selectedIcon, selectedColor], ([newIcon, newColor]) => {
       emit("getIconDay", { name: newIcon, color: newColor });
     });
+
+    watch(mainColor, (newValue) => {
+      selectedColor.value = newValue;
+    })
 
     return {
       iconNameList,

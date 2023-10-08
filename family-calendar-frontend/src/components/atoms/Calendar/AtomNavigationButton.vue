@@ -55,13 +55,13 @@ export default defineComponent({
   height: 30px;
   box-sizing: border-box;
 
-  color: #666; //#333
+  color: $main-font-color; //#333
   font-family: sans-serif;
 
   background-color: transparent;
 
   &:hover {
-    background: $hover-blue;
+    background: $hover-day-field;
     cursor: pointer;
   }
 

@@ -24,14 +24,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@mixin home__segments($color, $background-color) {
+@mixin home__segments($color, $app-background-color) {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
 
   color: $color;
 
-  background-color: $background-color;
+  background-color: $app-background-color;
 }
 
 .home {
@@ -41,11 +41,11 @@ export default defineComponent({
   height: max(100vh, 600px);
 
   &__create-calendar {
-    @include home__segments($background-color, $active-day);
+    @include home__segments($background-color, $main-color);
   }
 
   &__join-calendar {
-    @include home__segments($active-day, $background-color);
+    @include home__segments($main-color, $background-color);
   }
 }
 
