@@ -91,7 +91,7 @@ export default defineComponent({
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
 	text-align: center;
-	color: $active-day;
+	color: $main-color;
 
 	background: $background-color;
 

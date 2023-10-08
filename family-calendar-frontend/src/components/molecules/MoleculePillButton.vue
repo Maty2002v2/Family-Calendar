@@ -34,14 +34,14 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .btn-pils {
 	display: inline-block;
 	outline: 0;
 	border: 0;
 	cursor: pointer;
 	font-weight: 600;
-	color: #fff;
+	color: $input-background-color;
 	font-size: 14px;
 	height: 38px;
 	padding: 8px 24px;

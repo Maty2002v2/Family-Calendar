@@ -46,7 +46,7 @@ export default defineComponent({
   text-align: center;
   box-sizing: border-box;
 
-  color: #666;
+  color: $main-font-color;
   font-family: sans-serif;
   font-size: 18px;
   line-height: 30px;

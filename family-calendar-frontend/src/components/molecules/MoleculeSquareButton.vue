@@ -72,7 +72,7 @@ export default defineComponent({
     &--gradient {
         @extend .btn-rectangle;
         border-radius: 6px;
-        box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d85252;
+        box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px $main-color;
         
         color: $btn-rectangle--gradient-color;
         text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
@@ -81,11 +81,11 @@ export default defineComponent({
     }
         
     &--gradient:hover {
-        box-shadow: 0px 4px 8px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px $active-day;
+        box-shadow: 0px 4px 8px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px $main-color;
     }
     
     &--gradient:active {
-        box-shadow: inset 0px 3px 7px $active-day;
+        box-shadow: inset 0px 3px 7px $main-color;
     }
 }
 </style>

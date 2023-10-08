@@ -43,10 +43,10 @@ export default defineComponent({
   &__span {
     @include position($top: 0px, $right: 0px, $bottom: 0px, $left: 0px);
 
-    border: 2px solid $active-day;
+    border: 2px solid $main-color;
     border-radius: 34px;
 
-    background-color: $white;
+    background-color: $input-background-color;
 
     cursor: pointer;
     -webkit-transition: 0.4s;
@@ -61,7 +61,7 @@ export default defineComponent({
       width: 26px;
       border-radius: 50%;
 
-      background-color: $active-day;
+      background-color: $main-color;
 
       -webkit-transition: 0.4s;
       transition: 0.4s;

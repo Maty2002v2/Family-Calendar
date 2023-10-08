@@ -90,7 +90,7 @@ export default defineComponent({
 .app-accordion {
   
   &--underline {
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid $break-line-color;
   }
 
   &__header {
@@ -130,10 +130,11 @@ export default defineComponent({
 
   &__default-char-toggle {
     position: relative;
-    color: $color-day-field;
     height: 100%;
     width: 30px;
     margin: 0px 10px;
+    
+    color: $main-font-color;
   }
 }
 </style>

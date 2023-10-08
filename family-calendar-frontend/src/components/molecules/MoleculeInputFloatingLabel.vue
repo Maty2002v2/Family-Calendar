@@ -53,7 +53,7 @@ export default defineComponent({
   &__label {
     @include position($top: 50%, $left: 15px);
 
-    color: $color-day-field;
+    color: $input-placeholder-color;
 
     user-select: none;
     pointer-events: none;
@@ -64,7 +64,7 @@ export default defineComponent({
   .input:focus ~ label,
   .input:valid ~ label {
     top: -15px;
-    color: $active-day;
+    color: $main-color;
     letter-spacing: 1px;
     transform: translateY(-50%) scale(1.2);
   }

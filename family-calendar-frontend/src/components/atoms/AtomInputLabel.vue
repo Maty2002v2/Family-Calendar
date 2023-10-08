@@ -29,7 +29,7 @@ export default {
   letter-spacing: 1px;
 
   &__optional-span {
-    color: $active-day;
+    color: $main-color;
   }
 }
 </style>

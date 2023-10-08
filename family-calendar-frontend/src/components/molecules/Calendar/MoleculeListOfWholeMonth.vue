@@ -149,7 +149,7 @@ transform: translate(-50%, -50%);
   color: $white;
   font-size: 30px;
 
-  background: $active-day;
+  background: $main-color;
 
   cursor: pointer;
   transform: translate(-50%, -50%);
@@ -167,14 +167,14 @@ transform: translate(-50%, -50%);
   @include flex-centering;
   width: 20px;
   height: 20px;
-  border: 2px solid $active-day;
+  border: 2px solid $main-color;
   border-radius: 50%;
 
-  color: $color-day-field;
+  color: $main-font-color;
   font-size: 15px;
   font-weight: 600;
 
-  background: $white;
+  background: $background-color;
 }
 
 &__list {
@@ -208,7 +208,7 @@ background: $background-color;
 &__date,
 &__title,
 &__content {
-  color: $color-day-field;
+  color: $main-font-color;
 }
 
 &__content {

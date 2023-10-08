@@ -43,7 +43,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .input-counter {
   &__span {
-    color: $active-day;
+    color: $main-color;
     font-weight: 500;
   }
 }

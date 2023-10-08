@@ -42,7 +42,7 @@ export default defineComponent({
 
   &__icon {
     display: inline-block;
-    color: $active-day;
+    color: $main-color;
     font-size: 20px;
     cursor: pointer;
     transition: all 0.2s ease;
