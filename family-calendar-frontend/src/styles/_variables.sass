@@ -1,12 +1,14 @@
 //colors
-$background-color: #FEFEFE
-$hover-blue: #D1EBFD
-$active-day: #F15C5C
-$hover-active-day: #DE5858
-$background-field: #FAFAFA
-$color-day-field: #666666
+$background-color: var(--appBackgroundColor)
+$hover-day-field: var(--hoverDayFieldBackgroundColor)
+$main-color: var(--mainColor)
+$hover-active-day: var(--hoverCurrentDayBackgroundColor)
+$background-field: var(--backgroundDayField)
+$main-font-color: var(--mainFontColor)
+$modal-headers-color: var(--modalHeadressColor)
+$break-line-color: var(--breakLineColor)
+$menu-background-color: var(--menuBackgroundColor)
 $white: #FFFFFFFF
-
 
 //breakpoints
 $large: 740px
@@ -14,11 +16,14 @@ $medium: 630px
 $small: 460px
 $extra-small: 300px
 
+//inputs
+$input-background-color: var(--inputBackgroundColor)
+$input-placeholder-color: var(--inputPlaceholdercolor)
 
 //buttons
-$btn-rectangle-color: #c04949
+$btn-rectangle-color: $main-color
 $btn-rectangle-background-color: #FCFCFD
 $btn-rectangle-shawod: #D6D6E7
 
 $btn-rectangle--gradient-color: #FFFFFFFF
-$btn-rectangle--gradient-background-color: linear-gradient(30deg, rgba(241,92,92,1) 39%, rgba(253,253,253,1) 100%)
+$btn-rectangle--gradient-background-color: var(--btnRectangleGradientColor)

@@ -48,15 +48,26 @@ export default {
   border: 1px solid #ccc;
   box-sizing: border-box;
 
-  color: $color-day-field;
+  color: $input-placeholder-color;
   font-size: 15px;
   letter-spacing: 1px;
+
+  background-color: $input-background-color;
 
   transition: all 0.3s ease;
 
   &:focus {
-    outline-color: $active-day;
-    box-shadow: 0px 0px 3px $active-day;
+    outline-color: $main-color;
+    box-shadow: 0px 0px 3px $main-color;
+  }
+
+  &::placeholder {
+    color: $input-placeholder-color;
+    opacity: 1; /* Firefox */
+  }
+
+  &::-ms-input-placeholder { /* Edge 12 -18 */
+    color: $input-placeholder-color;
   }
 }
 </style>

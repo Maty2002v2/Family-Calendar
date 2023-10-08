@@ -6,7 +6,7 @@
       @update:showContent="(newValue) => switchShowNewDayForm(newValue)"
     >
       <template v-slot:title>
-        <atom-title tag="h2" content="Add a new day" class="molecule-new-day-accordion__h2" />
+        <atom-title tag="h2" :content="t('addToDayModal.AddToDay')" class="molecule-new-day-accordion__h2" />
       </template>
       <template v-slot:char-toggle>
         <atom-plus-minus-switch class="char-toggle" :isOpen="getShowNewDayForm" />
@@ -18,15 +18,15 @@
             <molecule-input-with-label
               v-model="title"
               :maxLength="15"
-              placeholder="Meeting with in-laws..."
-              label="Title"
+              :placeholder="t('addToDayModal.placeholders.title')"
+              :label="t('addToDayModal.Title')"
               :requaied="true"
               :showCounter="true"
             />
             <molecule-textarea-with-label
               v-model="description"
-              placeholder="At 15:00. Don't be drunk..."
-              label="Description"
+              :placeholder="t('addToDayModal.placeholders.description')"
+              :label="t('addToDayModal.Description')"
               :maxLength="50"
               :rows="5"
               :requaied="true"
@@ -42,7 +42,7 @@
               />
               <div class="form__button-container">
                 <molecule-pill-button
-                  :jelloAniamted="titleOfButton === 'give data'"
+                  :jelloAniamted="titleOfButton === t('addToDayModal.giveData')"
                   @click="addDay"
                 >
                   {{ titleOfButton }}
@@ -57,7 +57,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, reactive } from "vue";
+import { defineComponent, ref, computed } from "vue";
+import { useI18n } from 'vue-i18n';
 
 import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -72,6 +73,8 @@ import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "../../../stores/CalendarApiStore";
 import { useDateStore } from "../../../stores/DateStore";
 import { useMainStore } from "../../../stores/MainStore";
+
+import { useTheme } from '@/composables/useTheme';
 
 export default defineComponent({
   name: "MoleculeNewDayAccordion",
@@ -92,6 +95,8 @@ export default defineComponent({
     MoleculeRepeatEveryYearCheckbox,
   },
   setup(props) {
+    const { mainColor } = useTheme();
+    
     const { getCalendarHash } = storeToRefs(useCalendarApiStore());
     const { addDayToCalendar } = useCalendarApiStore();
 
@@ -99,18 +104,20 @@ export default defineComponent({
 
     const { getShowNewDayForm } = storeToRefs(useMainStore());
     const { switchShowNewDayForm } = useMainStore();
+    
+    const { t } = useI18n();
 
     const title = ref("");
     const description = ref("");
     const toRepeat = ref(false);
     const iconDay = ref({ name: "icon-briefcase", color: "#DE5858" });
-    const titleOfButton = ref("add");
+    const titleOfButton = ref(t('addToDayModal.add'));
     const showAccordionContent = ref(getShowNewDayForm.value);
 
-    const accordionHeaderStyles = reactive({
-      background: "#F15C5C",
+    const accordionHeaderStyles = computed(() => ({
+      background: mainColor.value,
       position: "relative",
-    });
+    }));
 
     const correctData = computed(
       () => title.value.length > 0 && description.value.length > 0
@@ -134,9 +141,9 @@ export default defineComponent({
           description.value = "";
         });
       } else {
-        if (titleOfButton.value === "add") {
-          titleOfButton.value = "give data";
-          setTimeout(() => (titleOfButton.value = "add"), 2000);
+        if (titleOfButton.value === t('addToDayModal.add')) {
+          titleOfButton.value = t('addToDayModal.giveData');
+          setTimeout(() => (titleOfButton.value = t('addToDayModal.add')), 2000);
         }
       }
     };
@@ -154,6 +161,7 @@ export default defineComponent({
       switchShowNewDayForm,
       setToRepeat,
       addDay,
+      t,
     };
   },
 });
@@ -166,14 +174,14 @@ export default defineComponent({
     padding: 20px;
     box-sizing: border-box;
 
-    background: $active-day;
+    background: $main-color;
 
     cursor: pointer;
   }
 
   &__h2 {
     margin: 0px;
-    color: $white;
+    color: $modal-headers-color;
   }
 }
 
@@ -186,9 +194,9 @@ export default defineComponent({
   width: 40px;
   border-radius: 50%;
 
-  color: $active-day;
+  color: $main-color;
 
-  background: $white;
+  background: $modal-headers-color;
 
   transform: translate(50%, -50%);
 }
@@ -200,9 +208,10 @@ export default defineComponent({
   gap: 30px;
   padding: 35px 20px;
   box-sizing: border-box;
-  border: 5px solid $active-day;
+  border: 5px solid $main-color;
+  border-top: none;
 
-  color: $color-day-field;
+  color: $main-font-color;
   font-size: 15px;
   font-weight: bold;
 
@@ -218,6 +227,15 @@ export default defineComponent({
     @include flex-basis(50%);
     @include flexbox;
     @include flex-centering(flex-end, center);
+  }
+}
+
+
+
+@media only screen and (max-width: $small) {
+  .form {
+    gap: 13px;
+    padding: 18px 15px 15px 15px;
   }
 }
 
