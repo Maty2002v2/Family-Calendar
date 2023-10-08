@@ -59,7 +59,7 @@ export default defineComponent({
     transition: all 0.3s ease;
 
     &--active {
-      color: $active-day;
+      color: $main-color;
     }
   }
 }

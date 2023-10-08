@@ -80,7 +80,7 @@ export default defineComponent({
     width: 100%;
     text-align: center;
 
-    color: $color-day-field;
+    color: $main-font-color;
     font-size: 13px;
     font-weight: 100;
     letter-spacing: 1px;

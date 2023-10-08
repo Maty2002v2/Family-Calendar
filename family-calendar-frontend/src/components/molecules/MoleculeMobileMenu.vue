@@ -1,7 +1,9 @@
 <template>
   <div v-show="!modalIsOpen" class="molecule-mobile-menu" ref="mobileMenuElement">
     <button class="molecule-mobile-menu__triger" @click="switchState" ref="trigerButton"></button>
-    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--0"></div>
+    <div class="molecule-mobile-menu__item molecule-mobile-menu__item--0">
+      <moloecule-dark-mode-switcher />
+    </div>
     <div class="molecule-mobile-menu__item molecule-mobile-menu__item--1">
       <molecule-language-switcher />
     </div>
@@ -53,6 +55,7 @@ import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
+import MoloeculeDarkModeSwitcher from "@/components/molecules/MoloeculeDarkModeSwitcher.vue";
 import MoleculeLanguageSwitcher from "@/components/molecules/MoleculeLanguageSwitcher.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
 
@@ -63,6 +66,7 @@ export default defineComponent({
   components: {
     AtomIcon,
     AtomNavigationButton,
+    MoloeculeDarkModeSwitcher,
     MoleculeLanguageSwitcher,
     MoleculeListOfWholeMonth,
   },
@@ -104,14 +108,14 @@ export default defineComponent({
   box-sizing: border-box;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 
-  background: radial-gradient(circle at top, rgba(238, 238, 238, 0) 0%, rgba(238, 238, 238, 0) 23%, rgb(238, 238, 238) 22%, rgb(238, 238, 238) 100%);
+  background: $menu-background-color;
 
   &__triger {
     @include position($position: absolute, $bottom: 80px, $left: calc(50% - 35px));
 
     width: 70px;
     height: 70px;
-    background: #FFFFFF;
+    background: $background-color;
     border: none;
     border-radius: 50%;
     padding: 20px;
@@ -125,7 +129,7 @@ export default defineComponent({
       position: absolute;
       top: 50%;
       left: 50%;
-      background: $active-day;
+      background: $main-color;
       transform: translate(-50%, -50%);
     }
 
@@ -141,7 +145,7 @@ export default defineComponent({
 
     &.is-rotate {
       transform: translateY(40%) rotateZ(225deg);
-      background-color: $active-day;
+      background-color: $main-color;
 
       &::after, &::before{
         background: #FFFFFF;
@@ -160,7 +164,7 @@ export default defineComponent({
       padding: 10px;
       border-radius: 50%;
 
-      background: #FFFFFF;
+      background: $background-color;
       border: none;
       box-shadow: 0 0 5px 1px rgba(0,0,0,.05);
       z-index: -1000;
@@ -170,13 +174,13 @@ export default defineComponent({
     &__item--0{ 
       transition: .35s ease; 
       left: calc(50% - 30px);
-      background-color: $background-field;
+      // background-color: $background-field;
     }
 
     &__item--1{ 
       transition: .35s ease .1s; 
       left: calc(50% - 30px);
-      background-color: $background-field;
+      // background-color: $background-field;
     }
 
     &__item--2{ 

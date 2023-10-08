@@ -97,7 +97,7 @@ export default defineComponent({
     background: $white;
 
     &:hover {
-      border: 2px solid $active-day;
+      border: 2px solid $main-color;
     }
   }
 
@@ -121,7 +121,7 @@ export default defineComponent({
 
     &:hover {
       border-radius: 3px;
-      color: $active-day;
+      color: $main-color;
       background: $white;
       cursor: pointer;
       transform: scale(1.4);
