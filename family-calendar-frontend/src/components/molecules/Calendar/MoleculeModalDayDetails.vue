@@ -118,7 +118,7 @@ export default defineComponent({
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     box-sizing: border-box;
-    background: $active-day;
+    background: $main-color;
   }
 
   &__h2 {
@@ -139,20 +139,20 @@ export default defineComponent({
   }
 
   &__title {
-    color: $color-day-field;
+    color: $main-font-color;
     font-size: 20px;
   }
 
   &__content {
     padding: 10px;
-    color: $color-day-field;
+    color: $main-font-color;
   }
 }
 
 .info-about-lack-of-days {
   &__h2 {
     text-align: center;
-    color: $active-day;
+    color: $main-color;
     font-size: 30px;
     font-weight: 500;
   }
@@ -163,15 +163,15 @@ export default defineComponent({
     width: 50px;
     height: 50px;
     padding: 10px;
-    border: 2px solid $active-day;
+    border: 2px solid $main-color;
     border-radius: 50%;
     @include margin-auto;
     box-sizing: border-box;
 
-    color: $active-day;
+    color: $main-color;
     font-size: 30px;
 
-    background: $white;
+    background: $background-color;
   }
 }
 

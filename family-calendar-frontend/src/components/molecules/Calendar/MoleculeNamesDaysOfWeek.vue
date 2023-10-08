@@ -45,7 +45,7 @@ $size-day-div: calc(100% / 7 - 5px);
   box-sizing: border-box;
   margin: 15px 0px;
 
-  color: #aaa;
+  color: $main-font-color;
   font-family: sans-serif;
   font-weight: normal;
   font-size: 15px;
@@ -56,7 +56,7 @@ $size-day-div: calc(100% / 7 - 5px);
   }
 
   &__div--sunday {
-    color: $active-day !important;
+    color: $main-color !important;
     font-weight: bold;
   }
 }

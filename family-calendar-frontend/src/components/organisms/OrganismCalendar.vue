@@ -84,7 +84,7 @@ import { useDateStore } from "@/stores/DateStore";
 import { useMainStore } from "@/stores/MainStore";
 
 import { useWidthWindow } from "@/composables/useWidthWindow";
-
+import { useTheme } from '@/composables/useTheme';
 export default defineComponent({
   name: "OrganismCalendar",
   components: {
@@ -113,6 +113,7 @@ export default defineComponent({
     const { switchShowModalDetailsOffDay } = useMainStore();
 
     const { width } = useWidthWindow();
+    const { mode, tapSwitchMode }  = useTheme();
 
     const calendarTransitionAnimationName = ref('');
 
@@ -143,6 +144,7 @@ export default defineComponent({
     };
 
     return {
+      mode,
       isMobile,
       getDay,
       getMounth,
@@ -154,6 +156,7 @@ export default defineComponent({
       calendarTransitionAnimationName,
       indexOfSelectedDay,
       showThisDay,
+      tapSwitchMode,
     };
   },
 });
@@ -193,12 +196,12 @@ $size-day-div: calc(100% / 7 - 5px);
     border: 1px solid rgb(149, 148, 148);
     box-sizing: border-box;
 
-    color: $color-day-field;
+    color: $main-font-color;
 
     background: $background-field;
 
     &:hover {
-      background: $hover-blue;
+      background: $hover-day-field;
       cursor: pointer;
     }
 
@@ -210,7 +213,7 @@ $size-day-div: calc(100% / 7 - 5px);
     &--active {
       color: #fff;
       font-weight: bold;
-      background: $active-day;
+      background: $main-color;
 
       &:hover {
         background: $hover-active-day;
@@ -266,7 +269,7 @@ $size-day-div: calc(100% / 7 - 5px);
       border-radius: 100px;
       background-image: linear-gradient(
         180deg,
-        $active-day 0%,
+        $main-color 0%,
         $background-field 99%
       );
       box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);

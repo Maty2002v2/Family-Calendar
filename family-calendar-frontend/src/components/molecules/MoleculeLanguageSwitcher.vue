@@ -40,7 +40,7 @@ export default defineComponent({
   width: 50px;
   border-radius: 50%;
 
-  color: #FFFFFF;
+  color: $modal-headers-color;
   font-weight: 600;
   text-transform: uppercase;
 }
