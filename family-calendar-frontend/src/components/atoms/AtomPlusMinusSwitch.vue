@@ -26,7 +26,7 @@ export default defineComponent({
   width: 50%;
   height: 2px;
   border-radius: 20px;
-  background: $active-day;
+  background: $main-color;
 }
 
 .atom-plus-minus-switch {

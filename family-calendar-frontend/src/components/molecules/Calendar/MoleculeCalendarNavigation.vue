@@ -7,10 +7,6 @@
       <template v-slot:desktop-icon>
         <atom-icon class="icon-angle-double-left"/>
       </template>
-
-      <template v-slot:mobile-icon>
-        <atom-icon class="icon-angle-double-down"/>
-      </template>
     </atom-navigation-button>
 
     <atom-navigation-button
@@ -19,10 +15,6 @@
     >
       <template v-slot:desktop-icon>
         <atom-icon class="icon-left-open-mini"/>
-      </template>
-
-      <template v-slot:mobile-icon>
-        <atom-icon class="icon-down-open-mini"/>
       </template>
     </atom-navigation-button>
   </nav>
@@ -37,9 +29,6 @@
       <template v-slot:desktop-icon>
         <atom-icon class="icon-right-open-mini"/>
       </template>
-      <template v-slot:mobile-icon>
-        <atom-icon class="icon-up-open-mini"/>
-      </template>
     </atom-navigation-button>
 
     <atom-navigation-button
@@ -49,9 +38,6 @@
       <template v-slot:desktop-icon>
         <atom-icon class="icon-angle-double-right"/>
       </template>
-      <template v-slot:mobile-icon>
-        <atom-icon class="icon-angle-double-up"/>
-      </template>
     </atom-navigation-button>
   </nav>
 </template>
@@ -59,16 +45,16 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
 import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue";
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
 
 export default defineComponent({
   name: "MoleculeCalendarNavigation",
   components: {
     AtomIcon,
-    AtomNavigationButton,
     AtomCalendarTitle,
+    AtomNavigationButton,
   },
 });
 </script>
@@ -93,13 +79,7 @@ export default defineComponent({
 @media only screen and (max-width: $small) {
   .molecule-calendar-navigation {
     &__nav {
-      @include flex-direction(column-reverse);
-      @include flex-basis(100%);
-      margin: 10px 0px;
-    }
-
-    &__nav--prev {
-      @include order(1);
+      display: none
     }
 
     &__title {

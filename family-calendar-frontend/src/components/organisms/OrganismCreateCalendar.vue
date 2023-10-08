@@ -1,6 +1,6 @@
 <template>
   <atom-animated-wrapper class="organism-create-calendar animate__fadeInDown">
-    <atom-title tag="h2" content="Create your calendar." class="organism-create-calendar__h2" />
+    <atom-title tag="h2" :content="`${t('CreateCalendar')}.`" class="organism-create-calendar__h2" />
     <molecule-square-button @click="create">
       {{ messageButton }}
     </molecule-square-button>
@@ -10,6 +10,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from 'vue-i18n';
 
 import { useCalendarApiStore } from "../../stores/CalendarApiStore";
 import { useMainStore } from "../../stores/MainStore";
@@ -30,6 +31,7 @@ export default defineComponent({
     const { switchShowModalOfNewCalendar } = useMainStore();
 
     const router = useRouter();
+    const { t } = useI18n();
 
     let failedCreation = ref(false);
 
@@ -56,10 +58,15 @@ export default defineComponent({
     };
 
     const messageButton = computed(() =>
-      failedCreation.value ? "Something went wrong <br /> Try leater" : "create"
+      failedCreation.value ? t('SomethingWentWrongTryLater') : t('create')
     );
 
-    return { create, failedCreation, messageButton };
+    return { 
+      failedCreation,
+      messageButton,
+      create, 
+      t,
+    };
   },
 });
 </script>

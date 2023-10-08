@@ -32,7 +32,7 @@ export default {
     width: 100%;
     height: 60vh;
     box-sizing: border-box;
-    background: $active-day;
+    background: $main-color;
   }
 
   &__h1,

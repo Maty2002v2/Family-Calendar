@@ -1,0 +1,55 @@
+{
+  "months": {
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
+  },
+  "shortNamesDaysOfWeek": {
+    "Sun": "Sun",
+    "Mon": "Mon",
+    "Tues": "Tues",
+    "Wed": "Wed",
+    "Thurs": "Thurs",
+    "Fri": "Fri",
+    "Sat": "Sat"
+  },
+  "CreateCalendar": "Create your calendar",
+  "JoinExisting": "Join already existing calendar",
+  "create": "create",
+  "SomethingWentWrongTryLater": "Something went wrong <br /> Try leater",
+  "join": "join",
+  "BadCode": "Bad code",
+  "CODE": "CODE",
+  "startAlert": {
+    "hereIsYourCode": "<span class='modal-of-new-calendar__thickening-span'>Hey</span>, here's the code for this calendar",
+    "youCanShare": "You can <span class='modal-of-new-calendar__thickening-span'>share</span> it with those you want to give access."
+  },
+  "close": "Close",
+  "Details": "Szczegóły",
+  "addToDayModal": {
+    "DayOff": "You have a day off!",
+    "AddToDay": "Add to day",
+    "Title": "Title",
+    "Description": "Description",
+    "placeholders": {
+      "title": "Meeting with in-laws...",
+      "description": "At 15:00. Don't be drunk"
+    },
+    "giveData": "give data",
+    "add": "add",
+    "DoYouRepeat": "Do you repeat every year?",
+    "Disposable": "Disposable",
+    "repeatEveryYear": "Repeat every year",
+    "Icon": "Icon",
+    "Color": "Color"
+  }
+}
