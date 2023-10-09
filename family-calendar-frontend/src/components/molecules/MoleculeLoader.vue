@@ -24,7 +24,7 @@ export default defineComponent({
 });
 </script>
 
-<style type="text/css">
+<style type="text/css" lang="scss">
 @keyframes ldio-udrx6d3rqep {
   0% {
     transform: translate(-50%, -50%) rotate(0);
@@ -46,7 +46,7 @@ export default defineComponent({
   height: 144px;
   border-radius: 50%;
   border: 16px solid #000;
-  border-color: #e15b64 transparent #e15b64 transparent;
+  border-color: $main-color transparent $main-color transparent;
 
   animation: ldio-udrx6d3rqep 1s linear infinite;
 }
@@ -83,14 +83,14 @@ export default defineComponent({
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  box-shadow: 0 128px 0 0 #e15b64;
+  box-shadow: 0 128px 0 0 $main-color;
 
-  background: #e15b64;
+  background: $main-color;
 }
 .ldio-udrx6d3rqep > div:nth-child(3) div:after {
   left: -16px;
   top: 48px;
-  box-shadow: 128px 0 0 0 #e15b64;
+  box-shadow: 128px 0 0 0 $main-color;
 }
 
 .ldio-udrx6d3rqep > div:nth-child(4) {
