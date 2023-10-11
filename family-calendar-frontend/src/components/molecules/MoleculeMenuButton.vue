@@ -12,14 +12,14 @@
     <div class="molecule-menu-button__item molecule-menu-button__item--1">
       <molecule-language-switcher />
     </div>
-    <div class="molecule-menu-button__item molecule-menu-button__item--2">
+    <div class="molecule-menu-button__item molecule-menu-button__item--2" v-if="false">
       <molecule-list-of-whole-month />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 
 import AtomIcon from '@/components/atoms/AtomIcon.vue';
 import MoloeculeDarkModeSwitcher from "@/components/molecules/MoloeculeDarkModeSwitcher.vue";
@@ -35,21 +35,26 @@ export default defineComponent({
     MoleculeListOfWholeMonth,
   },
   props: {
-    trigerSeize: {//add validator for px
+    trigerButtonSize: {//add validator for px
       type: String,
-      default: '70px'
+      default: '70px',
+    },
+    iconSize: {
+      type: String,
+      default: '40px'
     },
     animationType: {
       type: String,
       default: 'over-trigger',
       validator(value: string) {
-        return ['over-trigger', 'horizontal trigge-'].includes(value);
+        return ['over-trigger', 'horizontal-trigger'].includes(value);
       },
     }
   },
-  setup() {
+  setup(props) {
     const mobileMenuElement = ref<HTMLDivElement>();
     const trigerButton = ref<HTMLButtonElement>();
+    const buttonSize = computed(() => props.trigerButtonSize);
 
     const switchState = () => {
       const menuItems = mobileMenuElement.value?.querySelectorAll('.molecule-menu-button__item');
@@ -62,6 +67,7 @@ export default defineComponent({
     return {
       mobileMenuElement,
       trigerButton,
+      buttonSize,
       switchState,
     }
   }
@@ -73,16 +79,17 @@ export default defineComponent({
   @include position($position: relative);
 
   &__triger {
-    width: 70px;
-    height: 70px;
+    width: v-bind(buttonSize);
+    height: v-bind(buttonSize);
     background: $background-color;
     border: none;
     border-radius: 50%;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     cursor: pointer;
     transition: .35s ease;
+
     color: #FFFFFF;
-    font-size: 40px;
+    font-size: 1rem;
   }
 
   &__item {
@@ -140,6 +147,44 @@ export default defineComponent({
       top: -80px; 
       right: calc(50% - 130px); 
       opacity: 1;
+    }
+  }
+
+  &--horizontal-trigger {
+    .molecule-menu-button__triger {
+      background-color: $main-color;
+      font-size: 25px;
+
+      &.is-rotate {
+        color: $white;
+        background: $background-color;
+        transform: rotateZ(225deg);
+      }
+    }
+
+    .molecule-menu-button__item {
+      top: -10px;
+    }
+
+    .item-0 { 
+      top:  0px; 
+      left: calc(50% + 30px); 
+      opacity: 1;
+      transform: translateY(-12px);
+    }
+
+    .item-1 { 
+      top: 0px; 
+      left: calc(50% + 100px); 
+      opacity: 1;
+      transform: translateY(-12px);
+    }
+
+    .item-2 { 
+      top: 0px;
+      left: calc(50% + 130px); 
+      opacity: 1;
+      transform: translateY(-12px);
     }
   }
 }
