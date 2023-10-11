@@ -61,6 +61,12 @@
     <teleport to="#pnotify">
       <molecule-pnotify />
     </teleport>
+
+    <molecule-menu-button 
+      class="molecule-menu-button"
+      trigerButtonSize="50px"
+      animationType="horizontal-trigger" 
+    />
   </atom-animated-wrapper>
 </template>
 
@@ -72,6 +78,7 @@ import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeC
 import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
 import MoleculeDayField from "@/components/molecules/Calendar/MoleculeDayField.vue";
 import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
+import MoleculeMenuButton from "@/components/molecules/MoleculeMenuButton.vue";
 import MoleculeMobileMenu from "@/components/molecules/MoleculeMobileMenu.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
@@ -93,6 +100,7 @@ export default defineComponent({
     MoleculeNamesDaysOfWeek,
     MoleculeDayField,
     AtomLoader,
+    MoleculeMenuButton,
     MoleculeMobileMenu,
     MoleculeModalDayDetails,
     MoleculeModalOfNewCalendar,
@@ -173,6 +181,12 @@ $size-day-div: calc(100% / 7 - 5px);
   height: 100vh;
   padding: 5px;
   box-sizing: border-box;
+}
+
+.molecule-menu-button {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
 }
 
 .days-grid {
