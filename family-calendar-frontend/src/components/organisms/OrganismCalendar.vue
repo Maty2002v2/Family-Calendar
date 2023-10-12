@@ -61,6 +61,10 @@
     <teleport to="#pnotify">
       <molecule-pnotify />
     </teleport>
+
+    <molecule-desktop-menu 
+      class="molecule-desktop-menu"
+    />
   </atom-animated-wrapper>
 </template>
 
@@ -72,7 +76,8 @@ import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeC
 import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
 import MoleculeDayField from "@/components/molecules/Calendar/MoleculeDayField.vue";
 import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
-import MoleculeMobileMenu from "@/components/molecules/MoleculeMobileMenu.vue";
+import MoleculeDesktopMenu from "@/components/molecules/Menu/MoleculeDesktopMenu.vue";
+import MoleculeMobileMenu from "@/components/molecules/Menu/MoleculeMobileMenu.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
@@ -90,6 +95,7 @@ export default defineComponent({
   components: {
     AtomAnimatedWrapper,
     MoleculeCalendarNavigaion,
+    MoleculeDesktopMenu,
     MoleculeNamesDaysOfWeek,
     MoleculeDayField,
     AtomLoader,
@@ -175,12 +181,16 @@ $size-day-div: calc(100% / 7 - 5px);
   box-sizing: border-box;
 }
 
+.molecule-desktop-menu {
+  @include position($position: absolute, $bottom: 20px, $left: 20px);
+  transform: translate(50%, -50%)
+}
+
 .days-grid {
   @include flexbox;
   @include flex-wrap(wrap);
   @include flex-basis(100%);
   margin-top: 20px;
-  // max-height: 567px;
 
   .container {
     @include flexbox;
@@ -283,6 +293,10 @@ $size-day-div: calc(100% / 7 - 5px);
         display: none;
       }
     }
+  }
+
+  .molecule-desktop-menu {
+    display: none;
   }
 }
 
