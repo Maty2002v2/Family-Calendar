@@ -57,7 +57,6 @@ export default defineComponent({
     background: $main-color;
     border: none;
     border-radius: 50%;
-    // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     cursor: pointer;
     transition: .35s ease;
 
@@ -67,7 +66,6 @@ export default defineComponent({
     &.is-rotate {
       color: $main-color;
       background-color: $background-color;
-      // box-shadow: $main-color 0px 0px 24px;
       transform: rotateZ(225deg);
       border: 1px solid $main-color;
     }
