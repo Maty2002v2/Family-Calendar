@@ -46,7 +46,7 @@ import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
-import MoleculeMenuButton from "@/components/molecules/MoleculeMenuButton.vue";
+import MoleculeMenuButton from "@/components/molecules/Menu/MoleculeMobileMenuButton.vue";
 
 import { useMainStore } from '@/stores/MainStore';
 
