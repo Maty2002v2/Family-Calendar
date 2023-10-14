@@ -64,6 +64,9 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
       this.calendarHash = hash;
       localStorageCalendarId.value = hash;
     },
+    removeCalendarHash() {
+      this.setCalendarHash('');
+    },
     async createCalendar() {
       const result = { error: false, message: [] };
 
