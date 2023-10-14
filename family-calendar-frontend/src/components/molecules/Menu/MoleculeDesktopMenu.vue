@@ -72,12 +72,12 @@ export default defineComponent({
   }
 
   &__item {
-    @include position($position: absolute, $top: -10px);
+    @include position($position: absolute, $top: -5px);
 
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
     border-radius: 50%;
     border: none;
 
@@ -88,10 +88,22 @@ export default defineComponent({
     opacity: 0;
     cursor: pointer;
     transform: scale(0.7);
+
+    &:hover {
+      & > div {
+        filter: brightness(90%);
+      }
+    }
+
+    &:active {
+      & > div {
+        transform: scale(0.9);
+      }
+    }
   }
 
   &__item--0 { 
-    transition: .35s ease; 
+    transition: .35s ease;
     left: calc(50% - 40px);
   }
 
@@ -101,26 +113,26 @@ export default defineComponent({
   }
 
   &__item--2 { 
-    transition: .35s ease .2s; 
+    transition: .35s ease .2s;
     right: calc(50% - 40px);
   }
 
   .item-0 { 
-    top:  2px; 
-    left: calc(50% + 30px); 
+    top:  7px; 
+    left: calc(50% + 40px); 
     opacity: 1;
     transform: translateY(-12px);
   }
 
   .item-1 { 
-    top: 2px; 
-    left: calc(50% + 100px); 
+    top:  7px; 
+    left: calc(50% + 110px); 
     opacity: 1;
     transform: translateY(-12px);
   }
 
   .item-2 { 
-    top: 2px;
+    top:  7px; 
     left: calc(50% + 130px); 
     opacity: 1;
     transform: translateY(-12px);
