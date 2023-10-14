@@ -9,6 +9,9 @@
     <div class="molecule-desktop-menu__item molecule-desktop-menu__item--1">
       <molecule-language-switcher />
     </div>
+    <div class="molecule-desktop-menu__item molecule-desktop-menu__item--2">
+      <molecule-logout-calendar/>
+    </div>
   </div>
 </template>
 
@@ -18,6 +21,7 @@ import { defineComponent, ref } from 'vue';
 import AtomIcon from '@/components/atoms/AtomIcon.vue';
 import MoloeculeDarkModeSwitcher from "@/components/molecules/MoloeculeDarkModeSwitcher.vue";
 import MoleculeLanguageSwitcher from "@/components/molecules/MoleculeLanguageSwitcher.vue";
+import MoleculeLogoutCalendar from '@/components/molecules/MoleculeLogoutCalendar.vue';
 
 export default defineComponent({
   name: "MoleculeDesktopMenu",
@@ -25,8 +29,9 @@ export default defineComponent({
     AtomIcon,
     MoloeculeDarkModeSwitcher,
     MoleculeLanguageSwitcher,
+    MoleculeLogoutCalendar,
   },
-  setup(props) {
+  setup() {
     const mobileMenuElement = ref<HTMLDivElement>();
     const trigerButton = ref<HTMLButtonElement>();
 
@@ -114,7 +119,7 @@ export default defineComponent({
 
   &__item--2 { 
     transition: .35s ease .2s;
-    right: calc(50% - 40px);
+    left: calc(50% - 40px);
   }
 
   .item-0 { 
@@ -133,7 +138,7 @@ export default defineComponent({
 
   .item-2 { 
     top:  7px; 
-    left: calc(50% + 130px); 
+    left: calc(50% + 180px); 
     opacity: 1;
     transform: translateY(-12px);
   }
