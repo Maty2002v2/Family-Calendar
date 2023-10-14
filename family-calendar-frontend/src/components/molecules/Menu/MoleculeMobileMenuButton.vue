@@ -71,12 +71,13 @@ export default defineComponent({
     cursor: pointer;
     transition: .35s ease;
 
-    color: #FFFFFF;
+    color: $main-font-color;
     font-size: 25px;
 
     &.is-rotate {
-      transform: translateY(-10%) rotateZ(225deg);
+      color: $white;
       background-color: $main-color;
+      transform: translateY(-10%) rotateZ(225deg);
     }
   }
 
