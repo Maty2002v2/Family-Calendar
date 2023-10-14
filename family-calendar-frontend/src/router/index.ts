@@ -5,6 +5,7 @@ import PageNotFound from "@/pages/PageNotFound.vue";
 
 import { useMainStore } from "@/stores/MainStore";
 import { useCalendarApiStore } from "@/stores/CalendarApiStore";
+import { useLocalStorage } from "@/composables/useLocalStorage";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,7 +13,13 @@ const routes: Array<RouteRecordRaw> = [
     name: "home",
     component: PageInitCalendar,
     beforeEnter: () => {
+      const localStorageCalendarId = useLocalStorage('calendarId');
       const { setCalendarHash } = useCalendarApiStore();
+      
+      if(localStorageCalendarId.value) {
+        setCalendarHash(localStorageCalendarId.value);
+        return { name: 'calendar', params: { calendarId: localStorageCalendarId.value }};
+      }
       setCalendarHash("");
     },
   },
