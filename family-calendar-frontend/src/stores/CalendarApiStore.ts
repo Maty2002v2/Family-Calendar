@@ -5,6 +5,9 @@ import CreateNewDay from "../types/CreateNewDay";
 
 import { useMainStore } from "./MainStore";
 import { useDateStore } from "./DateStore";
+import { useLocalStorage } from "@/composables/useLocalStorage";
+
+const localStorageCalendarId = useLocalStorage('calendarId');
 
 export const useCalendarApiStore = defineStore("CalendarApi", {
   state: () => {
@@ -59,6 +62,10 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
   actions: {
     setCalendarHash(hash: string) {
       this.calendarHash = hash;
+      localStorageCalendarId.value = hash;
+    },
+    removeCalendarHash() {
+      this.setCalendarHash('');
     },
     async createCalendar() {
       const result = { error: false, message: [] };
