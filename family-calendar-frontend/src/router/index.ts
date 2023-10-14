@@ -7,15 +7,15 @@ import { useMainStore } from "@/stores/MainStore";
 import { useCalendarApiStore } from "@/stores/CalendarApiStore";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 
-const localStorageCalendarId = useLocalStorage('calendarId');
-
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
     component: PageInitCalendar,
     beforeEnter: () => {
+      const localStorageCalendarId = useLocalStorage('calendarId');
       const { setCalendarHash } = useCalendarApiStore();
+      
       if(localStorageCalendarId.value) {
         setCalendarHash(localStorageCalendarId.value);
         return { name: 'calendar', params: { calendarId: localStorageCalendarId.value }};
