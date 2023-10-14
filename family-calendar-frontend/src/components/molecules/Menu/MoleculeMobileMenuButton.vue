@@ -12,6 +12,9 @@
     <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--2">
       <molecule-list-of-whole-month />
     </div>
+    <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--3">
+      <molecule-logout-calendar />
+    </div>
   </div>
 </template>
 
@@ -22,6 +25,7 @@ import AtomIcon from '@/components/atoms/AtomIcon.vue';
 import MoloeculeDarkModeSwitcher from "@/components/molecules/MoloeculeDarkModeSwitcher.vue";
 import MoleculeLanguageSwitcher from "@/components/molecules/MoleculeLanguageSwitcher.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
+import MoleculeLogoutCalendar from "@/components/molecules/MoleculeLogoutCalendar.vue";
 
 export default defineComponent({
   name: "MoleculeMobileMenuButton",
@@ -30,6 +34,7 @@ export default defineComponent({
     MoloeculeDarkModeSwitcher,
     MoleculeLanguageSwitcher,
     MoleculeListOfWholeMonth,
+    MoleculeLogoutCalendar,
   },
   setup() {
     const mobileMenuElement = ref<HTMLDivElement>();
@@ -108,6 +113,11 @@ export default defineComponent({
     right: calc(50% - 40px);
   }
 
+  &__item--3 { 
+    transition: .35s ease .3s; 
+    right: calc(50% - 35px);
+  }
+
   .item-0 { 
     top: -80px; 
     left: calc(50% - 130px); 
@@ -123,6 +133,12 @@ export default defineComponent({
   .item-2 { 
     top: -80px; 
     right: calc(50% - 130px); 
+    opacity: 1;
+  }
+
+  .item-3 { 
+    top: -210px; 
+    right: calc(50% - 35px); 
     opacity: 1;
   }
 
