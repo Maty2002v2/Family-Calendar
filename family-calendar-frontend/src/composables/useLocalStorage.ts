@@ -12,6 +12,10 @@ export const useLocalStorage = (key: string, defaultValue = '') => {
   }
 
   watch(localStorageValue, (newValue) => {
+    if(!newValue) {
+      localStorage.removeItem(key);
+      return;
+    }
     localStorage.setItem(key, newValue ?? '');
   });
 
