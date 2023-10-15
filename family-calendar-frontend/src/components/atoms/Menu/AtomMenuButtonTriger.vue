@@ -29,7 +29,7 @@ export default defineComponent({
       trigerButton.value = el;
     };
     
-    const menuItems = computed(() => mobileMenuElement.value?.querySelectorAll(`.${props.classPrefix}-menu__item`));
+    const menuItems = computed(() => mobileMenuElement.value?.querySelectorAll(`.${props.classPrefix}__item`));
 
     const switchState = () => {
       const menuItems = mobileMenuElement.value?.querySelectorAll(`.${props.classPrefix}__item`);
