@@ -41,7 +41,6 @@ export default defineComponent({
 
     const hideState = () => {
       if(!trigerButton.value || !menuItems.value) return;
-      console.log(menuItems.value)
 
       trigerButton.value.classList.remove("is-rotate");
       menuItems.value.forEach((item, index) => item.classList.remove(`item-${index}`))
