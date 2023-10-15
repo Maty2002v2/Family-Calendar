@@ -29,7 +29,7 @@ export default defineComponent({
       trigerButton.value = el;
     };
     
-    const menuItems = computed(() => mobileMenuElement.value?.querySelectorAll(`.${props.classPrefix}-menu__item`));
+    const menuItems = computed(() => mobileMenuElement.value?.querySelectorAll(`.${props.classPrefix}__item`));
 
     const switchState = () => {
       const menuItems = mobileMenuElement.value?.querySelectorAll(`.${props.classPrefix}__item`);
@@ -41,6 +41,7 @@ export default defineComponent({
 
     const hideState = () => {
       if(!trigerButton.value || !menuItems.value) return;
+      console.log(menuItems.value)
 
       trigerButton.value.classList.remove("is-rotate");
       menuItems.value.forEach((item, index) => item.classList.remove(`item-${index}`))
