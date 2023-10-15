@@ -1,6 +1,6 @@
 <template>
   <div v-show="!modalIsOpen" class="molecule-mobile-menu">
-    <molecule-menu-button class="molecule-menu-button" />
+    <molecule-mobile-menu-button class="molecule-mobile-menu-button" />
 
     <div class="molecule-mobile-menu__navgation-buttons-wrapper">
       <atom-navigation-button
@@ -46,7 +46,7 @@ import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
-import MoleculeMenuButton from "@/components/molecules/Menu/MoleculeMobileMenuButton.vue";
+import MoleculeMobileMenuButton from "@/components/molecules/Menu/MoleculeMobileMenuButton.vue";
 
 import { useMainStore } from '@/stores/MainStore';
 
@@ -55,7 +55,7 @@ export default defineComponent({
   components: {
     AtomIcon,
     AtomNavigationButton,
-    MoleculeMenuButton,
+    MoleculeMobileMenuButton,
   },
   setup() {
     const { modalIsOpen } = storeToRefs(useMainStore());
@@ -67,7 +67,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .molecule-mobile-menu {
   @include position($position: fixed, $bottom: 0px);
 
@@ -83,7 +83,7 @@ export default defineComponent({
 
   background: $menu-background-color;
 
-  .molecule-menu-button {
+  .molecule-mobile-menu-button {
     @include position($position: absolute, $bottom: 80px, $left: calc(50% - 35px));
     transform: translateY(50%);
   }
