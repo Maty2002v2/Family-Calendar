@@ -1,27 +1,33 @@
 <template>
-  <div class="molecule-mobile-menu-button" ref="mobileMenuElement">
-    <button class="molecule-mobile-menu-button__triger" @click="switchState" ref="trigerButton">
-      <atom-icon class="icon-cog" />
-    </button>
-    <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--0">
-      <moloecule-dark-mode-switcher />
-    </div>
-    <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--1">
-      <molecule-language-switcher />
-    </div>
-    <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--2">
-      <molecule-list-of-whole-month />
-    </div>
-    <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--3">
-      <molecule-logout-calendar />
-    </div>
-  </div>
+  <atom-menu-button-triger classPrefix="molecule-mobile-menu-button">
+    <template #atomMenuButtonTrigerWrapper="{ setRefParentElement, setButtonTrgerElement, buttonAction }">
+      <div class="molecule-mobile-menu-button" :ref="(el) => setRefParentElement(el)">
+        <button class="molecule-mobile-menu-button__triger" @click="buttonAction" :ref="(el) => setButtonTrgerElement(el)">
+          <atom-icon class="icon-cog" />
+        </button>
+        <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--0">
+          <moloecule-dark-mode-switcher />
+        </div>
+        <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--1">
+          <molecule-language-switcher />
+        </div>
+        <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--2">
+          <molecule-list-of-whole-month />
+        </div>
+        <div class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--3">
+          <molecule-logout-calendar />
+        </div>
+      </div>
+    </template>
+  </atom-menu-button-triger>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
+import { onClickOutside } from '@vueuse/core';
 
 import AtomIcon from '@/components/atoms/AtomIcon.vue';
+import AtomMenuButtonTriger from '@/components/atoms/Menu/AtomMenuButtonTriger.vue';
 import MoloeculeDarkModeSwitcher from "@/components/molecules/MoloeculeDarkModeSwitcher.vue";
 import MoleculeLanguageSwitcher from "@/components/molecules/MoleculeLanguageSwitcher.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
@@ -31,6 +37,7 @@ export default defineComponent({
   name: "MoleculeMobileMenuButton",
   components: {
     AtomIcon,
+    AtomMenuButtonTriger,
     MoloeculeDarkModeSwitcher,
     MoleculeLanguageSwitcher,
     MoleculeListOfWholeMonth,
@@ -39,6 +46,8 @@ export default defineComponent({
   setup() {
     const mobileMenuElement = ref<HTMLDivElement>();
     const trigerButton = ref<HTMLButtonElement>();
+    
+    const menuItems = computed(() => mobileMenuElement.value?.querySelectorAll('.molecule-mobile-menu-button__item'));
 
     const switchState = () => {
       const menuItems = mobileMenuElement.value?.querySelectorAll('.molecule-mobile-menu-button__item');
@@ -47,6 +56,15 @@ export default defineComponent({
       trigerButton.value.classList.toggle("is-rotate");
       menuItems.forEach((item, index) => item.classList.toggle(`item-${index}`))
     };
+
+    const hideState = () => {
+      if(!trigerButton.value || !menuItems.value) return;
+
+      trigerButton.value.classList.remove("is-rotate");
+      menuItems.value.forEach((item, index) => item.classList.remove(`item-${index}`))
+    }
+
+    onClickOutside(mobileMenuElement, hideState);
 
     return {
       mobileMenuElement,
@@ -141,44 +159,6 @@ export default defineComponent({
     top: -210px; 
     right: calc(50% - 35px); 
     opacity: 1;
-  }
-
-  &--horizontal-trigger {
-    .molecule-mobile-menu-button__triger {
-      background-color: $main-color;
-      font-size: 25px;
-
-      &.is-rotate {
-        color: $white;
-        background: $background-color;
-        transform: rotateZ(225deg);
-      }
-    }
-
-    .molecule-mobile-menu-button__item {
-      top: -10px;
-    }
-
-    .item-0 { 
-      top:  0px; 
-      left: calc(50% + 30px); 
-      opacity: 1;
-      transform: translateY(-12px);
-    }
-
-    .item-1 { 
-      top: 0px; 
-      left: calc(50% + 100px); 
-      opacity: 1;
-      transform: translateY(-12px);
-    }
-
-    .item-2 { 
-      top: 0px;
-      left: calc(50% + 130px); 
-      opacity: 1;
-      transform: translateY(-12px);
-    }
   }
 }
 </style>

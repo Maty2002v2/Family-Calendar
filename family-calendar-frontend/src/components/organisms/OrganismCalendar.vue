@@ -168,7 +168,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $size-day-div: calc(100% / 7 - 5px);
 
 .calendar {
