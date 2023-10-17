@@ -59,7 +59,7 @@
     </teleport>
 
     <teleport to="#pnotify">
-      <molecule-pnotify />
+      <molecule-notifications-wrapper />
     </teleport>
 
     <molecule-desktop-menu 
@@ -81,7 +81,6 @@ import MoleculeMobileMenu from "@/components/molecules/Menu/MoleculeMobileMenu.v
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
 import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
-import MoleculePnotify from "@/components/molecules/MoleculePnotify.vue";
 
 import { storeToRefs } from "pinia";
 import { useCalendarApiStore } from "@/stores/CalendarApiStore";
@@ -90,9 +89,13 @@ import { useMainStore } from "@/stores/MainStore";
 
 import { useWidthWindow } from "@/composables/useWidthWindow";
 import { useTheme } from '@/composables/useTheme';
+
+import MoleculeNotificationsWrapper from "../molecules/MoleculeNotificationsWrapper.vue";
+
 export default defineComponent({
   name: "OrganismCalendar",
   components: {
+    MoleculeNotificationsWrapper,
     AtomAnimatedWrapper,
     MoleculeCalendarNavigaion,
     MoleculeDesktopMenu,
@@ -103,7 +106,6 @@ export default defineComponent({
     MoleculeModalDayDetails,
     MoleculeModalOfNewCalendar,
     MoleculeListOfWholeMonth,
-    MoleculePnotify,
   },
   async setup() {
     const { getSortedDays, getCalendarHash } = storeToRefs(
