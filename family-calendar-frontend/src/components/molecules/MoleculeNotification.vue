@@ -8,19 +8,14 @@
         :class="['molecule-notification__icon', iconName]"
         v-show="iconName?.length"
       />
-      <atom-title tag="h2" :content="title" class="molecule-notification__h2" />
-      <atom-icon
-        v-show="message.length > 0"
-        :class="classObjectShowDetails"
-        @click="showContent = !showContent"
-      />
+      <atom-title tag="h2" :content="message" class="molecule-notification__h2" />
     </div>
-    <div class="molecule-notification__timer">
+    <!-- <div class="molecule-notification__timer">
       <span
         class="molecule-notification__line"
         :class="`molecule-notification__line--${type}`"
       ></span>
-    </div>
+    </div> -->
     <Transition
       name="molecule-notification"
       @enter="start"
@@ -28,7 +23,6 @@
       @before-leave="start"
       @after-leave="end"
     >
-      <p v-show="showContent" class="molecule-notification__p">{{ message }}</p>
     </Transition>
   </div>
 </template>
@@ -60,20 +54,10 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const showContent = ref(false);
-    const classObjectShowDetails = computed(() => ({
-      'molecule-notification__open-content': true,
-      'icon-up-open-mini': showContent.value,
-      'icon-down-open-mini': !showContent.value,
-    }));
-
     const iconName = computed(() => {
       switch (props.type) {
         case "success":
           return "icon-ok-circled";
-
-        case "warning":
-          return "icon-attention";
 
         case "info":
           return "icon-info-circled";
@@ -90,8 +74,6 @@ export default defineComponent({
     const end = (el: HTMLElement) => (el.style.height = "");
 
     return {
-      showContent,
-      classObjectShowDetails,
       iconName,
       start,
       end
@@ -123,18 +105,20 @@ export default defineComponent({
 }
 
 @mixin pnotify-variants($border-color, $color, $background) {
-  border: 1px solid $border-color;
+  border-left: 5px solid $border-color;
+  border-top: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
   color: $color;
-  background: rgba($color: $background, $alpha: 0.8);
+  background: $background;
   @content;
 }
 
 .molecule-notification {
   @include flexbox;
   @include flex-direction(column);
-  width: 250px;
-  min-height: 60px;
-  padding: 10px;
+  min-width: 250px;
+  padding: 10px 15px 10px 10px;
   border-radius: 5px;
   margin-bottom: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -142,21 +126,18 @@ export default defineComponent({
 
   background: burlywood;
   transition: all 0.3s ease;
+  z-index: 100000;
 
   &--success {
-    @include pnotify-variants(#d6e9c6, #3c763d, #dff0d8);
-  }
-
-  &--warning {
-    @include pnotify-variants(#faebcc, #8a6d3b, #fcf8e3);
+    @include pnotify-variants($success-border, $success-color, $success-background);
   }
 
   &--info {
-    @include pnotify-variants(#bce8f1, #31708f, #d9edf7);
+    @include pnotify-variants($info-border, $info-color, $info-background);
   }
 
   &--danger {
-    @include pnotify-variants(#ebccd1, #a94442, #f2dede);
+    @include pnotify-variants($danger-border, $danger-color, $danger-background);
   }
 
   &__title {
@@ -168,16 +149,15 @@ export default defineComponent({
     @include flex-basis(10%);
     @include flexbox;
     @include flex-centering;
+    margin-top: 4px;
+    font-size: 20px
   }
 
   &__h2 {
     @include flex-basis(80%);
     margin: 0px;
     font-weight: 500;
-  }
-
-  &__p {
-    margin: 10px 0px 0px 0px;
+    white-space: nowrap;
   }
 
   &__timer {
@@ -195,10 +175,6 @@ export default defineComponent({
 
     &--success {
       background: #3c763d;
-    }
-
-    &--warning {
-      background: #8a6d3b;
     }
 
     &--info {

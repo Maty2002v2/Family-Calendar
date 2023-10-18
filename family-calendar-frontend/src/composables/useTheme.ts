@@ -81,6 +81,51 @@ const updateVariables = () => {
     process.env.VUE_APP_BREAK_LINE_COLOR,
     process.env.VUE_APP_DARK_BREAK_LINE_COLOR
   );
+  updateVariable(
+    '--successBackground',
+    process.env.VUE_APP_SUCCESS_NOTIFICATION_BACKGROUND_COLOR,
+    process.env.VUE_APP_DARK_SUCCESS_NOTIFICATION_BACKGROUND_COLOR
+  );
+  updateVariable(
+    '--successBorder',
+    process.env.VUE_APP_SUCCESS_NOTIFICATION_BORDER,
+    process.env.VUE_APP_DARK_SUCCESS_NOTIFICATION_BORDER
+  );
+  updateVariable(
+    '--successColor',
+    process.env.VUE_APP_SUCCESS_NOTIFICATION_COLOR,
+    process.env.VUE_APP_DARK_SUCCESS_NOTIFICATION_COLOR
+  );
+  updateVariable(
+    '--infoBackground',
+    process.env.VUE_APP_INFO_NOTIFICATION_BACKGROUND_COLOR,
+    process.env.VUE_APP_DARK_INFO_NOTIFICATION_BACKGROUND_COLOR
+  );
+  updateVariable(
+    '--infosBorder',
+    process.env.VUE_APP_INFO_NOTIFICATION_BORDER,
+    process.env.VUE_APP_DARK_INFO_NOTIFICATION_BORDER
+  );
+  updateVariable(
+    '--infoColor',
+    process.env.VUE_APP_INFO_NOTIFICATION_COLOR,
+    process.env.VUE_APP_DARK_INFO_NOTIFICATION_COLOR
+  );
+  updateVariable(
+    '--dangerBackground',
+    process.env.VUE_APP_DANGER_NOTIFICATION_BACKGROUND_COLOR,
+    process.env.VUE_APP_DARK_DANGER_NOTIFICATION_BACKGROUND_COLOR
+  );
+  updateVariable(
+    '--dangerBorder',
+    process.env.VUE_APP_DANGER_NOTIFICATION_BORDER,
+    process.env.VUE_APP_DARK_DANGER_NOTIFICATION_BORDER
+  );
+  updateVariable(
+    '--dangerColor',
+    process.env.VUE_APP_DANGER_NOTIFICATION_COLOR,
+    process.env.VUE_APP_DARK_DANGER_NOTIFICATION_COLOR
+  );
 
   const { r: lr, g: lg, b: lb } = hexToRgb(process.env.VUE_APP_MENU_BACKGROUND_COLOR) ?? { r: 238, g: 238, b: 238 };
   const { r: dr, g: dg, b: db } = hexToRgb(process.env.VUE_APP_DARK_MENU_BACKGROUND_COLOR) ?? { r: 238, g: 238, b: 238 };
