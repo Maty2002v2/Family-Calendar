@@ -8,13 +8,6 @@ export const useMainStore = defineStore("Main", {
       showNewDayForm: false,
       showModalDetailsOffDay: false,
       showModalOfNewCalendar: false,
-      showPnotify: false,
-      pnotifyOptions: {
-        type: "",
-        title: "",
-        message: "",
-        time: 5,
-      },
       modalIsOpen: false,
     };
   },
@@ -24,8 +17,6 @@ export const useMainStore = defineStore("Main", {
     getShowNewDayForm: (state) => state.showNewDayForm,
     getShowModalDetailsOffDay: (state) => state.showModalDetailsOffDay,
     getShowModalOfNewCalendar: (state) => state.showModalOfNewCalendar,
-    getShowPnotify: (state) => state.showPnotify,
-    getPnotifyOptions: (state) => state.pnotifyOptions,
     getAppModalState: (state) => state.modalIsOpen,
   },
   actions: {
@@ -43,15 +34,6 @@ export const useMainStore = defineStore("Main", {
     },
     switchShowModalOfNewCalendar(value: boolean) {
       this.showModalOfNewCalendar = value;
-    },
-    switchShowPnotify(value: boolean) {
-      this.showPnotify = value;
-    },
-    setPnotifyOptions(type: string, title: string, message: string, time = 4) {
-      this.pnotifyOptions.type = type;
-      this.pnotifyOptions.title = title;
-      this.pnotifyOptions.message = message;
-      this.pnotifyOptions.time = time;
     },
     switchAppModalState(value: boolean) {
       this.modalIsOpen = value
