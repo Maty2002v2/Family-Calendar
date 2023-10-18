@@ -39,7 +39,7 @@ export default defineComponent({
 
 <style lang="scss">
 .molecule-notifications-wrapper {
-  @include position($position: fixed, $top: 30px, $right: 30px);
+  @include position($position: fixed, $top: 50px, $right: 30px);
 }
 
 .list-enter-active,
