@@ -102,9 +102,8 @@ export default defineComponent({
   }
 
   &__ul {
-    @include flexbox;
-    @include flex-wrap(wrap);
-    @include justify-content(center);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     padding: 5px;
 
     list-style: none;

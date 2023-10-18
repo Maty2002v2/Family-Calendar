@@ -2,12 +2,15 @@ import { defineStore, storeToRefs } from "pinia";
 import InformationDaysDownload from "../types/InformationDaysDownload";
 import DaysOfTheMonthDownloaded from "../types/DaysOfTheMonthDownloaded";
 import CreateNewDay from "../types/CreateNewDay";
+import { defaultNotificationTime } from '@/types/Notifications';
 
 import { useMainStore } from "./MainStore";
 import { useDateStore } from "./DateStore";
 import { useLocalStorage } from "@/composables/useLocalStorage";
+import { useNotifications } from "@/composables/useNotifications";
 
 const localStorageCalendarId = useLocalStorage('calendarId');
+const { addNotification } = useNotifications();
 
 export const useCalendarApiStore = defineStore("CalendarApi", {
   state: () => {
@@ -148,8 +151,7 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
     async addDayToCalendar(day: CreateNewDay) {
       const { getMounth, getYear } = storeToRefs(useDateStore());
 
-      const { switchShowNewDayForm, switchShowPnotify, setPnotifyOptions } =
-        useMainStore();
+      const { switchShowNewDayForm } = useMainStore();
 
       const url = "https://matikster21.smallhost.pl/family-calendar-api/";
       const params = Object.assign({ action: "add-day" }, day);
@@ -168,12 +170,12 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         .then((response) => response.json())
         .then((response) => {
           if (!response.error) {
-            setPnotifyOptions(
-              "success",
-              "Success",
-              `Added "${response.message.day.title}" to your calendar`
-            );
-            switchShowPnotify(true);
+            addNotification({
+              type: "success",
+              title: "Success",
+              message: `Added "${response.message.day.title}" to your calendar`,
+              ...defaultNotificationTime
+            });
 
             switchShowNewDayForm(false);
 
@@ -183,15 +185,17 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
               numberYear: getYear.value.toString(),
             });
           } else {
-            setPnotifyOptions("danger", "We are sorry", response.message, 10);
-            switchShowPnotify(true);
+            addNotification({
+              type: "danger",
+              title: "We are sorry",
+              message: response.message,
+              ...defaultNotificationTime
+            });
           }
         });
     },
     async deleteDay(idDay: string) {
       const { getMounth, getYear } = storeToRefs(useDateStore());
-
-      const { switchShowPnotify, setPnotifyOptions } = useMainStore();
 
       const url = "https://matikster21.smallhost.pl/family-calendar-api/";
       const params = Object.assign({ action: "delete-day" }, { id: idDay });
@@ -210,16 +214,24 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
         .then((response) => response.json())
         .then((response) => {
           if (!response.error) {
-            setPnotifyOptions("success", "Success", response.message);
-            switchShowPnotify(true);
+            addNotification({
+              type: "success",
+              title: "Success",
+              message: response.message,
+              ...defaultNotificationTime
+            });
             this.fetchDaysOfTheMonth({
               calendarId: this.calendarHash,
               numberMonth: getMounth.value.toString(),
               numberYear: getYear.value.toString(),
             });
           } else {
-            setPnotifyOptions("danger", "We are sorry", response.message, 10);
-            switchShowPnotify(true);
+            addNotification({
+              type: "danger",
+              title: "We are sorry",
+              message: response.message,
+              ...defaultNotificationTime
+            });
           }
         });
     },
