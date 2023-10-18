@@ -1,7 +1,7 @@
 <template>
   <TransitionGroup 
-    enter-active-class="animate__animated animate__faster animate__bounceIn"
-    leave-active-class="animate__animated animate__faster animate__bounceOut" 
+    enter-active-class="animate__animated animate__zoomInRight"
+    leave-active-class="animate__animated animate__zoomOutRight" 
     class="molecule-notifications-wrapper"
     tag="div" 
   >
