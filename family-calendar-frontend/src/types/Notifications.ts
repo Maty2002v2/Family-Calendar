@@ -1,4 +1,4 @@
-type notificationType = 'success' | 'warning' | 'info' | 'danger';
+type notificationType = 'success' | 'info' | 'danger';
 type notification = {
   type: notificationType,
   title: string,
