@@ -51,4 +51,11 @@ export default defineComponent({
   opacity: 0;
   transform: translateX(30px);
 }
+
+@media only screen and (max-width: $small) {
+  .molecule-notifications-wrapper {
+    @include position($position: fixed, $bottom: 150px, $right: 0px);
+    font-size: 10px;
+  }
+}
 </style>
