@@ -28,7 +28,7 @@
               :placeholder="t('addToDayModal.placeholders.description')"
               :label="t('addToDayModal.Description')"
               :maxLength="50"
-              :rows="2"
+              :rows="5"
               :requaied="true"
               :showCounter="true"
             />
@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, watch } from "vue";
 import { useI18n } from 'vue-i18n';
 
 import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
@@ -123,6 +123,9 @@ export default defineComponent({
       () => title.value.length > 0 && description.value.length > 0
     );
 
+    const translatedAddToDay = computed(() => t('addToDayModal.add'));
+    const translatedGiveData = computed(() => t('addToDayModal.giveData'));
+
     const addDay = () => {
       if (correctData.value) {
         addDayToCalendar({
@@ -141,14 +144,18 @@ export default defineComponent({
           description.value = "";
         });
       } else {
-        if (titleOfButton.value === t('addToDayModal.add')) {
-          titleOfButton.value = t('addToDayModal.giveData');
-          setTimeout(() => (titleOfButton.value = t('addToDayModal.add')), 2000);
+        if (titleOfButton.value === translatedAddToDay.value) {
+          titleOfButton.value = translatedGiveData.value;
+          setTimeout(() => (titleOfButton.value = translatedAddToDay.value), 2000);
         }
       }
     };
 
     const setToRepeat = (value: boolean) => (toRepeat.value = value);
+
+    watch(translatedAddToDay, (newValue) => {
+      titleOfButton.value = newValue;
+    });
 
     return {
       showAccordionContent,
