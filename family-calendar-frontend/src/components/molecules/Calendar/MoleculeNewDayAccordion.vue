@@ -70,7 +70,7 @@ import MoleculeInputWithLabel from "@/components/molecules/MoleculeInputWithLabe
 import MoleculeRepeatEveryYearCheckbox from "@/components/molecules/Calendar/MoleculeRepeatEveryYearCheckbox.vue";
 
 import { storeToRefs } from "pinia";
-import { useCalendarApiStore } from "../../../stores/CalendarApiStore";
+import { useCalendarApi } from "../../../composables/useCalendarApi";
 import { useDateStore } from "../../../stores/DateStore";
 import { useMainStore } from "../../../stores/MainStore";
 
@@ -97,8 +97,7 @@ export default defineComponent({
   setup(props) {
     const { mainColor } = useTheme();
     
-    const { getCalendarHash } = storeToRefs(useCalendarApiStore());
-    const { addDayToCalendar } = useCalendarApiStore();
+    const { getCalendarHash, addDayToCalendar } = useCalendarApi();
 
     const { getMounth, getYear } = storeToRefs(useDateStore());
 
@@ -261,3 +260,4 @@ export default defineComponent({
   }
 }
 </style>
+../../../stores/useCalendarApi

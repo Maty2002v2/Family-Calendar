@@ -83,7 +83,7 @@ import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNe
 import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
 
 import { storeToRefs } from "pinia";
-import { useCalendarApiStore } from "@/stores/CalendarApiStore";
+import { useCalendarApi } from "@/composables/useCalendarApi";
 import { useDateStore } from "@/stores/DateStore";
 import { useMainStore } from "@/stores/MainStore";
 
@@ -108,10 +108,11 @@ export default defineComponent({
     MoleculeListOfWholeMonth,
   },
   async setup() {
-    const { getSortedDays, getCalendarHash } = storeToRefs(
-      useCalendarApiStore()
-    );
-    const { fetchDaysOfTheMonth } = useCalendarApiStore();
+    const { 
+      getSortedDays, 
+      getCalendarHash, 
+      fetchDaysOfTheMonth 
+    } = useCalendarApi();
 
     const dataStore = useDateStore();
     const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } =

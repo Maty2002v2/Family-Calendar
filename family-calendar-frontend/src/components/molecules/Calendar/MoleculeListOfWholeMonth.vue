@@ -62,7 +62,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
-import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -72,7 +71,7 @@ import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayBut
 
 import { useWidthWindow } from "@/composables/useWidthWindow";
 
-import { useCalendarApiStore } from "@/stores/CalendarApiStore";
+import { useCalendarApi } from "@/composables/useCalendarApi";
 import { useMainStore } from '@/stores/MainStore';
 
 export default defineComponent({
@@ -89,7 +88,7 @@ setup() {
 
   const { switchAppModalState } = useMainStore();
 
-  const { getDays } = storeToRefs(useCalendarApiStore());
+  const { getDays } = useCalendarApi();
   const showList = ref(false);
 
   const listButtonClassObject = computed(() => ({
