@@ -55,10 +55,6 @@ export default defineComponent({
 		const codeSpan = ref();
 		const closeAndCopy = () => switchShowModalOfNewCalendar(false);
 
-		const closeModal = () => {
-			emit('closeModal');
-		};
-
 		const copyHash = () => {
 			copyTextToClipboard(getCalendarHash.value);
 		};
@@ -70,7 +66,6 @@ export default defineComponent({
 			codeSpan,
 			switchShowModalOfNewCalendar,
 			closeAndCopy,
-			closeModal,
 			copyHash,
 			t,
 		};
