@@ -52,5 +52,6 @@
     "Icon": "Ikona",
     "Color": "Kolor"
   },
-  "CodeCopied": "{code} skopiowane"
+  "CodeCopied": "{code} skopiowane",
+  "newDayHasBeenAdded": "Dodano \"{dayTitle}\" do towojego kalendarza"
 }
