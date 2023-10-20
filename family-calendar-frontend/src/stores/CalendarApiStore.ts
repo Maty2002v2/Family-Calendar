@@ -2,7 +2,6 @@ import { defineStore, storeToRefs } from "pinia";
 import InformationDaysDownload from "../types/InformationDaysDownload";
 import DaysOfTheMonthDownloaded from "../types/DaysOfTheMonthDownloaded";
 import CreateNewDay from "../types/CreateNewDay";
-import { defaultNotificationTime } from '@/types/Notifications';
 
 import { useMainStore } from "./MainStore";
 import { useDateStore } from "./DateStore";
@@ -10,7 +9,7 @@ import { useLocalStorage } from "@/composables/useLocalStorage";
 import { useNotifications } from "@/composables/useNotifications";
 
 const localStorageCalendarId = useLocalStorage('calendarId');
-const { addNotification } = useNotifications();
+const { addNotification, defaultNotificationTime } = useNotifications();
 
 export const useCalendarApiStore = defineStore("CalendarApi", {
   state: () => {

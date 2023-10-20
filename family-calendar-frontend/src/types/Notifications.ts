@@ -6,12 +6,7 @@ type notification = {
   time: number,
 }
 
-const defaultNotificationTime = {
-  time: 5000
-}
-
 export {
   notificationType,
   notification,
-  defaultNotificationTime
 };
