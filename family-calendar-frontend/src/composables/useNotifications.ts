@@ -2,6 +2,10 @@ import { ref } from 'vue';
 
 import { notification } from '@/types/Notifications';
 
+const defaultNotificationTime = {
+  time: 5000
+}
+
 const notifications = ref<notification[]>([])
 
 const addNotification = (notification: notification) => {
@@ -22,6 +26,7 @@ const countdownSetting = (time: number) => {
 export const useNotifications = () => {
   return {
     notifications,
-    addNotification
+    addNotification,
+    defaultNotificationTime
   }
 }
