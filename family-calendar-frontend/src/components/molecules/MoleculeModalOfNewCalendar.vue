@@ -31,7 +31,7 @@ import MoleculePillButton from '@/components/molecules/MoleculePillButton.vue';
 import MoleculeModal from '@/components/molecules/MoleculeModal.vue';
 
 import { storeToRefs } from 'pinia';
-import { useCalendarApiStore } from '../../stores/CalendarApiStore';
+import { useCalendarApi } from '../../composables/useCalendarApi';
 import { useMainStore } from '../../stores/MainStore';
 import { useCopyText } from '../../composables/useCopyText';
 import { useNotifications } from '@/composables/useNotifications';
@@ -47,7 +47,7 @@ export default defineComponent({
 		const { getShowModalOfNewCalendar } = storeToRefs(useMainStore());
 		const { switchShowModalOfNewCalendar } = useMainStore();
 
-		const { getCalendarHash } = storeToRefs(useCalendarApiStore());
+		const { getCalendarHash } = useCalendarApi();
 
 		const { copyTextToClipboard, copyTextState } = useCopyText();
 		const { t } = useI18n();
@@ -132,3 +132,4 @@ export default defineComponent({
 	}
 }
 </style>
+../../stores/useCalendarApi

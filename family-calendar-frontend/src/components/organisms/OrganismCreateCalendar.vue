@@ -12,7 +12,7 @@ import { defineComponent, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from 'vue-i18n';
 
-import { useCalendarApiStore } from "../../stores/CalendarApiStore";
+import { useCalendarApi } from "../../composables/useCalendarApi";
 import { useMainStore } from "../../stores/MainStore";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
@@ -27,7 +27,7 @@ export default defineComponent({
     MoleculeSquareButton
   },
   setup() {
-    const { createCalendar } = useCalendarApiStore();
+    const { createCalendar } = useCalendarApi();
     const { switchShowModalOfNewCalendar } = useMainStore();
 
     const router = useRouter();
@@ -97,3 +97,4 @@ export default defineComponent({
   }
 }
 </style>
+../../stores/useCalendarApi

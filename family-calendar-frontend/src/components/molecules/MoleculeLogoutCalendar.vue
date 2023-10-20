@@ -10,7 +10,7 @@ import { useRouter } from 'vue-router';
 
 import AtomIcon from '@/components/atoms/AtomIcon.vue';
 
-import { useCalendarApiStore } from "@/stores/CalendarApiStore";
+import { useCalendarApi } from "@/composables/useCalendarApi";
 
 export default defineComponent({
   name: "MoleculeLogoutCalendar",
@@ -19,7 +19,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
-    const { removeCalendarHash } = useCalendarApiStore();
+    const { removeCalendarHash } = useCalendarApi();
 
     const calickAction = () => {
       removeCalendarHash();
