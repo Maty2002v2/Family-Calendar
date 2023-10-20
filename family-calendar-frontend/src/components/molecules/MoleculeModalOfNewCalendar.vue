@@ -42,7 +42,6 @@ export default defineComponent({
 		MoleculePillButton,
 		MoleculeModal,
 	},
-	emits: ['closeModal'],
 	setup() {
 		const { getShowModalOfNewCalendar } = storeToRefs(useMainStore());
 		const { switchShowModalOfNewCalendar } = useMainStore();
