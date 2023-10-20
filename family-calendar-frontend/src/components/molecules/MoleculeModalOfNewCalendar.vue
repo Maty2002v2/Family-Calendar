@@ -34,6 +34,7 @@ import { storeToRefs } from 'pinia';
 import { useCalendarApiStore } from '../../stores/CalendarApiStore';
 import { useMainStore } from '../../stores/MainStore';
 import { useCopyText } from '../../composables/useCopyText';
+import { useNotifications } from '@/composables/useNotifications';
 
 export default defineComponent({
 	name: 'MoleculeModalOfNewCalendar',
@@ -50,12 +51,18 @@ export default defineComponent({
 
 		const { copyTextToClipboard, copyTextState } = useCopyText();
 		const { t } = useI18n();
+		const { addNotification, defaultNotificationTime } = useNotifications();
 
 		const codeSpan = ref();
 		const closeAndCopy = () => switchShowModalOfNewCalendar(false);
 
 		const copyHash = () => {
 			copyTextToClipboard(getCalendarHash.value);
+			addNotification({
+				type: 'info',
+				message: t('CodeCopied', { code: getCalendarHash.value }),
+				time: defaultNotificationTime.time
+			});
 		};
 
 		return {
