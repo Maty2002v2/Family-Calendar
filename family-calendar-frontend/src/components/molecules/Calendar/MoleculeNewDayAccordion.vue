@@ -28,7 +28,7 @@
               :placeholder="t('addToDayModal.placeholders.description')"
               :label="t('addToDayModal.Description')"
               :maxLength="50"
-              :rows="5"
+              :rows="2"
               :requaied="true"
               :showCounter="true"
             />
