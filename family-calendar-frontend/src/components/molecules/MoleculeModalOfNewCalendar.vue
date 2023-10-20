@@ -43,7 +43,7 @@ export default defineComponent({
 		MoleculeModal,
 	},
 	emits: ['closeModal'],
-	setup(props, { emit }) {
+	setup() {
 		const { getShowModalOfNewCalendar } = storeToRefs(useMainStore());
 		const { switchShowModalOfNewCalendar } = useMainStore();
 
