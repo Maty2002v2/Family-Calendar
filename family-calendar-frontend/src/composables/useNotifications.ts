@@ -9,8 +9,8 @@ const defaultNotificationTime = {
 const notifications = ref<notification[]>([])
 
 const addNotification = (notification: notification) => {
-  const { type, title, message, time = 5000 } = notification;
-  if(!type || !title || !message) return;
+  const { type, message, time } = notification;
+  if(!type || !message) return;
 
   notifications.value.push(notification);
   countdownSetting(notification.time);
