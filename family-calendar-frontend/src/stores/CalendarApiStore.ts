@@ -171,7 +171,6 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
           if (!response.error) {
             addNotification({
               type: "success",
-              title: "Success",
               message: `Added "${response.message.day.title}" to your calendar`,
               ...defaultNotificationTime
             });
@@ -186,7 +185,6 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
           } else {
             addNotification({
               type: "danger",
-              title: "We are sorry",
               message: response.message,
               ...defaultNotificationTime
             });
@@ -215,7 +213,6 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
           if (!response.error) {
             addNotification({
               type: "success",
-              title: "Success",
               message: response.message,
               ...defaultNotificationTime
             });
@@ -227,7 +224,6 @@ export const useCalendarApiStore = defineStore("CalendarApi", {
           } else {
             addNotification({
               type: "danger",
-              title: "We are sorry",
               message: response.message,
               ...defaultNotificationTime
             });
