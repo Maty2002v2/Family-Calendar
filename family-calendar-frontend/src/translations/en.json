@@ -52,5 +52,6 @@
     "Icon": "Icon",
     "Color": "Color"
   },
-  "CodeCopied": "{code} copied"
+  "CodeCopied": "{code} copied",
+  "newDayHasBeenAdded": "Added \"{dayTitle}\" to your calendar"
 }
