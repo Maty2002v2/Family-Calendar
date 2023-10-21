@@ -16,13 +16,8 @@
             :key="index"
             :showUnderline="true">
             <template v-slot:title>
-              <span class="list__date">{{
-                convertingDate(
-                  specialDay.number_year,
-                  specialDay.number_month,
-                  specialDay.number_day
-                )
-              }}</span>
+              <atom-title tag="h2" :content="specialDay.title" class="list__title" />
+              
               <atom-icon
                 :class="['list__icon', specialDay.icon_name]"
                 :style="{ backgroundColor: specialDay.icon_color }"
@@ -30,7 +25,13 @@
             </template>
             <template v-slot:content>
               <div class="list__content">
-                <atom-title tag="h2" :content="specialDay.title" class="list__title" />
+                <span class="list__date">{{
+                convertingDate(
+                  specialDay.number_year,
+                  specialDay.number_month,
+                  specialDay.number_day
+                )
+              }}</span>
                 <span class="list__description">
                   {{ specialDay.description }}
                 </span>
@@ -62,6 +63,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
+import { useI18n } from 'vue-i18n';
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -84,6 +86,7 @@ components: {
   MoleculeDeleteDayButton,
 },
 setup() {
+  const { t } = useI18n();
   const { isMobile } = useWidthWindow();
 
   const { switchAppModalState } = useMainStore();
@@ -101,9 +104,11 @@ setup() {
     number_month: number,
     number_day: number
   ) => {
-    return `(${number_year} - ${
-      number_month < 9 ? "0" + number_month : number_month
-    } - ${number_day < 9 ? "0" + number_day : number_day})`;
+    const date = new Date(`${number_year}-${number_month}-${number_day}`);
+    console.log(date.getDay())
+    return `
+      ${t('namesDaysOfWeek.'+ (date.getDay()))}, 
+      ${date.getDate()} ${t('months.' + (date.getMonth() + 1))}`;
   };
 
   const switchShowListAction = () => {
@@ -112,7 +117,7 @@ setup() {
     }
   };
 
-  watch(showList , (newVlaue) => {
+  watch(showList, (newVlaue) => {
     switchAppModalState(newVlaue);
   })
 
@@ -130,109 +135,114 @@ setup() {
 
 <style lang="scss" scoped>
 .molecule-list-of-whole-month {
-@include position($position: fixed, $right: 10px, $bottom: 10px);
-width: 50px;
-height: 50px;
-margin-left: 10px;
-transform: translate(-50%, -50%);
-
-&__button {
-  @include position($position: fixed, $bottom: 20px, $right: 20px);
-
-  @include flexbox;
-  @include flex-centering;
+  @include position($position: fixed, $right: 10px, $bottom: 10px);
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-
-  color: $white;
-  font-size: 30px;
-
-  background: $main-color;
-
-  cursor: pointer;
+  margin-left: 10px;
   transform: translate(-50%, -50%);
-  transition: all 0.3s ease;
 
-  &--desabled {
-    opacity: 0.4;
+  &__button {
+    @include position($position: fixed, $bottom: 20px, $right: 20px);
+
+    @include flexbox;
+    @include flex-centering;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+    color: $white;
+    font-size: 30px;
+
+    background: $main-color;
+
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+
+    &--desabled {
+      opacity: 0.4;
+    }
   }
-}
 
-&__counter {
-  @include position($top: 0px, $left: 0px);
+  &__counter {
+    @include position($top: 0px, $left: 0px);
 
-  @include flexbox;
-  @include flex-centering;
-  width: 20px;
-  height: 20px;
-  border: 2px solid $main-color;
-  border-radius: 50%;
+    @include flexbox;
+    @include flex-centering;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $main-color;
+    border-radius: 50%;
 
-  color: $main-font-color;
-  font-size: 15px;
-  font-weight: 600;
+    color: $main-font-color;
+    font-size: 15px;
+    font-weight: 600;
 
-  background: $background-color;
-}
+    background: $background-color;
+  }
 
-&__list {
-  @include position($bottom: -25px, $right: -25px);
-}
+  &__list {
+    @include position($bottom: -25px, $right: -25px);
+  }
 }
 
 .list {
-@extend .custom-scrollbar;
-width: min(400px, (100vw - 20px));
-max-height: 90vh;
-padding: 10px 10px 100px 10px;
-border: 2px solid rgba(0, 0, 0, 0.35);
-border-radius: 8px;
-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-box-sizing: border-box;
-overflow-y: auto;
+  @extend .custom-scrollbar;
+  width: min(400px, (100vw - 20px));
+  max-height: 90vh;
+  padding: 10px 10px 100px 10px;
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-sizing: border-box;
+  overflow-y: auto;
 
-background: $background-color;
+  background: $background-color;
 
-&__icon {
-  @include flexbox;
-  @include flex-centering;
-  aspect-ratio: 1 / 1;
-  width: 25px;
-  border-radius: 50%;
+  &__icon {
+    @include flexbox;
+    @include flex-centering;
+    aspect-ratio: 1 / 1;
+    width: 25px;
+    border-radius: 50%;
 
-  color: $white;
-}
+    color: $white;
+  }
 
-&__date,
-&__title,
-&__content {
-  color: $main-font-color;
-}
+  &__date,
+  &__title,
+  &__content {
+    color: $main-font-color;
+  }
 
-&__content {
-  @include flexbox;
-  @include flex-direction(column);
-  @include justify-content(space-between);
-  gap: 20px;
-}
+  &__content {
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(space-between);
+    gap: 20px;
+    font-size: 16px;
+  }
 
-&__title {
-  margin: 0px;
-  font-size: 20px;
-}
+  &__title {
+    margin: 0px;
+    font-size: 20px;
+  }
+
+  &__date {
+    font-size: 17px;
+  }
 }
 
 .delete-button {
-padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 @media only screen and (max-width: $small) {
-.molecule-list-of-whole-month {
-  &__button {
-    @include position($position: static);
-    transform: translate(0%, 0%);
+  .molecule-list-of-whole-month {
+    &__button {
+      @include position($position: static);
+      transform: translate(0%, 0%);
+    }
   }
-}
 }
 </style>
