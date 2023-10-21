@@ -1,14 +1,20 @@
 <template>
   <div class="molecule-names-days-of-week">
     <div
-      v-for="(index) in 7"
-      :key="index"
+      v-for="(value) in 6"
+      :key="value"
       class="molecule-names-days-of-week__div"
       :class="{
-        'molecule-names-days-of-week__div--sunday': index == 1,
+        'molecule-names-days-of-week__div--sunday': value == 1,
       }"
     >
-      {{ t(`shortNamesDaysOfWeek.${index}`) }}
+      {{ t(`shortNamesDaysOfWeek.${value}`) }}
+    </div>
+
+    <div
+      class="molecule-names-days-of-week__div"
+    >
+      {{ t(`shortNamesDaysOfWeek.${0}`) }}
     </div>
   </div>
 </template>
