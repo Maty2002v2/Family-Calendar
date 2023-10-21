@@ -14,22 +14,22 @@
     "12": "Grudzień"
   },
   "shortNamesDaysOfWeek": {
+    "0": "Niedz",
     "1": "Pon",
     "2": "Wt",
     "3": "Śr",
     "4": "Czw",
     "5": "Pt",
-    "6": "Sob",
-    "7": "Niedz"
+    "6": "Sob"
   },
   "namesDaysOfWeek" : {
+    "0": "Niedziela",
     "1": "Poniedziałek",
     "2": "Wtorek",
     "3": "Środa",
     "4": "Czwartek",
     "5": "Piątek",
-    "6": "Sobota",
-    "7": "Niedziela"
+    "6": "Sobota"
   },
   "CreateCalendar": "Stwórz swój kalendarz",
   "JoinExisting": "Dołącz do już istniejącego",
