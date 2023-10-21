@@ -1,34 +1,29 @@
 <template>
   <div class="molecule-names-days-of-week">
     <div
-      v-for="(name, index) in namesDaysOfWeek"
+      v-for="(index) in 7"
       :key="index"
       class="molecule-names-days-of-week__div"
       :class="{
-        'molecule-names-days-of-week__div--sunday': name == namesDaysOfWeek[0],
+        'molecule-names-days-of-week__div--sunday': index == 1,
       }"
     >
-      {{ t(`shortNamesDaysOfWeek.${name}`) }}
+      {{ t(`shortNamesDaysOfWeek.${index}`) }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-
-import { useDateStore } from "@/stores/DateStore";
 
 export default defineComponent({
   name: "MoleculeNamesDaysOfWeek",
   setup() {
     const { t } = useI18n();
-    const { getNamesDaysOfWeek: namesDaysOfWeek } = storeToRefs(useDateStore());
 
     return { 
-      t,
-      namesDaysOfWeek,
+      t
     };
   },
 });
