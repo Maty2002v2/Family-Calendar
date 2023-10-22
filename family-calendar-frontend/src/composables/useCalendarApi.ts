@@ -48,7 +48,7 @@ export const useCalendarApi = () => {
     const result = { error: false, message: [] };
 
     await fetch(
-      "https://matikster21.smallhost.pl/family-calendar-api/?action=add-calendar",
+      `${process.env.VUE_APP_API_URL}?action=add-calendar`,
       {
         method: "GET",
         mode: "cors",
@@ -68,7 +68,7 @@ export const useCalendarApi = () => {
   };
 
   const checkIfThereIsCalendar = async (calendar_id: string) => {
-    const url = new URL("https://matikster21.smallhost.pl/family-calendar-api/");
+    const url = new URL(process.env.VUE_APP_API_URL);
     const params = { action: "exist-calendar", calendar_id: calendar_id };
     const result = { error: false, message: "" };
 
@@ -97,7 +97,7 @@ export const useCalendarApi = () => {
   const fetchDaysOfTheMonth = async (whatDays: InformationDaysDownload) => {
     const { switchLoadingCalendar } = useMainStore();
 
-    const url = new URL("https://matikster21.smallhost.pl/family-calendar-api/");
+    const url = new URL(process.env.VUE_APP_API_URL);
     const params = {
       action: "give-days-of-the-month",
       calendar_id: whatDays.calendarId,
@@ -130,7 +130,7 @@ export const useCalendarApi = () => {
 
     const { switchShowNewDayForm } = useMainStore();
 
-    const url = "https://matikster21.smallhost.pl/family-calendar-api/";
+    const url = process.env.VUE_APP_API_URL;
     const params = Object.assign({ action: "add-day" }, day);
 
     const formData = new FormData();
@@ -173,7 +173,7 @@ export const useCalendarApi = () => {
   const deleteDay = async (idDay: string) => {
     const { getMounth, getYear } = storeToRefs(useDateStore());
 
-    const url = "https://matikster21.smallhost.pl/family-calendar-api/";
+    const url = process.env.VUE_APP_API_URL;
     const params = Object.assign({ action: "delete-day" }, { id: idDay });
 
     const formData = new FormData();
