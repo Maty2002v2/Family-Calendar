@@ -53,9 +53,11 @@ export default defineComponent({
 
     const { t } = useI18n();
 
-    const translatedDayOfWeek = computed(() => 
-      t(`shortNamesDaysOfWeek.${(((getFirstMonthDay.value - 2) + props.nrDay) % 7 + 1)}`)
-    );
+    const translatedDayOfWeek = computed(() => {
+      const index = ((getFirstMonthDay.value - 2) + props.nrDay) % 7 + 1;
+
+      return t(`shortNamesDaysOfWeek.${index != 7 ? index : 0}`)
+    });
 
     const theFirstThreeElements = computed(() =>
       props.specialDayList.slice(0, 3)
