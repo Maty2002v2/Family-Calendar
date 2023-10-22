@@ -15,7 +15,6 @@ export const useCopyText = () => {
 
     try {
       const successful = document.execCommand('copy');
-      const msg = successful ? 'successful' : 'unsuccessful';
       copyTextState.value = true;
     } catch (err) {
       copyTextState.value = false;
