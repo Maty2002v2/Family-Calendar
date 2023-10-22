@@ -4,7 +4,7 @@ import PageCalendar from "@/pages/PageCalendar.vue";
 import PageNotFound from "@/pages/PageNotFound.vue";
 
 import { useMainStore } from "@/stores/MainStore";
-import { useCalendarApiStore } from "@/stores/CalendarApiStore";
+import { useCalendarApi } from "@/composables/useCalendarApi";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 
 const routes: Array<RouteRecordRaw> = [
@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     component: PageInitCalendar,
     beforeEnter: () => {
       const localStorageCalendarId = useLocalStorage('calendarId');
-      const { setCalendarHash } = useCalendarApiStore();
+      const { setCalendarHash } = useCalendarApi();
       
       if(localStorageCalendarId.value) {
         setCalendarHash(localStorageCalendarId.value);
@@ -30,7 +30,7 @@ const routes: Array<RouteRecordRaw> = [
     props: true,
     beforeEnter: (to, from, next) => {
       const { switchIncorrectCodeEntered } = useMainStore();
-      const { checkIfThereIsCalendar, setCalendarHash } = useCalendarApiStore();
+      const { checkIfThereIsCalendar, setCalendarHash } = useCalendarApi();
 
       checkIfThereIsCalendar(to.params.calendarId as string).then(
         (response) => {

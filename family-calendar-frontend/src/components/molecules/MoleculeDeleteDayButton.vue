@@ -9,9 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
-import { useCalendarApiStore } from "@/stores/CalendarApiStore";
-
+import { useCalendarApi } from "@/composables/useCalendarApi";
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 
 export default defineComponent({
@@ -26,7 +24,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { deleteDay } = useCalendarApiStore();
+    const { deleteDay } = useCalendarApi();
 
     const eraseDay = () => deleteDay(props.id);
 

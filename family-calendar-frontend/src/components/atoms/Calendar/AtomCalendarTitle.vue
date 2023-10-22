@@ -5,8 +5,8 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useI18n } from 'vue-i18n';
-
-import { storeToRefs } from "pinia";
+import { storeToRefs } from "pinia"
+;
 import { useDateStore } from "@/stores/DateStore";
 
 export default defineComponent({
@@ -15,22 +15,8 @@ export default defineComponent({
     const { t } = useI18n();
 
     const { getMounth, getYear } = storeToRefs(useDateStore());
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
 
-    const monuhName = computed(() => t(`months.${monthNames[getMounth.value]}`))
+    const monuhName = computed(() => t(`months.${[getMounth.value + 1]}`))
 
     const title = computed(() => {
       return `${monuhName.value} ${getYear.value}`;

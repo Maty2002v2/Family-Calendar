@@ -19,15 +19,14 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
 import { useI18n } from 'vue-i18n';
+import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import MoleculeInputFloatingLabel from "@/components/molecules/MoleculeInputFloatingLabel.vue"
 import MoleculeSquareButton from "@/components/molecules/MoleculeSquareButton.vue";
 
-import { storeToRefs } from "pinia";
 import { useMainStore } from "@/stores/MainStore";
-
-import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "MoleculeJoinCalendarForm",

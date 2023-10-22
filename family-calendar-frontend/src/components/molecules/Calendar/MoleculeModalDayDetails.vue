@@ -46,6 +46,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useI18n } from 'vue-i18n';
+import { storeToRefs } from "pinia";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -54,7 +55,6 @@ import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayButton.vue";
 import MoleculeNewDayAccordion from "@/components/molecules/Calendar/MoleculeNewDayAccordion.vue";
 
-import { storeToRefs } from "pinia";
 import { useMainStore } from "@/stores/MainStore";
 
 export default defineComponent({
