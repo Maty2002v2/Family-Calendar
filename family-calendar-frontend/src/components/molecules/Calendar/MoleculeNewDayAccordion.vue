@@ -57,8 +57,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, watch } from "vue";
 import { useI18n } from 'vue-i18n';
+import { storeToRefs } from "pinia";
 
 import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -69,11 +70,10 @@ import MoleculeCustomizationDayIcon from "@/components/molecules/Calendar/Molecu
 import MoleculeInputWithLabel from "@/components/molecules/MoleculeInputWithLabel.vue";
 import MoleculeRepeatEveryYearCheckbox from "@/components/molecules/Calendar/MoleculeRepeatEveryYearCheckbox.vue";
 
-import { storeToRefs } from "pinia";
-import { useCalendarApiStore } from "../../../stores/CalendarApiStore";
-import { useDateStore } from "../../../stores/DateStore";
-import { useMainStore } from "../../../stores/MainStore";
+import { useDateStore } from "@/stores/DateStore";
+import { useMainStore } from "@/stores/MainStore";
 
+import { useCalendarApi } from "@/composables/useCalendarApi";
 import { useTheme } from '@/composables/useTheme';
 
 export default defineComponent({
@@ -97,8 +97,7 @@ export default defineComponent({
   setup(props) {
     const { mainColor } = useTheme();
     
-    const { getCalendarHash } = storeToRefs(useCalendarApiStore());
-    const { addDayToCalendar } = useCalendarApiStore();
+    const { getCalendarHash, addDayToCalendar } = useCalendarApi();
 
     const { getMounth, getYear } = storeToRefs(useDateStore());
 
@@ -123,6 +122,9 @@ export default defineComponent({
       () => title.value.length > 0 && description.value.length > 0
     );
 
+    const translatedAddToDay = computed(() => t('addToDayModal.add'));
+    const translatedGiveData = computed(() => t('addToDayModal.giveData'));
+
     const addDay = () => {
       if (correctData.value) {
         addDayToCalendar({
@@ -141,14 +143,18 @@ export default defineComponent({
           description.value = "";
         });
       } else {
-        if (titleOfButton.value === t('addToDayModal.add')) {
-          titleOfButton.value = t('addToDayModal.giveData');
-          setTimeout(() => (titleOfButton.value = t('addToDayModal.add')), 2000);
+        if (titleOfButton.value === translatedAddToDay.value) {
+          titleOfButton.value = translatedGiveData.value;
+          setTimeout(() => (titleOfButton.value = translatedAddToDay.value), 2000);
         }
       }
     };
 
     const setToRepeat = (value: boolean) => (toRepeat.value = value);
+
+    watch(translatedAddToDay, (newValue) => {
+      titleOfButton.value = newValue;
+    });
 
     return {
       showAccordionContent,

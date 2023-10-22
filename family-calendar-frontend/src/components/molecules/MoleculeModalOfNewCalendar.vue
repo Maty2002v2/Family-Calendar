@@ -25,15 +25,17 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { storeToRefs } from 'pinia';
 
-import AtomTitle from '../atoms/AtomTitle.vue';
+import AtomTitle from '@/components//atoms/AtomTitle.vue';
 import MoleculePillButton from '@/components/molecules/MoleculePillButton.vue';
 import MoleculeModal from '@/components/molecules/MoleculeModal.vue';
 
-import { storeToRefs } from 'pinia';
-import { useCalendarApiStore } from '../../stores/CalendarApiStore';
-import { useMainStore } from '../../stores/MainStore';
-import { useCopyText } from '../../composables/useCopyText';
+import { useCalendarApi } from '@/composables/useCalendarApi';
+import { useCopyText } from '@/composables/useCopyText';
+import { useNotifications } from '@/composables/useNotifications';
+
+import { useMainStore } from '@/stores/MainStore';
 
 export default defineComponent({
 	name: 'MoleculeModalOfNewCalendar',
@@ -42,25 +44,26 @@ export default defineComponent({
 		MoleculePillButton,
 		MoleculeModal,
 	},
-	emits: ['closeModal'],
-	setup(props, { emit }) {
+	setup() {
 		const { getShowModalOfNewCalendar } = storeToRefs(useMainStore());
 		const { switchShowModalOfNewCalendar } = useMainStore();
 
-		const { getCalendarHash } = storeToRefs(useCalendarApiStore());
+		const { getCalendarHash } = useCalendarApi();
 
 		const { copyTextToClipboard, copyTextState } = useCopyText();
 		const { t } = useI18n();
+		const { addNotification, defaultNotificationTime } = useNotifications();
 
 		const codeSpan = ref();
 		const closeAndCopy = () => switchShowModalOfNewCalendar(false);
 
-		const closeModal = () => {
-			emit('closeModal');
-		};
-
 		const copyHash = () => {
 			copyTextToClipboard(getCalendarHash.value);
+			addNotification({
+				type: 'info',
+				message: t('CodeCopied', { code: getCalendarHash.value }),
+				time: defaultNotificationTime.time
+			});
 		};
 
 		return {
@@ -70,7 +73,6 @@ export default defineComponent({
 			codeSpan,
 			switchShowModalOfNewCalendar,
 			closeAndCopy,
-			closeModal,
 			copyHash,
 			t,
 		};

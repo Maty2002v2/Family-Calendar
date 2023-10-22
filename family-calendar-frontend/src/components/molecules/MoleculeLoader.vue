@@ -13,7 +13,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 
 export default defineComponent({

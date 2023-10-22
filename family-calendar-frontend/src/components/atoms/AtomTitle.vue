@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: "AtomTitle",
   props: {
     tag: {
@@ -20,5 +22,5 @@ export default {
       default: ''
     }
   }
-};
+});
 </script>
