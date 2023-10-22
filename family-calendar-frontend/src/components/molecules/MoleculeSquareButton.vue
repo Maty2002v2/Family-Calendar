@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-
 import AtomButton from "@/components/atoms/AtomButton.vue";
 
 export default defineComponent({

@@ -16,7 +16,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
-
 import AtomCheckboxInput from "@/components/atoms/AtomCheckboxInput.vue";
 
 export default defineComponent({

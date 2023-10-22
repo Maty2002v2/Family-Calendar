@@ -12,7 +12,6 @@
 import { defineComponent, computed } from "vue";
 import { useLanguages } from "@/composables/useLanguages";
 
-
 export default defineComponent({
   name: "MoleculeLanguageSwitcher",
   setup() {

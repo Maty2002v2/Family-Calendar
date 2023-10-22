@@ -71,10 +71,10 @@ import AtomBackdrop from '@/components/atoms/AtomBackdrop.vue';
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayButton.vue";
 
-import { useWidthWindow } from "@/composables/useWidthWindow";
-
-import { useCalendarApi } from "@/composables/useCalendarApi";
 import { useMainStore } from '@/stores/MainStore';
+
+import { useWidthWindow } from "@/composables/useWidthWindow";
+import { useCalendarApi } from "@/composables/useCalendarApi";
 
 export default defineComponent({
 name: "MoleculeListOfWholeMonth",

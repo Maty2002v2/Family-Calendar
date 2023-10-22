@@ -72,10 +72,11 @@
 import { defineComponent, ref, computed, watch } from "vue";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
+import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
 import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeCalendarNavigation.vue"
 import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
+import MoleculeNotificationsWrapper from "@/components/molecules/MoleculeNotificationsWrapper.vue";
 import MoleculeDayField from "@/components/molecules/Calendar/MoleculeDayField.vue";
-import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
 import MoleculeDesktopMenu from "@/components/molecules/Menu/MoleculeDesktopMenu.vue";
 import MoleculeMobileMenu from "@/components/molecules/Menu/MoleculeMobileMenu.vue";
 import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
@@ -90,18 +91,16 @@ import { useMainStore } from "@/stores/MainStore";
 import { useWidthWindow } from "@/composables/useWidthWindow";
 import { useTheme } from '@/composables/useTheme';
 
-import MoleculeNotificationsWrapper from "../molecules/MoleculeNotificationsWrapper.vue";
-
 export default defineComponent({
   name: "OrganismCalendar",
   components: {
-    MoleculeNotificationsWrapper,
     AtomAnimatedWrapper,
+    AtomLoader,
     MoleculeCalendarNavigaion,
     MoleculeDesktopMenu,
     MoleculeNamesDaysOfWeek,
+    MoleculeNotificationsWrapper,
     MoleculeDayField,
-    AtomLoader,
     MoleculeMobileMenu,
     MoleculeModalDayDetails,
     MoleculeModalOfNewCalendar,

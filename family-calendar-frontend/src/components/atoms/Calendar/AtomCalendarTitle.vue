@@ -5,8 +5,8 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useI18n } from 'vue-i18n';
-
-import { storeToRefs } from "pinia";
+import { storeToRefs } from "pinia"
+;
 import { useDateStore } from "@/stores/DateStore";
 
 export default defineComponent({

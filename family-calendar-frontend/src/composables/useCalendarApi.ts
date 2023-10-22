@@ -1,13 +1,14 @@
 import { storeToRefs } from "pinia";
 import { ref, computed } from 'vue';
-import { i18n } from '../translations/main';
+import { i18n } from '@/translations/main';
 
-import InformationDaysDownload from "../types/InformationDaysDownload";
-import DaysOfTheMonthDownloaded from "../types/DaysOfTheMonthDownloaded";
-import CreateNewDay from "../types/CreateNewDay";
+import InformationDaysDownload from "@/types/InformationDaysDownload";
+import DaysOfTheMonthDownloaded from "@/types/DaysOfTheMonthDownloaded";
+import CreateNewDay from "@/types/CreateNewDay";
 
-import { useMainStore } from "../stores/MainStore";
-import { useDateStore } from "../stores/DateStore";
+import { useMainStore } from "@/stores/MainStore";
+import { useDateStore } from "@/stores/DateStore";
+
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { useNotifications } from "@/composables/useNotifications";
 
@@ -20,7 +21,9 @@ const days = ref<DaysOfTheMonthDownloaded[]>([]);
 
 export const useCalendarApi = () => {
   const getCalendarHash = computed(() => calendarHash.value);
+
   const getDays = computed(() => days.value);
+
   const getSortedDays = computed(() => {
     const dayIndex: DaysOfTheMonthDownloaded[][] = [
       [],[],[],[],[],[],[],
@@ -101,7 +104,7 @@ export const useCalendarApi = () => {
     const params = {
       action: "give-days-of-the-month",
       calendar_id: whatDays.calendarId,
-      number_month: (parseInt(whatDays.numberMonth) + 1).toString(), //By miesiace zaczynaly sie od 1 a nie 0
+      number_month: (parseInt(whatDays.numberMonth) + 1).toString(),
       number_year: whatDays.numberYear.toString(),
     };
 
@@ -119,18 +122,12 @@ export const useCalendarApi = () => {
         days.value = response.message;
         switchLoadingCalendar(false);
       });
-    // .catch((error) => {
-    //   result.error = true;
-    //   result.message = error;
-    // });
   };
 
   const addDayToCalendar = async (day: CreateNewDay) => {
     const { getMounth, getYear } = storeToRefs(useDateStore());
 
     const { switchShowNewDayForm } = useMainStore();
-
-    const url = process.env.VUE_APP_API_URL;
     const params = Object.assign({ action: "add-day" }, day);
 
     const formData = new FormData();
@@ -139,7 +136,7 @@ export const useCalendarApi = () => {
       formData.append(param, params[param as keyof typeof params] || "");
     }
 
-    await fetch(url, {
+    await fetch(process.env.VUE_APP_API_URL, {
       method: "POST",
       body: formData,
       mode: "cors",
@@ -172,8 +169,6 @@ export const useCalendarApi = () => {
 
   const deleteDay = async (idDay: string) => {
     const { getMounth, getYear } = storeToRefs(useDateStore());
-
-    const url = process.env.VUE_APP_API_URL;
     const params = Object.assign({ action: "delete-day" }, { id: idDay });
 
     const formData = new FormData();
@@ -182,7 +177,7 @@ export const useCalendarApi = () => {
       formData.append(param, params[param as keyof typeof params] || "");
     }
 
-    await fetch(url, {
+    await fetch(process.env.VUE_APP_API_URL, {
       method: "POST",
       body: formData,
       mode: "cors",
