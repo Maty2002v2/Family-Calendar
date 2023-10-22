@@ -22,8 +22,8 @@
 import { getCurrentInstance, computed } from "vue";
 
 import AtomInput from "@/components/atoms/AtomInput.vue";
-import AtomInputLabel from "../atoms/AtomInputLabel.vue";
-import AtomCounterForInput from "../atoms/AtomCounterForInput.vue";
+import AtomInputLabel from "@/components/atoms/AtomInputLabel.vue";
+import AtomCounterForInput from "@/components/atoms/AtomCounterForInput.vue";
 
 export default {
   name: "MoleculeInputWithLabel",

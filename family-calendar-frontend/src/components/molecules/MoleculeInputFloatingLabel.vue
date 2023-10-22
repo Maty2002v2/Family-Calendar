@@ -14,8 +14,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import AtomInput from "../atoms/AtomInput.vue";
-import AtomInputLabel from "../atoms/AtomInputLabel.vue";
+import AtomInput from "@/components/atoms/AtomInput.vue";
+import AtomInputLabel from "@/components/atoms/AtomInputLabel.vue";
 
 export default defineComponent({
   name: "MoleculeInputFloatingLabel",

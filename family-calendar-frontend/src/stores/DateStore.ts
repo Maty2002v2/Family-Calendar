@@ -6,15 +6,6 @@ export const useDateStore = defineStore("Date", {
       day: new Date().getDate(),
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
-      namesDaysOfWeek: <string[]>[
-        "Mon",
-        "Tues",
-        "Wed",
-        "Thurs",
-        "Fri",
-        "Sat",
-        "Sun",
-      ]
     }
   },
   getters: {
@@ -33,7 +24,6 @@ export const useDateStore = defineStore("Date", {
 
       return firstMonthDay;
     },
-    getNamesDaysOfWeek: (state) => state.namesDaysOfWeek
   },
   actions: {
     changeDateData(step: number) {

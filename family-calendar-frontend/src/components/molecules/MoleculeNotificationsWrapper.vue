@@ -17,9 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
 import MoleculeNotification from "@/components/molecules/MoleculeNotification.vue";
-
 import { useNotifications } from '@/composables/useNotifications';
 
 export default defineComponent({
@@ -50,5 +48,12 @@ export default defineComponent({
 .list-leave-to {
   opacity: 0;
   transform: translateX(30px);
+}
+
+@media only screen and (max-width: $small) {
+  .molecule-notifications-wrapper {
+    @include position($position: fixed, $bottom: 150px, $right: 0px);
+    font-size: 10px;
+  }
 }
 </style>

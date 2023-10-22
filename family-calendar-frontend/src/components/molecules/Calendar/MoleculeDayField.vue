@@ -49,15 +49,12 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { 
-      getFirstMonthDay, 
-      getNamesDaysOfWeek,
-    } = storeToRefs(useDateStore());
+    const { getFirstMonthDay } = storeToRefs(useDateStore());
 
     const { t } = useI18n();
 
     const translatedDayOfWeek = computed(() => 
-      t(`shortNamesDaysOfWeek.${getNamesDaysOfWeek.value[((getFirstMonthDay.value - 2) + props.nrDay) % 7]}`)
+      t(`shortNamesDaysOfWeek.${(((getFirstMonthDay.value - 2) + props.nrDay) % 7 + 1)}`)
     );
 
     const theFirstThreeElements = computed(() =>

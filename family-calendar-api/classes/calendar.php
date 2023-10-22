@@ -16,10 +16,8 @@ class Calendar {
 
         if($db->query($sql)) {
             return ["is_ok" => true, "hash" => $hash];
-        } else {
-            return ["is_ok" => false];
         }
-
+        return ["is_ok" => false];
     }
 
     public function does_it_exist(): bool {
@@ -42,6 +40,6 @@ class Calendar {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
 
-         return $randomString;
+        return $randomString;
     }
 }

@@ -10,12 +10,6 @@
       />
       <atom-title tag="h2" :content="message" class="molecule-notification__h2" />
     </div>
-    <!-- <div class="molecule-notification__timer">
-      <span
-        class="molecule-notification__line"
-        :class="`molecule-notification__line--${type}`"
-      ></span>
-    </div> -->
     <Transition
       name="molecule-notification"
       @enter="start"
@@ -28,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, computed } from "vue";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -36,8 +30,8 @@ import AtomTitle from "@/components/atoms/AtomTitle.vue";
 export default defineComponent({
   name: "MoleculeNotification",
   components: {
+    AtomIcon,
     AtomTitle,
-    AtomIcon
   },
   props: {
     type: {
@@ -165,25 +159,6 @@ export default defineComponent({
     height: 20px;
     text-align: center;
     animation: flashColdownLine 1s ease infinite;
-  }
-
-  &__line {
-    display: inline-block;
-    height: 2px;
-    animation-name: coldownLine;
-    animation-timing-function: linear;
-
-    &--success {
-      background: #3c763d;
-    }
-
-    &--info {
-      background: #31708f;
-    }
-
-    &--danger {
-      background: #a94442;
-    }
   }
 
   &__open-content {
