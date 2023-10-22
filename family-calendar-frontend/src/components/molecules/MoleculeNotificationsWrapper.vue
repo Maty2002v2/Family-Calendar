@@ -17,9 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
 import MoleculeNotification from "@/components/molecules/MoleculeNotification.vue";
-
 import { useNotifications } from '@/composables/useNotifications';
 
 export default defineComponent({

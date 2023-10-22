@@ -9,9 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
 import { useCalendarApi } from "@/composables/useCalendarApi";
-
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 
 export default defineComponent({

@@ -19,13 +19,13 @@
   </div>
 </template>
 <script lang="ts">
-import { getCurrentInstance, computed } from "vue";
+import { defineComponent, getCurrentInstance, computed } from "vue";
 
 import AtomInputLabel from "@/components/atoms/AtomInputLabel.vue";
 import AtomTextarea from "@/components/atoms/AtomTextarea.vue";
-import AtomCounterForInput from "../atoms/AtomCounterForInput.vue";
+import AtomCounterForInput from "@/components/atoms/AtomCounterForInput.vue";
 
-export default {
+export default defineComponent({
   name: "MoleculeTextareaWithText",
   components: {
     AtomInputLabel,
@@ -76,7 +76,7 @@ export default {
       textareaId,
     };
   },
-};
+});
 </script>
 <style lang="scss">
 .molecule-textarea-with-label {

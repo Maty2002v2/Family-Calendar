@@ -25,16 +25,17 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { storeToRefs } from 'pinia';
 
-import AtomTitle from '../atoms/AtomTitle.vue';
+import AtomTitle from '@/components//atoms/AtomTitle.vue';
 import MoleculePillButton from '@/components/molecules/MoleculePillButton.vue';
 import MoleculeModal from '@/components/molecules/MoleculeModal.vue';
 
-import { storeToRefs } from 'pinia';
-import { useCalendarApi } from '../../composables/useCalendarApi';
-import { useMainStore } from '../../stores/MainStore';
-import { useCopyText } from '../../composables/useCopyText';
+import { useCalendarApi } from '@/composables/useCalendarApi';
+import { useCopyText } from '@/composables/useCopyText';
 import { useNotifications } from '@/composables/useNotifications';
+
+import { useMainStore } from '@/stores/MainStore';
 
 export default defineComponent({
 	name: 'MoleculeModalOfNewCalendar',
@@ -132,4 +133,3 @@ export default defineComponent({
 	}
 }
 </style>
-../../stores/useCalendarApi

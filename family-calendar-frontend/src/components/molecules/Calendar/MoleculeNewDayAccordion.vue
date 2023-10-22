@@ -59,6 +59,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
 import { useI18n } from 'vue-i18n';
+import { storeToRefs } from "pinia";
 
 import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
@@ -69,11 +70,10 @@ import MoleculeCustomizationDayIcon from "@/components/molecules/Calendar/Molecu
 import MoleculeInputWithLabel from "@/components/molecules/MoleculeInputWithLabel.vue";
 import MoleculeRepeatEveryYearCheckbox from "@/components/molecules/Calendar/MoleculeRepeatEveryYearCheckbox.vue";
 
-import { storeToRefs } from "pinia";
-import { useCalendarApi } from "../../../composables/useCalendarApi";
-import { useDateStore } from "../../../stores/DateStore";
-import { useMainStore } from "../../../stores/MainStore";
+import { useDateStore } from "@/stores/DateStore";
+import { useMainStore } from "@/stores/MainStore";
 
+import { useCalendarApi } from "@/composables/useCalendarApi";
 import { useTheme } from '@/composables/useTheme';
 
 export default defineComponent({
@@ -260,4 +260,3 @@ export default defineComponent({
   }
 }
 </style>
-../../../stores/useCalendarApi

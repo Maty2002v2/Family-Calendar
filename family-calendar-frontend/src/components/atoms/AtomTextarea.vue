@@ -12,7 +12,9 @@
   </div>
 </template>
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: "AtomTextarea",
   props: {
     modelValue: {
@@ -36,7 +38,7 @@ export default {
       default: 10,
     },
   }
-}
+})
 </script>
 <style lang="scss">
 .atom-textarea {

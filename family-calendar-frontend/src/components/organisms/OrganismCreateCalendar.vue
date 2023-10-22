@@ -12,11 +12,12 @@ import { defineComponent, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from 'vue-i18n';
 
-import { useCalendarApi } from "../../composables/useCalendarApi";
-import { useMainStore } from "../../stores/MainStore";
+import { useCalendarApi } from "@/composables/useCalendarApi";
+
+import { useMainStore } from "@/stores/MainStore";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
-import AtomTitle from "../atoms/AtomTitle.vue";
+import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeSquareButton from "@/components/molecules/MoleculeSquareButton.vue";
 
 export default defineComponent({
@@ -97,4 +98,3 @@ export default defineComponent({
   }
 }
 </style>
-../../stores/useCalendarApi

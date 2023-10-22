@@ -30,8 +30,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from "vue";
-
-import AtomPlusMinusSwitch from "../atoms/AtomPlusMinusSwitch.vue";
+import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
 
 export default defineComponent({
   name: "MoleculeAccordion",
