@@ -192,7 +192,8 @@ $size-day-div: calc(100% / 7 - 5px);
   @include flexbox;
   @include flex-wrap(wrap);
   @include flex-basis(100%);
-  margin-top: 20px;
+  max-width: 2100px;
+  margin: 20px auto 0px auto;
 
   .container {
     @include flexbox;
