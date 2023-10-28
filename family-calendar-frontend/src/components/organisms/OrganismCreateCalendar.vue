@@ -2,7 +2,7 @@
   <atom-animated-wrapper class="organism-create-calendar animate__fadeInDown">
     <atom-title tag="h2" :content="`${t('CreateCalendar')}.`" class="organism-create-calendar__h2" />
     <molecule-square-button @click="create">
-      {{ messageButton }}
+      <span v-html="messageButton"></span>
     </molecule-square-button>
   </atom-animated-wrapper>
 </template>
