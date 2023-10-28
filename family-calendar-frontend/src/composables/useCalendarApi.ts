@@ -13,6 +13,7 @@ import { useLocalStorage } from "@/composables/useLocalStorage";
 import { useNotifications } from "@/composables/useNotifications";
 
 const localStorageCalendarId = useLocalStorage('calendarId');
+const localStorageIdsOfCreatedCalendars = useLocalStorage('idsOfCreatedCalendars', '[]');
 const { addNotification, defaultNotificationTime } = useNotifications();
 const { t } = i18n.global;
 
@@ -61,6 +62,9 @@ export const useCalendarApi = () => {
     .then((response) => {
       result.error = response.error;
       result.message = response.message;
+
+      localStorageIdsOfCreatedCalendars.value = 
+        JSON.stringify([...JSON.parse(localStorageIdsOfCreatedCalendars.value), result.message]);
     })
     .catch((error) => {
       result.error = true;
