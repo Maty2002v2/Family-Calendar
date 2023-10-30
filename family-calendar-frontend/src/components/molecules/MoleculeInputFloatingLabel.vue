@@ -5,6 +5,8 @@
       class="input molecule-input-floating-label__input"
       :value="modelValue"
       @input="updateValue"
+      @focus="$emit('focus')"
+      @blur="$emit('blur')"
       :required="true"
     />
     <atom-input-label class="molecule-input-floating-label__label" :label="label" />

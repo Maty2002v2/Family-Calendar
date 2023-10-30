@@ -1,3 +1,8 @@
+import { useMainStore } from "@/stores/MainStore";
+import router  from '@/router/index';
+
+const mainStore = useMainStore();
+
 const hexToRgb = (hex: string) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result ? {
@@ -5,10 +10,24 @@ const hexToRgb = (hex: string) => {
     g: parseInt(result[2], 16),
     b: parseInt(result[3], 16)
   } : null;
-}
+};
+
+const pushToCalendar = (calendarHash: string) => {
+  if (calendarHash.length > 0) {
+    router.push({
+      name: "calendar",
+      params: {
+        calendarId: calendarHash,
+      },
+    });
+  } else {
+    mainStore.switchIncorrectCodeEntered(true); //TODO: Zrobic by mozna bylo przekazywac wiadomosci a nie tylko BAD CODE, np pusty kod
+  }
+};
 
 export const useUtils = () => {
   return {
-    hexToRgb
+    hexToRgb,
+    pushToCalendar
   }
 }

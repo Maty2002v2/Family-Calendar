@@ -1,7 +1,7 @@
 <template>
   <div>
-    <molecule-input-floating-label :label="t('CODE')" v-model="calendarHash" />
-    <molecule-square-button variant="btn-rectangle--gradient" @click="pushWithQuery">
+    <molecule-input-with-options :label="t('CODE')" v-model="calendarHash" />
+    <molecule-square-button variant="btn-rectangle--gradient" @click="pushToCalendar(calendarHash)">
       {{ t('join') }}
     </molecule-square-button>
 
@@ -19,19 +19,20 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
 import { useI18n } from 'vue-i18n';
-import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
-import MoleculeInputFloatingLabel from "@/components/molecules/MoleculeInputFloatingLabel.vue"
+import MoleculeInputWithOptions from "@/components/molecules/InputWithOptions/MoleculeInputWithOptions.vue";
 import MoleculeSquareButton from "@/components/molecules/MoleculeSquareButton.vue";
+
+import { useUtils } from "@/composables/useUtils";
 
 import { useMainStore } from "@/stores/MainStore";
 
 export default defineComponent({
   name: "MoleculeJoinCalendarForm",
   components: {
-    MoleculeInputFloatingLabel,
+    MoleculeInputWithOptions,
     MoleculeSquareButton,
     AtomAnimatedWrapper,
   },
@@ -39,23 +40,10 @@ export default defineComponent({
     const { getIncorrectCodeEntered } = storeToRefs(useMainStore());
     const { switchIncorrectCodeEntered } = useMainStore();
 
-    const router = useRouter();
+    const { pushToCalendar } = useUtils();
     const { t } = useI18n();
 
     const calendarHash = ref("");
-
-    const pushWithQuery = () => {
-      if (calendarHash.value.length > 0) {
-        router.push({
-          name: "calendar",
-          params: {
-            calendarId: calendarHash.value,
-          },
-        });
-      } else {
-        switchIncorrectCodeEntered(true); //TODO: Zrobic by mozna bylo przekazywac wiadomosci a nie tylko BAD CODE, np pusty kod
-      }
-    };
 
     watch(getIncorrectCodeEntered, (newValue) => {
       if (newValue) {
@@ -65,8 +53,8 @@ export default defineComponent({
 
     return { 
       calendarHash, 
-      getIncorrectCodeEntered, 
-      pushWithQuery,
+      getIncorrectCodeEntered,
+      pushToCalendar,
       t 
     };
   }
