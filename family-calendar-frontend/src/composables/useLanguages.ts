@@ -9,20 +9,20 @@ type languageBlock = {
   background: string,
 }
 
-const avaibleLanguages = computed<Array<languageBlock>>(() => [
-  {
-    code: "pl",
-    background: mainColor.value
-  },
-  {
-    code: "en",
-    background: "#FF8000"
-  }
-]);
-
-const { mainColor } = useTheme();
-
 export const useLanguages = () => {
+  const avaibleLanguages = computed<Array<languageBlock>>(() => [
+    {
+      code: "pl",
+      background: mainColor.value
+    },
+    {
+      code: "en",
+      background: "#FF8000"
+    }
+  ]);
+  
+  const { mainColor } = useTheme();
+
   const { locale } = i18n.global;
   const localStorageLanguage = useLocalStorage('lang', avaibleLanguages.value[0].code);
 
