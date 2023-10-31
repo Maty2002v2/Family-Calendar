@@ -18,6 +18,11 @@ const updateValue = (event: any) => {
 
 const { pushToCalendar } = useUtils();
 
+const selectedCode = (code: string) => {
+  showList.value = false;
+  pushToCalendar(code);
+}
+
 const showList = ref(false);
 </script>
 
@@ -28,13 +33,12 @@ const showList = ref(false);
       :value="modelValue"
       @input="updateValue"
       @focus="showList = true"
-      @blur="showList = false"
     />
 
     <molecule-list-of-options-to-input 
       :searchPhrase="props.modelValue" 
       :showList="showList"
-      @selectOption="(selectCode) => pushToCalendar(selectCode)"
+      @selectOption="selectedCode"
     />
   </div>
 </template>
