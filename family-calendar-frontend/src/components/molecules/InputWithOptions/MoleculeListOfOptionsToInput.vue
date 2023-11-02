@@ -17,7 +17,7 @@ const filtredCodes = computed(() => listOfCodes.value.filter((code: string) => c
 </script>
 
 <template>
-  <div v-if="props.showList" class="molecule-list-of-options-to-input">
+  <div v-if="props.showList" class="molecule-list-of-options-to-input custom-scrollbar">
     <div v-if="filtredCodes.length < 1" class="molecule-list-of-options-to-input__option">Brak</div>
     <div 
       v-for="(code, index) in filtredCodes" 
@@ -31,10 +31,14 @@ const filtredCodes = computed(() => listOfCodes.value.filter((code: string) => c
 .molecule-list-of-options-to-input {
   display: flex;
   flex-direction: column;
+  max-height: 150px;
   margin-top: 10px;
   padding: 5px;
   border-radius: 3px;
+  overflow-y: scroll;
+
   background: #FFFFFF;
+
   color: $background-color;
 
   &__option {

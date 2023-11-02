@@ -27,6 +27,6 @@ const pushToCalendar = (calendarHash: string) => {
 export const useUtils = () => {
   return {
     hexToRgb,
-    pushToCalendar
+    pushToCalendar,
   }
 }
