@@ -39,7 +39,7 @@ const filtredCodes = computed(() => listOfCodes.value.filter((code: string) => c
 
   background: #FFFFFF;
 
-  color: $background-color;
+  color: $main-color;
 
   &__option {
     padding: 10px 5px;
