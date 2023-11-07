@@ -1,5 +1,5 @@
 <template>
-  <atom-button :class="[classObject, variant?.length ? variant : '']" type="button" @click="$emit('click')">
+  <atom-button :class="[classObject, variant?.length ? variant : '']" type="button">
     <slot></slot>
   </atom-button>
 </template>
