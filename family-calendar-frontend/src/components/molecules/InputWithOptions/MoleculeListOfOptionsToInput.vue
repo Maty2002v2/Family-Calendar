@@ -7,8 +7,6 @@ const props = defineProps<{
   showList: boolean
 }>();
 
-const emit = defineEmits(['selectOption']);
-
 const localStorageIdsOfCreatedCalendars = useLocalStorage('idsOfCreatedCalendars', '[]');
 
 const listOfCodes = computed(() => JSON.parse(localStorageIdsOfCreatedCalendars.value));
