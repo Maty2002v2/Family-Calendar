@@ -1,6 +1,6 @@
 <template>
   <div>
-    <molecule-input-with-options :label="t('CODE')" v-model="calendarHash" />
+    <molecule-input-with-options :label="t('enterCode')" v-model="calendarHash" />
     <molecule-square-button variant="btn-rectangle--gradient" @click="pushToCalendar(calendarHash)">
       {{ t('join') }}
     </molecule-square-button>

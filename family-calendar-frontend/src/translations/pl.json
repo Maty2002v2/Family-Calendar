@@ -37,7 +37,7 @@
   "SomethingWentWrongTryLater": "Coś jest nie tak <br /> Spróbuj później",
   "join": "Dołącz",
   "BadCode": "Zły kod",
-  "CODE": "KOD",
+  "enterCode": "Podaj lub wybierz kod",
   "startAlert": {
     "hereIsYourCode": "<span style='font-weight: 600;' >Cześć</span>, oto twój kod do tego kalendarza ",
     "youCanShare": "Możesz <span style='font-weight: 600;' >udostępnić</span> go tym z którymi chcesz dzielić dostęp."
