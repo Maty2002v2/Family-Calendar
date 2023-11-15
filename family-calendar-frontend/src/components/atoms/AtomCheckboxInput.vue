@@ -1,23 +1,15 @@
+<script setup lang="ts">
+defineProps<{
+	checked: boolean,
+}>();
+</script>
+
 <template>
   <label class="atom-checkbox-input" >
     <input class="atom-checkbox-input__input" type="checkbox" :checked="checked" @input="$emit('update:checked', $event.target.checked)"/>
     <span class="atom-checkbox-input__span round"></span>
   </label>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "AtomCheckboxInput",
-  props: {
-    checked: {
-      type: Boolean,
-      default: false,
-    },
-  }
-})
-</script>
 
 <style lang="scss">
 .atom-checkbox-input {
