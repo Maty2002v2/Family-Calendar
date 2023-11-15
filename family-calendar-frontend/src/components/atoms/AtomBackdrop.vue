@@ -1,3 +1,11 @@
+<script setup lang="ts">
+
+defineProps<{
+	isShow: boolean,
+}>();
+
+</script>
+
 <template>
 	<Transition
 		enter-active-class="animate__animated animate__faster animate__fadeIn"
@@ -10,18 +18,6 @@
       </div>
 	</Transition>
 </template>
-
-<script lang="ts">
-export default {
-	name: 'AtomBackdrop',
-	props: {
-		isShow: {
-			type: Boolean,
-			default: false,
-		},
-	},
-};
-</script>
 
 <style lang="scss" scoped>
 .darkened-background {
