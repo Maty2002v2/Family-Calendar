@@ -7,7 +7,7 @@ import { useDateStore } from "@/stores/DateStore";
 const { t } = useI18n();
 const { getMounth, getYear } = storeToRefs(useDateStore());
 
-const monuhName = computed(() => t(`months.${[getMounth.value + 1]}`))
+const monuhName = computed(() => t(`months.${[getMounth.value + 1]}`));
 const title = computed(() => `${monuhName.value} ${getYear.value}`);
 </script>
 
