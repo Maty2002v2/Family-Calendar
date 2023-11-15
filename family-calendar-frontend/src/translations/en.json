@@ -62,5 +62,6 @@
     "Color": "Color"
   },
   "CodeCopied": "{code} copied",
-  "newDayHasBeenAdded": "Added \"{dayTitle}\" to your calendar"
+  "newDayHasBeenAdded": "Added \"{dayTitle}\" to your calendar",
+  "lack": "Lack"
 }

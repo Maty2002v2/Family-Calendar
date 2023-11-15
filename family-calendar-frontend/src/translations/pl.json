@@ -62,5 +62,6 @@
     "Color": "Kolor"
   },
   "CodeCopied": "{code} skopiowane",
-  "newDayHasBeenAdded": "Dodano \"{dayTitle}\" do towojego kalendarza"
+  "newDayHasBeenAdded": "Dodano \"{dayTitle}\" do towojego kalendarza",
+  "lack": "Brak"
 }

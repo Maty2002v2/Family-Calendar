@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useLocalStorage } from "@/composables/useLocalStorage";
 
 const props = defineProps<{
@@ -7,6 +8,7 @@ const props = defineProps<{
   showList: boolean
 }>();
 
+const { t } = useI18n();
 const localStorageIdsOfCreatedCalendars = useLocalStorage('idsOfCreatedCalendars', '[]');
 
 const listOfCodes = computed(() => JSON.parse(localStorageIdsOfCreatedCalendars.value));
@@ -16,7 +18,7 @@ const filtredCodes = computed(() => listOfCodes.value.filter((code: string) => c
 
 <template>
   <div v-if="props.showList" class="molecule-list-of-options-to-input custom-scrollbar">
-    <div v-if="filtredCodes.length < 1" class="molecule-list-of-options-to-input__option">Brak</div>
+    <div v-if="filtredCodes.length < 1" class="molecule-list-of-options-to-input__option">{{ t('lack') }}</div>
     <div 
       v-for="(code, index) in filtredCodes" 
       :key="index" class="molecule-list-of-options-to-input__option"
