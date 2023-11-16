@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue";
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
+</script>
+
 <template>
   <nav class="molecule-calendar-navigation__nav molecule-calendar-navigation__nav--prev">
     <atom-navigation-button
@@ -41,23 +47,6 @@
     </atom-navigation-button>
   </nav>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue";
-import AtomIcon from "@/components/atoms/AtomIcon.vue";
-import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
-
-export default defineComponent({
-  name: "MoleculeCalendarNavigation",
-  components: {
-    AtomIcon,
-    AtomCalendarTitle,
-    AtomNavigationButton,
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .molecule-calendar-navigation {

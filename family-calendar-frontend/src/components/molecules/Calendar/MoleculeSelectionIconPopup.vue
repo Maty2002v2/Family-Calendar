@@ -1,3 +1,39 @@
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
+
+defineProps<{
+  title: string;
+  listItem: string[];
+}>();
+
+const emit = defineEmits(["getValue"]);
+
+const showList = ref(false);
+const popup = ref();
+const controller = new AbortController();
+
+onMounted(() => {
+  document.addEventListener(
+    "click",
+    (e) => {
+      if (popup.value !== undefined && popup.value.contains(e.target) === false) {
+        showList.value = false;
+      }
+    },
+    { signal: controller.signal }
+  );
+});
+
+onUnmounted(() => {
+  controller.abort();
+});
+
+const selectAListItem = (element: string) => {
+  showList.value = !showList.value;
+  emit("getValue", element);
+};
+</script>
+
 <template>
   <div class="molecule-selection-icon-popup" ref="popup">
     <div
@@ -25,56 +61,6 @@
     </Transition>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted } from "vue";
-
-export default defineComponent({
-  name: "MoleculeSelectionIconPopup",
-  props: {
-    title: {
-      type: String,
-      require: true,
-    },
-    listItem: {
-      type: Array,
-      require: true,
-    },
-  },
-  emits: ["getValue"],
-  setup(props, { emit }) {
-    const showList = ref(false);
-    const popup = ref();
-    const controller = new AbortController();
-
-    onMounted(() => {
-      document.addEventListener(
-        "click",
-        (e) => {
-          if (
-            popup.value !== undefined &&
-            popup.value.contains(e.target) === false
-          ) {
-            showList.value = false;
-          }
-        },
-        { signal: controller.signal }
-      );
-    });
-
-    onUnmounted(() => {
-      controller.abort();
-    });
-
-    const selectAListItem = (element: string) => {
-      showList.value = !showList.value;
-      emit("getValue", element);
-    };
-
-    return { showList, selectAListItem, popup };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .molecule-selection-icon-popup {

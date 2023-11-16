@@ -1,3 +1,18 @@
+<script setup lang="ts">
+import { ref, watchEffect } from "vue";
+import { useI18n } from 'vue-i18n';
+
+import MoleculeCheckboxForm from "@/components/molecules/MoleculeCheckboxForm.vue";
+
+const emit = defineEmits(['getCheckboxValue']);
+
+const { t } = useI18n();
+
+const switchValue = ref(false);
+
+watchEffect(() => emit("getCheckboxValue", switchValue.value));
+</script>
+
 <template>
   <div class="molecule-repeat-every-year-checkbox">
     <label class="molecule-repeat-every-year-checkbox__label"
@@ -12,33 +27,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, watchEffect } from "vue";
-import { useI18n } from 'vue-i18n';
-
-import MoleculeCheckboxForm from "@/components/molecules/MoleculeCheckboxForm.vue";
-
-export default defineComponent({
-  name: "MoleculeRepeatEveryYearCheckbox",
-  emits: ["getCheckboxValue"],
-  components: {
-    MoleculeCheckboxForm
-  },
-  setup(props, { emit }) {
-    const { t } = useI18n();
-
-    const switchValue = ref(false);
-
-    watchEffect(() => emit("getCheckboxValue", switchValue.value));
-
-    return { 
-      switchValue,
-      t,
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .molecule-repeat-every-year-checkbox {

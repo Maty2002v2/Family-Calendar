@@ -13,7 +13,6 @@ const localStorageIdsOfCreatedCalendars = useLocalStorage('idsOfCreatedCalendars
 
 const listOfCodes = computed(() => JSON.parse(localStorageIdsOfCreatedCalendars.value));
 const filtredCodes = computed(() => listOfCodes.value.filter((code: string) => code.includes(props.searchPhrase)));
-
 </script>
 
 <template>

@@ -1,3 +1,85 @@
+<script setup lang="ts">
+import { ref, watch } from "vue";
+import { useI18n } from 'vue-i18n';
+
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import MoleculeSelectionIconPopup from "@/components/molecules/Calendar/MoleculeSelectionIconPopup.vue";
+
+import { useTheme } from '@/composables/useTheme';
+
+const emit = defineEmits(['getIconDay']);
+
+const { t } = useI18n();
+const { mainColor } = useTheme();
+
+const iconNameList = [
+  { name: "icon-shopping-basket" },
+  { name: "icon-cab" },
+  { name: "icon-paw" },
+  { name: "icon-male" },
+  { name: "icon-female" },
+  { name: "icon-medkit" },
+  { name: "icon-briefcase" },
+  { name: "icon-phone" },
+  { name: "icon-users" },
+  { name: "icon-glass" },
+  { name: "icon-calendar" },
+  { name: "icon-hourglass-2" },
+  { name: "icon-venus-mars" },
+  { name: "icon-bicycle" },
+  { name: "icon-brush" },
+  { name: "icon-tree" },
+  { name: "icon-space-shuttle" },
+  { name: "icon-food" },
+  { name: "icon-coffee" },
+  { name: "icon-mail-alt" },
+  { name: "icon-moon-inv" },
+  { name: "icon-pencil" },
+  { name: "icon-wrench" },
+  { name: "icon-home" },
+  { name: "icon-hammer" },
+  { name: "icon-credit-card" },
+  { name: "icon-cog" },
+  { name: "icon-basket" },
+  { name: "icon-attention" },
+  { name: "icon-trash-empty" },
+  { name: "icon-ok" },
+  { name: "icon-phone" },
+];
+
+const colorList = [
+  { name: "#e43b3b" },
+  { name: "#d28fad" },
+  { name: "#637999" },
+  { name: "#778afd" },
+  { name: "#ffe800" },
+  { name: "#ff3e99" },
+  { name: "#c563a9" },
+  { name: "#b6d7a8" },
+  { name: "#d3ffce" },
+  { name: "#ff985f" },
+  { name: "#34568B" },
+  { name: "#6B5B95" },
+  { name: "#88B04B" },
+  { name: "#F7CAC9" },
+  { name: "#92A8D1" },
+  { name: "#EFC050" },
+  { name: "#DD4124" },
+  { name: "#DFCFBE" },
+];
+
+const selectedIcon = ref("icon-briefcase");
+const selectedColor = ref(mainColor.value);
+
+watch([selectedIcon, selectedColor], ([newIcon, newColor]) => {
+  emit("getIconDay", { name: newIcon, color: newColor });
+});
+
+watch(mainColor, (newValue) => {
+  selectedColor.value = newValue;
+})
+</script>
+
 <template>
   <article class="icon-selection">
     <section
@@ -33,104 +115,6 @@
     </section>
   </article>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, watch } from "vue";
-import { useI18n } from 'vue-i18n';
-
-import AtomIcon from "@/components/atoms/AtomIcon.vue";
-import MoleculeSelectionIconPopup from "@/components/molecules/Calendar/MoleculeSelectionIconPopup.vue";
-
-import { useTheme } from '@/composables/useTheme';
-
-export default defineComponent({
-  name: "MoleculeCustomizationDayIcon",
-  components: {
-    AtomIcon,
-    MoleculeSelectionIconPopup,
-  },
-  emits: ["getIconDay"],
-  setup(props, { emit }) {
-    const { t } = useI18n();
-    const { mainColor } = useTheme();
-
-    const iconNameList = [
-      { name: "icon-shopping-basket" },
-      { name: "icon-cab" },
-      { name: "icon-paw" },
-      { name: "icon-male" },
-      { name: "icon-female" },
-      { name: "icon-medkit" },
-      { name: "icon-briefcase" },
-      { name: "icon-phone" },
-      { name: "icon-users" },
-      { name: "icon-glass" },
-      { name: "icon-calendar" },
-      { name: "icon-hourglass-2" },
-      { name: "icon-venus-mars" },
-      { name: "icon-bicycle" },
-      { name: "icon-brush" },
-      { name: "icon-tree" },
-      { name: "icon-space-shuttle" },
-      { name: "icon-food" },
-      { name: "icon-coffee" },
-      { name: "icon-mail-alt" },
-      { name: "icon-moon-inv" },
-      { name: "icon-pencil" },
-      { name: "icon-wrench" },
-      { name: "icon-home" },
-      { name: "icon-hammer" },
-      { name: "icon-credit-card" },
-      { name: "icon-cog" },
-      { name: "icon-basket" },
-      { name: "icon-attention" },
-      { name: "icon-trash-empty" },
-      { name: "icon-ok" },
-      { name: "icon-phone" },
-    ];
-
-    const colorList = [
-      { name: "#e43b3b" },
-      { name: "#d28fad" },
-      { name: "#637999" },
-      { name: "#778afd" },
-      { name: "#ffe800" },
-      { name: "#ff3e99" },
-      { name: "#c563a9" },
-      { name: "#b6d7a8" },
-      { name: "#d3ffce" },
-      { name: "#ff985f" },
-      { name: "#34568B" },
-      { name: "#6B5B95" },
-      { name: "#88B04B" },
-      { name: "#F7CAC9" },
-      { name: "#92A8D1" },
-      { name: "#EFC050" },
-      { name: "#DD4124" },
-      { name: "#DFCFBE" },
-    ];
-
-    const selectedIcon = ref("icon-briefcase");
-    const selectedColor = ref(mainColor.value);
-
-    watch([selectedIcon, selectedColor], ([newIcon, newColor]) => {
-      emit("getIconDay", { name: newIcon, color: newColor });
-    });
-
-    watch(mainColor, (newValue) => {
-      selectedColor.value = newValue;
-    })
-
-    return {
-      iconNameList,
-      colorList,
-      selectedIcon,
-      selectedColor,
-      t,
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .icon-selection {

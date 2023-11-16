@@ -1,3 +1,13 @@
+<script setup lang="ts">
+defineProps<{
+  modelValue: string,
+  placeholder: string,
+  textareaId: string,
+  maxLength: number,
+  rows: number,
+}>();
+</script>
+
 <template>
   <div>
     <textarea 
@@ -11,35 +21,7 @@
     ></textarea>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
 
-export default defineComponent({
-  name: "AtomTextarea",
-  props: {
-    modelValue: {
-      type: String,
-      default: '',
-    },
-    placeholder: {
-      type: String,
-      default: ''
-    },
-    maxLength: {
-      type: Number,
-      default: null
-    },
-    textareaId: {
-      type: String,
-      default: ''
-    },
-    rows: {
-      type: Number,
-      default: 10,
-    },
-  }
-})
-</script>
 <style lang="scss">
 .atom-textarea {
   width: 100%;

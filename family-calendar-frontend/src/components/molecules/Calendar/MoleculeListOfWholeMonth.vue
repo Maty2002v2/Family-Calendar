@@ -1,137 +1,118 @@
-<template>
-  <teleport to='#mobile-menu'>
-    <atom-backdrop :isShow="showList && getDays.length > 0" @clickBackdrop="showList = false" >
-    <div class="molecule-list-of-whole-month">
-      <Transition
-        enter-active-class="animate__animated animate__faster animate__bounceInRight"
-        leave-active-class="animate__animated animate__faster animate__bounceOut"
-      >
-        <div
-          v-show="showList && getDays.length > 0"
-          class="list molecule-list-of-whole-month__list"
-          :class="[showList ? 'list molecule-list-of-whole-month__list--active' : '']"
-        >
-          <molecule-accordion 
-            v-for="(specialDay, index) in getDays" 
-            :key="index"
-            :showUnderline="true">
-            <template v-slot:title>
-              <atom-title tag="h2" :content="specialDay.title" class="list__title" />
-              
-              <atom-icon
-                :class="['list__icon', specialDay.icon_name]"
-                :style="{ backgroundColor: specialDay.icon_color }"
-              />
-            </template>
-            <template v-slot:content>
-              <div class="list__content">
-                <span class="list__date">{{
-                convertingDate(
-                  specialDay.number_year,
-                  specialDay.number_month,
-                  specialDay.number_day
-                )
-              }}</span>
-                <span class="list__description">
-                  {{ specialDay.description }}
-                </span>
-              </div>
-              <molecule-delete-day-button class="delete-button" :id="specialDay.id" />
-            </template>
-          </molecule-accordion>
-        </div>
-      </Transition>
-    </div>
-    </atom-backdrop>
-  </teleport>
-  <div
-      v-show="(!isMobile && getDays.length > 0) || isMobile"
-      :class="listButtonClassObject"
-      @click="switchShowListAction"
-    >
-      <Transition
-        enter-active-class="animate__animated animate__faster animate__bounceIn"
-        leave-active-class="animate__animated animate__faster animate__bounceOut"
-      >
-        <span class="molecule-list-of-whole-month__counter" v-show="!showList">{{
-          getDays.length
-        }}</span>
-      </Transition>
-      <atom-icon class="icon-calendar" />
-    </div>
-</template>
-
-<script lang="ts">
-import { defineComponent, ref, computed, watch } from "vue";
-import { useI18n } from 'vue-i18n';
+<script setup lang="ts">
+import { ref, computed, watch } from "vue";
+import { useI18n } from "vue-i18n";
 
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
-import AtomBackdrop from '@/components/atoms/AtomBackdrop.vue';
+import AtomBackdrop from "@/components/atoms/AtomBackdrop.vue";
 import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
 import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayButton.vue";
 
-import { useMainStore } from '@/stores/MainStore';
+import { useMainStore } from "@/stores/MainStore";
 
 import { useWidthWindow } from "@/composables/useWidthWindow";
 import { useCalendarApi } from "@/composables/useCalendarApi";
 
-export default defineComponent({
-name: "MoleculeListOfWholeMonth",
-components: {
-  AtomIcon,
-  AtomTitle,
-  AtomBackdrop,
-  MoleculeAccordion,
-  MoleculeDeleteDayButton,
-},
-setup() {
-  const { t } = useI18n();
-  const { isMobile } = useWidthWindow();
+const { t } = useI18n();
+const { isMobile } = useWidthWindow();
 
-  const { switchAppModalState } = useMainStore();
+const { switchAppModalState } = useMainStore();
 
-  const { getDays } = useCalendarApi();
-  const showList = ref(false);
+const { getDays } = useCalendarApi();
+const showList = ref(false);
 
-  const listButtonClassObject = computed(() => ({
-    'molecule-list-of-whole-month__button': true,
-    'molecule-list-of-whole-month__button--desabled': getDays.value.length < 1,
-  }))
+const listButtonClassObject = computed(() => ({
+  "molecule-list-of-whole-month__button": true,
+  "molecule-list-of-whole-month__button--desabled": getDays.value.length < 1,
+}));
 
-  const convertingDate = (
-    number_year: number,
-    number_month: number,
-    number_day: number
-  ) => {
-    const date = new Date(`${number_year}-${number_month}-${number_day}`);
-    console.log(date.getDay())
-    return `
-      ${t('namesDaysOfWeek.'+ (date.getDay()))}, 
-      ${date.getDate()} ${t('months.' + (date.getMonth() + 1))}`;
-  };
+const convertingDate = (
+  number_year: number,
+  number_month: number,
+  number_day: number
+) => {
+  const date = new Date(`${number_year}-${number_month}-${number_day}`);
+  return `
+      ${t("namesDaysOfWeek." + date.getDay())}, 
+      ${date.getDate()} ${t("months." + (date.getMonth() + 1))}`;
+};
 
-  const switchShowListAction = () => {
-    if(getDays.value.length > 0) {
-      showList.value = !showList.value;
-    }
-  };
+const switchShowListAction = () => {
+  if (!getDays.value.length) return;
+  showList.value = !showList.value;
+};
 
-  watch(showList, (newVlaue) => {
-    switchAppModalState(newVlaue);
-  })
-
-  return {
-    isMobile,
-    showList, 
-    getDays,
-    listButtonClassObject,
-    convertingDate,
-    switchShowListAction,
-  };
-},
+watch(showList, (newVlaue) => {
+  switchAppModalState(newVlaue);
 });
 </script>
+
+<template>
+  <teleport to="#mobile-menu">
+    <atom-backdrop
+      :isShow="showList && getDays.length > 0"
+      @clickBackdrop="showList = false"
+    >
+      <div class="molecule-list-of-whole-month">
+        <Transition
+          enter-active-class="animate__animated animate__faster animate__bounceInRight"
+          leave-active-class="animate__animated animate__faster animate__bounceOut"
+        >
+          <div
+            v-show="showList && getDays.length > 0"
+            class="list molecule-list-of-whole-month__list"
+            :class="[showList ? 'list molecule-list-of-whole-month__list--active' : '']"
+          >
+            <molecule-accordion
+              v-for="(specialDay, index) in getDays"
+              :key="index"
+              :showUnderline="true"
+            >
+              <template v-slot:title>
+                <atom-title tag="h2" :content="specialDay.title" class="list__title" />
+
+                <atom-icon
+                  :class="['list__icon', specialDay.icon_name]"
+                  :style="{ backgroundColor: specialDay.icon_color }"
+                />
+              </template>
+              <template v-slot:content>
+                <div class="list__content">
+                  <span class="list__date">{{
+                    convertingDate(
+                      specialDay.number_year,
+                      specialDay.number_month,
+                      specialDay.number_day
+                    )
+                  }}</span>
+                  <span class="list__description">
+                    {{ specialDay.description }}
+                  </span>
+                </div>
+                <molecule-delete-day-button class="delete-button" :id="specialDay.id" />
+              </template>
+            </molecule-accordion>
+          </div>
+        </Transition>
+      </div>
+    </atom-backdrop>
+  </teleport>
+  <div
+    v-show="(!isMobile && getDays.length > 0) || isMobile"
+    :class="listButtonClassObject"
+    @click="switchShowListAction"
+  >
+    <Transition
+      enter-active-class="animate__animated animate__faster animate__bounceIn"
+      leave-active-class="animate__animated animate__faster animate__bounceOut"
+    >
+      <span class="molecule-list-of-whole-month__counter" v-show="!showList">{{
+        getDays.length
+      }}</span>
+    </Transition>
+    <atom-icon class="icon-calendar" />
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .molecule-list-of-whole-month {

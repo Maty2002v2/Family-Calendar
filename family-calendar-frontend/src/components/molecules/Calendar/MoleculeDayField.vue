@@ -1,3 +1,34 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
+import { useI18n } from "vue-i18n";
+
+import { useDateStore } from "@/stores/DateStore";
+
+import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+
+export interface Props {
+  nrDay: number;
+  specialDayList: string[];
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  specialDayList: () => [],
+});
+const { getFirstMonthDay } = storeToRefs(useDateStore());
+
+const { t } = useI18n();
+
+const translatedDayOfWeek = computed(() => {
+  const index = ((getFirstMonthDay.value - 2 + props.nrDay) % 7) + 1;
+
+  return t(`shortNamesDaysOfWeek.${index != 7 ? index : 0}`);
+});
+
+const theFirstThreeElements = computed(() => props.specialDayList.slice(0, 3));
+</script>
+
 <template>
   <div class="molecule-day-field">
     <p class="molecule-day-field__day-name">{{ translatedDayOfWeek }}</p>
@@ -10,66 +41,16 @@
         :class="[specialDay.icon_name, `animate__delay-${index + 1}s`]"
         :style="{ backgroundColor: specialDay.icon_color }"
       />
-      
+
       <atom-animated-wrapper
         v-if="specialDayList.length > 3"
         class="icons__span animate__animated animate__pulse animate__slower animate__infinite"
-        >
-          ...
-        </atom-animated-wrapper>
+      >
+        ...
+      </atom-animated-wrapper>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from "vue";
-import { storeToRefs } from "pinia";
-import { useI18n } from 'vue-i18n';
-
-import { useDateStore } from "@/stores/DateStore";
-
-import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
-import AtomIcon from '@/components/atoms/AtomIcon.vue';
-
-export default defineComponent({
-  name: "MoleculeDayField",
-  components: {
-    AtomIcon,
-    AtomAnimatedWrapper
-  },  
-  props: {
-    nrDay: {
-      type: Number,
-      required: true,
-    },
-    specialDayList: {
-      type: Array,
-      required: true,
-      default: () => [],
-    }
-  },
-  setup(props) {
-    const { getFirstMonthDay } = storeToRefs(useDateStore());
-
-    const { t } = useI18n();
-
-    const translatedDayOfWeek = computed(() => {
-      const index = ((getFirstMonthDay.value - 2) + props.nrDay) % 7 + 1;
-
-      return t(`shortNamesDaysOfWeek.${index != 7 ? index : 0}`)
-    });
-
-    const theFirstThreeElements = computed(() =>
-      props.specialDayList.slice(0, 3)
-    );
-
-    return {
-      theFirstThreeElements,
-      translatedDayOfWeek
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .molecule-day-field {
@@ -133,7 +114,6 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: $small) {
-
   .molecule-day-field {
     &__day-name {
       display: block;
