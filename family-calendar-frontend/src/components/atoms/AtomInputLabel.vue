@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps<{
   label: string,
-  requaied: boolean,
-  inputId: string,
+  requaied?: boolean,
+  inputId?: string,
 }>();
 </script>
 

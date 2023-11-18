@@ -1,16 +1,7 @@
-<template>
-  <atom-animated-wrapper class="organism-create-calendar animate__fadeInDown">
-    <atom-title tag="h2" :content="`${t('CreateCalendar')}.`" class="organism-create-calendar__h2" />
-    <molecule-square-button @click="create">
-      <span v-html="messageButton"></span>
-    </molecule-square-button>
-  </atom-animated-wrapper>
-</template>
-
-<script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+<script setup lang="ts">
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 import { useCalendarApi } from "@/composables/useCalendarApi";
 
@@ -20,57 +11,53 @@ import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeSquareButton from "@/components/molecules/MoleculeSquareButton.vue";
 
-export default defineComponent({
-  name: "OrganismCreateCalendar",
-  components: {
-    AtomTitle,
-    AtomAnimatedWrapper,
-    MoleculeSquareButton
-  },
-  setup() {
-    const { createCalendar } = useCalendarApi();
-    const { switchShowModalOfNewCalendar } = useMainStore();
+const { createCalendar } = useCalendarApi();
+const { switchShowModalOfNewCalendar } = useMainStore();
 
-    const router = useRouter();
-    const { t } = useI18n();
+const router = useRouter();
+const { t } = useI18n();
 
-    let failedCreation = ref(false);
+let failedCreation = ref(false);
 
-    const create = () => {
-      createCalendar()
-        .then((response) => {
-          if (!response.error) {
-            router.push({
-              name: "calendar",
-              params: {
-                calendarId: response.message,
-              },
-            });
-            setTimeout(() => switchShowModalOfNewCalendar(true), 1000);
-          } else {
-            failedCreation.value = true;
-            setTimeout(() => (failedCreation.value = false), 4000);
-          }
-        })
-        .catch(() => {
-          failedCreation.value = true;
-          setTimeout(() => (failedCreation.value = false), 4000);
+const create = () => {
+  createCalendar()
+    .then((response) => {
+      if (!response.error) {
+        router.push({
+          name: "calendar",
+          params: {
+            calendarId: response.message,
+          },
         });
-    };
+        setTimeout(() => switchShowModalOfNewCalendar(true), 1000);
+      } else {
+        failedCreation.value = true;
+        setTimeout(() => (failedCreation.value = false), 4000);
+      }
+    })
+    .catch(() => {
+      failedCreation.value = true;
+      setTimeout(() => (failedCreation.value = false), 4000);
+    });
+};
 
-    const messageButton = computed(() =>
-      failedCreation.value ? t('SomethingWentWrongTryLater') : t('create')
-    );
-
-    return { 
-      failedCreation,
-      messageButton,
-      create, 
-      t,
-    };
-  },
-});
+const messageButton = computed(() =>
+  failedCreation.value ? t("SomethingWentWrongTryLater") : t("create")
+);
 </script>
+
+<template>
+  <atom-animated-wrapper class="organism-create-calendar animate__fadeInDown">
+    <atom-title
+      tag="h2"
+      :content="`${t('CreateCalendar')}.`"
+      class="organism-create-calendar__h2"
+    />
+    <molecule-square-button @click="create">
+      <span v-html="messageButton"></span>
+    </molecule-square-button>
+  </atom-animated-wrapper>
+</template>
 
 <style lang="scss" scoped>
 .organism-create-calendar {

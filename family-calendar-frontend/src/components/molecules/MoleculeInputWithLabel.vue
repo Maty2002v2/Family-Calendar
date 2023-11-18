@@ -1,3 +1,32 @@
+<script setup lang="ts">
+import { getCurrentInstance, computed } from "vue";
+
+import AtomInput from "@/components/atoms/AtomInput.vue";
+import AtomInputLabel from "@/components/atoms/AtomInputLabel.vue";
+import AtomCounterForInput from "@/components/atoms/AtomCounterForInput.vue";
+
+type inputTypes = "text" | "email" | "tel" | "number";
+
+defineProps<{
+  modelValue: string,
+  type: inputTypes,
+  placeholder: string,
+  maxLength: number,
+  label: string,
+  requaied: boolean,
+  showCounter: boolean
+}>();
+
+const componentInstance = getCurrentInstance();
+let uid = 0;
+
+if(componentInstance) {
+  uid = componentInstance.uid;
+}
+
+const inputId = computed(() => `molecule-input-with-label-${uid}`);
+</script>
+
 <template>
   <div class="molecule-input-with-label">
     <atom-input-label :inputId="inputId" :label="label" :requaied="requaied" />
@@ -18,69 +47,6 @@
     />
   </div>
 </template>
-<script lang="ts">
-import { getCurrentInstance, computed } from "vue";
-
-import AtomInput from "@/components/atoms/AtomInput.vue";
-import AtomInputLabel from "@/components/atoms/AtomInputLabel.vue";
-import AtomCounterForInput from "@/components/atoms/AtomCounterForInput.vue";
-
-export default {
-  name: "MoleculeInputWithLabel",
-  components: {
-    AtomInput,
-    AtomInputLabel,
-    AtomCounterForInput,
-  },
-  props: {
-    modelValue: {
-      type: String,
-      default: "",
-    },
-    type: {
-      type: String,
-      default: "text",
-      validator(value: string) {
-        return ["text", "email", "tel", "number"].includes(value);
-      },
-    },
-    placeholder: {
-      type: String,
-      default: "",
-    },
-    maxLength: {
-      type: Number,
-      default: null,
-    },
-    label: {
-      type: String,
-      default: "",
-    },
-    requaied: {
-      type: Boolean,
-      default: false,
-    },
-    showCounter: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  setup() {
-    const componentInstance = getCurrentInstance();
-    let uid = 0;
-
-    if(componentInstance) {
-      uid = componentInstance.uid;
-    }
-
-    const inputId = computed(() => `molecule-input-with-label-${uid}`);
-
-    return {
-      inputId,
-    };
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 .molecule-input-with-label {

@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
+</script>
+
 <template>
   <atom-animated-wrapper class="animate__fadeIn">
     <div class="loadingio-spinner-double-ring-j4uqqjzx04">
@@ -10,18 +14,6 @@
     </div>
   </atom-animated-wrapper>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
-
-export default defineComponent({
-  name: "MoleculeLoader",
-  components: {
-    AtomAnimatedWrapper
-  }
-});
-</script>
 
 <style type="text/css" lang="scss">
 @keyframes ldio-udrx6d3rqep {
