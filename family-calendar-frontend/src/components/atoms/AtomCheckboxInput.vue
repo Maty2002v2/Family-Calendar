@@ -1,12 +1,17 @@
 <script setup lang="ts">
 defineProps<{
-	checked: boolean,
+  checked: boolean;
 }>();
 </script>
 
 <template>
-  <label class="atom-checkbox-input" >
-    <input class="atom-checkbox-input__input" type="checkbox" :checked="checked" @input="$emit('update:checked', $event.target.checked)"/>
+  <label class="atom-checkbox-input">
+    <input
+      class="atom-checkbox-input__input"
+      type="checkbox"
+      :checked="checked"
+      @input="$emit('update:checked', ($event.target as HTMLInputElement).checked)"
+    />
     <span class="atom-checkbox-input__span round"></span>
   </label>
 </template>

@@ -2,12 +2,12 @@
 import { watch } from "vue";
 
 const props = defineProps<{
-  inputLength: number,
-    maxLength: number
+  inputLength: number;
+  maxLength: number;
 }>();
 
-const emit = defineEmits(['tooLongText']);
-  
+const emit = defineEmits(["tooLongText"]);
+
 watch(
   () => props.inputLength,
   (newInputLength) => {
@@ -24,9 +24,7 @@ watch(
     leave-active-class="animate__animated animate__faster animate__fadeOut"
   >
     <div class="input-counter" v-show="inputLength > 0">
-      <span class="input-counter__span"
-        >{{ inputLength }} / {{ maxLength }}</span
-      >
+      <span class="input-counter__span">{{ inputLength }} / {{ maxLength }}</span>
     </div>
   </Transition>
 </template>

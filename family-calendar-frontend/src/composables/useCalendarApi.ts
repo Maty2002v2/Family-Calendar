@@ -4,13 +4,16 @@ import { i18n } from '@/translations/main';
 
 import InformationDaysDownload from "@/types/InformationDaysDownload";
 import DaysOfTheMonthDownloaded from "@/types/DaysOfTheMonthDownloaded";
-import CreateNewDay from "@/types/CreateNewDay";
+import { SpecialDay } from "@/types/Components.interface";
 
 import { useMainStore } from "@/stores/MainStore";
 import { useDateStore } from "@/stores/DateStore";
 
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { useNotifications } from "@/composables/useNotifications";
+
+const getKeyValue = <U extends keyof T, T extends object>(key: U) => (obj: T) =>
+  obj[key];
 
 const localStorageCalendarId = useLocalStorage('calendarId');
 const localStorageIdsOfCreatedCalendars = useLocalStorage('idsOfCreatedCalendars', '[]');
@@ -128,7 +131,7 @@ export const useCalendarApi = () => {
       });
   };
 
-  const addDayToCalendar = async (day: CreateNewDay) => {
+  const addDayToCalendar = async (day: SpecialDay) => {
     const { getMounth, getYear } = storeToRefs(useDateStore());
 
     const { switchShowNewDayForm } = useMainStore();
@@ -137,7 +140,7 @@ export const useCalendarApi = () => {
     const formData = new FormData();
 
     for (const param in params) {
-      formData.append(param, params[param as keyof typeof params] || "");
+      formData.append(param, getKeyValue<keyof SpecialDay, SpecialDay>(param as keyof SpecialDay)(params));
     }
 
     await fetch(process.env.VUE_APP_API_URL, {

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import { Icon } from '@/types/Components.interface'
 
 defineProps<{
   title: string;
-  listItem: string[];
+  listItem: Icon[];
 }>();
 
 const emit = defineEmits(["getValue"]);

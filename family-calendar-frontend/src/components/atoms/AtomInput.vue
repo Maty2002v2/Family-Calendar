@@ -16,7 +16,7 @@ defineProps<{
     :maxlength="maxLength"
     :id="inputId"
     class="atom-input" 
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
   >
 </template>
 

@@ -7,12 +7,14 @@ import MoleculeSelectionIconPopup from "@/components/molecules/Calendar/Molecule
 
 import { useTheme } from '@/composables/useTheme';
 
+import { Icon, Color } from '@/types/Components.interface';
+
 const emit = defineEmits(['getIconDay']);
 
 const { t } = useI18n();
 const { mainColor } = useTheme();
 
-const iconNameList = [
+const listOfIconsNames: Icon[] = [
   { name: "icon-shopping-basket" },
   { name: "icon-cab" },
   { name: "icon-paw" },
@@ -47,7 +49,7 @@ const iconNameList = [
   { name: "icon-phone" },
 ];
 
-const colorList = [
+const colorList: Color[] = [
   { name: "#e43b3b" },
   { name: "#d28fad" },
   { name: "#637999" },
@@ -90,7 +92,7 @@ watch(mainColor, (newValue) => {
     <section class="icon-selection__choice">
       <molecule-selection-icon-popup
         :title="t('addToDayModal.Icon')"
-        :listItem="iconNameList"
+        :listItem="listOfIconsNames"
         @getValue="(element) => (selectedIcon = element)"
       >
         <template #item="{ name }">
