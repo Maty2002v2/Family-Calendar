@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, watch } from "vue";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
 import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
@@ -19,7 +19,6 @@ import { useDateStore } from "@/stores/DateStore";
 import { useMainStore } from "@/stores/MainStore";
 
 import { useWidthWindow } from "@/composables/useWidthWindow";
-import { useTheme } from "@/composables/useTheme";
 
 const { getSortedDays, getCalendarHash, fetchDaysOfTheMonth } = useCalendarApi();
 
@@ -31,12 +30,9 @@ const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } = storeTo
 const { getLoadingCalendar } = storeToRefs(useMainStore());
 const { switchShowModalDetailsOffDay } = useMainStore();
 
-const { width } = useWidthWindow();
-const { mode, tapSwitchMode } = useTheme();
+const { isMobile } = useWidthWindow();
 
 const calendarTransitionAnimationName = ref("");
-
-const isMobile = computed(() => width.value <= 460);
 
 watch(
   dataStore,

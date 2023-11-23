@@ -2,6 +2,8 @@
 import { useI18n } from "vue-i18n";
 import { storeToRefs } from "pinia";
 
+import { type SpecialDay } from "@/types/Components.interface";
+
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
@@ -11,17 +13,12 @@ import MoleculeNewDayAccordion from "@/components/molecules/Calendar/MoleculeNew
 
 import { useMainStore } from "@/stores/MainStore";
 
-defineProps<{
-  selectedDayNumber: {
-    type: number;
-    required: true;
-  };
-  specialDayList: {
-    type: string[];
-    required: true;
-    default: () => [];
-  };
-}>();
+interface Props {
+  selectedDayNumber: number,
+  specialDayList: SpecialDay[]
+}
+
+defineProps<Props>();
 
 const { getShowModalDetailsOffDay } = storeToRefs(useMainStore());
 const { switchShowNewDayForm, switchShowModalDetailsOffDay } = useMainStore();

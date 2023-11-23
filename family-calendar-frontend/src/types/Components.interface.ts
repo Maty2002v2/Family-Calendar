@@ -7,6 +7,7 @@ export interface Color {
 }
 
 export interface SpecialDay {
+  id: string;
   calendar_id: string;
   number_day: string;
   number_month: string;
@@ -17,4 +18,6 @@ export interface SpecialDay {
   category_day: string;
   icon_name: string;
   icon_color: string;
-} 
+}
+
+export type NavigationAnimations = "animate__backInRight" | "animate__backInLeft" | "animate__fadeInDown"; 

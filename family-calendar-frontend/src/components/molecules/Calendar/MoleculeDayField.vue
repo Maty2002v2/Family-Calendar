@@ -3,6 +3,8 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 
+import { type SpecialDay } from '@/types/Components.interface';
+
 import { useDateStore } from "@/stores/DateStore";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
@@ -10,7 +12,7 @@ import AtomIcon from "@/components/atoms/AtomIcon.vue";
 
 export interface Props {
   nrDay: number;
-  specialDayList: string[];
+  specialDayList: SpecialDay[];
 }
 
 const props = withDefaults(defineProps<Props>(), {

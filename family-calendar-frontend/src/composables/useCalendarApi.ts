@@ -3,7 +3,6 @@ import { ref, computed } from 'vue';
 import { i18n } from '@/translations/main';
 
 import InformationDaysDownload from "@/types/InformationDaysDownload";
-import DaysOfTheMonthDownloaded from "@/types/DaysOfTheMonthDownloaded";
 import { SpecialDay } from "@/types/Components.interface";
 
 import { useMainStore } from "@/stores/MainStore";
@@ -21,15 +20,12 @@ const { addNotification, defaultNotificationTime } = useNotifications();
 const { t } = i18n.global;
 
 const calendarHash = ref('');
-const days = ref<DaysOfTheMonthDownloaded[]>([]);
+const daysOfTheMonth = ref<SpecialDay[]>([]);
 
 export const useCalendarApi = () => {
   const getCalendarHash = computed(() => calendarHash.value);
-
-  const getDays = computed(() => days.value);
-
   const getSortedDays = computed(() => {
-    const dayIndex: DaysOfTheMonthDownloaded[][] = [
+    const dayIndex: SpecialDay[][] = [
       [],[],[],[],[],[],[],
       [],[],[],[],[],[],[],
       [],[],[],[],[],[],[],
@@ -37,7 +33,7 @@ export const useCalendarApi = () => {
       [],[],[],
     ];
 
-    days.value.forEach((day) => dayIndex[day.number_day - 1].push(day));
+    daysOfTheMonth.value.forEach((day) => dayIndex[Number(day.number_day) - 1].push(day));
 
     return dayIndex;
   });
@@ -126,7 +122,7 @@ export const useCalendarApi = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        days.value = response.message;
+        daysOfTheMonth.value = response.message;
         switchLoadingCalendar(false);
       });
   };
@@ -214,7 +210,7 @@ export const useCalendarApi = () => {
 
   return {
     getCalendarHash,
-    getDays,
+    daysOfTheMonth,
     getSortedDays,
     setCalendarHash,
     removeCalendarHash,

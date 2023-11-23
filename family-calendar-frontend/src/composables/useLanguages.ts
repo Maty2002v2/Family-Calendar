@@ -3,14 +3,14 @@ import { useLocalStorage } from "@/composables/useLocalStorage";
 import { useTheme } from "@/composables/useTheme";
 import { i18n } from '@/translations/main';
 
-type languageCode = 'pl' | 'en';
-type languageBlock = {
-  code: languageCode,
+type LanguageCode = 'pl' | 'en';
+type LanguageBlock = {
+  code: LanguageCode,
   background: string,
 }
 
 export const useLanguages = () => {
-  const avaibleLanguages = computed<Array<languageBlock>>(() => [
+  const avaibleLanguages = computed<Array<LanguageBlock>>(() => [
     {
       code: "pl",
       background: mainColor.value

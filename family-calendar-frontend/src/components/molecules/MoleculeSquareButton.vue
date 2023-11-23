@@ -2,15 +2,15 @@
 import { computed } from "vue";
 import AtomButton from "@/components/atoms/AtomButton.vue";
 
-type Variant = "" | "btn-rectangle--gradient";
+type Variant = "btn-rectangle--gradient";
 
 interface Props {
   shakeXAnimate: boolean;
-  variant: Variant;
+  variant?: Variant;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  shakeXAnimate: false,
+  shakeXAnimate: false
 });
 
 const classObject = computed(() => ({

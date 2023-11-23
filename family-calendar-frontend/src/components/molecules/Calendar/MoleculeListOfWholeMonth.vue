@@ -18,12 +18,12 @@ const { isMobile } = useWidthWindow();
 
 const { switchAppModalState } = useMainStore();
 
-const { getDays } = useCalendarApi();
+const { daysOfTheMonth } = useCalendarApi();
 const showList = ref(false);
 
 const listButtonClassObject = computed(() => ({
   "molecule-list-of-whole-month__button": true,
-  "molecule-list-of-whole-month__button--desabled": getDays.value.length < 1,
+  "molecule-list-of-whole-month__button--desabled": daysOfTheMonth.value.length < 1,
 }));
 
 const convertingDate = (
@@ -37,8 +37,8 @@ const convertingDate = (
       ${date.getDate()} ${t("months." + (date.getMonth() + 1))}`;
 };
 
-const switchShowListAction = () => {
-  if (!getDays.value.length) return;
+const switchActiveState = () => {
+  if (!daysOfTheMonth.value.length) return;
   showList.value = !showList.value;
 };
 
@@ -50,7 +50,7 @@ watch(showList, (newVlaue) => {
 <template>
   <teleport to="#mobile-menu">
     <atom-backdrop
-      :isShow="showList && getDays.length > 0"
+      :isShow="showList && daysOfTheMonth.length > 0"
       @clickBackdrop="showList = false"
     >
       <div class="molecule-list-of-whole-month">
@@ -59,12 +59,12 @@ watch(showList, (newVlaue) => {
           leave-active-class="animate__animated animate__faster animate__bounceOut"
         >
           <div
-            v-show="showList && getDays.length > 0"
+            v-show="showList && daysOfTheMonth.length > 0"
             class="list molecule-list-of-whole-month__list"
             :class="[showList ? 'list molecule-list-of-whole-month__list--active' : '']"
           >
             <molecule-accordion
-              v-for="(specialDay, index) in getDays"
+              v-for="(specialDay, index) in daysOfTheMonth"
               :key="index"
               :showUnderline="true"
             >
@@ -80,9 +80,9 @@ watch(showList, (newVlaue) => {
                 <div class="list__content">
                   <span class="list__date">{{
                     convertingDate(
-                      specialDay.number_year,
-                      specialDay.number_month,
-                      specialDay.number_day
+                      Number(specialDay.number_year),
+                      Number(specialDay.number_month),
+                      Number(specialDay.number_day)
                     )
                   }}</span>
                   <span class="list__description">
@@ -98,16 +98,16 @@ watch(showList, (newVlaue) => {
     </atom-backdrop>
   </teleport>
   <div
-    v-show="(!isMobile && getDays.length > 0) || isMobile"
+    v-show="(!isMobile && daysOfTheMonth.length > 0) || isMobile"
     :class="listButtonClassObject"
-    @click="switchShowListAction"
+    @click="switchActiveState"
   >
     <Transition
       enter-active-class="animate__animated animate__faster animate__bounceIn"
       leave-active-class="animate__animated animate__faster animate__bounceOut"
     >
       <span class="molecule-list-of-whole-month__counter" v-show="!showList">{{
-        getDays.length
+        daysOfTheMonth.length
       }}</span>
     </Transition>
     <atom-icon class="icon-calendar" />

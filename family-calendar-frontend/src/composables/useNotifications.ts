@@ -13,7 +13,7 @@ const addNotification = (notification: notification) => {
   if(!type || !message) return;
 
   notifications.value.push(notification);
-  countdownSetting(notification.time);
+  countdownSetting(time);
 }
 
 const countdownSetting = (time: number) => {

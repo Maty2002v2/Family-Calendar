@@ -16,16 +16,6 @@ const menuItems = computed(() =>
   mobileMenuElement.value?.querySelectorAll(".molecule-mobile-menu-button__item")
 );
 
-const switchState = () => {
-  const menuItems = mobileMenuElement.value?.querySelectorAll(
-    ".molecule-mobile-menu-button__item"
-  );
-  if (!trigerButton.value || !menuItems) return;
-
-  trigerButton.value.classList.toggle("is-rotate");
-  menuItems.forEach((item, index) => item.classList.toggle(`item-${index}`));
-};
-
 const hideState = () => {
   if (!trigerButton.value || !menuItems.value) return;
 
@@ -45,11 +35,11 @@ onClickOutside(mobileMenuElement, hideState);
         buttonAction,
       }"
     >
-      <div class="molecule-mobile-menu-button" :ref="(el) => setRefParentElement(el)">
+      <div class="molecule-mobile-menu-button" :ref="(el) => setRefParentElement(el as HTMLDivElement)">
         <button
           class="molecule-mobile-menu-button__triger"
           @click="buttonAction"
-          :ref="(el) => setButtonTrgerElement(el)"
+          :ref="(el) => setButtonTrgerElement(el as HTMLButtonElement)"
         >
           <atom-icon class="icon-cog" />
         </button>

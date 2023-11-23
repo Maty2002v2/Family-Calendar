@@ -2,7 +2,7 @@
 import { useI18n } from "vue-i18n";
 
 import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
-import AtomTitle from "../atoms/AtomTitle.vue";
+import AtomTitle from "@/components/atoms/AtomTitle.vue";
 import MoleculeJoinCalendarForm from "@/components/molecules/MoleculeJoinCalendarForm.vue";
 
 const { t } = useI18n();
