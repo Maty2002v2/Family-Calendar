@@ -3,7 +3,7 @@ import { ref, computed } from 'vue';
 import { i18n } from '@/translations/main';
 
 import InformationDaysDownload from "@/types/InformationDaysDownload";
-import { SpecialDay } from "@/types/Components.interface";
+import { type SpecialDay, type NewSpecialDay } from "@/types/Components.interface";
 
 import { useMainStore } from "@/stores/MainStore";
 import { useDateStore } from "@/stores/DateStore";
@@ -127,7 +127,7 @@ export const useCalendarApi = () => {
       });
   };
 
-  const addDayToCalendar = async (day: SpecialDay) => {
+  const addDayToCalendar = async (day: NewSpecialDay) => {
     const { getMounth, getYear } = storeToRefs(useDateStore());
 
     const { switchShowNewDayForm } = useMainStore();
@@ -136,7 +136,7 @@ export const useCalendarApi = () => {
     const formData = new FormData();
 
     for (const param in params) {
-      formData.append(param, getKeyValue<keyof SpecialDay, SpecialDay>(param as keyof SpecialDay)(params));
+      formData.append(param, getKeyValue<keyof NewSpecialDay, NewSpecialDay>(param as keyof NewSpecialDay)(params));
     }
 
     await fetch(process.env.VUE_APP_API_URL, {

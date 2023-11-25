@@ -46,8 +46,9 @@ const closeModal = () => {
           >
             <template v-slot:title>
               <atom-icon
-                :class="['accordions__icon', specialDay.icon_name]"
-                :style="{ backgroundColor: specialDay.icon_color }"
+                class="accordions__icon"
+                :name="specialDay.icon_name"
+                :color="specialDay.icon_color"
               />
               <span class="accordions__title">
                 {{ specialDay.title }}
@@ -70,7 +71,7 @@ const closeModal = () => {
           class="info-about-lack-of-days__h2"
         />
         <div class="info-about-lack-of-days__div">
-          <atom-icon class="icon-ok" />
+          <atom-icon name="Sticker" />
         </div>
       </section>
       <section class="create-holiday">

@@ -69,12 +69,12 @@ watch(showList, (newVlaue) => {
               :showUnderline="true"
             >
               <template v-slot:title>
-                <atom-title tag="h2" :content="specialDay.title" class="list__title" />
-
                 <atom-icon
-                  :class="['list__icon', specialDay.icon_name]"
-                  :style="{ backgroundColor: specialDay.icon_color }"
+                  class="list__icon"
+                  :name="specialDay.icon_name"
+                  :color="specialDay.icon_color"
                 />
+                <atom-title tag="h2" :content="specialDay.title" class="list__title" />
               </template>
               <template v-slot:content>
                 <div class="list__content">
@@ -110,7 +110,7 @@ watch(showList, (newVlaue) => {
         daysOfTheMonth.length
       }}</span>
     </Transition>
-    <atom-icon class="icon-calendar" />
+    <atom-icon name="CalendarDays" :stroke-width="3" />
   </div>
 </template>
 

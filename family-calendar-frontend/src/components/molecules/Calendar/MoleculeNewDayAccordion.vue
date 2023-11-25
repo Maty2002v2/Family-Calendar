@@ -35,7 +35,7 @@ const { t } = useI18n();
 const title = ref("");
 const description = ref("");
 const toRepeat = ref(false);
-const iconDay = ref({ name: "icon-briefcase", color: "#DE5858" });
+const iconDay = ref({ name: "Apple", color: "#DE5858" });
 const titleOfButton = ref(t("addToDayModal.add"));
 
 const accordionHeaderStyles = computed(() => ({

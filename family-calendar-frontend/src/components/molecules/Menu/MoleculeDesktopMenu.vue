@@ -11,7 +11,7 @@ import MoleculeLogoutCalendar from '@/components/molecules/MoleculeLogoutCalenda
     <template #atomMenuButtonTrigerWrapper="{ setRefParentElement, setButtonTrgerElement, buttonAction }">
       <div class="molecule-desktop-menu" :ref="(el) => setRefParentElement(el)">
         <button class="molecule-desktop-menu__triger" @click="buttonAction" :ref="(el) => setButtonTrgerElement(el)">
-          <atom-icon class="icon-cog" />
+          <atom-icon name="Settings" />
         </button>
         <div class="molecule-desktop-menu__item molecule-desktop-menu__item--0">
           <moloecule-dark-mode-switcher />

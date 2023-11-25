@@ -15,38 +15,38 @@ const { t } = useI18n();
 const { mainColor } = useTheme();
 
 const listOfIconsNames: Icon[] = [
-  { name: "icon-shopping-basket" },
-  { name: "icon-cab" },
-  { name: "icon-paw" },
-  { name: "icon-male" },
-  { name: "icon-female" },
-  { name: "icon-medkit" },
-  { name: "icon-briefcase" },
-  { name: "icon-phone" },
-  { name: "icon-users" },
-  { name: "icon-glass" },
-  { name: "icon-calendar" },
-  { name: "icon-hourglass-2" },
-  { name: "icon-venus-mars" },
-  { name: "icon-bicycle" },
-  { name: "icon-brush" },
-  { name: "icon-tree" },
-  { name: "icon-space-shuttle" },
-  { name: "icon-food" },
-  { name: "icon-coffee" },
-  { name: "icon-mail-alt" },
-  { name: "icon-moon-inv" },
-  { name: "icon-pencil" },
-  { name: "icon-wrench" },
-  { name: "icon-home" },
-  { name: "icon-hammer" },
-  { name: "icon-credit-card" },
-  { name: "icon-cog" },
-  { name: "icon-basket" },
-  { name: "icon-attention" },
-  { name: "icon-trash-empty" },
-  { name: "icon-ok" },
-  { name: "icon-phone" },
+  { name: "Baby" },
+  { name: "Accessibility" },
+  { name: "AlarmClock" },
+  { name: "Apple" },
+  { name: "Contact" },
+  { name: "DollarSign" },
+  { name: "FlaskConical" },
+  { name: "FlagTriangleRight" },
+  { name: "Dumbbell" },
+  { name: "Home" },
+  { name: "HandMetal" },
+  { name: "Lightbulb" },
+  { name: "Moon" },
+  { name: "PackageOpen" },
+  { name: "Palmtree" },
+  { name: "Palmtree" },
+  { name: "Paintbrush2" },
+  { name: "Plane" },
+  { name: "Phone" },
+  { name: "School" },
+  { name: "ShoppingBasket" },
+  { name: "Slack" },
+  { name: "Stethoscope" },
+  { name: "Truck" },
+  { name: "Wallet" },
+  { name: "Utensils" },
+  { name: "Video" },
+  { name: "Wrench" },
+  { name: "Wine" },
+  { name: "Trash" },
+  { name: "Tv2" },
+  { name: "Sword" },
 ];
 
 const colorList: Color[] = [
@@ -70,7 +70,7 @@ const colorList: Color[] = [
   { name: "#DFCFBE" },
 ];
 
-const selectedIcon = ref("icon-briefcase");
+const selectedIcon = ref("Apple");
 const selectedColor = ref(mainColor.value);
 
 watch([selectedIcon, selectedColor], ([newIcon, newColor]) => {
@@ -87,7 +87,12 @@ watch(mainColor, (newValue) => {
     <section
       class="icon-selection__preview"
     >
-      <atom-icon :class="['icon-selection__icon', selectedIcon]" :style="{'background-color': selectedColor}" />
+      <atom-icon 
+        class="icon-selection__icon" 
+        :name="selectedIcon" 
+        :color="selectedColor"
+        :size="35"
+      />
     </section>
     <section class="icon-selection__choice">
       <molecule-selection-icon-popup
@@ -97,7 +102,7 @@ watch(mainColor, (newValue) => {
       >
         <template #item="{ name }">
           <div class="icon-selection__item-list">
-            <atom-icon :class="[name]" />
+            <atom-icon :name="name"/>
           </div>
         </template>
       </molecule-selection-icon-popup>

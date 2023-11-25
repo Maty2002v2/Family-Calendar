@@ -3,16 +3,22 @@ import { computed } from 'vue';
 import AtomIcon from '@/components/atoms/AtomIcon.vue';
 import { useTheme } from '@/composables/useTheme';
 
-const { tapSwitchMode, secondMainColor } = useTheme();
+const { mode, tapSwitchMode, secondMainColor } = useTheme();
 
 const styleObject = computed(() => ({
   backgroundColor: secondMainColor.value,
 }));
+
+const iconName = computed(() => mode.value === 'dark' ? 'Sun' : 'Moon')
 </script>
 
 <template>
-  <div class="molecule-dork-mode-switcher" :style="styleObject" @click="tapSwitchMode">
-    <atom-icon class="icon-brush" />
+  <div 
+    class="molecule-dork-mode-switcher" 
+    :style="styleObject" 
+    @click="tapSwitchMode"
+  >
+      <atom-icon :name="iconName"/>
   </div>
 </template>
 

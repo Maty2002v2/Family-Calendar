@@ -13,15 +13,15 @@ const props = defineProps<{
 const iconName = computed(() => {
   switch (props.type) {
     case "success":
-      return "icon-ok-circled";
+      return "CheckCircle2";
 
     case "info":
-      return "icon-info-circled";
+      return "Info";
 
     case "danger":
-      return "icon-error";
+      return "XCircle";
     default:
-      return "icon-ok-circled";
+      return "CheckCircle2";
   }
 });
 
@@ -33,8 +33,9 @@ const end = (el: HTMLElement) => (el.style.height = "");
   <div class="molecule-notification" :class="`molecule-notification--${type}`">
     <div class="molecule-notification__title">
       <atom-icon
-        :class="['molecule-notification__icon', iconName]"
         v-show="iconName?.length"
+        class="molecule-notification__icon"
+        :name="iconName"
       />
       <atom-title tag="h2" :content="message" class="molecule-notification__h2" />
     </div>

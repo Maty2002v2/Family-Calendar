@@ -13,9 +13,10 @@ const eraseDay = () => deleteDay(props.id);
 <template>
   <div class="molecule-delete-day-button">
     <atom-icon
-      class="molecule-delete-day-button__icon icon-trash-empty"
+      class="molecule-delete-day-button__icon"
+      name="Trash2"
       @click="eraseDay"
-    ></atom-icon>
+    />
   </div>
 </template>
 

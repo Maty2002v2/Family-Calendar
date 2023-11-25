@@ -16,7 +16,7 @@ const calickAction = () => {
 
 <template>
   <div class="molecule-logout-calendar" @click="calickAction">
-    <atom-icon class="icon-home" />
+    <atom-icon name="LogOut" />
   </div>
 </template>
 

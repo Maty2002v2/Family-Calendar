@@ -39,9 +39,9 @@ const theFirstThreeElements = computed(() => props.specialDayList.slice(0, 3));
       <atom-icon
         v-for="(specialDay, index) in theFirstThreeElements"
         :key="index"
-        class="icons__i animate__pulse animate__faster"
-        :class="[specialDay.icon_name, `animate__delay-${index + 1}s`]"
-        :style="{ backgroundColor: specialDay.icon_color }"
+        :class="[`animate__delay-${index + 1}s`, 'icons__i animate__pulse animate__faster']"
+        :name="specialDay.icon_name"
+        :color="specialDay.icon_color"
       />
 
       <atom-animated-wrapper

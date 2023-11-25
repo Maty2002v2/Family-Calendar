@@ -41,7 +41,7 @@ onClickOutside(mobileMenuElement, hideState);
           @click="buttonAction"
           :ref="(el) => setButtonTrgerElement(el as HTMLButtonElement)"
         >
-          <atom-icon class="icon-cog" />
+          <atom-icon name="Settings" />
         </button>
         <div
           class="molecule-mobile-menu-button__item molecule-mobile-menu-button__item--0"

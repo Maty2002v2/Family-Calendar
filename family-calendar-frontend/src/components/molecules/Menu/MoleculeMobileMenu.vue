@@ -19,7 +19,7 @@ const { modalIsOpen } = storeToRefs(useMainStore());
         :step="-1"
         >
           <template v-slot:mobile-icon>
-            <atom-icon class="icon-left-open-mini"/>
+            <atom-icon name="ChevronLeft"/>
           </template>
       </atom-navigation-button>
 
@@ -27,7 +27,7 @@ const { modalIsOpen } = storeToRefs(useMainStore());
         :step="-12"
       >
         <template v-slot:mobile-icon>
-          <atom-icon class="icon-angle-double-left"/>
+          <atom-icon name="ChevronsLeft"/>
         </template>
       </atom-navigation-button>
     </div>
@@ -37,7 +37,7 @@ const { modalIsOpen } = storeToRefs(useMainStore());
         :step="12"
       >
         <template v-slot:mobile-icon>
-          <atom-icon class="icon-angle-double-right"/>
+          <atom-icon name="ChevronsRight"/>
         </template>
       </atom-navigation-button>
 
@@ -45,7 +45,7 @@ const { modalIsOpen } = storeToRefs(useMainStore());
         :step="1"
         >
           <template v-slot:mobile-icon>
-            <atom-icon class="icon-right-open-mini"/>
+            <atom-icon name="ChevronRight"/>
           </template>
       </atom-navigation-button>
     </div>

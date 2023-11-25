@@ -11,7 +11,7 @@ import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButt
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <atom-icon class="icon-angle-double-left"/>
+        <atom-icon name="ChevronsLeft"/>
       </template>
     </atom-navigation-button>
 
@@ -20,7 +20,7 @@ import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButt
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <atom-icon class="icon-left-open-mini"/>
+        <atom-icon name="ChevronLeft"/>
       </template>
     </atom-navigation-button>
   </nav>
@@ -33,7 +33,7 @@ import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButt
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <atom-icon class="icon-right-open-mini"/>
+        <atom-icon name="ChevronRight"/>
       </template>
     </atom-navigation-button>
 
@@ -42,7 +42,7 @@ import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButt
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <atom-icon class="icon-angle-double-right"/>
+        <atom-icon name="ChevronsRight"/>
       </template>
     </atom-navigation-button>
   </nav>
