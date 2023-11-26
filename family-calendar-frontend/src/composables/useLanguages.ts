@@ -1,13 +1,10 @@
 import { onMounted, ref, computed } from "vue";
+
+import { type LanguageBlock } from '@/types/Composables.interface';
+
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { useTheme } from "@/composables/useTheme";
 import { i18n } from '@/translations/main';
-
-type LanguageCode = 'pl' | 'en';
-type LanguageBlock = {
-  code: LanguageCode,
-  background: string,
-}
 
 export const useLanguages = () => {
   const avaibleLanguages = computed<Array<LanguageBlock>>(() => [

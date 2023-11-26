@@ -1,14 +1,14 @@
 import { ref } from 'vue';
 
-import { notification } from '@/types/Notifications';
+import { type Notification } from '@/types/Composables.interface';
 
 const defaultNotificationTime = {
   time: 5000
 }
 
-const notifications = ref<notification[]>([])
+const notifications = ref<Notification[]>([])
 
-const addNotification = (notification: notification) => {
+const addNotification = (notification: Notification) => {
   const { type, message, time } = notification;
   if(!type || !message) return;
 

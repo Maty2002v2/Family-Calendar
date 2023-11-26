@@ -1,8 +1,7 @@
 import { onMounted, onBeforeUnmount, ref, computed, watch } from 'vue';
+import { type ModeState } from '@/types/Composables.interface';
 import { useLocalStorage } from '@/composables/useLocalStorage';
 import { useUtils } from '@/composables/useUtils';
-
-type ModeState = 'light' | 'dark';
 
 const { hexToRgb } = useUtils();
 

@@ -1,3 +1,5 @@
+export type NavigationAnimations = "animate__backInRight" | "animate__backInLeft" | "animate__fadeInDown"; 
+
 export interface Icon {
   name: string
 }
@@ -22,5 +24,3 @@ export interface NewSpecialDay {
 export interface SpecialDay extends NewSpecialDay {
   id: string;
 }
-
-export type NavigationAnimations = "animate__backInRight" | "animate__backInLeft" | "animate__fadeInDown"; 
