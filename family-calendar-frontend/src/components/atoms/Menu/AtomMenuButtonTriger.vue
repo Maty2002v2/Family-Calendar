@@ -4,7 +4,7 @@ import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps<{
   classPrefix: string,
-  class: string,
+  class?: string,
 }>();
 
 const mobileMenuElement = ref<HTMLDivElement>();

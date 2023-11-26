@@ -117,14 +117,17 @@ export const useCalendarApi = () => {
       url.searchParams.append(key, params[key as keyof typeof params])
     );
 
+    switchLoadingCalendar(true);
+
     //chack if is in cache
     const cacheKey = `cache-key_${numberMonth}_${numberYear}`;
     if (cacheable && calendarApiCache.has(cacheKey)) {
       daysOfTheMonth.value = calendarApiCache.get(cacheKey);
+      setTimeout(() => {
+        switchLoadingCalendar(false);
+      }, 1)
       return;
     }
-
-    switchLoadingCalendar(true);
 
     try {
       const responseJson = await fetch(url.toString(), {

@@ -3,7 +3,7 @@ import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
 
-const eimt =defineEmits(['setTransitionName']);
+defineEmits(['setTransitionName']);
 </script>
 
 <template>
