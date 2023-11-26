@@ -19,6 +19,7 @@ const localStorageIdsOfCreatedCalendars = useLocalStorage('idsOfCreatedCalendars
 const { addNotification, defaultNotificationTime } = useNotifications();
 const { t } = i18n.global;
 
+const calendarApiCache = new Map();
 const calendarHash = ref('');
 const daysOfTheMonth = ref<SpecialDay[]>([]);
 
@@ -100,20 +101,28 @@ export const useCalendarApi = () => {
     return result;
   };
 
-  const fetchDaysOfTheMonth = async (whatDays: InfoForDownload) => {
+  const fetchDaysOfTheMonth = async (whatDays: InfoForDownload, cacheable = true) => {
     const { switchLoadingCalendar } = useMainStore();
+    const { calendarId, numberMonth, numberYear } = whatDays;
 
     const url = new URL(process.env.VUE_APP_API_URL);
     const params = {
       action: "give-days-of-the-month",
-      calendar_id: whatDays.calendarId,
-      number_month: (parseInt(whatDays.numberMonth) + 1).toString(),
-      number_year: whatDays.numberYear.toString(),
+      calendar_id: calendarId,
+      number_month: (parseInt(numberMonth) + 1).toString(),
+      number_year: numberYear.toString(),
     };
 
     Object.keys(params).forEach((key) =>
       url.searchParams.append(key, params[key as keyof typeof params])
     );
+
+    //chack if is in cache
+    const cacheKey = `cache-key_${numberMonth}_${numberYear}`;
+    if (cacheable && calendarApiCache.has(cacheKey)) {
+      daysOfTheMonth.value = calendarApiCache.get(cacheKey);
+      return;
+    }
 
     switchLoadingCalendar(true);
 
@@ -123,7 +132,10 @@ export const useCalendarApi = () => {
         mode: "cors",
       })
       const response = await responseJson.json();
-      daysOfTheMonth.value = response.message; 
+      daysOfTheMonth.value = response.message;
+
+      //set result in cache
+      calendarApiCache.set(cacheKey, response.message);
     } finally {
       switchLoadingCalendar(false);
     }
@@ -162,7 +174,7 @@ export const useCalendarApi = () => {
           calendarId: calendarHash.value,
           numberMonth: getMounth.value.toString(),
           numberYear: getYear.value.toString(),
-        });
+        }, false);
       } else {
         addNotification({
           type: "danger",
