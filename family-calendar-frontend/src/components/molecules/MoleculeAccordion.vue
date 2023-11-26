@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, StyleValue } from "vue";
 import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
 
 interface Props {
-  accordionHeaderStyle: object;
-  showContent: boolean;
-  showUnderline: boolean;
+  accordionHeaderStyle?: StyleValue;
+  showContent?: boolean;
+  showUnderline?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -41,7 +41,7 @@ watch(
   <article :class="accordionClassObject">
     <section
       class="header app-accordion__header"
-      :style="accordionHeaderStyle"
+      :style="accordionHeaderStyle ?? {}"
       @click="switchShowContent"
     >
       <div class="header__title-slot no-select">

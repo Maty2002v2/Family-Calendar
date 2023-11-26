@@ -5,17 +5,21 @@ import AtomInput from "@/components/atoms/AtomInput.vue";
 import AtomInputLabel from "@/components/atoms/AtomInputLabel.vue";
 import AtomCounterForInput from "@/components/atoms/AtomCounterForInput.vue";
 
-type inputTypes = "text" | "email" | "tel" | "number";
+type InputTypes = "text" | "email" | "tel" | "number";
 
-defineProps<{
+interface Props { 
   modelValue: string,
-  type: inputTypes,
+  type?: InputTypes,
   placeholder: string,
   maxLength: number,
   label: string,
   requaied: boolean,
   showCounter: boolean
-}>();
+}
+
+withDefaults(defineProps<Props>(), {
+  type: 'text'
+});
 
 const componentInstance = getCurrentInstance();
 let uid = 0;

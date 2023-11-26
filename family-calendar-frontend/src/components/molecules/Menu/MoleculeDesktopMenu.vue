@@ -9,8 +9,8 @@ import MoleculeLogoutCalendar from '@/components/molecules/MoleculeLogoutCalenda
 <template>
   <atom-menu-button-triger classPrefix="molecule-desktop-menu">
     <template #atomMenuButtonTrigerWrapper="{ setRefParentElement, setButtonTrgerElement, buttonAction }">
-      <div class="molecule-desktop-menu" :ref="(el) => setRefParentElement(el)">
-        <button class="molecule-desktop-menu__triger" @click="buttonAction" :ref="(el) => setButtonTrgerElement(el)">
+      <div class="molecule-desktop-menu" :ref="(el) => setRefParentElement(el as HTMLDivElement)">
+        <button class="molecule-desktop-menu__triger" @click="buttonAction" :ref="(el) => setButtonTrgerElement(el as HTMLButtonElement)">
           <atom-icon name="Settings" />
         </button>
         <div class="molecule-desktop-menu__item molecule-desktop-menu__item--0">

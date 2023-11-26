@@ -8,5 +8,6 @@ export const i18n = createI18n({
   messages: {
     pl,
     en,
-  }
+  },
+  warnHtmlMessage: false,
 });

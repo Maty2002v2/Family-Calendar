@@ -4,6 +4,7 @@ import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps<{
   classPrefix: string,
+  class: string,
 }>();
 
 const mobileMenuElement = ref<HTMLDivElement>();
@@ -41,5 +42,6 @@ onClickOutside(mobileMenuElement, hideState);
     :setRefParentElement="setRefParentElement"
     :setButtonTrgerElement="setButtonTrgerElement"
     :buttonAction="switchState"
+    :class="props.class"
   ></slot>
 </template>

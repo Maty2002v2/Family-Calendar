@@ -3,7 +3,7 @@ import { computed } from "vue";
 import AtomButton from "@/components/atoms/AtomButton.vue";
 
 interface Props {
-  jelloAniamted: boolean;
+  jelloAniamted?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
