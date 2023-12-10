@@ -1,4 +1,15 @@
-<template >
+<script setup lang="ts">
+import { computed } from "vue";
+import { useLanguages } from "@/composables/useLanguages";
+
+const { currentLanguage, tapNextLanguage } = useLanguages();
+
+const styleObject = computed(() => ({
+  backgroundColor: currentLanguage.value.background
+}));
+</script>
+
+<template>
   <div 
     :style="styleObject" 
     class="molecule-language-switcher" 
@@ -7,28 +18,6 @@
     {{ currentLanguage.code }}
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from "vue";
-import { useLanguages } from "@/composables/useLanguages";
-
-export default defineComponent({
-  name: "MoleculeLanguageSwitcher",
-  setup() {
-    const { currentLanguage, tapNextLanguage } = useLanguages();
-
-    const styleObject = computed(() => ({
-      backgroundColor: currentLanguage.value.background
-    }));
-
-    return {
-      styleObject,
-      currentLanguage,
-      tapNextLanguage,
-    }
-  }
-})
-</script>
 
 <style lang="scss">
 .molecule-language-switcher {

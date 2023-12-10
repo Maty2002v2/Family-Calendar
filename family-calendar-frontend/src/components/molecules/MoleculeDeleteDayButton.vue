@@ -1,37 +1,24 @@
-<template>
-  <div class="molecule-delete-day-button">
-    <atom-icon
-      class="molecule-delete-day-button__icon icon-trash-empty"
-      @click="eraseDay"
-    ></atom-icon>
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useCalendarApi } from "@/composables/useCalendarApi";
 import AtomIcon from "@/components/atoms/AtomIcon.vue";
 
-export default defineComponent({
-  name: "MoleculeDeleteDayButton",
-  components: {
-    AtomIcon
-  },
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const { deleteDay } = useCalendarApi();
+const props = defineProps<{
+  id: string
+}>();
 
-    const eraseDay = () => deleteDay(props.id);
-
-    return { eraseDay };
-  },
-});
+const { deleteDay } = useCalendarApi();
+const eraseDay = () => deleteDay(props.id);
 </script>
+
+<template>
+  <div class="molecule-delete-day-button">
+    <atom-icon
+      class="molecule-delete-day-button__icon"
+      name="Trash2"
+      @click="eraseDay"
+    />
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .molecule-delete-day-button {

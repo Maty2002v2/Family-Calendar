@@ -1,3 +1,36 @@
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+import { storeToRefs } from "pinia";
+
+import { type SpecialDay } from "@/types/Components.interface";
+
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import AtomTitle from "@/components/atoms/AtomTitle.vue";
+import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
+import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
+import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayButton.vue";
+import MoleculeNewDayAccordion from "@/components/molecules/Calendar/MoleculeNewDayAccordion.vue";
+
+import { useMainStore } from "@/stores/MainStore";
+
+interface Props {
+  selectedDayNumber: number,
+  specialDayList: SpecialDay[]
+}
+
+defineProps<Props>();
+
+const { getShowModalDetailsOffDay } = storeToRefs(useMainStore());
+const { switchShowNewDayForm, switchShowModalDetailsOffDay } = useMainStore();
+
+const { t } = useI18n();
+
+const closeModal = () => {
+  switchShowModalDetailsOffDay(false);
+  switchShowNewDayForm(false);
+};
+</script>
+
 <template>
   <molecule-modal :isShow="getShowModalDetailsOffDay" @closeModal="closeModal">
     <article class="molecule-modal-day-details">
@@ -13,8 +46,9 @@
           >
             <template v-slot:title>
               <atom-icon
-                :class="['accordions__icon', specialDay.icon_name]"
-                :style="{ backgroundColor: specialDay.icon_color }"
+                class="accordions__icon"
+                :name="specialDay.icon_name"
+                :color="specialDay.icon_color"
               />
               <span class="accordions__title">
                 {{ specialDay.title }}
@@ -31,9 +65,13 @@
       </section>
 
       <section v-else class="info-about-lack-of-days">
-        <atom-title tag="h2" :content="t('addToDayModal.DayOff')" class="info-about-lack-of-days__h2" />
+        <atom-title
+          tag="h2"
+          :content="t('addToDayModal.DayOff')"
+          class="info-about-lack-of-days__h2"
+        />
         <div class="info-about-lack-of-days__div">
-          <atom-icon class="icon-ok" />
+          <atom-icon name="Sticker" />
         </div>
       </section>
       <section class="create-holiday">
@@ -42,62 +80,6 @@
     </article>
   </molecule-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-import { useI18n } from 'vue-i18n';
-import { storeToRefs } from "pinia";
-
-import AtomIcon from "@/components/atoms/AtomIcon.vue";
-import AtomTitle from "@/components/atoms/AtomTitle.vue";
-import MoleculeModal from "@/components/molecules/MoleculeModal.vue";
-import MoleculeAccordion from "@/components/molecules/MoleculeAccordion.vue";
-import MoleculeDeleteDayButton from "@/components/molecules/MoleculeDeleteDayButton.vue";
-import MoleculeNewDayAccordion from "@/components/molecules/Calendar/MoleculeNewDayAccordion.vue";
-
-import { useMainStore } from "@/stores/MainStore";
-
-export default defineComponent({
-  name: "MoleculeModalDayDetails",
-  props: {
-    selectedDayNumber: {
-      type: Number,
-      required: true,
-    },
-    specialDayList: {
-      type: Array,
-      required: true,
-      default: () => [],
-    },
-  },
-  components: {
-    AtomIcon,
-    AtomTitle,
-    MoleculeModal,
-    MoleculeAccordion,
-    MoleculeNewDayAccordion,
-    MoleculeDeleteDayButton,
-  },
-  setup() {
-    const { getShowModalDetailsOffDay } = storeToRefs(useMainStore());
-    const { switchShowNewDayForm, switchShowModalDetailsOffDay } =
-      useMainStore();
-
-    const { t } = useI18n();
-
-    const closeModal = () => {
-      switchShowModalDetailsOffDay(false);
-      switchShowNewDayForm(false);
-    };
-
-    return { 
-      getShowModalDetailsOffDay,
-      closeModal,
-      t
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .molecule-modal-day-details {

@@ -37,7 +37,7 @@
   "SomethingWentWrongTryLater": "Something went wrong <br /> Try leater",
   "join": "join",
   "BadCode": "Bad code",
-  "CODE": "CODE",
+  "enterCode": "Enter or select the code",
   "startAlert": {
     "hereIsYourCode": "<span class='modal-of-new-calendar__thickening-span'>Hey</span>, here's the code for this calendar",
     "youCanShare": "You can <span class='modal-of-new-calendar__thickening-span'>share</span> it with those you want to give access."
@@ -62,5 +62,6 @@
     "Color": "Color"
   },
   "CodeCopied": "{code} copied",
-  "newDayHasBeenAdded": "Added \"{dayTitle}\" to your calendar"
+  "newDayHasBeenAdded": "Added \"{dayTitle}\" to your calendar",
+  "lack": "Lack"
 }

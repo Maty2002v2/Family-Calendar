@@ -1,8 +1,47 @@
+<script setup lang="ts">
+import { ref, computed, watch, StyleValue } from "vue";
+import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
+
+interface Props {
+  accordionHeaderStyle?: StyleValue;
+  showContent?: boolean;
+  showUnderline?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  accordionHeaderStyle: () => ({}),
+  showContent: false,
+  showUnderline: false,
+});
+
+const emit = defineEmits(["update:showContent"]);
+
+const isShowContent = ref(props.showContent);
+
+const accordionClassObject = computed(() => ({
+  "app-accordion": true,
+  "app-accordion--underline": props.showUnderline,
+}));
+
+const switchShowContent = () => {
+  isShowContent.value = !isShowContent.value;
+  emit("update:showContent", isShowContent.value);
+};
+
+const start = (el: HTMLElement) => (el.style.height = el.scrollHeight + "px");
+const end = (el: HTMLElement) => (el.style.height = "");
+
+watch(
+  () => props.showContent,
+  (newShowContent) => (isShowContent.value = newShowContent)
+);
+</script>
+
 <template>
   <article :class="accordionClassObject">
     <section
       class="header app-accordion__header"
-      :style="accordionHeaderStyle"
+      :style="accordionHeaderStyle ?? {}"
       @click="switchShowContent"
     >
       <div class="header__title-slot no-select">
@@ -10,7 +49,10 @@
       </div>
       <div>
         <slot name="char-toggle">
-          <atom-plus-minus-switch class="header__default-char-toggle no-select" :isOpen="isShowContent" />
+          <atom-plus-minus-switch
+            class="header__default-char-toggle no-select"
+            :isOpen="isShowContent"
+          />
         </slot>
       </div>
     </section>
@@ -28,66 +70,8 @@
   </article>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed, watch } from "vue";
-import AtomPlusMinusSwitch from "@/components/atoms/AtomPlusMinusSwitch.vue";
-
-export default defineComponent({
-  name: "MoleculeAccordion",
-  emits: ['update:showContent'],
-  components: {
-    AtomPlusMinusSwitch
-  },
-  props: {
-    accordionHeaderStyle: {
-      type: Object,
-      default: () => ({})
-    },
-    showContent: {
-      type: Boolean,
-      default: false
-    },
-    showUnderline: {
-      type: Boolean,
-      default: false
-    }
-  },
-  setup(props, { emit }) {
-    const isShowContent = ref(props.showContent);
-
-    const accordionClassObject = computed(() => ({
-      'app-accordion': true,
-      'app-accordion--underline': props.showUnderline
-    }))
-
-    const switchShowContent = () => {
-      isShowContent.value = !isShowContent.value;
-      emit('update:showContent', isShowContent.value)
-    }
-
-    const start = (el: HTMLElement) =>
-      (el.style.height = el.scrollHeight + "px");
-    const end = (el: HTMLElement) => (el.style.height = "");
-
-    watch(
-      () => props.showContent,
-      (newShowContent) => isShowContent.value = newShowContent
-    )
-
-    return {
-      isShowContent,
-      accordionClassObject,
-      switchShowContent,
-      end,
-      start,
-    };
-  },
-});
-</script>
-
 <style lang="scss" scoped>
 .app-accordion {
-  
   &--underline {
     border-bottom: 1px solid $break-line-color;
   }
@@ -132,7 +116,7 @@ export default defineComponent({
     height: 100%;
     width: 30px;
     margin: 0px 10px;
-    
+
     color: $main-font-color;
   }
 }

@@ -1,0 +1,46 @@
+https://github.com/quasarframework/quasar/issues/11526
+
+https://www.w3.org/TR/2017/CR-css-color-3-20171205/
+
+
+TODO:
+- Kod nie obsługuje błędów związanych z fetch i nie dostarcza żadnego mechanizmu raportowania błędów
+- W kodzie występuje powtarzający się kod związany z obsługą odpowiedzi z fetch, dodawaniem notyfikacji i odświeżaniem danych. Można by ten kod zrefaktoryzować i umieścić go w jednym miejscu, aby uniknąć powtarzalności.
+- W przypadku błędów sieciowych (np. brak dostępu do internetu), kod nie dostarcza obsługi takich sytuacji.
+ nie wszędzie jest poprawnie zaimplementowanie "i18n"
+- brak opisów funkcji , przy takiej ilości powtórzeń i zagnieźdź słabo to się czyta bez odpowiednich komentarzy
+
+-i jakbyś dodał możliwość wysłania maila (a najlepiej sms) do n zaproszonych osób o przypomnieniu, to myślę, że taka interaktywność przebiłaby brak autoryzacji, to takie spostrzeżenia
+-rochę na dużym ekranie przeszkadza wielkość, dlatego może warto container otoczyć czymś a'la tailwindowe lg:max-w-[1200px]
+-w appce brakuje jeszcze pomocy (czyli na dole ikonka z info i rzeczowy opis aplikacji)
+-pomyśl jeszcze o dodaniu obsługi PWA
+- "add-calendar", "exist-calendar", "give-days-of-the-month". Lepszym podejściem jest wydzielenie tych stałych do zmiennych lub stałych, aby zwiększyć czytelność i ułatwić zmianę wartości w przyszłości. A nie umieszczać w kodzie
+
+-dodać odmienianie
+
+
+Tak na szybko, pamiętaj, ze część rzeczy jest kwestią preferencji, a nie twardych wytycznych. Staram się też pisać w krótkich punktach, więc niektóre mogą brzmieć zbyt dosadnie 🙂
+ui:
+- przyciski: każdy inny, gradient na join jest niepotrzebny, tak samo jak cień i "podskakiwanie" na hover.
+- po wejściu w kalendarz jego ID możemy wyciągnąć tylko z linka. Przeciętny użytkownik nie będzie miał jak tam wrócić.
+- dobierając kolory skorzystaj z jakiegoś toola do tego np. Adobe Color wheel (za darmo)
+- "o 15 nie bądź pijany" - nawet tego nie skomentuje.
+- CTA "You have a day off!" przy dodawaniu wydarzenia. Daj tam "dodajesz wydarzenie do kalendarza" albo "Nowe wydarzenie". Cokolwiek normalnego. To jest Twoje pf, nie miejsce na żarty.
+- placeholdery sa zbyt ciemne. Wyglądają jak wypełniony tekst
+- Angielski (wiem się czepiam i mój daleki jest od perfekcyjnego) - jednakże masz chatGPT, który może Ci pewne rzeczy poprawić. ew. zaloguj się do google calendar lub sprawdź dowolny inny kalendarz. Zobaczysz jakie słownictwo wykorzystują.
+To tak na szybko, teraz kod:
+- Light/Dark mode w .env Dlaczego? Masz tam same HEXy kolorów.
+- proponuję zacząć korzystać z prettier.io. W AtomCalendarTitle.vue linia 9 - masz średnik 🙂
+- mało tego Vue we Vue. Patrz np. taki button. Aż się prosi by był to jeden osobny komponent, a masz ich dużo. Masz atom-button, który niewiele robi, nawet nie ma @click i on jest w MoleculeSquareButton i innych z tego co widzę. To jest spory bałagan. Frameworka używa się po to by był porządek 🙂 Jeden komponent na przycisk wystarczy.
+- nazewnictwa komponentów kompletnie nie rozumiem: atom/ molecules/ organism. Dodatkowo jest ich strasznie dużo. Komponenty się tworzy by je ponownie używać. Tutaj ciężko się odnaleźć, a aplikacja jest dość mała.
+- dlaczego nie korzystasz z Script Setup? 😃
+- Mam też wrażenie, że TS nie jest Twoją mocną stroną (ale nie potrafię tego uargumentować). Takie odczucie po przejrzeniu repo.
+- Wydaje mi się, ze na siłę chcesz pokazać co umiesz. Przez co robi się (już wyżej wspomniany) bałagan. Starasz się wykorzystać za dużo rzeczy, zamiast wykorzystywać właściwe rzeczy.
+- w mono repo nazwałbym folder od frontów "web"
+- Kolejne pytanie: dlaczego nie vite?
+- $background-color: var(--appBackgroundColor) - dlaczego tak? Wydaje mi się, że wiem jak to się tam znalazło patrząc w kod, ale to chyba nie jest optymalne rozwiązanie 🙂
+
+
+ZRELIZOWANE
+- usunięcie .env z repo i dodanie .env.example
+-dodanie maksymalnej szerokości

@@ -1,4 +1,5 @@
 import { onMounted, onBeforeUnmount, ref, computed, watch } from 'vue';
+import { type ModeState } from '@/types/Composables.interface';
 import { useLocalStorage } from '@/composables/useLocalStorage';
 import { useUtils } from '@/composables/useUtils';
 
@@ -6,7 +7,7 @@ const { hexToRgb } = useUtils();
 
 const root: HTMLElement | null = document.querySelector(':root');
 
-const mode = ref('light');
+const mode = ref<ModeState>('light');
 
 const mainColor = computed(() => 
   mode.value === 'dark' ? 
@@ -158,7 +159,7 @@ export const useTheme = () => {
     if(localStorageThemeMode.value.length < 1) {
       updateModeBrowser();
     } else {
-      mode.value = localStorageThemeMode.value;
+      mode.value = localStorageThemeMode.value as ModeState;
       updateVariables();
     }
 

@@ -67,7 +67,7 @@ Project is: _in progress_
 
 ## Kontakt
 
-Stworzone przez [@Maty](mailto:mateusz_malolepszy_02@wp.pl) - nie wahaj się ze mną skontaktować!
+Stworzone przez [@Maty](mailto:matikster21@gmail.com) - nie wahaj się ze mną skontaktować!
 
 <!-- Optional -->
 <!-- ## License -->

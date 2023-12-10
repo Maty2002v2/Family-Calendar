@@ -1,6 +1,34 @@
+<script setup lang="ts">
+import { ref, watch } from "vue";
+import { useI18n } from 'vue-i18n';
+import { storeToRefs } from "pinia";
+
+import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
+import MoleculeInputWithOptions from "@/components/molecules/InputWithOptions/MoleculeInputWithOptions.vue";
+import MoleculeSquareButton from "@/components/molecules/MoleculeSquareButton.vue";
+
+import { useUtils } from "@/composables/useUtils";
+
+import { useMainStore } from "@/stores/MainStore";
+
+const { getIncorrectCodeEntered } = storeToRefs(useMainStore());
+const { switchIncorrectCodeEntered } = useMainStore();
+
+const { pushToCalendar } = useUtils();
+const { t } = useI18n();
+
+const calendarHash = ref("");
+
+watch(getIncorrectCodeEntered, (newValue) => {
+  if (newValue) {
+    setTimeout(() => switchIncorrectCodeEntered(false), 3000);
+  }
+});
+</script>
+
 <template>
   <div>
-    <molecule-input-with-options :label="t('CODE')" v-model="calendarHash" />
+    <molecule-input-with-options :label="t('enterCode')" v-model="calendarHash" />
     <molecule-square-button variant="btn-rectangle--gradient" @click="pushToCalendar(calendarHash)">
       {{ t('join') }}
     </molecule-square-button>
@@ -16,50 +44,6 @@
       </atom-animated-wrapper>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, watch } from "vue";
-import { useI18n } from 'vue-i18n';
-import { storeToRefs } from "pinia";
-
-import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
-import MoleculeInputWithOptions from "@/components/molecules/InputWithOptions/MoleculeInputWithOptions.vue";
-import MoleculeSquareButton from "@/components/molecules/MoleculeSquareButton.vue";
-
-import { useUtils } from "@/composables/useUtils";
-
-import { useMainStore } from "@/stores/MainStore";
-
-export default defineComponent({
-  name: "MoleculeJoinCalendarForm",
-  components: {
-    MoleculeInputWithOptions,
-    MoleculeSquareButton,
-    AtomAnimatedWrapper,
-  },
-  setup() {
-    const { getIncorrectCodeEntered } = storeToRefs(useMainStore());
-    const { switchIncorrectCodeEntered } = useMainStore();
-
-    const { pushToCalendar } = useUtils();
-    const { t } = useI18n();
-
-    const calendarHash = ref("");
-
-    watch(getIncorrectCodeEntered, (newValue) => {
-      if (newValue) {
-        setTimeout(() => switchIncorrectCodeEntered(false), 3000);
-      }
-    });
-
-    return { 
-      calendarHash, 
-      getIncorrectCodeEntered,
-      pushToCalendar,
-      t 
-    };
-  }
-});
-</script>
 
 <style lang="scss">
 .molecule-join-calendar-form {

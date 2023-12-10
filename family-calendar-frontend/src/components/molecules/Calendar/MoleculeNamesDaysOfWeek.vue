@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+</script>
+
 <template>
   <div class="molecule-names-days-of-week">
     <div
@@ -18,22 +24,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-import { useI18n } from 'vue-i18n';
-
-export default defineComponent({
-  name: "MoleculeNamesDaysOfWeek",
-  setup() {
-    const { t } = useI18n();
-
-    return { 
-      t
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 $size-day-div: calc(100% / 7 - 5px);

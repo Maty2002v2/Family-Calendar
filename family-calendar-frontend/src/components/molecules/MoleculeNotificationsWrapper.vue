@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import MoleculeNotification from "@/components/molecules/MoleculeNotification.vue";
+import { useNotifications } from '@/composables/useNotifications';
+
+const { notifications } = useNotifications();
+</script>
+
 <template>
   <TransitionGroup 
     enter-active-class="animate__animated animate__zoomInRight"
@@ -14,26 +21,6 @@
     />
   </TransitionGroup>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-import MoleculeNotification from "@/components/molecules/MoleculeNotification.vue";
-import { useNotifications } from '@/composables/useNotifications';
-
-export default defineComponent({
-  name: "MoleculeNotificationsWrapper",
-  components: {
-    MoleculeNotification,
-  },
-  setup() {
-    const { notifications } = useNotifications();
-
-    return {
-      notifications
-    }
-  }
-})
-</script>
 
 <style lang="scss">
 .molecule-notifications-wrapper {

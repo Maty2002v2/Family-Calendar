@@ -1,3 +1,13 @@
+<script setup lang="ts">
+defineProps<{
+  modelValue: string,
+  type: string,
+  placeholder: string,
+  maxLength: number,
+  inputId: string,
+}>();
+</script>
+
 <template>
   <input 
     :type="type" 
@@ -6,41 +16,10 @@
     :maxlength="maxLength"
     :id="inputId"
     class="atom-input" 
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
   >
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
 
-export default defineComponent({
-  name: "AtomInput",
-  props: {
-    modelValue: {
-      type: String,
-      default: '',
-    },
-    type: {
-      type: String,
-      default: 'text',
-      validator(value: string) {
-        return ['text', 'email', 'tel', 'number'].includes(value);
-      },
-    },
-    placeholder: {
-      type: String,
-      default: ''
-    },
-    maxLength: {
-      type: Number,
-      default: null
-    },
-    inputId: {
-      type: String,
-      default: ''
-    }
-  }
-})
-</script>
 <style lang="scss">
 .atom-input {
   width: 100%;

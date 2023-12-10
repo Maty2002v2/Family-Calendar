@@ -1,6 +1,71 @@
+<script setup lang="ts">
+import { ref, watch } from "vue";
+
+import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
+import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
+import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeCalendarNavigation.vue";
+import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
+import MoleculeNotificationsWrapper from "@/components/molecules/MoleculeNotificationsWrapper.vue";
+import MoleculeDayField from "@/components/molecules/Calendar/MoleculeDayField.vue";
+import MoleculeDesktopMenu from "@/components/molecules/Menu/MoleculeDesktopMenu.vue";
+import MoleculeMobileMenu from "@/components/molecules/Menu/MoleculeMobileMenu.vue";
+import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
+import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
+import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
+
+import { storeToRefs } from "pinia";
+import { useCalendarApi } from "@/composables/useCalendarApi";
+import { useDateStore } from "@/stores/DateStore";
+import { useMainStore } from "@/stores/MainStore";
+
+import { useWidthWindow } from "@/composables/useWidthWindow";
+
+const { getSortedDays, getCalendarHash, fetchDaysOfTheMonth } = useCalendarApi();
+
+const dataStore = useDateStore();
+const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } = storeToRefs(
+  useDateStore()
+);
+
+const { getLoadingCalendar } = storeToRefs(useMainStore());
+const { switchShowModalDetailsOffDay } = useMainStore();
+
+const { isMobile } = useWidthWindow();
+
+const calendarTransitionAnimationName = ref("");
+
+watch(
+  dataStore,
+  async () => {
+    await fetchDaysOfTheMonth({
+      calendarId: getCalendarHash.value,
+      numberMonth: getMounth.value.toString(),
+      numberYear: getYear.value.toString(),
+    });
+  },
+  { deep: true }
+);
+
+await fetchDaysOfTheMonth({
+  calendarId: getCalendarHash.value,
+  numberMonth: getMounth.value.toString(),
+  numberYear: getYear.value.toString(),
+});
+
+let indexOfSelectedDay = ref(0);
+const showThisDay = (nrDay: number) => {
+  indexOfSelectedDay.value = nrDay;
+  switchShowModalDetailsOffDay(true);
+};
+</script>
+
 <template>
   <atom-animated-wrapper class="calendar animate__fadeInDown full-height">
-    <molecule-calendar-navigaion @setTransitionName="(transitionName) => calendarTransitionAnimationName = transitionName" />
+    <molecule-calendar-navigaion
+      @setTransitionName="
+        (transitionName) => (calendarTransitionAnimationName = transitionName)
+      "
+    />
 
     <div class="days-grid">
       <molecule-names-days-of-week />
@@ -34,14 +99,14 @@
           />
         </div>
       </atom-animated-wrapper>
-      
-      <atom-loader v-else/>
+
+      <atom-loader v-else />
     </div>
 
-    <teleport to='#mobile-menu'>
+    <teleport to="#mobile-menu">
       <molecule-mobile-menu />
     </teleport>
-    
+
     <!-- modals -->
     <teleport to="#modal">
       <molecule-list-of-whole-month v-if="!isMobile" />
@@ -62,113 +127,9 @@
       <molecule-notifications-wrapper />
     </teleport>
 
-    <molecule-desktop-menu 
-      class="molecule-desktop-menu"
-    />
+    <molecule-desktop-menu class="molecule-desktop-menu" />
   </atom-animated-wrapper>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, computed, watch } from "vue";
-
-import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
-import AtomLoader from "@/components/molecules/MoleculeLoader.vue";
-import MoleculeCalendarNavigaion from "@/components/molecules/Calendar/MoleculeCalendarNavigation.vue"
-import MoleculeNamesDaysOfWeek from "@/components/molecules/Calendar/MoleculeNamesDaysOfWeek.vue";
-import MoleculeNotificationsWrapper from "@/components/molecules/MoleculeNotificationsWrapper.vue";
-import MoleculeDayField from "@/components/molecules/Calendar/MoleculeDayField.vue";
-import MoleculeDesktopMenu from "@/components/molecules/Menu/MoleculeDesktopMenu.vue";
-import MoleculeMobileMenu from "@/components/molecules/Menu/MoleculeMobileMenu.vue";
-import MoleculeModalDayDetails from "@/components/molecules/Calendar/MoleculeModalDayDetails.vue";
-import MoleculeModalOfNewCalendar from "@/components/molecules/MoleculeModalOfNewCalendar.vue";
-import MoleculeListOfWholeMonth from "@/components/molecules/Calendar/MoleculeListOfWholeMonth.vue";
-
-import { storeToRefs } from "pinia";
-import { useCalendarApi } from "@/composables/useCalendarApi";
-import { useDateStore } from "@/stores/DateStore";
-import { useMainStore } from "@/stores/MainStore";
-
-import { useWidthWindow } from "@/composables/useWidthWindow";
-import { useTheme } from '@/composables/useTheme';
-
-export default defineComponent({
-  name: "OrganismCalendar",
-  components: {
-    AtomAnimatedWrapper,
-    AtomLoader,
-    MoleculeCalendarNavigaion,
-    MoleculeDesktopMenu,
-    MoleculeNamesDaysOfWeek,
-    MoleculeNotificationsWrapper,
-    MoleculeDayField,
-    MoleculeMobileMenu,
-    MoleculeModalDayDetails,
-    MoleculeModalOfNewCalendar,
-    MoleculeListOfWholeMonth,
-  },
-  async setup() {
-    const { 
-      getSortedDays, 
-      getCalendarHash, 
-      fetchDaysOfTheMonth 
-    } = useCalendarApi();
-
-    const dataStore = useDateStore();
-    const { getDay, getMounth, getYear, getDaysInMonth, getFirstMonthDay } =
-      storeToRefs(useDateStore());
-
-    const { getLoadingCalendar } = storeToRefs(useMainStore());
-    const { switchShowModalDetailsOffDay } = useMainStore();
-
-    const { width } = useWidthWindow();
-    const { mode, tapSwitchMode }  = useTheme();
-
-    const calendarTransitionAnimationName = ref('');
-
-    const isMobile = computed(() => width.value <= 460);
-
-    watch(
-      dataStore,
-      async () => {
-        await fetchDaysOfTheMonth({
-          calendarId: getCalendarHash.value,
-          numberMonth: getMounth.value.toString(),
-          numberYear: getYear.value.toString(),
-        });
-      },
-      { deep: true }
-    );
-
-    await fetchDaysOfTheMonth({
-      calendarId: getCalendarHash.value,
-      numberMonth: getMounth.value.toString(),
-      numberYear: getYear.value.toString(),
-    });
-
-    let indexOfSelectedDay = ref(0);
-    const showThisDay = (nrDay: number) => {
-      indexOfSelectedDay.value = nrDay;
-      switchShowModalDetailsOffDay(true);
-    };
-
-    return {
-      mode,
-      isMobile,
-      getDay,
-      getMounth,
-      getYear,
-      getDaysInMonth,
-      getFirstMonthDay,
-      getSortedDays,
-      getLoadingCalendar,
-      calendarTransitionAnimationName,
-      indexOfSelectedDay,
-      showThisDay,
-      tapSwitchMode,
-    };
-  },
-});
-</script>
 
 <style lang="scss">
 $size-day-div: calc(100% / 7 - 5px);
@@ -185,7 +146,7 @@ $size-day-div: calc(100% / 7 - 5px);
 
 .molecule-desktop-menu {
   @include position($position: absolute, $bottom: 20px, $left: 20px);
-  transform: translate(50%, -50%)
+  transform: translate(50%, -50%);
 }
 
 .days-grid {
@@ -239,7 +200,7 @@ $size-day-div: calc(100% / 7 - 5px);
   .calendar {
     gap: 20px;
     padding: 5px 0px;
-    margin-bottom: 100px
+    margin-bottom: 100px;
   }
 
   .days-grid {
@@ -280,11 +241,7 @@ $size-day-div: calc(100% / 7 - 5px);
 
     &::-webkit-scrollbar-thumb {
       border-radius: 100px;
-      background-image: linear-gradient(
-        180deg,
-        $main-color 0%,
-        $background-field 99%
-      );
+      background-image: linear-gradient(180deg, $main-color 0%, $background-field 99%);
       box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
     }
 

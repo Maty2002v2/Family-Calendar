@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue";
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
+
+defineEmits(['setTransitionName']);
+</script>
+
 <template>
   <nav class="molecule-calendar-navigation__nav molecule-calendar-navigation__nav--prev">
     <atom-navigation-button
@@ -5,7 +13,7 @@
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <atom-icon class="icon-angle-double-left"/>
+        <atom-icon name="ChevronsLeft"/>
       </template>
     </atom-navigation-button>
 
@@ -14,7 +22,7 @@
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <atom-icon class="icon-left-open-mini"/>
+        <atom-icon name="ChevronLeft"/>
       </template>
     </atom-navigation-button>
   </nav>
@@ -27,7 +35,7 @@
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <atom-icon class="icon-right-open-mini"/>
+        <atom-icon name="ChevronRight"/>
       </template>
     </atom-navigation-button>
 
@@ -36,28 +44,11 @@
       @setTransitionName="(transitionName) => $emit('setTransitionName', transitionName)"
     >
       <template v-slot:desktop-icon>
-        <atom-icon class="icon-angle-double-right"/>
+        <atom-icon name="ChevronsRight"/>
       </template>
     </atom-navigation-button>
   </nav>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-import AtomCalendarTitle from "@/components/atoms/Calendar/AtomCalendarTitle.vue";
-import AtomIcon from "@/components/atoms/AtomIcon.vue";
-import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
-
-export default defineComponent({
-  name: "MoleculeCalendarNavigation",
-  components: {
-    AtomIcon,
-    AtomCalendarTitle,
-    AtomNavigationButton,
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .molecule-calendar-navigation {

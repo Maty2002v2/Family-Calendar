@@ -1,3 +1,21 @@
+<script setup lang="ts">
+import { ref, watch } from "vue";
+import AtomCheckboxInput from "@/components/atoms/AtomCheckboxInput.vue";
+
+defineProps<{
+  firstOption: string;
+  secoundOption: string;
+}>();
+
+const emit = defineEmits(["valueToggle"]);
+
+const switchValue = ref(false);
+
+watch(switchValue, () => {
+  emit("valueToggle", switchValue.value);
+});
+</script>
+
 <template>
   <p
     class="molecule-checkboc-form__p"
@@ -5,7 +23,10 @@
   >
     {{ firstOption }}
   </p>
-  <atom-checkbox-input class="molecule-checkboc-form__switch" v-model:checked="switchValue" />
+  <atom-checkbox-input
+    class="molecule-checkboc-form__switch"
+    v-model:checked="switchValue"
+  />
   <p
     class="molecule-checkboc-form__p"
     :class="{ 'molecule-checkboc-form__p--active': switchValue }"
@@ -13,37 +34,6 @@
     {{ secoundOption }}
   </p>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, watch } from "vue";
-import AtomCheckboxInput from "@/components/atoms/AtomCheckboxInput.vue";
-
-export default defineComponent({
-  name: "MoleculeCheckboxForm",
-  components: {
-    AtomCheckboxInput
-  },
-  props: {
-    firstOption: {
-      type: String,
-      default: ''
-    },
-    secoundOption: {
-      type: String,
-      default: ''
-    }
-  },
-  setup(props, { emit }) {
-    const switchValue = ref(false);
-
-    watch(switchValue, () => {
-      emit('valueToggle', switchValue.value)
-    })
-
-    return { switchValue }
-  }
-})
-</script>
 
 <style lang="scss">
 .molecule-checkboc-form {

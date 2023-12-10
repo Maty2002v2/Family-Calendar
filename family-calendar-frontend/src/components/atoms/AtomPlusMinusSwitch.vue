@@ -1,23 +1,15 @@
+<script setup lang="ts">
+defineProps<{
+  isOpen: boolean,
+}>();
+</script>
+
 <template>
   <span
     class="atom-plus-minus-switch"
     :class="{ 'atom-plus-minus-switch--active': isOpen }"
   ></span>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "AtomPlusMinusSwitch",
-  props: {
-    isOpen: {
-      type: Boolean,
-      default: false
-    }
-  }
-});
-</script>
 
 <style lang="scss">
 %pseudo-elements {

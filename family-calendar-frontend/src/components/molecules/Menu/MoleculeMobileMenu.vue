@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import { storeToRefs } from "pinia";
+
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
+import MoleculeMobileMenuButton from "@/components/molecules/Menu/MoleculeMobileMenuButton.vue";
+
+import { useMainStore } from '@/stores/MainStore';
+
+const { modalIsOpen } = storeToRefs(useMainStore());
+</script>
+
 <template>
   <div v-show="!modalIsOpen" class="molecule-mobile-menu">
     <molecule-mobile-menu-button class="molecule-mobile-menu-button" />
@@ -7,7 +19,7 @@
         :step="-1"
         >
           <template v-slot:mobile-icon>
-            <atom-icon class="icon-left-open-mini"/>
+            <atom-icon name="ChevronLeft"/>
           </template>
       </atom-navigation-button>
 
@@ -15,7 +27,7 @@
         :step="-12"
       >
         <template v-slot:mobile-icon>
-          <atom-icon class="icon-angle-double-left"/>
+          <atom-icon name="ChevronsLeft"/>
         </template>
       </atom-navigation-button>
     </div>
@@ -25,7 +37,7 @@
         :step="12"
       >
         <template v-slot:mobile-icon>
-          <atom-icon class="icon-angle-double-right"/>
+          <atom-icon name="ChevronsRight"/>
         </template>
       </atom-navigation-button>
 
@@ -33,39 +45,12 @@
         :step="1"
         >
           <template v-slot:mobile-icon>
-            <atom-icon class="icon-right-open-mini"/>
+            <atom-icon name="ChevronRight"/>
           </template>
       </atom-navigation-button>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-import { storeToRefs } from "pinia";
-
-import AtomIcon from "@/components/atoms/AtomIcon.vue";
-import AtomNavigationButton from "@/components/atoms/Calendar/AtomNavigationButton.vue";
-import MoleculeMobileMenuButton from "@/components/molecules/Menu/MoleculeMobileMenuButton.vue";
-
-import { useMainStore } from '@/stores/MainStore';
-
-export default defineComponent({
-  name: "MoleculeMobileMenu",
-  components: {
-    AtomIcon,
-    AtomNavigationButton,
-    MoleculeMobileMenuButton,
-  },
-  setup() {
-    const { modalIsOpen } = storeToRefs(useMainStore());
-
-    return {
-      modalIsOpen,
-    }
-  }
-});
-</script>
 
 <style lang="scss">
 .molecule-mobile-menu {

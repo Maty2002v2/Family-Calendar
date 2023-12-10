@@ -1,34 +1,23 @@
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+
+import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
+import AtomTitle from "@/components/atoms/AtomTitle.vue";
+import MoleculeJoinCalendarForm from "@/components/molecules/MoleculeJoinCalendarForm.vue";
+
+const { t } = useI18n();
+</script>
+
 <template>
-  <atom-animated-wrapper
-    class="organism-join-calendar animate__zoomIn animate__delay-1s"
-  >
-    <atom-title tag="h2" :content="`${t('JoinExisting')}.`" class="organism-join-calendar__h2" />
+  <atom-animated-wrapper class="organism-join-calendar animate__zoomIn animate__delay-1s">
+    <atom-title
+      tag="h2"
+      :content="`${t('JoinExisting')}.`"
+      class="organism-join-calendar__h2"
+    />
     <molecule-join-calendar-form class="organism-join-calendar__form" />
   </atom-animated-wrapper>
 </template>
-
-<script lang="ts">
-import { defineComponent} from "vue";
-import { useI18n } from 'vue-i18n';
-
-import AtomAnimatedWrapper from "@/components/atoms/AtomAnimatedWrapper.vue";
-import AtomTitle from "../atoms/AtomTitle.vue";
-import MoleculeJoinCalendarForm from "@/components/molecules/MoleculeJoinCalendarForm.vue";
-
-export default defineComponent({
-  name: "OrganismJoinCalendar",
-  components: {
-    AtomTitle,
-    AtomAnimatedWrapper,
-    MoleculeJoinCalendarForm
-  },
-  setup() {
-    const { t } = useI18n();
-
-    return { t }
-  }
-});
-</script>
 
 <style lang="scss" scoped>
 .organism-join-calendar {

@@ -1,9 +1,17 @@
+<script setup lang="ts">
+import AtomIcon from '@/components/atoms/AtomIcon.vue';
+import AtomMenuButtonTriger from '@/components/atoms/Menu/AtomMenuButtonTriger.vue';
+import MoloeculeDarkModeSwitcher from "@/components/molecules/MoloeculeDarkModeSwitcher.vue";
+import MoleculeLanguageSwitcher from "@/components/molecules/MoleculeLanguageSwitcher.vue";
+import MoleculeLogoutCalendar from '@/components/molecules/MoleculeLogoutCalendar.vue';
+</script>
+
 <template>
   <atom-menu-button-triger classPrefix="molecule-desktop-menu">
     <template #atomMenuButtonTrigerWrapper="{ setRefParentElement, setButtonTrgerElement, buttonAction }">
-      <div class="molecule-desktop-menu" :ref="(el) => setRefParentElement(el)">
-        <button class="molecule-desktop-menu__triger" @click="buttonAction" :ref="(el) => setButtonTrgerElement(el)">
-          <atom-icon class="icon-cog" />
+      <div class="molecule-desktop-menu" :ref="(el) => setRefParentElement(el as HTMLDivElement)">
+        <button class="molecule-desktop-menu__triger" @click="buttonAction" :ref="(el) => setButtonTrgerElement(el as HTMLButtonElement)">
+          <atom-icon name="Settings" />
         </button>
         <div class="molecule-desktop-menu__item molecule-desktop-menu__item--0">
           <moloecule-dark-mode-switcher />
@@ -18,27 +26,6 @@
     </template>
   </atom-menu-button-triger>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-import AtomIcon from '@/components/atoms/AtomIcon.vue';
-import AtomMenuButtonTriger from '@/components/atoms/Menu/AtomMenuButtonTriger.vue';
-import MoloeculeDarkModeSwitcher from "@/components/molecules/MoloeculeDarkModeSwitcher.vue";
-import MoleculeLanguageSwitcher from "@/components/molecules/MoleculeLanguageSwitcher.vue";
-import MoleculeLogoutCalendar from '@/components/molecules/MoleculeLogoutCalendar.vue';
-
-export default defineComponent({
-  name: "MoleculeDesktopMenu",
-  components: {
-    AtomIcon,
-    AtomMenuButtonTriger,
-    MoloeculeDarkModeSwitcher,
-    MoleculeLanguageSwitcher,
-    MoleculeLogoutCalendar,
-  }
-})
-</script>
 
 <style lang="scss">
 .molecule-desktop-menu {

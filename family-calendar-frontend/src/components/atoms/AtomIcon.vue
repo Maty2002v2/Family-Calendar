@@ -1,11 +1,36 @@
+<script setup lang="ts">
+import { computed } from 'vue';
+import * as icons from "lucide-vue-next";
+
+interface Props {
+  name: string,
+  size?: number,
+  color?: string,
+  strokeWidth?: number,
+  defaultClass?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  strokeWidth: 2
+});
+
+const icon = computed(() => icons[props.name]);
+</script>
+
 <template>
-  <i class="demo-icon"></i>
+  <div class="atom-icon">
+    <component
+      :is="icon"
+      :size="size"
+      :color="color"
+      :stroke-width="strokeWidth" :default-class="defaultClass"
+    />
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "AtomIcon"
-});
-</script>
+<style lang="scss">
+.atom-icon {
+  @include flexbox;
+  @include flex-centering;
+}
+</style>

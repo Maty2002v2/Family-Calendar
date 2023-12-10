@@ -1,3 +1,28 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import { useDateStore } from "@/stores/DateStore";
+import { useWidthWindow } from "@/composables/useWidthWindow";
+
+const props = defineProps<{
+  step: number,
+}>();
+
+const emit = defineEmits(['setTransitionName']);
+
+const { changeDateData } = useDateStore();
+const { isMobile } = useWidthWindow();
+
+const transitionName = computed(() => {
+  if (!isMobile.value) return props.step > 0 ? "animate__backInRight" : "animate__backInLeft";
+  return "animate__fadeInDown";
+});
+
+const changeDate = () => {
+  changeDateData(props.step);
+  emit("setTransitionName", transitionName.value);
+};
+</script>
+
 <template>
   <div class="calendar-navigation">
     <div class="calendar-navigation__icon" @click="changeDate()">
@@ -6,48 +31,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from "vue";
-
-import { useDateStore } from "@/stores/DateStore";
-
-import { useWidthWindow } from "@/composables/useWidthWindow";
-
-export default defineComponent({
-  name: "AtomNavigationButton",
-  props: {
-    step: {
-      type: Number,
-      required: true,
-    },
-  },
-  emits: ["setTransitionName"],
-  setup(props, { emit }) {
-    const { changeDateData } = useDateStore();
-    const { isMobile } = useWidthWindow();
-
-    const transitionName = computed(() => {
-      if (!isMobile.value) {
-        return props.step > 0 ? "animate__backInRight" : "animate__backInLeft";
-      } else {
-        return "animate__fadeInDown";
-      }
-    });
-
-    const changeDate = () => {
-      changeDateData(props.step);
-
-      emit("setTransitionName", transitionName.value);
-    };
-
-    return {
-      isMobile,
-      changeDate, 
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .calendar-navigation {

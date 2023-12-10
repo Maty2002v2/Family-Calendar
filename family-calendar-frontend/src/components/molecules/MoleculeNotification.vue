@@ -1,12 +1,41 @@
+<script setup lang="ts">
+import { computed } from "vue";
+
+import AtomIcon from "@/components/atoms/AtomIcon.vue";
+import AtomTitle from "@/components/atoms/AtomTitle.vue";
+
+const props = defineProps<{
+  type: string;
+  title: string;
+  message: string;
+}>();
+
+const iconName = computed(() => {
+  switch (props.type) {
+    case "success":
+      return "CheckCircle2";
+
+    case "info":
+      return "Info";
+
+    case "danger":
+      return "XCircle";
+    default:
+      return "CheckCircle2";
+  }
+});
+
+const start = (el: HTMLElement) => (el.style.height = el.scrollHeight + "px");
+const end = (el: HTMLElement) => (el.style.height = "");
+</script>
+
 <template>
-  <div
-    class="molecule-notification"
-    :class="`molecule-notification--${type}`"
-  >
+  <div class="molecule-notification" :class="`molecule-notification--${type}`">
     <div class="molecule-notification__title">
       <atom-icon
-        :class="['molecule-notification__icon', iconName]"
         v-show="iconName?.length"
+        class="molecule-notification__icon"
+        :name="iconName"
       />
       <atom-title tag="h2" :content="message" class="molecule-notification__h2" />
     </div>
@@ -20,61 +49,6 @@
     </Transition>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from "vue";
-
-import AtomIcon from "@/components/atoms/AtomIcon.vue";
-import AtomTitle from "@/components/atoms/AtomTitle.vue";
-
-export default defineComponent({
-  name: "MoleculeNotification",
-  components: {
-    AtomIcon,
-    AtomTitle,
-  },
-  props: {
-    type: {
-      type: String,
-      default: ''
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    message: {
-      type: String,
-      default: ''
-    },
-  },
-  setup(props) {
-    const iconName = computed(() => {
-      switch (props.type) {
-        case "success":
-          return "icon-ok-circled";
-
-        case "info":
-          return "icon-info-circled";
-
-        case "danger":
-          return "icon-error";
-        default: 
-          return "icon-ok-circled"
-      }
-    });
-
-    const start = (el: HTMLElement) =>
-      (el.style.height = el.scrollHeight + "px");
-    const end = (el: HTMLElement) => (el.style.height = "");
-
-    return {
-      iconName,
-      start,
-      end
-    }
-  }
-})
-</script>
 
 <style lang="scss">
 @keyframes coldownLine {
@@ -144,7 +118,7 @@ export default defineComponent({
     @include flexbox;
     @include flex-centering;
     margin-top: 4px;
-    font-size: 20px
+    font-size: 20px;
   }
 
   &__h2 {
