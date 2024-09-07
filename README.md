@@ -1,6 +1,6 @@
 # Family Calendar
 
-> Podgląd na żywo [_tutaj_](https://gh-pages--marvelous-speculoos-9d49b5.netlify.app/).
+> Podgląd na żywo [_tutaj_](https://gh-pages--marvelous-speculoos-9d49b5.netlify.app/). (chwilowo nie działa bo nie opłaciłem serweru z backendem)
 
 ## Spis treści
 
